@@ -20,10 +20,6 @@ const categoryScheme = new Schema(
             type: String,
             required: [true, "Category Image Is Required"],
         },
-        isActive: {
-            type: Boolean,
-            default: true,
-        },
     },
     { timestamps: true }
 );

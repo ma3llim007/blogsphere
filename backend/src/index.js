@@ -1,10 +1,8 @@
 /* eslint-disable no-process-exit */
 /* eslint-disable no-console */
 import app from "./app.js";
-import dotenv from "dotenv";
 import connectDB from "./db/index.js";
 
-dotenv.config();
 connectDB()
     .then(() => {
         if (!process.env.PORT) {

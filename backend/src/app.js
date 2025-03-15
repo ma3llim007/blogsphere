@@ -1,7 +1,6 @@
 import express from "express";
 import { adminRoutes } from "./routes/index.routes.js";
 import cookieParser from "cookie-parser";
-
 const app = express();
 
 // Middleware
