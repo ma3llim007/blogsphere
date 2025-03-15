@@ -1,9 +1,7 @@
-import asyncHandler from "../../utils/asyncHandler.js";
-import { Admin } from "../../models/admin.model.js";
-import ApiError from "../../utils/ApiError.js";
-import ApiResponse from "../../utils/ApiResponse.js";
-import { HttpOptions } from "../../utils/utils.js";
 import bcrypt from "bcrypt";
+import { Admin } from "../../models/admin.model.js";
+import { HttpOptions } from "../../utils/utils.js";
+import { ApiError, ApiResponse, asyncHandler } from "../../utils/Api.utils.js";
 
 // Generating Access And Refresh Token
 export const generateAccessAndRefreshTokensAdmin = async (adminId) => {
@@ -51,7 +49,7 @@ const registerAdmin = asyncHandler(async (req, res) => {
 const loginAdmin = asyncHandler(async (req, res) => {
     const { email, password } = req.body;
 
-    if (!email || !password) {
+    if (!email?.trim() || !password?.trim()) {
         return res.status(422).json(new ApiError(422, "Both Field Are Required"));
     }
 
@@ -117,7 +115,7 @@ const changePassword = asyncHandler(async (req, res) => {
         return res.status(400).json(new ApiError(400, "Admin Not Authenticated"));
     }
 
-    if (!password) {
+    if (!password?.trim()) {
         return res.status(422).json(new ApiError(422, "Password Field Is Required"));
     }
 

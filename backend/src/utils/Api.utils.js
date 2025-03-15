@@ -25,4 +25,19 @@ class ApiError extends Error {
     }
 }
 
-export default ApiError;
+class ApiResponse {
+    constructor(statusCode, data, message = "Success") {
+        this.statusCode = statusCode;
+        this.data = data;
+        this.message = message;
+        this.success = Boolean(statusCode < 400);
+    }
+}
+
+const asyncHandler = (requestHandler) => {
+    return (req, res, next) => {
+        Promise.resolve(requestHandler(req, res, next).catch((error) => next(error)));
+    };
+};
+
+export { ApiError, ApiResponse, asyncHandler };

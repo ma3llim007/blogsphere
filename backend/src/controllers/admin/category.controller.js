@@ -1,10 +1,9 @@
 import { isValidObjectId } from "mongoose";
 import { Category } from "../../models/category.model.js";
-import ApiError from "../../utils/ApiError.js";
-import ApiResponse from "../../utils/ApiResponse.js";
-import asyncHandler from "../../utils/asyncHandler.js";
 import { extractPublicId, removeImage, uploadCloudinary } from "../../utils/cloudinary.js";
 import { ConvertImageWebp } from "../../utils/ConvertImageWebp.js";
+import { ApiError, ApiResponse, asyncHandler } from "../../utils/Api.utils.js";
+
 
 // Add Category
 const addCategory = asyncHandler(async (req, res) => {
@@ -90,7 +89,7 @@ const updateCategory = asyncHandler(async (req, res) => {
     const { categoryName, categorySlug, categoryId } = req.body;
     const categoryImage = req.file?.path;
 
-    if (!categoryId) {
+    if (!categoryId?.trim()) {
         return res.status(422).json(new ApiError(422, "Category ID is Required"));
     }
 
@@ -222,7 +221,6 @@ const deleteCategory = asyncHandler(async (req, res) => {
 // options category with only name and _id
 const getOptionsCategory = asyncHandler(async (req, res) => {
     const category = await Category.aggregate([
-        { $match: { isActive: true } },
         {
             $project: {
                 categoryName: 1,

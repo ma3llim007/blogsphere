@@ -36,6 +36,11 @@ const blogScheme = new Schema(
             type: String,
             required: [true, "Blog Description Is Required"],
         },
+        blogCategory: {
+            type: Schema.Types.ObjectId,
+            ref: "Category",
+            required: [true, "Category Is Required"],
+        },
     },
     {
         timestamps: true,

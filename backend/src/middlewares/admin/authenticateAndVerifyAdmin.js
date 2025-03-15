@@ -1,9 +1,8 @@
-import asyncHandler from "../../utils/asyncHandler.js";
-import ApiError from "../../utils/ApiError.js";
 import { HttpOptions, isTokenExpired } from "../../utils/utils.js";
 import jwt from "jsonwebtoken";
 import { generateAccessAndRefreshTokensAdmin } from "../../controllers/admin/auth.controller.js";
 import { Admin } from "../../models/admin.model.js";
+import { ApiError, asyncHandler } from "../../utils/Api.utils.js";
 
 const authenticateAndVerifyAdmin = asyncHandler(async (req, res, next) => {
     try {
