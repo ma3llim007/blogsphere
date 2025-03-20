@@ -8,5 +8,6 @@ routes.use(authenticateAndVerifyAdmin);
 
 routes.route("/register-moderator").post(registerModerator);
 routes.route("/delete-moderator/:moderatorId").delete(deleteModerator);
+routes.route("/moderators").get(listModerator);
 
 export default routes;

@@ -70,7 +70,7 @@ moderatorScheme.methods.isCorrectPassword = async (password) => {
 };
 
 // Generate Access Token
-moderatorScheme.methods.generateAccessToken = async () => {
+moderatorScheme.methods.generateAccessToken = () => {
     return jwt.sign(
         {
             _id: this._id,
@@ -81,6 +81,10 @@ moderatorScheme.methods.generateAccessToken = async () => {
         { expiresIn: process.env.ACCESS_TOKEN_EXPIRY }
     );
 };
+
 // Generate Refresh Token
+moderatorScheme.methods.generateRefreshToken = () => {
+    return 
+}
 
 export const Moderator = model("Moderator", moderatorScheme);
