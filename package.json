@@ -1,8 +1,8 @@
 {
-    "name": "sameerblogsphere",
+    "name": "blogsphere",
     "version": "1.0.0",
     "main": "index.js",
-    "repository": "https://github.com/ma3llim007/sameerBlogSphere.git",
+    "repository": "https://github.com/ma3llim007/blogsphere.git",
     "author": "ma3llim007 <mohdsameer68257@gmail.com>",
     "license": "MIT",
     "scripts": {
