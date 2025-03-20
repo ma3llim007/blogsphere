@@ -4,8 +4,14 @@ import { yupResolver } from "@hookform/resolvers/yup";
 import { adminLoginSchema } from "@/validation/admin/Schema";
 import Input from "@/components/Form/Input";
 import { Button } from "@/components/ui/button";
+import { useMutation } from "@tanstack/react-query";
+import crudService from "@/services/crudService";
+import { login } from "@/store/features/admin/admin/adminAuthSlice";
+import { useNavigate } from "react-router-dom";
+import toastService from "@/services/toastService";
 
 const Login = () => {
+    const navigate = useNavigate();
     const dispatch = useDispatch();
 
     const {
@@ -15,9 +21,29 @@ const Login = () => {
         formState: { errors },
         resetField,
     } = useForm({
+        mode: "onChange",
         resolver: yupResolver(adminLoginSchema),
     });
 
+    const { mutate, isPending } = useMutation({
+        mutationFn: data => crudService.post("/auth/login", true, data),
+        onError: error => {
+            console.log(error?.message);
+            
+            const message = error.response?.data?.message || "An unexpected error occurred.";
+            console.log(message);
+            
+            setError("root", { message });
+            resetField("email");
+            resetField("password");
+        },
+        onSuccess: data => {
+            const { admin } = data?.data || {};
+            dispatch(login({ admin }));
+            navigate("/admin/dashboard");
+            toastService.success("Admin Login Successfully!");
+        },
+    });
     return (
         <section className="w-screen h-screen bg-slate-950">
             <div className="container mx-auto flex justify-center items-center h-full">
@@ -29,18 +55,20 @@ const Login = () => {
                             <p className="text-white font-bold text-sm">{errors.root.message}</p>
                         </div>
                     )}
-                    <form onSubmit={handleSubmit()} className="space-y-4">
+                    <form onSubmit={handleSubmit(formData => mutate(formData))} className="space-y-4">
                         <Input
                             placeholder="Enter The Email"
                             {...register("email")}
-                            className="text-xl p-3 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-800"
+                            disabled={isPending}
+                            className="text-xl p-3 border border-gray-300 focus:outline-none focus:ring-2 focus:ring-blue-800"
                             error={errors.email?.message}
                         />
                         <Input
                             placeholder="Enter The Password"
                             type="password"
+                            disabled={isPending}
                             {...register("password")}
-                            className="text-xl p-3 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-800"
+                            className="text-xl p-3 border border-gray-300 focus:outline-none focus:ring-2 focus:ring-blue-800"
                             error={errors.password?.message}
                         />
                         <div className="flex flex-col md:flex-row gap-2 justify-between items-center">
@@ -50,7 +78,7 @@ const Login = () => {
                                     Remember Me
                                 </label>
                             </div>
-                            <Button className="Primary" size="lg">
+                            <Button className="cursor-pointer" size="lg">
                                 Sign In
                             </Button>
                         </div>

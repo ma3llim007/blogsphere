@@ -20,7 +20,7 @@ const Input = forwardRef(function Input({ label, type = "text", placeholder, err
                     placeholder={placeholder}
                     autoComplete="off"
                     className={clsx(
-                        "px-3 py-2 rounded-lg bg-white text-black dark:bg-slate-800 dark:text-white outline-none text-lg focus:bg-gray-50 duration-200 border border-gray-700 dark:border-gray-400 w-full",
+                        "px-3 py-2 rounded-md bg-white text-black dark:bg-slate-800 dark:text-white outline-none text-lg focus:bg-gray-50 duration-200 border border-gray-700 dark:border-gray-400 w-full",
                         className
                     )}
                 />
