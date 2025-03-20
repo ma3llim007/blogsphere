@@ -1,0 +1,17 @@
+{
+    "name": "sameerblogsphere",
+    "version": "1.0.0",
+    "main": "index.js",
+    "repository": "https://github.com/ma3llim007/sameerBlogSphere.git",
+    "author": "ma3llim007 <mohdsameer68257@gmail.com>",
+    "license": "MIT",
+    "scripts": {
+        "frontend": "cd frontend && yarn run dev",
+        "backend": "cd backend && yarn run dev",
+        "dev": "concurrently \"yarn run backend\" \"yarn run frontend\""
+    },
+    "dependencies": {},
+    "devDependencies": {
+        "concurrently": "^9.1.2"
+    }
+}
