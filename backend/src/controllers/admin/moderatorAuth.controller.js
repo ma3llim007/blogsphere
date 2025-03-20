@@ -1,3 +1,4 @@
+import { isValidObjectId } from "mongoose";
 import { Moderator } from "../../models/moderator.model.js";
 import { ApiError, ApiResponse, asyncHandler } from "../../utils/Api.utils.js";
 
@@ -30,7 +31,26 @@ const registerModerator = asyncHandler(async (req, res) => {
 });
 
 // Delete Moderator
-const deleteModerator = asyncHandler(async (req, res) => {});
+const deleteModerator = asyncHandler(async (req, res) => {
+    const { moderatorId } = req.params;
+
+    if (!isValidObjectId(moderatorId)) {
+        return res.status(422).json(new ApiError(422, "Moderator Id Is Required"));
+    }
+
+    const moderator = await Moderator.findById(moderatorId);
+    if (!moderator) {
+        return res.status(400).json(new ApiError(400, "Moderator Is Not Found"));
+    }
+
+    const moderatorDelete = await Moderator.deleteOne({ _id: moderatorId });
+
+    if (moderatorDelete.deletedCount === 0) {
+        return res.status(500).json(new ApiError(500, "Something Went Wrong! While Deleting Moderator"));
+    }
+
+    return res.status(200).json(new ApiResponse(200, {}, "Moderator Delete Successfully"));
+});
 
 // List Moderator
 const listModerator = asyncHandler(async (req, res) => {});
