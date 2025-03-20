@@ -84,7 +84,7 @@ moderatorScheme.methods.generateAccessToken = () => {
 
 // Generate Refresh Token
 moderatorScheme.methods.generateRefreshToken = () => {
-    return 
-}
+    return jwt.sign({ _id: this._id }, process.env.REFRESH_TOKEN_SECRET, { expiresIn: process.env.REFRESH_TOKEN_EXPIRY });
+};
 
 export const Moderator = model("Moderator", moderatorScheme);

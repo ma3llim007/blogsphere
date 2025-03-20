@@ -53,6 +53,17 @@ const deleteModerator = asyncHandler(async (req, res) => {
 });
 
 // List Moderator
-const listModerator = asyncHandler(async (req, res) => {});
+const listModerator = asyncHandler(async (req, res) => {
+    try {
+        const moderators = await Moderator.find().select("-password -refreshToken");
+        if (!moderators) {
+            return res.status(200).json(new ApiResponse(200, {}, "Moderator Is Not Available"));
+        }
+
+        return res.status(200).json(new ApiResponse(200, {}, "Moderator Fetching Successfully"));
+    } catch (_error) {
+        return res.status(500).json(new ApiError(500, "Something Went Wrong! While Fetching Moderator's"));
+    }
+});
 
 export { registerModerator, deleteModerator, listModerator };
