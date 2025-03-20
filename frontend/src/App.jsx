@@ -1,11 +1,11 @@
-import { Button } from "@/components/ui/button";
+import AdminApp from "./admin/AdminApp";
+import ClientApp from "./client/ClientApp";
 
 const App = () => {
-    return (
-        <div className="flex flex-col items-center justify-center min-h-svh">
-            <Button>Click me</Button>
-        </div>
-    );
+    // Check if the URL starts with "/admin"
+    const isAdmin = window.location.pathname.startsWith("/admin/");
+    
+    return isAdmin ? <AdminApp /> : <ClientApp />;
 };
 
 export default App;
