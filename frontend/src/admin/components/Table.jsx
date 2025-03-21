@@ -115,7 +115,7 @@ const Table = ({ columns, data, paginationOptions = { pageSize: 10 }, sortable =
                         reactTable.getRowModel().rows.map(row => (
                             <TableRow key={row.id} className={row.index % 2 === 0 ? "bg-slate-900 hover:dark:bg-gray-700" : "bg-slate-800 hover:dark:bg-gray-600"}>
                                 {row.getVisibleCells().map(cell => (
-                                    <TableCell key={cell.id} className="p-3 border border-gray-300 border-opacity-20">
+                                    <TableCell key={cell.id} className="p-3 border border-gray-300 border-opacity-20 text-center">
                                         {flexRender(cell.column.columnDef.cell, cell.getContext())}
                                     </TableCell>
                                 ))}
