@@ -16,4 +16,8 @@ const isTokenExpired = (token) => {
     }
 };
 
-export { HttpOptions, isTokenExpired };
+const verifyToken = (token, secret) => {
+    return new Promise((resolve, reject) => jwt.verify(token, secret, (err, decoded) => (err ? reject(err) : resolve(decoded))));
+};
+
+export { HttpOptions, isTokenExpired, verifyToken };

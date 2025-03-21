@@ -4,9 +4,11 @@ import Loading from "@/components/Loaders/Loading";
 
 // Layouts
 import AuthLayout from "@/layouts/AuthLayout";
+import AdminLayout from "@/layouts/AdminLayout";
 
 // Pages
 const Login = lazy(() => import("./pages/admin/auth/Login"));
+const Dashboard = lazy(() => import("./pages/admin/Dashboard/Dashboard"));
 
 // Defining Routes
 const router = createBrowserRouter([
@@ -40,7 +42,7 @@ const router = createBrowserRouter([
         path: "admin",
         element: (
             <Suspense fallback={<Loading />}>
-                <AuthLayout />
+                <AdminLayout />
             </Suspense>
         ),
         children: [
@@ -48,15 +50,15 @@ const router = createBrowserRouter([
                 index: true,
                 element: (
                     <Suspense fallback={<Loading />}>
-                        <Login />
+                        <Dashboard />
                     </Suspense>
                 ),
             },
             {
-                path: "login",
+                path: "dashboard",
                 element: (
                     <Suspense fallback={<Loading />}>
-                        <Login />
+                        <Dashboard />
                     </Suspense>
                 ),
             },

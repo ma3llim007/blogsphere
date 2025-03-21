@@ -1,6 +1,6 @@
 import bcrypt from "bcrypt";
 import { Admin } from "../../models/admin.model.js";
-import { HttpOptions } from "../../utils/utils.js";
+import { HttpOptions, verifyToken } from "../../utils/utils.js";
 import { ApiError, ApiResponse, asyncHandler } from "../../utils/Api.utils.js";
 
 // Generating Access And Refresh Token
@@ -138,4 +138,20 @@ const changePassword = asyncHandler(async (req, res) => {
         .json(new ApiResponse(200, {}, "Password Change Successfully"));
 });
 
-export { registerAdmin, loginAdmin, logOutAdmin, changePassword };
+
+// Check Session
+const checkSession = asyncHandler(async (req, res) => {
+    const accessToken = req.cookies.accessToken;
+    if (!accessToken) {
+        return res.status(401).json(new ApiError(401, "Access Token Is Required"));
+    }
+    try {
+        const admin = await verifyToken(accessToken, process.env.ACCESS_TOKEN_SECRET);
+        
+        return res.status(200).json(new ApiResponse(200, { isAuthenticated: true, admin }, "Admin AccessToken Verified Successfully"));
+    } catch (_error) {
+        return res.status(403).json(new ApiError(403, "Access Token Is Not Valid"));
+    }
+});
+
+export { registerAdmin, loginAdmin, logOutAdmin, changePassword, checkSession };

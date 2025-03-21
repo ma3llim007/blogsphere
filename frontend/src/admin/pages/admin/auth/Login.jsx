@@ -19,7 +19,6 @@ const Login = () => {
         handleSubmit,
         setError,
         formState: { errors },
-        resetField,
     } = useForm({
         mode: "onChange",
         resolver: yupResolver(adminLoginSchema),
@@ -28,18 +27,12 @@ const Login = () => {
     const { mutate, isPending } = useMutation({
         mutationFn: data => crudService.post("/auth/login", true, data),
         onError: error => {
-            console.log(error?.message);
-            
             const message = error.response?.data?.message || "An unexpected error occurred.";
-            console.log(message);
-            
             setError("root", { message });
-            resetField("email");
-            resetField("password");
         },
         onSuccess: data => {
-            const { admin } = data?.data || {};
-            dispatch(login({ admin }));
+            const response = data?.data || {};
+            dispatch(login({ admin: response }));
             navigate("/admin/dashboard");
             toastService.success("Admin Login Successfully!");
         },
