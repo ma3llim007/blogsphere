@@ -4,9 +4,11 @@ import ButtonWithAlert from "@/components/ButtonWithAlert";
 import Loading from "@/components/Loaders/Loading";
 import { Button } from "@/components/ui/button";
 import crudService from "@/services/crudService";
+import queryClient from "@/services/queryClientConfig";
 import toastService from "@/services/toastService";
 import { formatDateTime } from "@/utils/utils";
-import { useQuery } from "@tanstack/react-query";
+import { useMutation, useQuery } from "@tanstack/react-query";
+import { Helmet } from "react-helmet-async";
 import { useNavigate } from "react-router-dom";
 
 const ModeratorList = () => {
@@ -20,6 +22,17 @@ const ModeratorList = () => {
         },
     });
 
+    const { mutate, isPending } = useMutation({
+        mutationFn: id => crudService.delete(`/moderator/delete-moderator/${id}`, true),
+        onSuccess: data => {
+            queryClient.invalidateQueries("ModeratorList");
+            toastService.success(data?.message);
+        },
+        onError: error => {
+            const errorMessage = error?.response?.data?.message || error?.message || "An error occurred";
+            toastService.error(errorMessage);
+        },
+    });
     const moderatorColumns = [
         { accessorKey: "no", header: "No." },
         { accessorKey: "firstName", header: "First Name" },
@@ -29,7 +42,7 @@ const ModeratorList = () => {
         { accessorKey: "phoneNumber", header: "Phone Number" },
         {
             accessorKey: "moderatorVerify",
-            header: "Moderator Verify",
+            header: "Verify",
             cell: ({ row }) => (row?.original.moderatorVerify ? <Badge title="Verify" /> : <Badge title="Not Verify" className="Danger" />),
         },
         { accessorKey: "createdAt", header: "Created At", cell: ({ row }) => formatDateTime(row?.original?.createdAt) },
@@ -46,7 +59,7 @@ const ModeratorList = () => {
                         dialogTitle="Are You Sure You Want to Delete This Moderator?"
                         dialogDesc="This Action Will Permanently Delete The Moderator. Proceed?"
                         dialogActionTitle="Delete Moderator"
-                        // dialogActionfunc={() => deleteBlog(row.original?._id)}
+                        dialogActionfunc={() => mutate(row.original?._id)}
                     />
                 </div>
             ),
@@ -54,12 +67,17 @@ const ModeratorList = () => {
     ];
 
     const moderatorData = Array.isArray(data?.data) ? data?.data?.map((moderator, index) => ({ no: index + 1, ...moderator })) : [];
-    if (isLoading) {
+    if (isLoading || isPending) {
         return <Loading />;
     }
 
     return (
         <>
+            <Helmet>
+                <title>Moderator Listing | BlogSphere</title>
+                <meta name="description" content="View and manage all moderators in the BlogSphere admin panel. Assign roles, update permissions, and monitor activity efficiently." />
+                <meta name="robots" content="noindex, nofollow" />
+            </Helmet>
             <Table data={moderatorData} columns={moderatorColumns} loading={isLoading} paginationOptions={{ pageSize: 10 }} sortable={true} />
         </>
     );
