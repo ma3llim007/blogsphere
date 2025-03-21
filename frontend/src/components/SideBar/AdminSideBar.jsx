@@ -1,9 +1,11 @@
-import { FaHome, FaUsers, FaCube, FaPlus, FaCubes, FaBlogger, FaList } from "react-icons/fa";
+import { FaHome, FaUsers, FaPlus, FaCubes, FaBlogger, FaList } from "react-icons/fa";
+import { FaRegMessage } from "react-icons/fa6";
+import { MdAddModerator } from "react-icons/md";
 import { AiFillDashboard } from "react-icons/ai";
 import { Sidebar, SidebarContent, SidebarGroup, SidebarGroupContent, SidebarMenu, SidebarMenuButton, SidebarMenuItem, SidebarMenuSub, useSidebar } from "@/components/ui/sidebar";
 import { Collapsible, CollapsibleContent, CollapsibleTrigger } from "@/components/ui/collapsible";
 import { Link, useLocation } from "react-router-dom";
-import { BadgeCheck, ChevronRight, ChevronsUpDown,LogOut } from "lucide-react";
+import { BadgeCheck, ChevronRight, ChevronsUpDown, LogOut } from "lucide-react";
 import { DropdownMenu, DropdownMenuContent, DropdownMenuGroup, DropdownMenuItem, DropdownMenuLabel, DropdownMenuSeparator, DropdownMenuTrigger } from "../ui/dropdown-menu";
 import { Avatar, AvatarFallback, AvatarImage } from "../ui/avatar";
 
@@ -28,7 +30,7 @@ const navBar = [
     },
     {
         name: "Manage Enquiry",
-        // Icon: FaMessage,
+        Icon: FaRegMessage,
         innerLists: [
             {
                 name: "Enquiry",
@@ -38,20 +40,20 @@ const navBar = [
         segment: "users",
     },
     {
-        name: "Manage Category",
-        Icon: FaCube,
+        name: "Manage Moderator",
+        Icon: MdAddModerator,
         innerLists: [
             {
-                name: "Add Category",
-                urlLink: "/admin/category/add-category",
+                name: "Add Moderator",
+                urlLink: "/admin/moderator/add-moderator",
                 Icon: FaPlus,
             },
             {
-                name: "Category List",
-                urlLink: "/admin/category/category-list",
+                name: "Moderator List",
+                urlLink: "/admin/moderator/moderator-list",
             },
         ],
-        segment: "category",
+        segment: "moderator",
     },
     {
         name: "Manage Sub-Category",

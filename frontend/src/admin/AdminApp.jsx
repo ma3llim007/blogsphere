@@ -9,6 +9,7 @@ import AdminLayout from "@/layouts/AdminLayout";
 // Pages
 const Login = lazy(() => import("./pages/admin/auth/Login"));
 const Dashboard = lazy(() => import("./pages/admin/Dashboard/Dashboard"));
+const AdminNotFound = lazy(() => import("./pages/AdminNotFound"));
 
 // Defining Routes
 const router = createBrowserRouter([
@@ -59,6 +60,14 @@ const router = createBrowserRouter([
                 element: (
                     <Suspense fallback={<Loading />}>
                         <Dashboard />
+                    </Suspense>
+                ),
+            },
+            {
+                path: "*",
+                element: (
+                    <Suspense fallback={<Loading />}>
+                        <AdminNotFound />
                     </Suspense>
                 ),
             },
