@@ -10,6 +10,8 @@ import AdminLayout from "@/layouts/AdminLayout";
 const Login = lazy(() => import("./pages/admin/auth/Login"));
 const Dashboard = lazy(() => import("./pages/admin/Dashboard/Dashboard"));
 const AdminNotFound = lazy(() => import("./pages/AdminNotFound"));
+const AddModerator = lazy(() => import("./pages/admin/Dashboard/AddModerator"));
+const ModeratorList = lazy(() => import("./pages/admin/Dashboard/ModeratorList"));
 
 // Defining Routes
 const router = createBrowserRouter([
@@ -62,6 +64,35 @@ const router = createBrowserRouter([
                         <Dashboard />
                     </Suspense>
                 ),
+            },
+            {
+                path: "moderator",
+                children: [
+                    {
+                        index: true,
+                        element: (
+                            <Suspense fallback={<Loading />}>
+                                <AddModerator />
+                            </Suspense>
+                        ),
+                    },
+                    {
+                        path: "add-moderator",
+                        element: (
+                            <Suspense fallback={<Loading />}>
+                                <AddModerator />
+                            </Suspense>
+                        ),
+                    },
+                    {
+                        path: "moderator-list",
+                        element: (
+                            <Suspense fallback={<Loading />}>
+                                <ModeratorList />
+                            </Suspense>
+                        ),
+                    },
+                ],
             },
             {
                 path: "*",
