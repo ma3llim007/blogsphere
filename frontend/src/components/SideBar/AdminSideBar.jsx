@@ -8,7 +8,7 @@ import { Link, useLocation } from "react-router-dom";
 import { BadgeCheck, ChevronRight, ChevronsUpDown } from "lucide-react";
 import { DropdownMenu, DropdownMenuContent, DropdownMenuGroup, DropdownMenuItem, DropdownMenuLabel, DropdownMenuSeparator, DropdownMenuTrigger } from "../ui/dropdown-menu";
 import { Avatar, AvatarFallback, AvatarImage } from "../ui/avatar";
-import LogoutBtn from "@/admin/component/AdminLogoutBtn";
+import LogoutBtn from "@/admin/components/AdminLogoutBtn";
 
 const navBar = [
     { name: "Main Site", Icon: FaHome, urlLink: "/" },
@@ -57,16 +57,16 @@ const navBar = [
         segment: "moderator",
     },
     {
-        name: "Manage Sub-Category",
+        name: "Manage Category",
         Icon: FaCubes,
         innerLists: [
             {
-                name: "Add Sub-Category",
+                name: "Add Category",
                 urlLink: "/admin/sub-category/add-subcategory",
                 Icon: FaPlus,
             },
             {
-                name: "Sub-Category List",
+                name: "Category List",
                 urlLink: "/admin/sub-category/subcategory-list",
             },
         ],
