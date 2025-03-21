@@ -25,7 +25,7 @@ const Input = forwardRef(function Input({ label, type = "text", placeholder, err
                     )}
                 />
                 {additionalTitle && <p className="font-bold mt-2 text-black dark:text-white text-sm">{additionalTitle}</p>}
-                {error && <p className="text-red-700 font-bold my-2 text-base px-2">{error}</p>}
+                {error && <p className="text-red-500 font-bold my-2 text-base px-2">{error}</p>}
             </div>
         </>
     );
