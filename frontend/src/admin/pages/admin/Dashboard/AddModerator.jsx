@@ -37,6 +37,10 @@ const AddModerator = () => {
             setError("root", { message });
         },
     });
+
+    if (isPending) {
+        return <Loading />;
+    }
     return (
         <>
             <Helmet>
