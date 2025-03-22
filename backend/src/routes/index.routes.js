@@ -18,6 +18,6 @@ adminRoutes.use("/writer", writerRouter);
 
 // Writer Routes
 const writerRoutes = Router();
-writerRouter.use("/auth", writerAuthRouter);
+writerRoutes.use("/auth", writerAuthRouter);
 
 export { adminRoutes, writerRoutes };
