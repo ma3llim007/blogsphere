@@ -1,6 +1,6 @@
 import { ApiError, ApiResponse, asyncHandler } from "../../utils/Api.utils.js";
 import { Writer } from "../../models/writer.model.js";
-import { HttpOptions } from "../../utils/utils.js";
+import { HttpOptions, verifyToken } from "../../utils/utils.js";
 import bcrypt from "bcrypt";
 
 // Generating Access And Refresh Token
@@ -111,4 +111,38 @@ const logoutWriter = asyncHandler(async (req, res) => {
         .json(new ApiResponse(200, {}, "Writer Logged Out"));
 });
 
-export { loginWriter, logoutWriter, generateAccessAndRefreshTokensWriter };
+// Get Writer Details
+const getWriter = asyncHandler(async (req, res) => {
+    try {
+        if (!req.writer || !req.writer._id) {
+            return res.status(400).json(new ApiError(400, "Writer Not Authenticated"));
+        }
+        const writerId = req.writer._id;
+
+        const writer = await Writer.findById({ _id: writerId }).select("-password -refreshToken -verifyBy -writerVerify").lean();
+        if (!writer) {
+            return res.status(404).json(new ApiError(404, "Writer Not Found"));
+        }
+
+        return res.status(200).json(new ApiResponse(200, writer, "Writer Details Fetch Successfully"));
+    } catch (_error) {
+        return res.status(500).json(new ApiError(500, "Something Went Wrong! While Fetching Writer Detail"));
+    }
+});
+
+// Check Session
+const checkSessionWriter = asyncHandler(async (req, res) => {
+    const accessToken = req.cookies.accessToken;
+    if (!accessToken) {
+        return res.status(401).json(new ApiError(401, "Access Token Is Required"));
+    }
+    try {
+        const admin = await verifyToken(accessToken, process.env.ACCESS_TOKEN_SECRET);
+
+        return res.status(200).json(new ApiResponse(200, { isAuthenticated: true, admin }, "Writer AccessToken Verified Successfully"));
+    } catch (_error) {
+        return res.status(403).json(new ApiError(403, "Access Token Is Not Valid"));
+    }
+});
+
+export { loginWriter, logoutWriter, generateAccessAndRefreshTokensWriter, getWriter, checkSessionWriter };
