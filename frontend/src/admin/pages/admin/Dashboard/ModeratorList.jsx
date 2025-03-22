@@ -15,7 +15,7 @@ const ModeratorList = () => {
     const navigate = useNavigate();
 
     const { data, isLoading } = useQuery({
-        queryKey: ["ModeratorList"],
+        queryKey: ["moderatorList"],
         queryFn: () => crudService.get("moderator/moderators", true),
         onError: err => {
             toastService.error(err?.message || "Failed to fetch Data.");
@@ -25,7 +25,7 @@ const ModeratorList = () => {
     const { mutate, isPending } = useMutation({
         mutationFn: id => crudService.delete(`/moderator/delete-moderator/${id}`, true),
         onSuccess: data => {
-            queryClient.invalidateQueries("ModeratorList");
+            queryClient.invalidateQueries("moderatorList");
             toastService.success(data?.message);
         },
         onError: error => {
