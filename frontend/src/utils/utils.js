@@ -15,4 +15,12 @@ const currentYear = () => {
     return date.getFullYear();
 };
 
-export { formatDateTime, currentYear };
+const capitalizeWords = str => {
+    return str
+        ?.trim()
+        .split(" ")
+        .map(word => word.charAt(0).toUpperCase() + word.slice(1).toLowerCase())
+        .join(" ");
+};
+
+export { formatDateTime, currentYear, capitalizeWords };
