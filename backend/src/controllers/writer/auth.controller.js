@@ -1,6 +1,7 @@
 import { ApiError, ApiResponse, asyncHandler } from "../../utils/Api.utils.js";
 import { Writer } from "../../models/writer.model.js";
 import { HttpOptions } from "../../utils/utils.js";
+import bcrypt from "bcrypt";
 
 // Generating Access And Refresh Token
 const generateAccessAndRefreshTokensWriter = async (writerId) => {
@@ -48,11 +49,41 @@ const loginWriter = asyncHandler(async (req, res) => {
         .status(200)
         .cookie("accessToken", accessToken, HttpOptions)
         .cookie("refreshToken", refreshToken, HttpOptions)
-        .json(new ApiResponse(200, writer, "Admin Logged In Successfully"));
+        .json(new ApiResponse(200, writer, "Writer Logged In Successfully"));
 });
 
 // Change Password
-const changePasswordWriter = asyncHandler(async (req, res) => {});
+const changePasswordWriter = asyncHandler(async (req, res) => {
+    const { password } = req.body;
+    const { email } = req.writer;
+
+    if (!req.writer || !req.writer._id) {
+        return res.status(400).json(new ApiError(400, "Writer Not Authenticated"));
+    }
+
+    if (!password?.trim()) {
+        return res.status(422).json(new ApiError(422, "Password Field Is Required"));
+    }
+
+    const writerIsExisted = await Writer.findOne({ email });
+    if (!writerIsExisted) {
+        return res.status(404).json(new ApiError(404, "Writer Not Found"));
+    }
+
+    const isSamePassword = await bcrypt.compare(password, writerIsExisted.password);
+    if (isSamePassword) {
+        return res.status(400).json(new ApiError(400, "New Password Cannot Be The Same As The Current Password"));
+    }
+
+    writerIsExisted.password = password;
+    await writerIsExisted.save();
+
+    return res
+        .status(200)
+        .clearCookie("accessToken", HttpOptions)
+        .clearCookie("refreshToken", HttpOptions)
+        .json(new ApiResponse(200, {}, "Password Change Successfully"));
+});
 
 // update details
 const updateDetailsWriter = asyncHandler(async (req, res) => {});
