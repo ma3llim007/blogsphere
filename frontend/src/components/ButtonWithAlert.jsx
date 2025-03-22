@@ -26,7 +26,7 @@ const ButtonWithAlert = ({
     return (
         <AlertDialog>
             <AlertDialogTrigger asChild>
-                <Button className={`${buttonColor} ${className}`} {...props}>
+                <Button className={`${buttonColor} ${className} cursor-pointer`} {...props}>
                     {buttonTitle}
                 </Button>
             </AlertDialogTrigger>

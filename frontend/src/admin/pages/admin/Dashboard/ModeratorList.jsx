@@ -50,7 +50,7 @@ const ModeratorList = () => {
             header: "Actions",
             cell: ({ row }) => (
                 <div className="flex gap-1 items-center flex-wrap">
-                    <Button className="Primary" onClick={() => navigate(`/admin/moderator/view-moderator/${row.original._id}`)}>
+                    <Button className="Primary cursor-pointer" onClick={() => navigate(`/admin/moderator/view-moderator/${row.original._id}`)}>
                         View
                     </Button>
                     |
