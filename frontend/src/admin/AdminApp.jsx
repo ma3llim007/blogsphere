@@ -12,6 +12,7 @@ const Dashboard = lazy(() => import("./pages/admin/Dashboard/Dashboard"));
 const AdminNotFound = lazy(() => import("./pages/AdminNotFound"));
 const AddModerator = lazy(() => import("./pages/admin/Dashboard/AddModerator"));
 const ModeratorList = lazy(() => import("./pages/admin/Dashboard/ModeratorList"));
+const ViewModerator = lazy(() => import("./pages/admin/Dashboard/ViewModerator"));
 
 // Defining Routes
 const router = createBrowserRouter([
@@ -89,6 +90,14 @@ const router = createBrowserRouter([
                         element: (
                             <Suspense fallback={<Loading />}>
                                 <ModeratorList />
+                            </Suspense>
+                        ),
+                    },
+                    {
+                        path: "view-moderator/:moderatorId",
+                        element: (
+                            <Suspense fallback={<Loading />}>
+                                <ViewModerator />
                             </Suspense>
                         ),
                     },
