@@ -58,6 +58,26 @@ const changePasswordWriter = asyncHandler(async (req, res) => {});
 const updateDetailsWriter = asyncHandler(async (req, res) => {});
 
 // Logout Writer
-const logoutWriter = asyncHandler(async (req, res) => {});
+const logoutWriter = asyncHandler(async (req, res) => {
+    if (!req.writer || !req.writer._id) {
+        return res.status(400).json(new ApiError(400, "Writer Not Authenticated"));
+    }
+    await Writer.findByIdAndUpdate(
+        req.writer._id,
+        {
+            $unset: {
+                refreshToken: 1,
+            },
+        },
+        {
+            new: true,
+        }
+    );
+    return res
+        .status(200)
+        .clearCookie("accessToken", HttpOptions)
+        .clearCookie("refreshToken", HttpOptions)
+        .json(new ApiResponse(200, {}, "Writer Logged Out"));
+});
 
-export { loginWriter };
+export { loginWriter, logoutWriter, generateAccessAndRefreshTokensWriter };
