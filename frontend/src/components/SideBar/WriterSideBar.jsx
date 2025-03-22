@@ -7,6 +7,7 @@ import { DropdownMenu, DropdownMenuContent, DropdownMenuGroup, DropdownMenuItem,
 import { DropdownMenuLabel } from "../ui/dropdown-menu";
 import { Avatar, AvatarFallback, AvatarImage } from "../ui/avatar";
 import { AiFillDashboard } from "react-icons/ai";
+import LogOutWriter from "../writer/LogOutWriter";
 
 const navBar = [
     { name: "Main Site", Icon: FaHome, urlLink: "/" },
@@ -166,7 +167,7 @@ const WriterSideBar = ({ user, ...props }) => {
                                         <AvatarFallback className="rounded-lg">CN</AvatarFallback>
                                     </Avatar>
                                     <div className="grid flex-1 text-left text-sm leading-tight">
-                                        <span className="truncate font-semibold">{user?.username} - Admin</span>
+                                        <span className="truncate font-semibold">{user?.username} - Writer</span>
                                         <span className="truncate text-xs">{user?.email}</span>
                                     </div>
                                     <ChevronsUpDown className="ml-auto size-4" />
@@ -191,7 +192,9 @@ const WriterSideBar = ({ user, ...props }) => {
                                         <BadgeCheck />
                                         Account
                                     </DropdownMenuItem>
-                                    <DropdownMenuItem onSelect={e => e.preventDefault()}>{/* <LogoutBtn /> */}</DropdownMenuItem>
+                                    <DropdownMenuItem onSelect={e => e.preventDefault()}>
+                                        <LogOutWriter />
+                                    </DropdownMenuItem>
                                 </DropdownMenuGroup>
                             </DropdownMenuContent>
                         </DropdownMenu>
