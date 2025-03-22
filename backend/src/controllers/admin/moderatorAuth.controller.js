@@ -88,6 +88,7 @@ const getModeratorById = asyncHandler(async (req, res) => {
 
 // Verify Moderator By Moderator Id
 const verifyModeratorById = asyncHandler(async (req, res) => {
+    const adminId = req.admin?._id;
     try {
         const { moderatorId } = req.params;
 
@@ -104,7 +105,7 @@ const verifyModeratorById = asyncHandler(async (req, res) => {
             return res.status(404).json(new ApiError(404, "Moderator Is Already Verify"));
         }
         moderator.moderatorVerify = true;
-
+        moderator.verifyBy = adminId;
         await moderator.save();
         return res.status(200).json(new ApiResponse(200, {}, "Moderator Fetch Successfully"));
     } catch (_error) {
