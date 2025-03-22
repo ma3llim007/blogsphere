@@ -1,3 +1,4 @@
+import PageHeader from "@/admin/components/PageHeader";
 import Table from "@/admin/components/Table";
 import Badge from "@/components/Badge";
 import ButtonWithAlert from "@/components/ButtonWithAlert";
@@ -78,6 +79,7 @@ const ModeratorList = () => {
                 <meta name="description" content="View and manage all moderators in the BlogSphere admin panel. Assign roles, update permissions, and monitor activity efficiently." />
                 <meta name="robots" content="noindex, nofollow" />
             </Helmet>
+            <PageHeader title={"Manage Moderators"} controller={"View All Moderator"} controllerUrl={"/admin/moderator/moderator-list/"} page={"Moderator Listing"} />
             <Table data={moderatorData} columns={moderatorColumns} loading={isLoading} paginationOptions={{ pageSize: 10 }} sortable={true} />
         </>
     );
