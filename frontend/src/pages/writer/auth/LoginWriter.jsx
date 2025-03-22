@@ -2,7 +2,8 @@ import Input from "@/components/common/Input";
 import { Button } from "@/components/ui/button";
 import crudService from "@/services/crudService";
 import toastService from "@/services/toastService";
-import { login } from "@/store/features/admin/adminAuthSlice";
+import { loginWriter } from "@/store/features/writer/writerAuthSlice";
+import { adminLoginSchema } from "@/validation/adminSchema";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { useMutation } from "@tanstack/react-query";
 import { useForm } from "react-hook-form";
@@ -20,20 +21,20 @@ const LoginWriter = () => {
         formState: { errors },
     } = useForm({
         mode: "onChange",
-        // resolver: yupResolver(adminLoginSchema),
+        resolver: yupResolver(adminLoginSchema),
     });
 
     const { mutate, isPending } = useMutation({
-        mutationFn: data => crudService.post("/auth/login", true, data),
+        mutationFn: data => crudService.post("/writer/auth/login", true, data),
         onError: error => {
             const message = error.response?.data?.message || "An unexpected error occurred.";
             setError("root", { message });
         },
         onSuccess: data => {
             const response = data?.data || {};
-            dispatch(login({ admin: response }));
-            navigate("/admin/dashboard");
-            toastService.success("Admin Login Successfully!");
+            dispatch(loginWriter({ writer: response }));
+            navigate("/writer/dashboard");
+            toastService.success("Writer Login Successfully!");
         },
     });
     return (

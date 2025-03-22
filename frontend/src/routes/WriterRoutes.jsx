@@ -1,9 +1,10 @@
 import { lazy, Suspense } from "react";
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import Loading from "@/components/common/Loading";
-import AdminLayout from "@/layouts/AdminLayout";
-
+// layouts
 const AuthLayout = lazy(() => import("@/layouts/AuthLayout"));
+const WriterLayout = lazy(() => import("@/layouts/WriterLayout"));
+// Pages
 const LoginWriter = lazy(() => import("@/pages/writer/auth/LoginWriter"));
 const Dashboard = lazy(() => import("@/pages/moderator/Dashboard"));
 const WriterNotFound = lazy(() => import("@/pages/writer/auth/WriterNotFound"));
@@ -37,10 +38,10 @@ const router = createBrowserRouter([
         ],
     },
     {
-        path: "admin",
+        path: "/writer",
         element: (
             <Suspense fallback={<Loading />}>
-                <AdminLayout />
+                <WriterLayout />
             </Suspense>
         ),
         children: [
