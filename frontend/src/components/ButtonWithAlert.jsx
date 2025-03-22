@@ -37,7 +37,7 @@ const ButtonWithAlert = ({
                 </AlertDialogHeader>
                 <AlertDialogFooter className="mt-2">
                     <AlertDialogCancel>{dialogCancelTitle}</AlertDialogCancel>
-                    <AlertDialogAction onClick={dialogActionfunc} className={dialogActionBtnColor}>
+                    <AlertDialogAction onClick={dialogActionfunc} className={`${dialogActionBtnColor} cursor-pointer`}>
                         {dialogActionTitle}
                     </AlertDialogAction>
                 </AlertDialogFooter>

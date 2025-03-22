@@ -3,7 +3,6 @@ import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { useForm } from "react-hook-form";
 import { useNavigate } from "react-router-dom";
 import { addModeratorSchema } from "@/validation/admin/Schema";
-import { Helmet } from "react-helmet-async";
 import PageHeader from "@/admin/components/PageHeader";
 import Input from "@/components/Form/Input";
 import crudService from "@/services/crudService";
@@ -11,6 +10,7 @@ import toastService from "@/services/toastService";
 import { Button } from "@/components/ui/button";
 import Loading from "@/components/Loaders/Loading";
 import { FaPlus } from "react-icons/fa";
+import { Helmet } from "react-helmet";
 
 const AddModerator = () => {
     const queryClient = useQueryClient();
