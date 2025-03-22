@@ -6,13 +6,13 @@ import { ApiError, ApiResponse, asyncHandler } from "../../utils/Api.utils.js";
 const registerModerator = asyncHandler(async (req, res) => {
     try {
         const { firstName, lastName, username, email, phoneNumber, password } = req.body;
-        if (!firstName?.trim() || !lastName?.trim() || !username?.trim() || !email?.trim() || !phoneNumber?.trim() || !password?.trim()) {
+        if (![firstName, lastName, username, email, phoneNumber, password].every((field) => field?.trim())) {
             return res.status(422).json(new ApiError(422, "All Field Are Required"));
         }
 
-        const existedModerator = await Moderator.findOne({ email });
+        const existedModerator = await Moderator.findOne({ $or: [{ email }, { username }] });
         if (existedModerator) {
-            return res.status(409).json(new ApiError(409, "E-Mail Is Already Exists"));
+            return res.status(409).json(new ApiError(409, "E-Mail Or Username Is Already Exists"));
         }
 
         await Moderator.create({
@@ -35,12 +35,12 @@ const deleteModerator = asyncHandler(async (req, res) => {
     const { moderatorId } = req.params;
 
     if (!isValidObjectId(moderatorId)) {
-        return res.status(422).json(new ApiError(422, "Moderator Id Is Required"));
+        return res.status(422).json(new ApiError(422, "Invalid Moderator ID."));
     }
 
     const moderator = await Moderator.findById(moderatorId);
     if (!moderator) {
-        return res.status(400).json(new ApiError(400, "Moderator Is Not Found"));
+        return res.status(400).json(new ApiError(400, "Moderator Not Found"));
     }
 
     const moderatorDelete = await Moderator.deleteOne({ _id: moderatorId });
@@ -55,8 +55,8 @@ const deleteModerator = asyncHandler(async (req, res) => {
 // List Moderator
 const listModerator = asyncHandler(async (req, res) => {
     try {
-        const moderators = await Moderator.find().select("-password -refreshToken");
-        if (!moderators) {
+        const moderators = await Moderator.find().select("-password -refreshToken").lean();
+        if (!moderators.length) {
             return res.status(200).json(new ApiResponse(200, {}, "Moderator Is Not Available"));
         }
 
@@ -72,10 +72,10 @@ const getModeratorById = asyncHandler(async (req, res) => {
         const { moderatorId } = req.params;
 
         if (!isValidObjectId(moderatorId)) {
-            return res.status(422).json(new ApiError(422, "Moderator Id Is Required"));
+            return res.status(422).json(new ApiError(422, "Invalid Moderator ID."));
         }
 
-        const moderator = await Moderator.findById(moderatorId);
+        const moderator = await Moderator.findById(moderatorId).select("-password -refreshToken").lean();
         if (!moderator) {
             return res.status(400).json(new ApiError(400, "Moderator Is Not Found"));
         }
@@ -86,4 +86,30 @@ const getModeratorById = asyncHandler(async (req, res) => {
     }
 });
 
-export { registerModerator, deleteModerator, listModerator, getModeratorById };
+// Verify Moderator By Moderator Id
+const verifyModeratorById = asyncHandler(async (req, res) => {
+    try {
+        const { moderatorId } = req.params;
+
+        if (!isValidObjectId(moderatorId)) {
+            return res.status(422).json(new ApiError(422, "Invalid Moderator ID."));
+        }
+
+        const moderator = await Moderator.findById(moderatorId);
+        if (!moderator) {
+            return res.status(400).json(new ApiError(400, "Moderator Is Not Found"));
+        }
+
+        if (moderator.moderatorVerify) {
+            return res.status(404).json(new ApiError(404, "Moderator Is Already Verify"));
+        }
+        moderator.moderatorVerify = true;
+
+        await moderator.save();
+        return res.status(200).json(new ApiResponse(200, {}, "Moderator Fetch Successfully"));
+    } catch (_error) {
+        return res.status(500).json(new ApiError(500, "Something Went Wrong! While Verify Moderator"));
+    }
+});
+
+export { registerModerator, deleteModerator, listModerator, getModeratorById, verifyModeratorById };
