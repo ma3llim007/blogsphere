@@ -6,7 +6,7 @@ import { Button } from "@/components/ui/button";
 import crudService from "@/services/crudService";
 import queryClient from "@/services/queryClientConfig";
 import toastService from "@/services/toastService";
-import { capitalizeWords } from "@/utils/utils";
+import { capitalizeWords, formatDateTime } from "@/utils/utils";
 import { useMutation, useQuery } from "@tanstack/react-query";
 import { Helmet } from "react-helmet";
 import { FaBackward } from "react-icons/fa";
@@ -84,6 +84,10 @@ const ViewModerator = () => {
                                 <tr className="hover:bg-gray-300 hover:bg-opacity-60 dark:hover:bg-gray-800 transition">
                                     <th className="text-left p-3 font-semibold">Phone Number</th>
                                     <td className="p-3 text-left">{data?.moderatorVerify ? <Badge title="Verify" /> : <Badge title="Not Verify" className="Danger" />}</td>
+                                </tr>
+                                <tr className="hover:bg-gray-300 hover:bg-opacity-60 dark:hover:bg-gray-800 transition">
+                                    <th className="text-left p-3 font-semibold">Create At</th>
+                                    <td className="p-3 text-left">{formatDateTime(data?.createdAt)}</td>
                                 </tr>
                                 {!data?.moderatorVerify ? (
                                     <tr className="hover:bg-gray-300 hover:bg-opacity-60 dark:hover:bg-gray-800 transition">
