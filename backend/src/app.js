@@ -1,7 +1,7 @@
 import express from "express";
 import morgan from "morgan";
 import cors from "cors";
-import { adminRoutes } from "./routes/index.routes.js";
+import { adminRoutes, writerRoutes } from "./routes/index.routes.js";
 import cookieParser from "cookie-parser";
 const app = express();
 
@@ -14,5 +14,6 @@ app.use(morgan("dev"));
 
 // Routes
 app.use("/api/v1/admin", adminRoutes);
+app.use("/api/v1/writer", writerRoutes);
 
 export default app;
