@@ -1,7 +1,7 @@
-import Footer from "@/components/Admin/Footer";
-import Header from "@/components/Admin/Header";
-import Loading from "@/components/Loaders/Loading";
-import AdminSideBar from "@/components/SideBar/AdminSideBar";
+import Footer from "@/components/admin/Footer";
+import Header from "@/components/admin/Header";
+import Loading from "@/components/common/Loading";
+import AdminSideBar from "@/components/sidebar/AdminSideBar";
 import { SidebarInset, SidebarProvider } from "@/components/ui/sidebar";
 import useAdminAuth from "@/hooks/useAdminAuth";
 import toastService from "@/services/toastService";
@@ -16,6 +16,7 @@ const AdminLayout = () => {
         document.documentElement.classList.add("dark"); // Enable dark mode for admin
         return () => document.documentElement.classList.remove("dark"); // Remove when leaving admin panel
     }, []);
+    
     if (isLoading) {
         return <Loading />;
     }

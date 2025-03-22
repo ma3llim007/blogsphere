@@ -1,8 +1,8 @@
-import PageHeader from "@/admin/components/PageHeader";
-import Table from "@/admin/components/Table";
-import Badge from "@/components/Badge";
-import ButtonWithAlert from "@/components/ButtonWithAlert";
-import Loading from "@/components/Loaders/Loading";
+import PageHeader from "@/components/common/PageHeader";
+import Table from "@/components/common/Table";
+import Badge from "@/components/common/Badge";
+import ButtonWithAlert from "@/components/common/ButtonWithAlert";
+import Loading from "@/components/common/Loading";
 import { Button } from "@/components/ui/button";
 import crudService from "@/services/crudService";
 import queryClient from "@/services/queryClientConfig";

@@ -1,12 +1,12 @@
 import { useForm } from "react-hook-form";
 import { useDispatch } from "react-redux";
 import { yupResolver } from "@hookform/resolvers/yup";
-import { adminLoginSchema } from "@/validation/admin/Schema";
-import Input from "@/components/Form/Input";
+import { adminLoginSchema } from "@/validation/adminSchema";
+import Input from "@/components/common/Input";
 import { Button } from "@/components/ui/button";
 import { useMutation } from "@tanstack/react-query";
 import crudService from "@/services/crudService";
-import { login } from "@/store/features/admin/admin/adminAuthSlice";
+import { login } from "@/store/features/admin/adminAuthSlice";
 import { useNavigate } from "react-router-dom";
 import toastService from "@/services/toastService";
 

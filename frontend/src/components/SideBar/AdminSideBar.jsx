@@ -8,7 +8,7 @@ import { Link, useLocation } from "react-router-dom";
 import { BadgeCheck, ChevronRight, ChevronsUpDown } from "lucide-react";
 import { DropdownMenu, DropdownMenuContent, DropdownMenuGroup, DropdownMenuItem, DropdownMenuLabel, DropdownMenuSeparator, DropdownMenuTrigger } from "../ui/dropdown-menu";
 import { Avatar, AvatarFallback, AvatarImage } from "../ui/avatar";
-import LogoutBtn from "@/admin/components/AdminLogoutBtn";
+import LogoutBtn from "@/components/admin/AdminLogoutBtn";
 
 const navBar = [
     { name: "Main Site", Icon: FaHome, urlLink: "/" },

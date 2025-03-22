@@ -1,18 +1,18 @@
-import PageHeader from "@/admin/components/PageHeader";
-import Input from "@/components/Form/Input";
-import Loading from "@/components/Loaders/Loading";
-import { Button } from "@/components/ui/button";
-import crudService from "@/services/crudService";
-import toastService from "@/services/toastService";
-import { addWriterSchema } from "@/validation/admin/Schema";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
-import { Helmet } from "react-helmet-async";
 import { useForm } from "react-hook-form";
-import { FaPlus } from "react-icons/fa";
 import { useNavigate } from "react-router-dom";
+import { addModeratorSchema } from "@/validation/adminSchema";
+import PageHeader from "@/components/common/PageHeader";
+import Input from "@/components/common/Input";
+import crudService from "@/services/crudService";
+import toastService from "@/services/toastService";
+import { Button } from "@/components/ui/button";
+import Loading from "@/components/common/Loading";
+import { FaPlus } from "react-icons/fa";
+import { Helmet } from "react-helmet-async";
 
-const AddWriter = () => {
+const AddModerator = () => {
     const queryClient = useQueryClient();
     const navigate = useNavigate();
     const {
@@ -22,14 +22,14 @@ const AddWriter = () => {
         setError,
     } = useForm({
         mode: "onChange",
-        resolver: yupResolver(addWriterSchema),
+        resolver: yupResolver(addModeratorSchema),
     });
 
     const { mutate, isPending } = useMutation({
-        mutationFn: data => crudService.post("writer/register-writer", true, data),
+        mutationFn: data => crudService.post("moderator/register-moderator", true, data),
         onSuccess: data => {
-            navigate("/admin/writers/writer-list");
-            queryClient.invalidateQueries("writerList");
+            navigate("/admin/moderator/moderator-list");
+            queryClient.invalidateQueries("moderatorList");
             toastService.success(data?.message);
         },
         onError: error => {
@@ -44,15 +44,15 @@ const AddWriter = () => {
     return (
         <>
             <Helmet>
-                <title>Add New Writer | BlogSphere</title>
-                <meta name="description" content="Add and manage writers on the BlogSphere admin panel. Assign roles, set permissions, and streamline content creation effortlessly." />
+                <title>Add New Moderator | BlogSphere</title>
+                <meta name="description" content="Add and manage moderators on the BlogSphere admin panel. Assign roles and control permissions efficiently." />
                 <meta name="robots" content="noindex, nofollow" />
             </Helmet>
-            <PageHeader title={"Manage Writers"} controller={"Writers"} controllerUrl={"/admin/writers/"} page={"Add Writer's"} />
+            <PageHeader title={"Manage Moderators"} controller={"Moderators"} controllerUrl={"/admin/moderator/"} page={"Add Moderator's"} />
             <section className="w-full">
                 <div className="my-4 w-full container mx-auto border-t-4 border-blue-700 rounded-lg p-2 bg-gray-100 dark:bg-slate-800">
-                    <form className="space-y-5" onSubmit={handleSubmit(data => mutate(data))}>
-                        <h1 className="text-xl font-bold my-4 px-3">Add New Writer</h1>
+                    <form className="space-y-5" onSubmit={handleSubmit(data => mutate(data))} encType="multipart/form-data">
+                        <h1 className="text-xl font-bold my-4 px-3">Add New Moderator</h1>
                         {errors.root && (
                             <div className="w-full my-4 bg-red-500 text-center rounded-md border border-red-600 py-3 px-4">
                                 <h4 className="text-white font-bold text-sm">{errors.root.message}</h4>
@@ -145,4 +145,4 @@ const AddWriter = () => {
     );
 };
 
-export default AddWriter;
+export default AddModerator;

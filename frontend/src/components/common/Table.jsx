@@ -2,8 +2,8 @@ import { useMemo, useState } from "react";
 import { flexRender, getCoreRowModel, getPaginationRowModel, getSortedRowModel, useReactTable } from "@tanstack/react-table";
 import { Table as CnTable, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@/components/ui/table";
 import { ImSortAmountDesc, ImSortAmountAsc } from "react-icons/im";
-import Input from "@/components/Form/Input";
-import Loading from "@/components/Loaders/Loading";
+import Input from "@/components/common/Input";
+import Loading from "@/components/common/Loading";
 import { Button } from "@/components/ui/button";
 
 const Table = ({ columns, data, paginationOptions = { pageSize: 10 }, sortable = true, loading = false, emptyMessage = "No Data Is Available" }) => {

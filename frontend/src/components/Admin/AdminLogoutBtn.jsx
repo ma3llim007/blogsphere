@@ -14,7 +14,7 @@ import {
 } from "@/components/ui/alert-dialog";
 import { useMutation } from "@tanstack/react-query";
 import crudService from "@/services/crudService";
-import { logout } from "@/store/features/admin/admin/adminAuthSlice";
+import { logout } from "@/store/features/admin/adminAuthSlice";
 import { storePersistor } from "@/store/store";
 
 const LogoutBtn = () => {

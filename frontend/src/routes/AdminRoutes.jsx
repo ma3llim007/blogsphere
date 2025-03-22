@@ -1,31 +1,28 @@
 import { lazy, Suspense } from "react";
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
-import Loading from "@/components/Loaders/Loading";
-
+import Loading from "@/components/common/Loading";
 // Layouts
-import AuthLayout from "@/layouts/AuthLayout";
-import AdminLayout from "@/layouts/AdminLayout";
-import ViewWriter from "./pages/admin/Dashboard/ViewWriter";
+const AuthLayout = lazy(() => import("@/layouts/AuthLayout"));
+const AdminLayout = lazy(() => import("@/layouts/AdminLayout"));
 
 // Pages
-const Login = lazy(() => import("./pages/admin/auth/Login"));
-const Dashboard = lazy(() => import("./pages/admin/Dashboard/Dashboard"));
-const AdminNotFound = lazy(() => import("./pages/AdminNotFound"));
-const AddModerator = lazy(() => import("./pages/admin/Dashboard/AddModerator"));
-const ModeratorList = lazy(() => import("./pages/admin/Dashboard/ModeratorList"));
-const ViewModerator = lazy(() => import("./pages/admin/Dashboard/ViewModerator"));
-const AddWriter = lazy(() => import("./pages/admin/Dashboard/AddWriter"));
-const WriterList = lazy(() => import("./pages/admin/Dashboard/WriterList"));
-const AddCategory = lazy(() => import("./pages/admin/Dashboard/AddCategory"));
-const CategoryList = lazy(() => import("./pages/admin/Dashboard/CategoryList"));
-const EditCategory = lazy(() => import("./pages/admin/Dashboard/EditCategory"));
-const LoginWriter = lazy(() => import("./pages/Writer/auth/LoginWriter"));
+const Login = lazy(() => import("@/pages/admin/auth/Login"));
+const Dashboard = lazy(() => import("@/pages/admin/Dashboard"));
+const AdminNotFound = lazy(() => import("@/pages/admin/AdminNotFound"));
+const AddModerator = lazy(() => import("@/pages/admin/moderator/AddModerator"));
+const ModeratorList = lazy(() => import("@/pages/admin/moderator/ModeratorList"));
+const ViewModerator = lazy(() => import("@/pages/admin/moderator/ViewModerator"));
+const AddWriter = lazy(() => import("@/pages/admin/writer/AddWriter"));
+const WriterList = lazy(() => import("@/pages/admin/writer/WriterList"));
+const ViewWriter = lazy(() => import("@/pages/admin/writer/ViewWriter"));
+const AddCategory = lazy(() => import("@/pages/admin/category/AddCategory"));
+const CategoryList = lazy(() => import("@/pages/admin/category/CategoryList"));
+const EditCategory = lazy(() => import("@/pages/admin/category/EditCategory"));
 
 // Defining Routes
 const router = createBrowserRouter([
-    // Admin Routes
     {
-        path: "admin/auth",
+        path: "/admin/auth",
         element: (
             <Suspense fallback={<Loading />}>
                 <AuthLayout />
@@ -51,7 +48,7 @@ const router = createBrowserRouter([
         ],
     },
     {
-        path: "admin",
+        path: "/admin",
         element: (
             <Suspense fallback={<Loading />}>
                 <AdminLayout />
@@ -195,38 +192,10 @@ const router = createBrowserRouter([
             },
         ],
     },
-    // Moderator Routes
-    // Writer Routes
-    {
-        path: "admin/authwriter",
-        element: (
-            <Suspense>
-                <AuthLayout />
-            </Suspense>
-        ),
-        children: [
-            {
-                index: true,
-                element: (
-                    <Suspense fallback={<Loading />}>
-                        <LoginWriter />
-                    </Suspense>
-                ),
-            },
-            {
-                path: "writer-login",
-                element: (
-                    <Suspense fallback={<Loading />}>
-                        <LoginWriter />
-                    </Suspense>
-                ),
-            },
-        ],
-    },
 ]);
 
-const AdminApp = () => {
+const AdminRoutes = () => {
     return <RouterProvider router={router} />;
 };
 
-export default AdminApp;
+export default AdminRoutes;

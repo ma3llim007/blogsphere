@@ -3,7 +3,7 @@ import { persistReducer, persistStore } from "redux-persist";
 import sessionStorage from "redux-persist/lib/storage/session";
 
 // Slices
-import adminAuthSlice from "./features/admin/admin/adminAuthSlice";
+import adminAuthSlice from "./features/admin/adminAuthSlice";
 
 // Persistence Configuration For Admin Auth
 const adminAuthPersistentConfig = {

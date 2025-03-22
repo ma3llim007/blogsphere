@@ -1,11 +1,11 @@
-import PageHeader from "@/admin/components/PageHeader";
-import Input from "@/components/Form/Input";
-import Loading from "@/components/Loaders/Loading";
+import PageHeader from "@/components/common/PageHeader";
+import Input from "@/components/common/Input";
+import Loading from "@/components/common/Loading";
 import { Button } from "@/components/ui/button";
 import crudService from "@/services/crudService";
 import toastService from "@/services/toastService";
 import { slugTransform } from "@/utils/utils";
-import { editCategorySchema } from "@/validation/admin/Schema";
+import { editCategorySchema } from "@/validation/adminSchema";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 import { useEffect } from "react";

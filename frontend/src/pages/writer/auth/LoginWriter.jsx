@@ -1,8 +1,8 @@
-import Input from "@/components/Form/Input";
+import Input from "@/components/common/Input";
 import { Button } from "@/components/ui/button";
 import crudService from "@/services/crudService";
 import toastService from "@/services/toastService";
-import { login } from "@/store/features/admin/admin/adminAuthSlice";
+import { login } from "@/store/features/admin/adminAuthSlice";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { useMutation } from "@tanstack/react-query";
 import { useForm } from "react-hook-form";
