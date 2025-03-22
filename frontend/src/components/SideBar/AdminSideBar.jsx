@@ -78,12 +78,12 @@ const navBar = [
         innerLists: [
             {
                 name: "Add Category",
-                urlLink: "/admin/sub-category/add-subcategory",
+                urlLink: "/admin/category/add-category",
                 Icon: FaPlus,
             },
             {
                 name: "Category List",
-                urlLink: "/admin/sub-category/subcategory-list",
+                urlLink: "/admin/category/category-list",
             },
         ],
         segment: "sub-category",

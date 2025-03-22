@@ -1,3 +1,4 @@
+import { isValidExtensions, isValidFileType } from "@/utils/utils";
 import * as Yup from "yup";
 
 // Validation schema for the login form
@@ -38,4 +39,26 @@ export const addWriterSchema = Yup.object().shape({
         .matches(/[a-z]/, "Password Must Contain At Least One Lowercase Letter")
         .matches(/[0-9]/, "Password Must Contain At Least One Number")
         .matches(/[@$!%*?&]/, "Password Must Contain At Least One Special Character (@, $, !, %, *, ?, &)"),
+});
+
+export const addCategoryScheme = Yup.object().shape({
+    categoryName: Yup.string()
+        .required("Category Name Is Required")
+        .min(3, "Category At Least Have More Than 3 Characters")
+        .matches(/^[A-Za-z\s]+$/, "Category Name Must Only Contain Letters"),
+    categorySlug: Yup.string().required("Category Slug Is Required"),
+    categoryImage: Yup.mixed()
+        .required("Category Image Is Required")
+        .test("fileType", "Unsupported file format", value => isValidFileType(value)),
+});
+
+export const editCategorySchema = Yup.object().shape({
+    categoryName: Yup.string()
+        .required("Category Name Is Required")
+        .min(3, "Category At Least Have More Than 3 Characters")
+        .matches(/^[A-Za-z\s]+$/, "Category Name Must Only Contain Letters"),
+    categorySlug: Yup.string().required("Category Slug Is Required"),
+    categoryImage: Yup.mixed().test("fileType", "Unsupported file format", value => {
+        return !value || isValidExtensions(value);
+    }),
 });
