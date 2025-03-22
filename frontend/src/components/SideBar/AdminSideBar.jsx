@@ -1,4 +1,4 @@
-import { FaHome, FaUsers, FaPlus, FaCubes, FaBlogger, FaList } from "react-icons/fa";
+import { FaHome, FaUsers, FaPlus, FaCubes, FaBlogger, FaList, FaUserEdit } from "react-icons/fa";
 import { FaRegMessage } from "react-icons/fa6";
 import { MdAddModerator } from "react-icons/md";
 import { AiFillDashboard } from "react-icons/ai";
@@ -55,6 +55,22 @@ const navBar = [
             },
         ],
         segment: "moderator",
+    },
+    {
+        name: "Manage Writer",
+        Icon: FaUserEdit,
+        innerLists: [
+            {
+                name: "Add Writer",
+                urlLink: "/admin/writers/add-writer",
+                Icon: FaPlus,
+            },
+            {
+                name: "Writer List",
+                urlLink: "/admin/writers/writer-list",
+            },
+        ],
+        segment: "writer",
     },
     {
         name: "Manage Category",

@@ -5,6 +5,7 @@ import Loading from "@/components/Loaders/Loading";
 // Layouts
 import AuthLayout from "@/layouts/AuthLayout";
 import AdminLayout from "@/layouts/AdminLayout";
+import ViewWriter from "./pages/admin/Dashboard/ViewWriter";
 
 // Pages
 const Login = lazy(() => import("./pages/admin/auth/Login"));
@@ -13,6 +14,8 @@ const AdminNotFound = lazy(() => import("./pages/AdminNotFound"));
 const AddModerator = lazy(() => import("./pages/admin/Dashboard/AddModerator"));
 const ModeratorList = lazy(() => import("./pages/admin/Dashboard/ModeratorList"));
 const ViewModerator = lazy(() => import("./pages/admin/Dashboard/ViewModerator"));
+const AddWriter = lazy(() => import("./pages/admin/Dashboard/AddWriter"));
+const WriterList = lazy(() => import("./pages/admin/Dashboard/WriterList"));
 
 // Defining Routes
 const router = createBrowserRouter([
@@ -98,6 +101,43 @@ const router = createBrowserRouter([
                         element: (
                             <Suspense fallback={<Loading />}>
                                 <ViewModerator />
+                            </Suspense>
+                        ),
+                    },
+                ],
+            },
+            {
+                path: "writers",
+                children: [
+                    {
+                        index: true,
+                        element: (
+                            <Suspense fallback={<Loading />}>
+                                <AddWriter />
+                            </Suspense>
+                        ),
+                    },
+                    {
+                        path: "add-writer",
+                        element: (
+                            <Suspense fallback={<Loading />}>
+                                <AddWriter />
+                            </Suspense>
+                        ),
+                    },
+                    {
+                        path: "writer-list",
+                        element: (
+                            <Suspense fallback={<Loading />}>
+                                <WriterList />
+                            </Suspense>
+                        ),
+                    },
+                    {
+                        path: "view-writer/:moderatorId",
+                        element: (
+                            <Suspense fallback={<Loading />}>
+                                <ViewWriter />
                             </Suspense>
                         ),
                     },
