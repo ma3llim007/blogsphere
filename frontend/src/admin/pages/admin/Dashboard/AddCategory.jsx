@@ -9,7 +9,7 @@ import { addCategoryScheme } from "@/validation/admin/Schema";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { useEffect } from "react";
-import { Helmet } from "react-helmet";
+import { Helmet } from "react-helmet-async";
 import { Controller, useForm } from "react-hook-form";
 import { FaPlus } from "react-icons/fa";
 import { useNavigate } from "react-router-dom";

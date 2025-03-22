@@ -9,13 +9,16 @@ import { QueryClientProvider } from "@tanstack/react-query";
 import queryClient from "./services/queryClientConfig";
 import { ReactQueryDevtools } from "@tanstack/react-query-devtools";
 import { ToastContainer } from "react-toastify";
+import { Helmet } from "react-helmet-async";
 
 createRoot(document.getElementById("root")).render(
     <StrictMode>
         <Provider store={store}>
             <PersistGate loading={null} persistor={storePersistor}>
                 <QueryClientProvider client={queryClient}>
-                    <App />
+                    <Helmet>
+                        <App />
+                    </Helmet>
                     <ReactQueryDevtools initialIsOpen={false} />
                     <ToastContainer limit={4} />
                 </QueryClientProvider>

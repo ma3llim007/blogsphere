@@ -8,7 +8,7 @@ import queryClient from "@/services/queryClientConfig";
 import toastService from "@/services/toastService";
 import { capitalizeWords, formatDateTime } from "@/utils/utils";
 import { useMutation, useQuery } from "@tanstack/react-query";
-import { Helmet } from "react-helmet";
+import { Helmet } from "react-helmet-async";
 import { FaBackward } from "react-icons/fa";
 import { useNavigate, useParams } from "react-router-dom";
 

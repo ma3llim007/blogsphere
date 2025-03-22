@@ -19,9 +19,11 @@ const WriterList = lazy(() => import("./pages/admin/Dashboard/WriterList"));
 const AddCategory = lazy(() => import("./pages/admin/Dashboard/AddCategory"));
 const CategoryList = lazy(() => import("./pages/admin/Dashboard/CategoryList"));
 const EditCategory = lazy(() => import("./pages/admin/Dashboard/EditCategory"));
+const LoginWriter = lazy(() => import("./pages/Writer/auth/LoginWriter"));
 
 // Defining Routes
 const router = createBrowserRouter([
+    // Admin Routes
     {
         path: "admin/auth",
         element: (
@@ -188,6 +190,34 @@ const router = createBrowserRouter([
                 element: (
                     <Suspense fallback={<Loading />}>
                         <AdminNotFound />
+                    </Suspense>
+                ),
+            },
+        ],
+    },
+    // Moderator Routes
+    // Writer Routes
+    {
+        path: "admin/authwriter",
+        element: (
+            <Suspense>
+                <AuthLayout />
+            </Suspense>
+        ),
+        children: [
+            {
+                index: true,
+                element: (
+                    <Suspense fallback={<Loading />}>
+                        <LoginWriter />
+                    </Suspense>
+                ),
+            },
+            {
+                path: "writer-login",
+                element: (
+                    <Suspense fallback={<Loading />}>
+                        <LoginWriter />
                     </Suspense>
                 ),
             },

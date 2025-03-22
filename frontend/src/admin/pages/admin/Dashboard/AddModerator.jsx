@@ -10,7 +10,7 @@ import toastService from "@/services/toastService";
 import { Button } from "@/components/ui/button";
 import Loading from "@/components/Loaders/Loading";
 import { FaPlus } from "react-icons/fa";
-import { Helmet } from "react-helmet";
+import { Helmet } from "react-helmet-async";
 
 const AddModerator = () => {
     const queryClient = useQueryClient();

@@ -9,7 +9,7 @@ import queryClient from "@/services/queryClientConfig";
 import toastService from "@/services/toastService";
 import { formatDateTime } from "@/utils/utils";
 import { useMutation, useQuery } from "@tanstack/react-query";
-import { Helmet } from "react-helmet";
+import { Helmet } from "react-helmet-async";
 import { useNavigate } from "react-router-dom";
 
 const ModeratorList = () => {

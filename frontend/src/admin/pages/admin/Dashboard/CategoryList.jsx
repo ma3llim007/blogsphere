@@ -7,7 +7,7 @@ import crudService from "@/services/crudService";
 import toastService from "@/services/toastService";
 import { formatDateTime } from "@/utils/utils";
 import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
-import { Helmet } from "react-helmet";
+import { Helmet } from "react-helmet-async";
 import { useNavigate } from "react-router-dom";
 
 const CategoryList = () => {
