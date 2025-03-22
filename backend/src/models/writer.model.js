@@ -63,7 +63,7 @@ writerScheme.pre("save", async function (next) {
     return next();
 });
 
-writerScheme.methods.isCorrectPassword = async (password) => {
+writerScheme.methods.isPasswordCorrect = async function (password) {
     return await bcrypt.compare(password, this.password);
 };
 
