@@ -66,4 +66,24 @@ const listModerator = asyncHandler(async (req, res) => {
     }
 });
 
-export { registerModerator, deleteModerator, listModerator };
+// Moderator By Moderator Id
+const getModeratorById = asyncHandler(async (req, res) => {
+    try {
+        const { moderatorId } = req.params;
+
+        if (!isValidObjectId(moderatorId)) {
+            return res.status(422).json(new ApiError(422, "Moderator Id Is Required"));
+        }
+
+        const moderator = await Moderator.findById(moderatorId);
+        if (!moderator) {
+            return res.status(400).json(new ApiError(400, "Moderator Is Not Found"));
+        }
+
+        return res.status(200).json(new ApiResponse(200, moderator, "Moderator Fetch Successfully"));
+    } catch (_error) {
+        return res.status(500).json(new ApiError(500, "Something Went Wrong! While Fetching Moderator"));
+    }
+});
+
+export { registerModerator, deleteModerator, listModerator, getModeratorById };
