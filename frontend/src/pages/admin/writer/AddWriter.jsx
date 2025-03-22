@@ -26,7 +26,7 @@ const AddWriter = () => {
     });
 
     const { mutate, isPending } = useMutation({
-        mutationFn: data => crudService.post("writer/register-writer", true, data),
+        mutationFn: data => crudService.post("/admin/writer/register-writer", true, data),
         onSuccess: data => {
             navigate("/admin/writers/writer-list");
             queryClient.invalidateQueries("writerList");

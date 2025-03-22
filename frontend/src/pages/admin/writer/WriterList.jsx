@@ -17,7 +17,7 @@ const WriterList = () => {
 
     const { data, isLoading } = useQuery({
         queryKey: ["writerList"],
-        queryFn: () => crudService.get("writer/writers", true),
+        queryFn: () => crudService.get("/admin/writer/writers", true),
         onError: err => {
             toastService.error(err?.message || "Failed to fetch Data.");
         },

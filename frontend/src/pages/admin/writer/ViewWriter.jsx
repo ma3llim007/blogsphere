@@ -19,7 +19,7 @@ const ViewWriter = () => {
     // fetching data of order
     const { data: responseData, isPending } = useQuery({
         queryKey: ["viewWriter", writerId],
-        queryFn: () => crudService.get(`writer/writer/${writerId}`, true),
+        queryFn: () => crudService.get(`/admin/writer/writer/${writerId}`, true),
         onError: err => {
             toastService.error(err?.message || "Failed to fetch Data.");
         },
