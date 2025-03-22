@@ -1,6 +1,5 @@
 import PageHeader from "@/admin/components/PageHeader";
 import Table from "@/admin/components/Table";
-import Badge from "@/components/Badge";
 import ButtonWithAlert from "@/components/ButtonWithAlert";
 import Loading from "@/components/Loaders/Loading";
 import { Button } from "@/components/ui/button";
@@ -63,7 +62,7 @@ const CategoryList = () => {
             header: "Actions",
             cell: ({ row }) => (
                 <div className="flex gap-1 items-center flex-wrap">
-                    <Button className="Primary" onClick={() => navigate(`/admin/category/edit-category/${row.original._id}`)}>
+                    <Button className="Primary cursor-pointer" onClick={() => navigate(`/admin/category/edit-category/${row.original._id}`)}>
                         Edit
                     </Button>
                     |

@@ -18,6 +18,7 @@ const AddWriter = lazy(() => import("./pages/admin/Dashboard/AddWriter"));
 const WriterList = lazy(() => import("./pages/admin/Dashboard/WriterList"));
 const AddCategory = lazy(() => import("./pages/admin/Dashboard/AddCategory"));
 const CategoryList = lazy(() => import("./pages/admin/Dashboard/CategoryList"));
+const EditCategory = lazy(() => import("./pages/admin/Dashboard/EditCategory"));
 
 // Defining Routes
 const router = createBrowserRouter([
@@ -173,10 +174,10 @@ const router = createBrowserRouter([
                         ),
                     },
                     {
-                        path: "view-category/:categoryId",
+                        path: "edit-category/:categoryId",
                         element: (
                             <Suspense fallback={<Loading />}>
-                                <ViewWriter />
+                                <EditCategory />
                             </Suspense>
                         ),
                     },
