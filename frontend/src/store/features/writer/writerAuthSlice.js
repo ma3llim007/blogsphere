@@ -2,7 +2,7 @@ import { createSlice } from "@reduxjs/toolkit";
 
 const initialState = {
     status: false,
-    admin: null,
+    writer: null,
 };
 
 const writerAuthSlice = createSlice({
