@@ -32,7 +32,7 @@ const AddCategory = () => {
     });
 
     const { mutate, isPending } = useMutation({
-        mutationFn: data => crudService.post("category/add-category", true, data, "multipart/form-data"),
+        mutationFn: data => crudService.post("/admin/category/add-category", true, data, "multipart/form-data"),
         onSuccess: data => {
             navigate("/admin/category/category-list");
             queryClient.invalidateQueries("categoryList");

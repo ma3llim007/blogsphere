@@ -39,7 +39,7 @@ const EditCategory = () => {
     // Fetch category data based on categoryId
     const { data: categoryData, isSuccess } = useQuery({
         queryKey: ["category", categoryId],
-        queryFn: () => crudService.get(`category/get-category/${categoryId}`, true),
+        queryFn: () => crudService.get(`/admin/category/get-category/${categoryId}`, true),
         enabled: !!categoryId,
         onError: err => {
             toastService.error(err?.message || "Failed to fetch Data.");
@@ -64,7 +64,7 @@ const EditCategory = () => {
                 formData.append("categoryImage", data?.categoryImage);
             }
             formData.append("categoryId", categoryId);
-            return crudService.patch("category/update-category", true, formData, "multipart/form-data");
+            return crudService.patch("/admin/category/update-category", true, formData, "multipart/form-data");
         },
         onSuccess: data => {
             navigate("/admin/category/category-list");

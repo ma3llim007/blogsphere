@@ -19,7 +19,7 @@ const ViewModerator = () => {
     // fetching data of order
     const { data: responseData, isPending } = useQuery({
         queryKey: ["viewModerator", moderatorId],
-        queryFn: () => crudService.get(`moderator/moderator/${moderatorId}`, true),
+        queryFn: () => crudService.get(`/admin/moderator/moderator/${moderatorId}`, true),
         onError: err => {
             toastService.error(err?.message || "Failed to fetch Data.");
         },
