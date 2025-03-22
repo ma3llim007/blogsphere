@@ -134,7 +134,7 @@ const router = createBrowserRouter([
                         ),
                     },
                     {
-                        path: "view-writer/:moderatorId",
+                        path: "view-writer/:writerId",
                         element: (
                             <Suspense fallback={<Loading />}>
                                 <ViewWriter />

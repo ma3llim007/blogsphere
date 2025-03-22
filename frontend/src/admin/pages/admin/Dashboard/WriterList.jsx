@@ -1,3 +1,4 @@
+import PageHeader from "@/admin/components/PageHeader";
 import Table from "@/admin/components/Table";
 import Badge from "@/components/Badge";
 import ButtonWithAlert from "@/components/ButtonWithAlert";
@@ -41,9 +42,9 @@ const WriterList = () => {
         { accessorKey: "email", header: "EMail" },
         { accessorKey: "phoneNumber", header: "Phone Number" },
         {
-            accessorKey: "moderatorVerify",
+            accessorKey: "writerVerify",
             header: "Verify",
-            cell: ({ row }) => (row?.original.moderatorVerify ? <Badge title="Verify" /> : <Badge title="Not Verify" className="Danger" />),
+            cell: ({ row }) => (row?.original.writerVerify ? <Badge title="Verify" /> : <Badge title="Not Verify" className="Danger" />),
         },
         { accessorKey: "createdAt", header: "Created At", cell: ({ row }) => formatDateTime(row?.original?.createdAt) },
         {
@@ -78,6 +79,7 @@ const WriterList = () => {
                 <meta name="description" content="View and manage all writers in the BlogSphere admin panel. Assign roles, update permissions, and track writing activity efficiently." />
                 <meta name="robots" content="noindex, nofollow" />
             </Helmet>
+            <PageHeader title={"Manage Writers"} controller={"View All Writers"} controllerUrl={"/admin/writers/writer-list/"} page={"Writer Listing"} />
             <Table data={moderatorData} columns={moderatorColumns} loading={isLoading} paginationOptions={{ pageSize: 10 }} sortable={true} />
         </>
     );
