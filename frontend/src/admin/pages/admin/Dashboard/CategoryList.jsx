@@ -55,11 +55,6 @@ const CategoryList = () => {
             ),
         },
         {
-            accessorKey: "isActive",
-            header: "Active Status",
-            cell: ({ row }) => <Badge className={`${row.original?.isActive ? "Success" : "Secondary"} hover:pointer-events-none`} title={row.original?.isActive ? "Active" : "InActive"} />,
-        },
-        {
             accessorKey: "updatedAt",
             header: "Date Time",
             cell: ({ row }) => <p className="text-wrap">{formatDateTime(row.original?.updatedAt)}</p>,
