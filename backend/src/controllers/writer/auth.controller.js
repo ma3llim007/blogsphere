@@ -39,8 +39,7 @@ const loginWriter = asyncHandler(async (req, res) => {
     if (!writerIsExisted.writerVerify) {
         return res.status(403).json(new ApiError(403, "Access Denied. Your Account Is Not Active. Please Wait Un-Till Admin Verify You."));
     }
-
-    const { accessToken, refreshToken } = await generateAccessAndRefreshTokensWriter(writerIsExisted._id);
+    const { accessToken, refreshToken } = await generateAccessAndRefreshTokensWriter(writerIsExisted?._id);
     const writer = writerIsExisted.toObject();
     delete writer.password;
     delete writer.refreshToken;
