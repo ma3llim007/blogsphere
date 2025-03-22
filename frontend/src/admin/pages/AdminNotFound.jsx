@@ -6,7 +6,7 @@ const AdminNotFound = () => {
     return (
         <>
             <Helmet>
-                <title>404 - Page Not Found | Admin Panel</title>
+                <title>404 - Page Not Found | BlogSphere</title>
                 <meta name="robots" content="noindex, nofollow" />
                 <meta name="description" content="The page you are looking for does not exist in the admin panel." />
                 <meta property="og:title" content="404 - Page Not Found" />
