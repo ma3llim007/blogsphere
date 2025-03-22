@@ -11,7 +11,7 @@ const useAdminAuth = () => {
     // Using React Query to check authentication status
     const { data, isError, isLoading } = useQuery({
         queryKey: ["authStatus"],
-        queryFn: () => crudService.get("auth/check-session", true),
+        queryFn: () => crudService.get("/admin/auth/check-session", true),
         retry: false,
         staleTime: 5 * 60 * 1000,
         onError: error => toastService.error(error.message || "Error checking authentication status"),
