@@ -41,6 +41,20 @@ const blogScheme = new Schema(
             ref: "Category",
             required: [true, "Category Is Required"],
         },
+        blogStatus: {
+            type: String,
+            enum: ["Draft", "Ready to Publish", "Pending Review", "Needs Revisions", "Approved", "Rejected"],
+            default: "Draft",
+        },
+        blogAuthorId: {
+            type: Schema.Types.ObjectId,
+            ref: "Writer",
+            required: [true, "Author Id Is Required"],
+        },
+        blogModeratorId: {
+            type: Schema.Types.ObjectId,
+            ref: "Moderator",
+        },
     },
     {
         timestamps: true,
