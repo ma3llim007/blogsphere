@@ -197,7 +197,7 @@ const WriterSideBar = ({ user, ...props }) => {
                                     </DropdownMenuItem>
                                     <DropdownMenuSeparator />
                                     <DropdownMenuItem className="cursor-pointer" asChild>
-                                        <Link to="/writer/update-writer-details">
+                                        <Link to="/writer/change-password">
                                             <MdPassword />
                                             Change Password
                                         </Link>
