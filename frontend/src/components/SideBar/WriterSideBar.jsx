@@ -188,9 +188,11 @@ const WriterSideBar = ({ user, ...props }) => {
                                 </DropdownMenuLabel>
                                 <DropdownMenuSeparator />
                                 <DropdownMenuGroup>
-                                    <DropdownMenuItem>
-                                        <BadgeCheck />
-                                        Account
+                                    <DropdownMenuItem asChild>
+                                        <Link to="/writer/account">
+                                            <BadgeCheck />
+                                            Account
+                                        </Link>
                                     </DropdownMenuItem>
                                     <DropdownMenuItem onSelect={e => e.preventDefault()}>
                                         <LogOutWriter />

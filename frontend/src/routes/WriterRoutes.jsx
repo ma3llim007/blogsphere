@@ -8,6 +8,7 @@ const WriterLayout = lazy(() => import("@/layouts/WriterLayout"));
 const LoginWriter = lazy(() => import("@/pages/writer/auth/LoginWriter"));
 const Dashboard = lazy(() => import("@/pages/moderator/Dashboard"));
 const WriterNotFound = lazy(() => import("@/pages/writer/auth/WriterNotFound"));
+const Account = lazy(() => import("@/pages/writer/Account"));
 
 // Defining Routes
 const router = createBrowserRouter([
@@ -58,6 +59,14 @@ const router = createBrowserRouter([
                 element: (
                     <Suspense fallback={<Loading />}>
                         <Dashboard />
+                    </Suspense>
+                ),
+            },
+            {
+                path: "account",
+                element: (
+                    <Suspense fallback={<Loading />}>
+                        <Account />
                     </Suspense>
                 ),
             },

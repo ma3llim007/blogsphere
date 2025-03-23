@@ -1,29 +1,30 @@
 import { useEffect } from "react";
-import { useSelector } from "react-redux";
-import { Outlet, useNavigate } from "react-router-dom";
+import { Outlet } from "react-router-dom";
 import toastService from "@/services/toastService";
 import { SidebarInset, SidebarProvider } from "@/components/ui/sidebar";
 import Header from "@/components/admin/Header";
 import Footer from "@/components/admin/Footer";
 import WriterSideBar from "@/components/sidebar/WriterSideBar";
+import useWriterAuth from "@/hooks/useWriterAuth";
+import Loading from "@/components/common/Loading";
 
 const WriterLayout = () => {
-    const navigate = useNavigate();
+    const { isError, isLoading, writer } = useWriterAuth();
+
     // Apply dark mode only when inside the admin panel
     useEffect(() => {
         document.documentElement.classList.add("dark"); // Enable dark mode for admin
         return () => document.documentElement.classList.remove("dark"); // Remove when leaving admin panel
     }, []);
 
-    // Select writer and status from Redux store
-    const { status, writer } = useSelector(state => state.writerAuth);
+    if (isLoading) {
+        return <Loading />;
+    }
 
-    useEffect(() => {
-        if (!status || !writer) {
-            toastService.error("Please Log In To Access The Writer Panel");
-            navigate("/writer/auth/login", { replace: true });
-        }
-    }, [status, writer, navigate]);
+    if (isError) {
+        toastService.error("Please Log In To Access The Admin Panel");
+        return null;
+    }
 
     return (
         <SidebarProvider>
