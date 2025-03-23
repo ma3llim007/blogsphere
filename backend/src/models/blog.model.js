@@ -55,6 +55,12 @@ const blogScheme = new Schema(
             type: Schema.Types.ObjectId,
             ref: "Moderator",
         },
+        blogRevisionMessage: {
+            type: String,
+        },
+        blogRejectedMessage: {
+            type: String,
+        },
     },
     {
         timestamps: true,

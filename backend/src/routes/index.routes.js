@@ -7,6 +7,7 @@ import moderatorRouter from "./admin/moderator.routes.js";
 import writerRouter from "./admin/writeAuth.routes.js";
 // Writer Router
 import writerAuthRouter from "./writer/auth.routes.js";
+import writerBlogRouter from "./writer/blog.routes.js";
 
 // Admin Routes
 const adminRoutes = Router();
@@ -19,5 +20,6 @@ adminRoutes.use("/writer", writerRouter);
 // Writer Routes
 const writerRoutes = Router();
 writerRoutes.use("/auth", writerAuthRouter);
+writerRoutes.use("/blog", writerBlogRouter);
 
 export { adminRoutes, writerRoutes };
