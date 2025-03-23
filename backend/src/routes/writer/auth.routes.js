@@ -5,7 +5,6 @@ import authenticateAndVerifyWriter from "../../middlewares/authenticateAndVerify
 const routes = Router();
 
 routes.route("/login").post(loginWriter);
-routes.route("/login").post(loginWriter);
 
 routes.route("/logout").post(authenticateAndVerifyWriter, logoutWriter);
 routes.route("/writer").get(authenticateAndVerifyWriter, getWriter);
