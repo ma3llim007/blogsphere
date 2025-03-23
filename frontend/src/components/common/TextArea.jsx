@@ -23,7 +23,7 @@ const TextArea = forwardRef(function TextArea({ label, placeholder, error, class
                     value={value}
                     aria-invalid={!error}
                 ></textarea>
-                {error && <p className="text-red-700 font-bold my-2 text-base px-2">{error}</p>}
+                {error && <p className="text-red-500 font-bold my-2 text-base px-2">{error}</p>}
             </div>
         </>
     );

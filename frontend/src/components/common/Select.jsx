@@ -38,7 +38,7 @@ function Select({ options = [], placeholder = "Select an option", label, classNa
                 </option>
                 {optionsElments.length > 0 ? optionsElments : <option disabled>No options available</option>}
             </select>
-            {error && <p className="text-red-700 font-bold my-2 text-base px-2">{error}</p>}
+            {error && <p className="text-red-500 font-bold my-2 text-base px-2">{error}</p>}
         </div>
     );
 }
