@@ -6,7 +6,7 @@ import { ConvertImageWebp } from "../../utils/ConvertImageWebp.js";
 // Add Blog
 const addBlog = asyncHandler(async (req, res) => {
     try {
-        const { blogTitle, blogSlug, blogShortDescription, blogDescription, blogCategory } = req.body;
+        const { blogTitle, blogSlug, blogShortDescription, blogDescription, blogCategory, blogStatus } = req.body;
         const { blogFeatureImage, blogDetailImage } = req.files;
 
         if (!blogTitle?.trim() || !blogSlug?.trim() || !blogShortDescription?.trim() || !blogDescription?.trim() || !blogCategory?.trim()) {
@@ -66,6 +66,7 @@ const addBlog = asyncHandler(async (req, res) => {
             blogDescription,
             blogCategory,
             blogAuthorId: req.writer._id,
+            blogStatus,
         });
         return res.status(201).json(new ApiResponse(201, blog, "Blog Instead Successfully"));
     } catch (_error) {
