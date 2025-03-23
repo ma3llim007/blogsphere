@@ -30,7 +30,7 @@ const Account = () => {
                 <meta name="description" content="Manage your account settings, update profile details, and review your activity in BlogSphere." />
                 <meta name="robots" content="noindex, nofollow" />
             </Helmet>
-            <PageHeader title={"Manage Account"} controller={"Dashboard"} controllerUrl={"/writer/dashboard"} page={"View Account"} />
+            <PageHeader homeUrl="/writer/dashboard" title={"Manage Account"} controller={"Dashboard"} controllerUrl={"/writer/dashboard"} page={"View Account"} />
             <section className="w-full">
                 <div className="my-4 w-full container mx-auto border-t-4 border-blue-700 rounded-lg p-4 bg-gray-100 dark:bg-slate-800 space-y-4">
                     <div className="w-full border bg-gray-700/20 dark:bg-gray-950/50 shadow-md rounded-sm select-none overflow-x-auto">

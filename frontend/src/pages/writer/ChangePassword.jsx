@@ -45,7 +45,7 @@ const ChangePassword = () => {
                 <meta name="description" content="Secure your BlogSphere account by updating your password. Change your password regularly to keep your account safe." />
                 <meta name="robots" content="noindex, nofollow" />
             </Helmet>
-            <PageHeader title={"Manage Account"} controller={"Dashboard"} controllerUrl={"/writer/dashboard"} subController={"Account"} subControllerUrl={"/writer/account"} page={"Change Password"} />
+            <PageHeader homeUrl="/writer/dashboard"  title={"Manage Account"} controller={"Dashboard"} controllerUrl={"/writer/dashboard"} subController={"Account"} subControllerUrl={"/writer/account"} page={"Change Password"} />
             <section className="w-full">
                 <div className="my-4 w-full container mx-auto border-t-4 border-blue-700 rounded-lg p-2 bg-gray-100 dark:bg-slate-800">
                     <form className="space-y-5" onSubmit={handleSubmit(data => mutate(data))}>

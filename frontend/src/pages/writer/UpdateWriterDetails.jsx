@@ -70,6 +70,7 @@ const UpdateWriterDetails = () => {
                 <meta name="robots" content="noindex, nofollow" />
             </Helmet>
             <PageHeader
+                homeUrl="/writer/dashboard" 
                 title={"Manage Account"}
                 controller={"Dashboard"}
                 controllerUrl={"/writer/dashboard"}
