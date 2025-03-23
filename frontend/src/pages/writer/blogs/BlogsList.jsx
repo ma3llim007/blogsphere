@@ -70,11 +70,11 @@ const BlogsList = () => {
             header: "Actions",
             cell: ({ row }) => (
                 <div className="flex gap-1 items-center flex-wrap">
-                    <Button className="Primary" onClick={() => navigate(`/admin/blogs/edit-blog/${row.original._id}`)}>
+                    <Button className="Primary cursor-pointer" onClick={() => navigate(`/admin/blogs/edit-blog/${row.original._id}`)}>
                         Edit
                     </Button>
                     |
-                    <Button className="Info" onClick={() => navigate(`/admin/blogs/view-blog/${row.original._id}`)}>
+                    <Button className="Info cursor-pointer" onClick={() => navigate(`/admin/blogs/view-blog/${row.original._id}`)}>
                         View
                     </Button>
                     |
