@@ -8,6 +8,7 @@ import { DropdownMenuLabel } from "../ui/dropdown-menu";
 import { Avatar, AvatarFallback, AvatarImage } from "../ui/avatar";
 import { AiFillDashboard } from "react-icons/ai";
 import LogOutWriter from "../writer/LogOutWriter";
+import { MdPassword } from "react-icons/md";
 
 const navBar = [
     { name: "Main Site", Icon: FaHome, urlLink: "/" },
@@ -188,12 +189,20 @@ const WriterSideBar = ({ user, ...props }) => {
                                 </DropdownMenuLabel>
                                 <DropdownMenuSeparator />
                                 <DropdownMenuGroup>
-                                    <DropdownMenuItem asChild>
+                                    <DropdownMenuItem className="cursor-pointer" asChild>
                                         <Link to="/writer/account">
                                             <BadgeCheck />
                                             Account
                                         </Link>
                                     </DropdownMenuItem>
+                                    <DropdownMenuSeparator />
+                                    <DropdownMenuItem className="cursor-pointer" asChild>
+                                        <Link to="/writer/update-writer-details">
+                                            <MdPassword />
+                                            Change Password
+                                        </Link>
+                                    </DropdownMenuItem>
+                                    <DropdownMenuSeparator />
                                     <DropdownMenuItem onSelect={e => e.preventDefault()}>
                                         <LogOutWriter />
                                     </DropdownMenuItem>

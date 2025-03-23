@@ -104,7 +104,7 @@ const updateDetailsWriter = asyncHandler(async (req, res) => {
         }
 
         // Check IF the email or username already Exists of another writer
-        const existedWriter = await Writer.findOne({ $or: [{ username }, { email }] });
+        const existedWriter = await Writer.findOne({ $or: [{ username }, { email }], _id: { $ne: req.writer._id } });
         if (existedWriter) {
             return res.status(400).json(new ApiError(400, "Email Or Username Is Already In Use By Another Writer"));
         }
@@ -181,4 +181,4 @@ const checkSessionWriter = asyncHandler(async (req, res) => {
     }
 });
 
-export { loginWriter, logoutWriter, generateAccessAndRefreshTokensWriter, getWriter, checkSessionWriter, updateDetailsWriter };
+export { loginWriter, logoutWriter, generateAccessAndRefreshTokensWriter, getWriter, checkSessionWriter, updateDetailsWriter, changePasswordWriter };

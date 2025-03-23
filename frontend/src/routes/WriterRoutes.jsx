@@ -7,8 +7,10 @@ const WriterLayout = lazy(() => import("@/layouts/WriterLayout"));
 // Pages
 const LoginWriter = lazy(() => import("@/pages/writer/auth/LoginWriter"));
 const Dashboard = lazy(() => import("@/pages/moderator/Dashboard"));
-const WriterNotFound = lazy(() => import("@/pages/writer/auth/WriterNotFound"));
+const WriterNotFound = lazy(() => import("@/pages/writer/WriterNotFound"));
 const Account = lazy(() => import("@/pages/writer/Account"));
+const ChangePassword = lazy(() => import("@/pages/writer/ChangePassword"));
+const UpdateWriterDetails = lazy(() => import("@/pages/writer/UpdateWriterDetails"));
 
 // Defining Routes
 const router = createBrowserRouter([
@@ -67,6 +69,22 @@ const router = createBrowserRouter([
                 element: (
                     <Suspense fallback={<Loading />}>
                         <Account />
+                    </Suspense>
+                ),
+            },
+            {
+                path: "change-password",
+                element: (
+                    <Suspense fallback={<Loading />}>
+                        <ChangePassword />
+                    </Suspense>
+                ),
+            },
+            {
+                path: "update-writer-details",
+                element: (
+                    <Suspense fallback={<Loading />}>
+                        <UpdateWriterDetails />
                     </Suspense>
                 ),
             },
