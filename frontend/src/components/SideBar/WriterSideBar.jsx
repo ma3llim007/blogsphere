@@ -2,7 +2,7 @@ import { Link, useLocation } from "react-router-dom";
 import { Sidebar, SidebarContent, SidebarGroup, SidebarGroupContent, SidebarMenu, SidebarMenuButton, SidebarMenuItem, SidebarMenuSub, useSidebar } from "../ui/sidebar";
 import { Collapsible, CollapsibleContent, CollapsibleTrigger } from "../ui/collapsible";
 import { BadgeCheck, ChevronRight, ChevronsUpDown } from "lucide-react";
-import { FaHome, FaList } from "react-icons/fa";
+import { FaBlogger, FaHome, FaList, FaPlus } from "react-icons/fa";
 import { DropdownMenu, DropdownMenuContent, DropdownMenuGroup, DropdownMenuItem, DropdownMenuSeparator, DropdownMenuTrigger } from "../ui/dropdown-menu";
 import { DropdownMenuLabel } from "../ui/dropdown-menu";
 import { Avatar, AvatarFallback, AvatarImage } from "../ui/avatar";
@@ -18,92 +18,22 @@ const navBar = [
         urlLink: "/writer/dashboard",
         segment: "dashboard",
     },
-    // {
-    //     name: "Manage User",
-    //     Icon: FaUsers,
-    //     innerLists: [
-    //         {
-    //             name: "Users List",
-    //             urlLink: "/admin/users/user-list",
-    //         },
-    //     ],
-    //     segment: "users",
-    // },
-    // {
-    //     name: "Manage Enquiry",
-    //     Icon: FaRegMessage,
-    //     innerLists: [
-    //         {
-    //             name: "Enquiry",
-    //             urlLink: "/admin/enquiry/contact-list",
-    //         },
-    //     ],
-    //     segment: "users",
-    // },
-    // {
-    //     name: "Manage Moderator",
-    //     Icon: MdAddModerator,
-    //     innerLists: [
-    //         {
-    //             name: "Add Moderator",
-    //             urlLink: "/admin/moderator/add-moderator",
-    //             Icon: FaPlus,
-    //         },
-    //         {
-    //             name: "Moderator List",
-    //             urlLink: "/admin/moderator/moderator-list",
-    //         },
-    //     ],
-    //     segment: "moderator",
-    // },
-    // {
-    //     name: "Manage Writer",
-    //     Icon: FaUserEdit,
-    //     innerLists: [
-    //         {
-    //             name: "Add Writer",
-    //             urlLink: "/admin/writers/add-writer",
-    //             Icon: FaPlus,
-    //         },
-    //         {
-    //             name: "Writer List",
-    //             urlLink: "/admin/writers/writer-list",
-    //         },
-    //     ],
-    //     segment: "writer",
-    // },
-    // {
-    //     name: "Manage Category",
-    //     Icon: FaCubes,
-    //     innerLists: [
-    //         {
-    //             name: "Add Category",
-    //             urlLink: "/admin/category/add-category",
-    //             Icon: FaPlus,
-    //         },
-    //         {
-    //             name: "Category List",
-    //             urlLink: "/admin/category/category-list",
-    //         },
-    //     ],
-    //     segment: "sub-category",
-    // },
-    // {
-    //     name: "Manage Blogs",
-    //     Icon: FaBlogger,
-    //     innerLists: [
-    //         {
-    //             name: "Add Blog",
-    //             urlLink: "/admin/blogs/add-blog",
-    //             Icon: FaPlus,
-    //         },
-    //         {
-    //             name: "Blog List",
-    //             urlLink: "/admin/blogs/blog-list",
-    //         },
-    //     ],
-    //     segment: "users",
-    // },
+    {
+        name: "Manage Blogs",
+        Icon: FaBlogger,
+        innerLists: [
+            {
+                name: "Add Blog",
+                urlLink: "/writer/blogs/add-blog",
+                Icon: FaPlus,
+            },
+            {
+                name: "Blog List",
+                urlLink: "/writer/blogs/blog-list",
+            },
+        ],
+        segment: "users",
+    },
 ];
 
 const WriterSideBar = ({ user, ...props }) => {
