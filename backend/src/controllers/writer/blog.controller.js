@@ -91,7 +91,7 @@ const addBlog = asyncHandler(async (req, res) => {
 const blogs = asyncHandler(async (req, res) => {
     const id = req.writer._id;
     try {
-        const blogs = await Blog.find({ blogAuthorId: id });
+        const blogs = await Blog.find({ blogAuthorId: id }).populate("blogCategory", "categoryName").select("-blogDetailImage -blogShortDescription -blogDescription -blogAuthorId -createdAt").lean();
         if (!blogs.length) {
             return res.status(200).json(new ApiResponse(200, {}, "No Blog Found"));
         }

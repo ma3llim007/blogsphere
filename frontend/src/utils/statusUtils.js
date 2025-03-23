@@ -6,4 +6,13 @@ const writerBlogOptions = [
     { _id: "Ready To Publish", label: "Ready To Publish" },
 ];
 
-export { WRITER_BLOG_STATUSES, BLOG_STATUSES, writerBlogOptions };
+const statusBlogClass = {
+    Draft: "Secondary",
+    "Ready To Publish": "Info",
+    "Pending Review": "Warning",
+    "Needs Revisions": "Danger",
+    Approved: "Success",
+    Rejected: "Danger",
+};
+
+export { WRITER_BLOG_STATUSES, BLOG_STATUSES, writerBlogOptions, statusBlogClass };
