@@ -1,7 +1,8 @@
+import { isValidObjectId } from "mongoose";
 import { Blog } from "../../models/blog.model.js";
 import { Category } from "../../models/category.model.js";
 import { ApiError, ApiResponse, asyncHandler } from "../../utils/Api.utils.js";
-import { uploadCloudinary } from "../../utils/cloudinary.js";
+import { extractPublicId, removeImage, uploadCloudinary } from "../../utils/cloudinary.js";
 import { ConvertImageWebp } from "../../utils/ConvertImageWebp.js";
 
 // options category with only name and _id
@@ -16,6 +17,7 @@ const getOptionsCategory = asyncHandler(async (req, res) => {
     ]);
     return res.status(200).json(new ApiResponse(200, category, "Categories Options Fetch Successfully"));
 });
+
 // Add Blog
 const addBlog = asyncHandler(async (req, res) => {
     try {
@@ -101,4 +103,76 @@ const blogs = asyncHandler(async (req, res) => {
     }
 });
 
-export { addBlog, blogs, getOptionsCategory };
+// Delete Blog
+const deleteBlog = asyncHandler(async (req, res) => {
+    try {
+        const { blogId } = req.params;
+
+        if (!blogId) {
+            return res.status(422).json(new ApiError(422, "Blog ID is Required"));
+        }
+        if (!isValidObjectId(blogId)) {
+            return res.status(404).json(new ApiError(404, "Invalid Blog ID"));
+        }
+
+        // Finding the Blog
+        const blog = await Blog.findById(blogId);
+        if (!blog) {
+            return res.status(404).json(new ApiError(404, "Blog Not Found"));
+        }
+
+        const featureImage = blog.blogFeatureImage;
+        const detailImage = blog.blogDetailImage;
+
+        const deleteBlog = await Blog.deleteOne({ _id: blogId });
+        if (deleteBlog.deletedCount === 0) {
+            return res.status(500).json(new ApiError(500, "Something Went Wrong While Deleting The Blog"));
+        }
+
+        if (deleteBlog && featureImage && detailImage) {
+            const publicFeatureId = extractPublicId(featureImage);
+            try {
+                await removeImage("sameerblogs/blogs/", publicFeatureId);
+            } catch (_error) {
+                return res.status(500).json(new ApiError(500, "Failed To Remove Previous Blog Feature Image"));
+            }
+            const publicDetailId = extractPublicId(detailImage);
+            try {
+                await removeImage("sameerblogs/blogs/", publicDetailId);
+            } catch (_error) {
+                return res.status(500).json(new ApiError(500, "Failed To Remove Previous Blog Detail Image"));
+            }
+        }
+
+        return res.status(200).json(new ApiResponse(200, {}, "Blog Delete Successfully"));
+    } catch (_error) {
+        return res.status(500).json(new ApiError(500, "Something Went Wrong! While Deleting Blog"));
+    }
+});
+
+// Get Blog By ID
+const getBlog = asyncHandler(async (req, res) => {
+    try {
+        const { blogId } = req.params;
+
+        if (!blogId) {
+            return res.status(422).json(new ApiError(422, "Blog ID is Required"));
+        }
+
+        if (!isValidObjectId(blogId)) {
+            return res.status(404).json(new ApiError(404, "Invalid Blog Id"));
+        }
+
+        // Finding the Blog
+        const blog = await Blog.findById(blogId);
+        if (!blog) {
+            return res.status(404).json(new ApiError(404, "Blog Not Found"));
+        }
+
+        return res.status(200).json(new ApiResponse(200, blog, "Blog Fetch Successfully"));
+    } catch (_error) {
+        return res.status(500).json(new ApiError(500, "Something Went Wrong! While Fetch Blog Details"));
+    }
+});
+
+export { addBlog, blogs, getOptionsCategory, deleteBlog, getBlog };
