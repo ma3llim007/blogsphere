@@ -2,14 +2,14 @@ import { Breadcrumb, BreadcrumbItem, BreadcrumbList, BreadcrumbSeparator } from 
 import { FaHome } from "react-icons/fa";
 import { Link } from "react-router-dom";
 
-const PageHeader = ({ title, controller, controllerUrl, subController, subControllerUrl, page }) => {
+const PageHeader = ({ homeUrl = "/admin/dashboard", title, controller, controllerUrl, subController, subControllerUrl, page }) => {
     return (
         <section className="w-full flex items-center justify-between py-2 select-none">
             <h1 className="text-3xl font-bold">{title}</h1>
             <Breadcrumb className="hidden lg:block">
                 <BreadcrumbList>
                     <BreadcrumbItem>
-                        <Link className="flex gap-2 items-center" to={"/admin/dashboard"}>
+                        <Link className="flex gap-2 items-center" to={homeUrl}>
                             <FaHome />
                             Home
                         </Link>
