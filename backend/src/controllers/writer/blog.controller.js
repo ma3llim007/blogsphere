@@ -1,8 +1,21 @@
 import { Blog } from "../../models/blog.model.js";
+import { Category } from "../../models/category.model.js";
 import { ApiError, ApiResponse, asyncHandler } from "../../utils/Api.utils.js";
 import { uploadCloudinary } from "../../utils/cloudinary.js";
 import { ConvertImageWebp } from "../../utils/ConvertImageWebp.js";
 
+// options category with only name and _id
+const getOptionsCategory = asyncHandler(async (req, res) => {
+    const category = await Category.aggregate([
+        {
+            $project: {
+                categoryName: 1,
+                _id: 1,
+            },
+        },
+    ]);
+    return res.status(200).json(new ApiResponse(200, category, "Categories Options Fetch Successfully"));
+});
 // Add Blog
 const addBlog = asyncHandler(async (req, res) => {
     try {
@@ -88,4 +101,4 @@ const blogs = asyncHandler(async (req, res) => {
     }
 });
 
-export { addBlog, blogs };
+export { addBlog, blogs, getOptionsCategory };
