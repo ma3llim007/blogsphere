@@ -86,7 +86,43 @@ const changePasswordWriter = asyncHandler(async (req, res) => {
 });
 
 // update details
-const updateDetailsWriter = asyncHandler(async (req, res) => {});
+const updateDetailsWriter = asyncHandler(async (req, res) => {
+    if (!req.writer || !req.writer._id) {
+        return res.status(400).json(new ApiError(400, "Writer Not Authenticated"));
+    }
+    const { firstName, lastName, email, username, phoneNumber } = req.body;
+
+    // Validate required fields
+    if (!firstName || !lastName || !email || !username || !phoneNumber) {
+        return res.status(400).json(new ApiError(400, "All Fields Are Required"));
+    }
+
+    try {
+        const writer = await Writer.findById(req.writer._id);
+        if (!writer) {
+            return res.status(404).json(new ApiError(404, "Writer Not Found"));
+        }
+
+        // Check IF the email or username already Exists of another writer
+        const existedWriter = await Writer.findOne({ $or: [{ username }, { email }] });
+        if (existedWriter) {
+            return res.status(400).json(new ApiError(400, "Email Or Username Is Already In Use By Another Writer"));
+        }
+
+        // Update Writer Details
+        writer.firstName = firstName;
+        writer.lastName = lastName;
+        writer.email = email;
+        writer.username = username;
+        writer.phoneNumber = phoneNumber;
+
+        await writer.save();
+
+        return res.status(200).json(new ApiResponse(200, {}, "Writer Details Updated Successfully"));
+    } catch (_error) {
+        return res.status(500).json(new ApiError(500, "Something Went Wrong! While Updateing Writer Details"));
+    }
+});
 
 // Logout Writer
 const logoutWriter = asyncHandler(async (req, res) => {
@@ -145,4 +181,4 @@ const checkSessionWriter = asyncHandler(async (req, res) => {
     }
 });
 
-export { loginWriter, logoutWriter, generateAccessAndRefreshTokensWriter, getWriter, checkSessionWriter };
+export { loginWriter, logoutWriter, generateAccessAndRefreshTokensWriter, getWriter, checkSessionWriter, updateDetailsWriter };
