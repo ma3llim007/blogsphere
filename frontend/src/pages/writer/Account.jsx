@@ -11,7 +11,7 @@ import { FaEdit } from "react-icons/fa";
 import { Link } from "react-router-dom";
 
 const Account = () => {
-    // fetching data of order
+    // fetching data of writer
     const { data: responseData, isPending } = useQuery({
         queryKey: ["writerAccount"],
         queryFn: () => crudService.get(`writer/auth/writer`, true),
