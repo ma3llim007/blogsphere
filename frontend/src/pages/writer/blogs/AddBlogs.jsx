@@ -159,9 +159,9 @@ const AddBlogs = () => {
                         <div className="flex flex-wrap my-2 gap-4 md:gap-0">
                             <div className="w-full md:w-1/2 px-2 gap-4 md:gap-0">
                                 <Select
-                                    label="Category"
-                                    placeholder="Select The Category"
-                                    title="Select The Category"
+                                    label="Blog Category"
+                                    placeholder="Select The Blog Category"
+                                    title="Select The Blog Category"
                                     options={categoryOptions?.data}
                                     error={errors.blogCategory?.message}
                                     disabled={isPending}
@@ -171,9 +171,9 @@ const AddBlogs = () => {
                             </div>
                             <div className="w-full md:w-1/2 px-2 gap-4 md:gap-0">
                                 <Select
-                                    label="Category"
-                                    placeholder="Select The Category"
-                                    title="Select The Category"
+                                    label="Blog Status"
+                                    placeholder="Select The Blog Status"
+                                    title="Select The Blog Status"
                                     options={writerBlogOptions}
                                     error={errors.blogStatus?.message}
                                     disabled={isPending}

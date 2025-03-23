@@ -103,6 +103,130 @@ const blogs = asyncHandler(async (req, res) => {
     }
 });
 
+// Edit Blog
+const editBlog = asyncHandler(async (req, res) => {
+    const { blogId, blogTitle, blogSlug, blogShortDescription, blogDescription, blogCategory, blogStatus } = req.body;
+    const { blogFeatureImage, blogDetailImage } = req.files;
+
+    if (!blogId) {
+        return res.status(422).json(new ApiError(422, "Blog ID is Required"));
+    }
+
+    if (!isValidObjectId(blogId)) {
+        return res.status(404).json(new ApiError(404, "Invalid Blog Id"));
+    }
+
+    // Finding the Blog
+    const blog = await Blog.findById(blogId);
+    if (!blog) {
+        return res.status(404).json(new ApiError(404, "Blog Not Found"));
+    }
+
+    // Check if at least one field is provided for update
+    if (!blogTitle && !blogSlug && !blogShortDescription && !blogDescription && !blogFeatureImage && !blogDetailImage && !blogCategory && !blogStatus) {
+        return res
+            .status(400)
+            .json(new ApiError(400, "At Least One Field (Title, Slug, Short Description, Description , Feature Image, Detail Image, Blog Category Or Blog Status) Is Required For Update"));
+    }
+
+    const duplicateBlog = await Blog.findOne({
+        _id: { $ne: blogId },
+        $or: [{ blogSlug: blogSlug ? blogSlug : blog.blogSlug }, { blogTitle: blogTitle ? blogTitle : blog.blogTitle }],
+    });
+
+    // Check if there's a conflict with either slug
+    if (duplicateBlog) {
+        if (duplicateBlog.blogSlug === blogSlug) {
+            return res.status(409).json(new ApiError(409, "Blog Slug Already Exists"));
+        }
+        if (duplicateBlog.blogTitle === blogTitle) {
+            return res.status(409).json(new ApiError(409, "Blog Title Already Exists"));
+        }
+    }
+
+    // Update fields if there are no conflicts
+    if (blogTitle) {
+        blog.blogTitle = blogTitle;
+    }
+    if (blogSlug) {
+        blog.blogSlug = blogSlug;
+    }
+    if (blogShortDescription) {
+        blog.blogShortDescription = blogShortDescription;
+    }
+    if (blogDescription) {
+        blog.blogDescription = blogDescription;
+    }
+    if (blogFeatureImage) {
+        const previousImages = blog.blogFeatureImage;
+        if (blogFeatureImage && previousImages) {
+            const publicId = extractPublicId(previousImages);
+            try {
+                await removeImage("sameerblogs/blogs/", publicId);
+            } catch (_error) {
+                return res.status(500).json(new ApiError(500, "Failed To Remove Previous Blog Feature Image"));
+            }
+        }
+
+        // Convert Image To WebP
+        let convertedFeatureImage = blogFeatureImage;
+        if (blogFeatureImage[0].mimetype !== "image/webp") {
+            try {
+                convertedFeatureImage = await ConvertImageWebp(blogFeatureImage[0].path);
+            } catch (_error) {
+                return res.status(500).json(new ApiError(500, "Failed to Convert Image to WebP"));
+            }
+        }
+
+        // Upload to Cloudinary
+        try {
+            const featureImageUpload = await uploadCloudinary(convertedFeatureImage, "sameerblogs/blogs/");
+            blog.blogFeatureImage = featureImageUpload.secure_url;
+        } catch (_error) {
+            return res.status(500).json(new ApiError(500, "Failed To Upload Feature Image."));
+        }
+    }
+    if (blogDetailImage) {
+        const previousImages = blog.blogDetailImage;
+        if (blogDetailImage && previousImages) {
+            const publicId = extractPublicId(previousImages);
+            try {
+                await removeImage("sameerblogs/blogs/", publicId);
+            } catch (_error) {
+                return res.status(500).json(new ApiError(500, "Failed To Remove Previous Detail Image"));
+            }
+        }
+
+        // Convert Image To WebP
+        let convertedDetailImage = blogDetailImage;
+        if (blogDetailImage[0].mimetype !== "image/webp") {
+            try {
+                convertedDetailImage = await ConvertImageWebp(blogDetailImage[0].path);
+            } catch (_error) {
+                return res.status(500).json(new ApiError(500, "Failed to Convert Image to WebP"));
+            }
+        }
+
+        // Upload to Cloudinary
+        try {
+            const detailImageUpload = await uploadCloudinary(convertedDetailImage, "sameerblogs/blogs/");
+            blog.blogDetailImage = detailImageUpload.secure_url;
+        } catch (_error) {
+            return res.status(500).json(new ApiError(500, "Failed To Upload Previous Detail Image."));
+        }
+    }
+    if (blogCategory) {
+        blog.blogCategory = blogCategory;
+    }
+    if (blogStatus) {
+        blog.blogStatus = blogStatus;
+    }
+
+    await blog.save();
+
+    return res.status(200).json(new ApiResponse(200, blog, "Blog Update Successfully"));
+});
+
 // Delete Blog
 const deleteBlog = asyncHandler(async (req, res) => {
     try {
@@ -175,4 +299,4 @@ const getBlog = asyncHandler(async (req, res) => {
     }
 });
 
-export { addBlog, blogs, getOptionsCategory, deleteBlog, getBlog };
+export { addBlog, blogs, getOptionsCategory, deleteBlog, getBlog, editBlog };

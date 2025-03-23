@@ -50,7 +50,7 @@ const BlogsList = () => {
                 </div>
             ),
         },
-        { accessorKey: "blogCategory", header: "Category", cell: ({ row }) => row?.original?.blogCategory.categoryName },
+        { accessorKey: "blogCategory", header: "Category", cell: ({ row }) => row?.original?.blogCategory?.categoryName },
         {
             accessorKey: "blogStatus",
             header: "Order Status",
@@ -70,11 +70,11 @@ const BlogsList = () => {
             header: "Actions",
             cell: ({ row }) => (
                 <div className="flex gap-1 items-center flex-wrap">
-                    <Button className="Primary cursor-pointer" onClick={() => navigate(`/admin/blogs/edit-blog/${row.original._id}`)}>
+                    <Button className="Primary cursor-pointer" onClick={() => navigate(`/writer/blogs/edit-blog/${row.original._id}`)}>
                         Edit
                     </Button>
                     |
-                    <Button className="Info cursor-pointer" onClick={() => navigate(`/admin/blogs/view-blog/${row.original._id}`)}>
+                    <Button className="Info cursor-pointer" onClick={() => navigate(`/writer/blogs/view-blog/${row.original._id}`)}>
                         View
                     </Button>
                     |
@@ -99,7 +99,7 @@ const BlogsList = () => {
                 <meta name="description" content="View and manage all blog posts on BlogSpher. Edit, delete, and update content." />
                 <meta name="robots" content="noindex, nofollow" />
             </Helmet>
-            <PageHeader homeUrl="writer/dashboard" title={"Manage Blogs"} controller={"Blogs"} controllerUrl={"/admin/blogs/blog-list"} page={"Blog's List"} />
+            <PageHeader homeUrl="writer/dashboard" title={"Manage Blogs"} controller={"Blogs"} controllerUrl={"/writer/blogs/blog-list/"} page={"Blog's List"} />
             <Table columns={blogColums} data={blogData} paginationOptions={{ pageSize: 10 }} sortable loading={isLoading} />
         </>
     );
