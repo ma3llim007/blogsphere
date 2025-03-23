@@ -87,7 +87,7 @@ const CategoryList = () => {
                 <meta name="description" content="View and manage product categories in BlogSphere admin panel. Add, edit, and delete categories easily." />
                 <meta name="robots" content="noindex, nofollow" />
             </Helmet>
-            <PageHeader title={"Manage Category"} controller={"Category"} controllerUrl={"/admin/category/category-list/"} page={"Category's List"} />
+            <PageHeader title={"Manage Category's"} controller={"Category"} controllerUrl={"/admin/category/category-list/"} page={"Category's List"} />
             <Table columns={categoryColumns} data={categoryData} paginationOptions={{ pageSize: 10 }} sortable loading={isLoading} />
         </>
     );

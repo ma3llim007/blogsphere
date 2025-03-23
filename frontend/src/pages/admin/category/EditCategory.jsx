@@ -103,7 +103,7 @@ const EditCategory = () => {
                 <meta name="description" content="Modify an existing product category in sameerCart admin panel. Update category name, description, and status." />
                 <meta name="robots" content="noindex, nofollow" />
             </Helmet>
-            <PageHeader title={"Manage Category"} controller={"Category"} controllerUrl={"/admin/category/edit-category/"} page={"Edit Category"} />
+            <PageHeader title={"Manage Category's"} controller={"Category"} controllerUrl={"/admin/category/category-list"} page={"Edit Category"} />
             <section className="w-full">
                 <div className="my-4 w-full container mx-auto border-t-4 border-blue-700 rounded-lg p-2 bg-gray-100 dark:bg-slate-800">
                     <form className="space-y-5" onSubmit={handleSubmit(data => mutate(data))} encType="multipart/form-data">

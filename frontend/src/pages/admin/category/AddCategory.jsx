@@ -72,7 +72,7 @@ const AddCategory = () => {
                 <meta name="description" content="Create a new product category in BlogSphere admin panel to organize your inventory." />
                 <meta name="robots" content="noindex, nofollow" />
             </Helmet>
-            <PageHeader title={"Manage category's"} controller={"Category"} controllerUrl={"/admin/category/add-category/"} page={"Add Category's"} />
+            <PageHeader title={"Manage Category's"} controller={"Category"} controllerUrl={"/admin/category/add-category/"} page={"Add Category's"} />
             <section className="w-full">
                 <div className="my-4 w-full container mx-auto border-t-4 border-blue-700 rounded-lg p-2 bg-gray-100 dark:bg-slate-800">
                     <form className="space-y-5" onSubmit={handleSubmit(data => mutate(data))} encType="multipart/form-data">
@@ -129,7 +129,7 @@ const AddCategory = () => {
                             </div>
                         </div>
                         <div className="w-full border-t !mt-6">
-                            <Button disabled={isPending} className="Primary my-2 btnXl">
+                            <Button disabled={isPending} className="Primary my-2 btnXl cursor-pointer">
                                 {isPending ? (
                                     <Loading height="7" weight="7" />
                                 ) : (
