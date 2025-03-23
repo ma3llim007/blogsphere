@@ -11,6 +11,10 @@ const WriterNotFound = lazy(() => import("@/pages/writer/WriterNotFound"));
 const Account = lazy(() => import("@/pages/writer/Account"));
 const ChangePassword = lazy(() => import("@/pages/writer/ChangePassword"));
 const UpdateWriterDetails = lazy(() => import("@/pages/writer/UpdateWriterDetails"));
+const AddBlogs = lazy(() => import("@/pages/writer/blogs/AddBlogs"));
+const BlogsList = lazy(() => import("@/pages/writer/blogs/BlogsList"));
+const EditBlog = lazy(() => import("@/pages/writer/blogs/EditBlog"));
+const ViewBlog = lazy(() => import("@/pages/writer/blogs/ViewBlog"));
 
 // Defining Routes
 const router = createBrowserRouter([
@@ -87,6 +91,51 @@ const router = createBrowserRouter([
                         <UpdateWriterDetails />
                     </Suspense>
                 ),
+            },
+            {
+                path: "blogs",
+                children: [
+                    {
+                        index: true,
+                        element: (
+                            <Suspense fallback={<Loading />}>
+                                <AddBlogs />
+                            </Suspense>
+                        ),
+                    },
+                    {
+                        path: "add-blog",
+                        element: (
+                            <Suspense fallback={<Loading />}>
+                                <AddBlogs />
+                            </Suspense>
+                        ),
+                    },
+                    {
+                        path: "blog-list",
+                        element: (
+                            <Suspense fallback={<Loading />}>
+                                <BlogsList />
+                            </Suspense>
+                        ),
+                    },
+                    {
+                        path: "view-blog/:blogId",
+                        element: (
+                            <Suspense fallback={<Loading />}>
+                                <ViewBlog />
+                            </Suspense>
+                        ),
+                    },
+                    {
+                        path: "edit-blog/:blogId",
+                        element: (
+                            <Suspense fallback={<Loading />}>
+                                <EditBlog />
+                            </Suspense>
+                        ),
+                    },
+                ],
             },
             {
                 path: "*",
