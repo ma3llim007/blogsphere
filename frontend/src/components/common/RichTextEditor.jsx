@@ -87,7 +87,7 @@ const RichTextEditor = forwardRef(function RichTextEditor(
                                 }}
                             />
                         </div>
-                        {(error || fieldError) && <p className="text-red-700 font-bold my-2 text-base px-2">{error || fieldError?.message}</p>}
+                        {(error || fieldError) && <p className="text-red-500 font-bold my-2 text-base px-2">{error || fieldError?.message}</p>}
                     </div>
                 )}
             />
