@@ -22,7 +22,7 @@ const WriterLayout = () => {
     }
 
     if (isError) {
-        toastService.error("Please Log In To Access The Admin Panel");
+        toastService.error("Please Log In To Access The Writer Panel");
         return null;
     }
 
