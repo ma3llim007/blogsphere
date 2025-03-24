@@ -20,6 +20,7 @@ const generateAccessAndRefreshTokensModerator = async (moderatorId) => {
 
 const loginModerator = asyncHandler(async (req, res) => {
     const { email, password } = req.body;
+    console.log(email, password);
 
     if (!email?.trim() || !password?.trim()) {
         return res.status(422).json(new ApiError(422, "Both Field Are Required"));
