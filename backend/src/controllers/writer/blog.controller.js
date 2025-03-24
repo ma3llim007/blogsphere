@@ -45,15 +45,15 @@ const addBlog = asyncHandler(async (req, res) => {
                 return res.status(500).json(new ApiError(500, "Failed To Convert Image To WebP Of Blog Feature Image"));
             }
         }
-        
+
         // Upload On Cloudinary
         let blogFeatureImageUpload;
         try {
-            blogFeatureImageUpload = await uploadCloudinary(convertedImagePathFeatured.path, "sameerblogs/blogs/");
+            blogFeatureImageUpload = await uploadCloudinary(convertedImagePathFeatured, "sameerblogs/blogs/");
         } catch (_error) {
             return res.status(500).json(new ApiError(500, "Failed To Upload Blog Feature Image."));
         }
-        
+
         const blog = await Blog.create({
             blogTitle,
             blogSlug,
@@ -161,7 +161,7 @@ const editBlog = asyncHandler(async (req, res) => {
 
         // Upload to Cloudinary
         try {
-            const featureImageUpload = await uploadCloudinary(convertedFeatureImage.path, "sameerblogs/blogs/");
+            const featureImageUpload = await uploadCloudinary(convertedFeatureImage, "sameerblogs/blogs/");
             blog.blogFeatureImage = featureImageUpload.secure_url;
         } catch (_error) {
             return res.status(500).json(new ApiError(500, "Failed To Upload Feature Image."));
