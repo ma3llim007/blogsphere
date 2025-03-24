@@ -64,4 +64,4 @@ const checkSession = asyncHandler(async (req, res) => {
     }
 });
 
-export { loginModerator, changePasswordModerator, updateDetailsModerator, checkSession };
+export { loginModerator, changePasswordModerator, updateDetailsModerator, checkSession, generateAccessAndRefreshTokensModerator };
