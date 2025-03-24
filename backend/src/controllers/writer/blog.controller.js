@@ -22,7 +22,7 @@ const getOptionsCategory = asyncHandler(async (req, res) => {
 const addBlog = asyncHandler(async (req, res) => {
     try {
         const { blogTitle, blogSlug, blogShortDescription, blogDescription, blogCategory, blogStatus } = req.body;
-        const { blogFeatureImage } = req.files;
+        const blogFeatureImage = req.file;
 
         if (!blogTitle?.trim() || !blogSlug?.trim() || !blogShortDescription?.trim() || !blogDescription?.trim() || !blogCategory?.trim()) {
             return res.status(422).json(new ApiError(422, "All Fields Are Required"));
@@ -37,23 +37,23 @@ const addBlog = asyncHandler(async (req, res) => {
         }
 
         // Convert Image To WebP
-        let convertedImagePathFeatured = blogFeatureImage[0];
-        if (blogFeatureImage[0].mimetype !== "image/webp") {
+        let convertedImagePathFeatured = blogFeatureImage;
+        if (blogFeatureImage.mimetype !== "image/webp") {
             try {
-                convertedImagePathFeatured = await ConvertImageWebp(blogFeatureImage[0].path);
+                convertedImagePathFeatured = await ConvertImageWebp(blogFeatureImage.path);
             } catch (_error) {
                 return res.status(500).json(new ApiError(500, "Failed To Convert Image To WebP Of Blog Feature Image"));
             }
         }
-
+        
         // Upload On Cloudinary
         let blogFeatureImageUpload;
         try {
-            blogFeatureImageUpload = await uploadCloudinary(convertedImagePathFeatured, "sameerblogs/blogs/");
+            blogFeatureImageUpload = await uploadCloudinary(convertedImagePathFeatured.path, "sameerblogs/blogs/");
         } catch (_error) {
             return res.status(500).json(new ApiError(500, "Failed To Upload Blog Feature Image."));
         }
-
+        
         const blog = await Blog.create({
             blogTitle,
             blogSlug,
@@ -87,7 +87,7 @@ const blogs = asyncHandler(async (req, res) => {
 // Edit Blog
 const editBlog = asyncHandler(async (req, res) => {
     const { blogId, blogTitle, blogSlug, blogShortDescription, blogDescription, blogCategory, blogStatus } = req.body;
-    const { blogFeatureImage } = req.files;
+    const blogFeatureImage = req.file;
 
     if (!blogId) {
         return res.status(422).json(new ApiError(422, "Blog ID is Required"));
@@ -151,9 +151,9 @@ const editBlog = asyncHandler(async (req, res) => {
 
         // Convert Image To WebP
         let convertedFeatureImage = blogFeatureImage;
-        if (blogFeatureImage[0].mimetype !== "image/webp") {
+        if (blogFeatureImage.mimetype !== "image/webp") {
             try {
-                convertedFeatureImage = await ConvertImageWebp(blogFeatureImage[0].path);
+                convertedFeatureImage = await ConvertImageWebp(blogFeatureImage.path);
             } catch (_error) {
                 return res.status(500).json(new ApiError(500, "Failed to Convert Image to WebP"));
             }
@@ -161,7 +161,7 @@ const editBlog = asyncHandler(async (req, res) => {
 
         // Upload to Cloudinary
         try {
-            const featureImageUpload = await uploadCloudinary(convertedFeatureImage, "sameerblogs/blogs/");
+            const featureImageUpload = await uploadCloudinary(convertedFeatureImage.path, "sameerblogs/blogs/");
             blog.blogFeatureImage = featureImageUpload.secure_url;
         } catch (_error) {
             return res.status(500).json(new ApiError(500, "Failed To Upload Feature Image."));
