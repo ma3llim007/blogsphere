@@ -22,16 +22,13 @@ const getOptionsCategory = asyncHandler(async (req, res) => {
 const addBlog = asyncHandler(async (req, res) => {
     try {
         const { blogTitle, blogSlug, blogShortDescription, blogDescription, blogCategory, blogStatus } = req.body;
-        const { blogFeatureImage, blogDetailImage } = req.files;
+        const { blogFeatureImage } = req.files;
 
         if (!blogTitle?.trim() || !blogSlug?.trim() || !blogShortDescription?.trim() || !blogDescription?.trim() || !blogCategory?.trim()) {
             return res.status(422).json(new ApiError(422, "All Fields Are Required"));
         }
         if (!blogFeatureImage) {
             return res.status(422).json(new ApiError(422, "Blog Feature Image Is Required"));
-        }
-        if (!blogDetailImage) {
-            return res.status(422).json(new ApiError(422, "Blog Detail Image Is Required"));
         }
 
         const blogExisted = await Blog.findOne({ blogSlug });
@@ -48,14 +45,6 @@ const addBlog = asyncHandler(async (req, res) => {
                 return res.status(500).json(new ApiError(500, "Failed To Convert Image To WebP Of Blog Feature Image"));
             }
         }
-        let convertedImagePathDetail = blogDetailImage[0];
-        if (blogDetailImage[0].mimetype !== "image/webp") {
-            try {
-                convertedImagePathDetail = await ConvertImageWebp(blogDetailImage[0].path);
-            } catch (_error) {
-                return res.status(500).json(new ApiError(500, "Failed To Convert Image To WebP Of Blog Detail Image"));
-            }
-        }
 
         // Upload On Cloudinary
         let blogFeatureImageUpload;
@@ -65,18 +54,10 @@ const addBlog = asyncHandler(async (req, res) => {
             return res.status(500).json(new ApiError(500, "Failed To Upload Blog Feature Image."));
         }
 
-        let blogDetailImageUpload;
-        try {
-            blogDetailImageUpload = await uploadCloudinary(convertedImagePathDetail, "sameerblogs/blogs/");
-        } catch (_error) {
-            return res.status(500).json(new ApiError(500, "Failed To Upload Blog Detail Image."));
-        }
-
         const blog = await Blog.create({
             blogTitle,
             blogSlug,
             blogFeatureImage: blogFeatureImageUpload.secure_url,
-            blogDetailImage: blogDetailImageUpload.secure_url,
             blogShortDescription,
             blogDescription,
             blogCategory,
@@ -93,7 +74,7 @@ const addBlog = asyncHandler(async (req, res) => {
 const blogs = asyncHandler(async (req, res) => {
     const id = req.writer._id;
     try {
-        const blogs = await Blog.find({ blogAuthorId: id }).populate("blogCategory", "categoryName").select("-blogDetailImage -blogShortDescription -blogDescription -blogAuthorId -createdAt").lean();
+        const blogs = await Blog.find({ blogAuthorId: id }).populate("blogCategory", "categoryName").select("-blogShortDescription -blogDescription -blogAuthorId -createdAt").lean();
         if (!blogs.length) {
             return res.status(200).json(new ApiResponse(200, {}, "No Blog Found"));
         }
@@ -106,7 +87,7 @@ const blogs = asyncHandler(async (req, res) => {
 // Edit Blog
 const editBlog = asyncHandler(async (req, res) => {
     const { blogId, blogTitle, blogSlug, blogShortDescription, blogDescription, blogCategory, blogStatus } = req.body;
-    const { blogFeatureImage, blogDetailImage } = req.files;
+    const { blogFeatureImage } = req.files;
 
     if (!blogId) {
         return res.status(422).json(new ApiError(422, "Blog ID is Required"));
@@ -123,7 +104,7 @@ const editBlog = asyncHandler(async (req, res) => {
     }
 
     // Check if at least one field is provided for update
-    if (!blogTitle && !blogSlug && !blogShortDescription && !blogDescription && !blogFeatureImage && !blogDetailImage && !blogCategory && !blogStatus) {
+    if (!blogTitle && !blogSlug && !blogShortDescription && !blogDescription && !blogFeatureImage && !blogCategory && !blogStatus) {
         return res
             .status(400)
             .json(new ApiError(400, "At Least One Field (Title, Slug, Short Description, Description , Feature Image, Detail Image, Blog Category Or Blog Status) Is Required For Update"));
@@ -186,35 +167,7 @@ const editBlog = asyncHandler(async (req, res) => {
             return res.status(500).json(new ApiError(500, "Failed To Upload Feature Image."));
         }
     }
-    if (blogDetailImage) {
-        const previousImages = blog.blogDetailImage;
-        if (blogDetailImage && previousImages) {
-            const publicId = extractPublicId(previousImages);
-            try {
-                await removeImage("sameerblogs/blogs/", publicId);
-            } catch (_error) {
-                return res.status(500).json(new ApiError(500, "Failed To Remove Previous Detail Image"));
-            }
-        }
 
-        // Convert Image To WebP
-        let convertedDetailImage = blogDetailImage;
-        if (blogDetailImage[0].mimetype !== "image/webp") {
-            try {
-                convertedDetailImage = await ConvertImageWebp(blogDetailImage[0].path);
-            } catch (_error) {
-                return res.status(500).json(new ApiError(500, "Failed to Convert Image to WebP"));
-            }
-        }
-
-        // Upload to Cloudinary
-        try {
-            const detailImageUpload = await uploadCloudinary(convertedDetailImage, "sameerblogs/blogs/");
-            blog.blogDetailImage = detailImageUpload.secure_url;
-        } catch (_error) {
-            return res.status(500).json(new ApiError(500, "Failed To Upload Previous Detail Image."));
-        }
-    }
     if (blogCategory) {
         blog.blogCategory = blogCategory;
     }
@@ -246,25 +199,18 @@ const deleteBlog = asyncHandler(async (req, res) => {
         }
 
         const featureImage = blog.blogFeatureImage;
-        const detailImage = blog.blogDetailImage;
 
         const deleteBlog = await Blog.deleteOne({ _id: blogId });
         if (deleteBlog.deletedCount === 0) {
             return res.status(500).json(new ApiError(500, "Something Went Wrong While Deleting The Blog"));
         }
 
-        if (deleteBlog && featureImage && detailImage) {
+        if (deleteBlog && featureImage) {
             const publicFeatureId = extractPublicId(featureImage);
             try {
                 await removeImage("sameerblogs/blogs/", publicFeatureId);
             } catch (_error) {
                 return res.status(500).json(new ApiError(500, "Failed To Remove Previous Blog Feature Image"));
-            }
-            const publicDetailId = extractPublicId(detailImage);
-            try {
-                await removeImage("sameerblogs/blogs/", publicDetailId);
-            } catch (_error) {
-                return res.status(500).json(new ApiError(500, "Failed To Remove Previous Blog Detail Image"));
             }
         }
 

@@ -138,26 +138,6 @@ const AddBlogs = () => {
                                 />
                             </div>
                             <div className="w-full md:w-1/2 px-2 gap-4 md:gap-0">
-                                <Controller
-                                    control={control}
-                                    name="blogDetailImage"
-                                    render={({ field }) => (
-                                        <Input
-                                            label="Blog Detail Image"
-                                            title="Select The Blog Detail Image"
-                                            type="file"
-                                            disabled={isPending}
-                                            accept=".jpg, .jpeg, .png, .gif, .svg, .webp"
-                                            onChange={e => field.onChange(e.target.files[0])}
-                                            className="text-xl rounded-sm p-3 border border-gray-300 focus:outline-none focus:ring-2 focus:ring-blue-400"
-                                            error={errors.blogDetailImage?.message}
-                                        />
-                                    )}
-                                />
-                            </div>
-                        </div>
-                        <div className="flex flex-wrap my-2 gap-4 md:gap-0">
-                            <div className="w-full md:w-1/2 px-2 gap-4 md:gap-0">
                                 <Select
                                     label="Blog Category"
                                     placeholder="Select The Blog Category"
@@ -169,6 +149,8 @@ const AddBlogs = () => {
                                     defaultValue="default"
                                 />
                             </div>
+                        </div>
+                        <div className="flex flex-wrap my-2 gap-4 md:gap-0">
                             <div className="w-full md:w-1/2 px-2 gap-4 md:gap-0">
                                 <Select
                                     label="Blog Status"

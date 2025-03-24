@@ -112,12 +112,6 @@ const ViewBlog = () => {
                                     <img src={data?.data?.blogFeatureImage} className="max-w-60 max-h-60 object-cover rounded" alt="Blog Feature Image" />
                                 </div>
                             </div>
-                            <div className="w-full md:w-1/2 px-2 gap-4 md:gap-0">
-                                <div className="w-full">
-                                    <label className="inline-block mb-2 pl-1 text-base font-bold">Blog Details Image</label>
-                                    <img src={data?.data?.blogDetailImage} className="max-w-60 max-h-60 object-cover rounded" alt="Blog Feature Image" />
-                                </div>
-                            </div>
                         </div>
                         <div className="flex flex-wrap gap-4 md:gap-0">
                             <div className="w-full md:w-1/2 px-2 gap-4 md:gap-0">

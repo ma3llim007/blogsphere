@@ -8,21 +8,9 @@ router.use(authenticateAndVerifyWriter);
 
 // Routes
 router.route("/options-category").get(getOptionsCategory);
-router.route("/add-blog").post(
-    upload.fields([
-        { name: "blogFeatureImage", maxCount: 1 },
-        { name: "blogDetailImage", maxCount: 1 },
-    ]),
-    addBlog
-);
+router.route("/add-blog").post(upload.single("blogFeatureImage"), addBlog);
 router.route("/blogs").get(blogs);
-router.route("/edit-blog").patch(
-    upload.fields([
-        { name: "blogFeatureImage", maxCount: 1 },
-        { name: "blogDetailImage", maxCount: 1 },
-    ]),
-    editBlog
-);
+router.route("/edit-blog").patch(upload.single("blogFeatureImage"), editBlog);
 router.route("/delete-blog/:blogId").delete(deleteBlog);
 router.route("/blog/:blogId").get(getBlog);
 

@@ -24,10 +24,6 @@ const blogScheme = new Schema(
             type: String,
             required: [true, "Blog Feature Image Is Required"],
         },
-        blogDetailImage: {
-            type: String,
-            required: [true, "Blog Detail Image Is Required"],
-        },
         blogShortDescription: {
             type: String,
             required: [true, "Blog Short Description Is Required"],

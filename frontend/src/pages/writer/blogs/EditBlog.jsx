@@ -93,9 +93,6 @@ const EditBlog = () => {
             if (data?.blogFeatureImage) {
                 formData.append("blogFeatureImage", data?.blogFeatureImage);
             }
-            if (data?.blogDetailImage) {
-                formData.append("blogDetailImage", data?.blogDetailImage);
-            }
             formData.append("blogId", blogId);
 
             return crudService.patch("/writer/blog/edit-blog", true, formData, "multipart/form-data");
@@ -180,32 +177,6 @@ const EditBlog = () => {
                                 <div className="w-full">
                                     <label className="inline-block mb-2 pl-1 text-base font-bold">Blog Feature Image</label>
                                     <img src={data?.data?.blogFeatureImage} className="max-w-60 max-h-60 object-cover rounded" alt="Blog Feature Image" />
-                                </div>
-                            </div>
-                        </div>
-                        <div className="flex flex-wrap my-2 gap-4 md:gap-0">
-                            <div className="w-full md:w-1/2 px-2 gap-4 md:gap-0">
-                                <Controller
-                                    control={control}
-                                    name="blogDetailImage"
-                                    render={({ field }) => (
-                                        <Input
-                                            label="Blog Detail Image"
-                                            title="Select The Blog Detail Image"
-                                            type="file"
-                                            disabled={isPending}
-                                            accept=".jpg, .jpeg, .png, .gif, .svg, .webp"
-                                            onChange={e => field.onChange(e.target.files[0])}
-                                            className="text-xl rounded-sm p-3 border border-gray-300 focus:outline-none focus:ring-2 focus:ring-blue-400"
-                                            error={errors.blogDetailImage?.message}
-                                        />
-                                    )}
-                                />
-                            </div>
-                            <div className="w-full md:w-1/2 px-2 gap-4 md:gap-0">
-                                <div className="w-full">
-                                    <label className="inline-block mb-2 pl-1 text-base font-bold">Blog Details Image</label>
-                                    <img src={data?.data?.blogDetailImage} className="max-w-60 max-h-60 object-cover rounded" alt="Blog Feature Image" />
                                 </div>
                             </div>
                         </div>
