@@ -1,13 +1,12 @@
-import { Link, useLocation } from "react-router-dom";
+import { AiFillDashboard } from "react-icons/ai";
+import { FaBlogger, FaHome, FaList, FaPlus } from "react-icons/fa";
 import { Sidebar, SidebarContent, SidebarGroup, SidebarGroupContent, SidebarMenu, SidebarMenuButton, SidebarMenuItem, SidebarMenuSub, useSidebar } from "../ui/sidebar";
 import { Collapsible, CollapsibleContent, CollapsibleTrigger } from "../ui/collapsible";
-import { BadgeCheck, ChevronRight, ChevronsUpDown } from "lucide-react";
-import { FaBlogger, FaHome, FaList, FaPlus } from "react-icons/fa";
 import { DropdownMenu, DropdownMenuContent, DropdownMenuGroup, DropdownMenuItem, DropdownMenuSeparator, DropdownMenuTrigger } from "../ui/dropdown-menu";
 import { DropdownMenuLabel } from "../ui/dropdown-menu";
 import { Avatar, AvatarFallback, AvatarImage } from "../ui/avatar";
-import { AiFillDashboard } from "react-icons/ai";
-import LogOutWriter from "../writer/LogOutWriter";
+import { Link, useLocation } from "react-router-dom";
+import { BadgeCheck, ChevronRight, ChevronsUpDown } from "lucide-react";
 import { MdPassword } from "react-icons/md";
 
 const navBar = [
@@ -15,7 +14,7 @@ const navBar = [
     {
         name: "Dashboard",
         Icon: AiFillDashboard,
-        urlLink: "/writer/dashboard",
+        urlLink: "/moderator/dashboard",
         segment: "dashboard",
     },
     {
@@ -32,11 +31,11 @@ const navBar = [
                 urlLink: "/writer/blogs/blog-list",
             },
         ],
-        segment: "blogs",
+        segment: "users",
     },
 ];
 
-const WriterSideBar = ({ user, ...props }) => {
+const ModeratorSideBar = ({ user, ...props }) => {
     const { pathname } = useLocation();
     const segment = pathname.split("/")[2] || "";
     const { isMobile } = useSidebar();
@@ -134,7 +133,7 @@ const WriterSideBar = ({ user, ...props }) => {
                                     </DropdownMenuItem>
                                     <DropdownMenuSeparator />
                                     <DropdownMenuItem onSelect={e => e.preventDefault()}>
-                                        <LogOutWriter />
+                                        {/* <LogOutWriter /> */}
                                     </DropdownMenuItem>
                                 </DropdownMenuGroup>
                             </DropdownMenuContent>
@@ -146,4 +145,4 @@ const WriterSideBar = ({ user, ...props }) => {
     );
 };
 
-export default WriterSideBar;
+export default ModeratorSideBar;

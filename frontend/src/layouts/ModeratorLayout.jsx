@@ -1,7 +1,12 @@
+import Footer from "@/components/admin/Footer";
+import Header from "@/components/admin/Header";
 import Loading from "@/components/common/Loading";
+import WriterSideBar from "@/components/sidebar/WriterSideBar";
+import { SidebarInset, SidebarProvider } from "@/components/ui/sidebar";
 import useModeratorAuth from "@/hooks/useModeratorAuth";
 import toastService from "@/services/toastService";
 import { useEffect } from "react";
+import { Outlet } from "react-router-dom";
 
 const ModeratorLayout = () => {
     const { isError, isLoading, moderator } = useModeratorAuth();
@@ -19,7 +24,19 @@ const ModeratorLayout = () => {
         toastService.error("Please Log In To Access The Moderator Panel");
         return null;
     }
-    return <div>ModeratorLayout</div>;
+
+    return (
+        <SidebarProvider>
+            <WriterSideBar user={moderator} />
+            <SidebarInset>
+                <Header />
+                <section className="flex flex-1 flex-col gap-4 p-4 pt-0">
+                    <Outlet />
+                </section>
+                <Footer />
+            </SidebarInset>
+        </SidebarProvider>
+    );
 };
 
 export default ModeratorLayout;
