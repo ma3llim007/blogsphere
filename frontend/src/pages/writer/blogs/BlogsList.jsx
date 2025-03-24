@@ -37,10 +37,14 @@ const BlogsList = () => {
         },
     });
 
-    const blogColums = [
+    const blogColumns = [
         { accessorKey: "no", header: "No." },
         { accessorKey: "blogTitle", header: "Title" },
-        { accessorKey: "blogSlug", header: "Slug" },
+        {
+            accessorKey: "blogSlug",
+            header: "Slug",
+            cell: ({ row }) => <div className="w-[150px] break-words text-wrap">{row.getValue("blogSlug")}</div>,
+        },
         {
             accessorKey: "blogFeatureImage",
             header: "Feature Image",
@@ -54,12 +58,7 @@ const BlogsList = () => {
         {
             accessorKey: "blogStatus",
             header: "Order Status",
-            cell: ({ row }) => (
-                <Badge
-                    title={row.original?.blogStatus}
-                    className={`${statusBlogClass[row?.original?.blogStatus] || ""} !rounded !leading-normal`}
-                />
-            ),
+            cell: ({ row }) => <Badge title={row.original?.blogStatus} className={`${statusBlogClass[row?.original?.blogStatus] || ""} !rounded !leading-normal`} />,
         },
         {
             accessorKey: "updatedAt",
@@ -95,12 +94,12 @@ const BlogsList = () => {
     return (
         <>
             <Helmet>
-                <title>Manage Blog Posts | BlogSpher</title>
-                <meta name="description" content="View and manage all blog posts on BlogSpher. Edit, delete, and update content." />
+                <title>Manage Blog Posts | BlogSphere</title>
+                <meta name="description" content="View and manage all blog posts on BlogSphere. Edit, delete, and update content." />
                 <meta name="robots" content="noindex, nofollow" />
             </Helmet>
             <PageHeader homeUrl="writer/dashboard" title={"Manage Blogs"} controller={"Blogs"} controllerUrl={"/writer/blogs/blog-list/"} page={"Blog's List"} />
-            <Table columns={blogColums} data={blogData} paginationOptions={{ pageSize: 10 }} sortable loading={isLoading} />
+            <Table columns={blogColumns} data={blogData} paginationOptions={{ pageSize: 10 }} sortable loading={isLoading} />
         </>
     );
 };

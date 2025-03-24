@@ -36,7 +36,7 @@ const EditBlog = () => {
         resolver: yupResolver(editBlogScheme),
     });
 
-    // get the cateogry for options
+    // get the category for options
     const { data: categoryOptions, isLoading: categoryOptionsIsLoading } = useQuery({
         queryKey: ["categoryOptions"],
         queryFn: () => crudService.get("/writer/blog/options-category", true),
