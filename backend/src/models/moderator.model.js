@@ -65,12 +65,12 @@ moderatorScheme.pre("save", async function (next) {
 });
 
 // Checking The Password Is Correct Or Not
-moderatorScheme.methods.isCorrectPassword = async (password) => {
+moderatorScheme.methods.isCorrectPassword = async function (password) {
     return await bcrypt.compare(password, this.password);
 };
 
 // Generate Access Token
-moderatorScheme.methods.generateAccessToken = () => {
+moderatorScheme.methods.generateAccessToken = function () {
     return jwt.sign(
         {
             _id: this._id,
@@ -83,7 +83,7 @@ moderatorScheme.methods.generateAccessToken = () => {
 };
 
 // Generate Refresh Token
-moderatorScheme.methods.generateRefreshToken = () => {
+moderatorScheme.methods.generateRefreshToken = function () {
     return jwt.sign({ _id: this._id }, process.env.REFRESH_TOKEN_SECRET, { expiresIn: process.env.REFRESH_TOKEN_EXPIRY });
 };
 
