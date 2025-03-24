@@ -1,7 +1,7 @@
 import { createSlice } from "@reduxjs/toolkit";
 
 const initialState = {
-    state: false,
+    status: false,
     moderator: null,
 };
 
@@ -10,11 +10,12 @@ const moderatorAuthSlice = createSlice({
     initialState,
     reducers: {
         loginModerator: (state, action) => {
-            state.state = true;
+            state.status = true;
             state.moderator = action.payload.moderator;
         },
         logoutModerator: state => {
-            (state.state = false), (state.moderator = null);
+            state.status = false;
+            state.moderator = null;
         },
     },
 });

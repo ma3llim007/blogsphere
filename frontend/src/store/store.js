@@ -5,6 +5,7 @@ import sessionStorage from "redux-persist/lib/storage/session";
 // Slices
 import adminAuthSlice from "./features/admin/adminAuthSlice";
 import writerAuthSlice from "./features/writer/writerAuthSlice";
+import moderatorAuthSlice from "./features/moderator/moderatorAuthSlice";
 
 // Persistence Configuration For Admin Auth
 const adminAuthPersistentConfig = {
@@ -20,14 +21,23 @@ const writerAuthPersistentConfig = {
     storage: sessionStorage,
 };
 
+// Persistence Configuration For Moderator Auth
+const moderatorAuthPersistentConfig = {
+    key: "moderatorAuth",
+    version: 1,
+    storage: sessionStorage,
+};
+
 // persist the slice
 const persistedAdminAuthReducer = persistReducer(adminAuthPersistentConfig, adminAuthSlice);
 const persistedWriterAuthReducer = persistReducer(writerAuthPersistentConfig, writerAuthSlice);
+const persistedModeratorAuthReducer = persistReducer(moderatorAuthPersistentConfig, moderatorAuthSlice);
 
 // create a root reducer
 const rootReducer = combineReducers({
     adminAuth: persistedAdminAuthReducer,
     writerAuth: persistedWriterAuthReducer,
+    moderatorAuth: persistedModeratorAuthReducer,
 });
 
 const store = configureStore({

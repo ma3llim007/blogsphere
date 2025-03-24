@@ -120,7 +120,7 @@ const updateDetailsWriter = asyncHandler(async (req, res) => {
 
         return res.status(200).json(new ApiResponse(200, {}, "Writer Details Updated Successfully"));
     } catch (_error) {
-        return res.status(500).json(new ApiError(500, "Something Went Wrong! While Updateing Writer Details"));
+        return res.status(500).json(new ApiError(500, "Something Went Wrong! While Updating Writer Details"));
     }
 });
 
