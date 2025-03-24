@@ -47,6 +47,27 @@ const loginModerator = asyncHandler(async (req, res) => {
         .json(new ApiResponse(200, {}, "Moderator Logged In Successfully"));
 });
 
+const logOutModerator = asyncHandler(async (req, res) => {
+    if (!req.moderator || !req.moderator._id) {
+        return res.status(400).json(new ApiError(400, "Moderator Not Authenticated"));
+    }
+    await Moderator.findByIdAndUpdate(
+        req.moderator._id,
+        {
+            $unset: {
+                refreshToken: 1,
+            },
+        },
+        {
+            new: true,
+        }
+    );
+    return res
+        .status(200)
+        .clearCookie("accessToken", HttpOptions)
+        .clearCookie("refreshToken", HttpOptions)
+        .json(new ApiResponse(200, {}, "Moderator Logged Out"));
+});
 const changePasswordModerator = asyncHandler(async (req, res) => {});
 const updateDetailsModerator = asyncHandler(async (req, res) => {});
 
@@ -64,4 +85,4 @@ const checkSession = asyncHandler(async (req, res) => {
     }
 });
 
-export { loginModerator, changePasswordModerator, updateDetailsModerator, checkSession, generateAccessAndRefreshTokensModerator };
+export { loginModerator, changePasswordModerator, updateDetailsModerator, checkSession, generateAccessAndRefreshTokensModerator, logOutModerator };
