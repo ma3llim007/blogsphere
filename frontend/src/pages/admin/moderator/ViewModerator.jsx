@@ -30,7 +30,7 @@ const ViewModerator = () => {
 
     // Verify The Moderator
     const { mutate, isPending: mutateIsPending } = useMutation({
-        mutationFn: () => crudService.patch(`moderator/update-moderator-status/${moderatorId}`, true, {}),
+        mutationFn: () => crudService.patch(`/admin/moderator/update-moderator-status/${moderatorId}`, true, {}),
         onSuccess: data => {
             navigate("/admin/moderator/moderator-list");
             queryClient.invalidateQueries("ModeratorList");
