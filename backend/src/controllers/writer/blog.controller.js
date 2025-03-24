@@ -44,6 +44,8 @@ const addBlog = asyncHandler(async (req, res) => {
             } catch (_error) {
                 return res.status(500).json(new ApiError(500, "Failed To Convert Image To WebP Of Blog Feature Image"));
             }
+        } else {
+            convertedImagePathFeatured = blogFeatureImage.path;
         }
 
         // Upload On Cloudinary
@@ -66,6 +68,7 @@ const addBlog = asyncHandler(async (req, res) => {
         });
         return res.status(201).json(new ApiResponse(201, blog, "Blog Instead Successfully"));
     } catch (_error) {
+        console.error(_error);
         return res.status(500).json(new ApiError(500, "Something Went Wrong! While Adding Blog"));
     }
 });
@@ -157,6 +160,8 @@ const editBlog = asyncHandler(async (req, res) => {
             } catch (_error) {
                 return res.status(500).json(new ApiError(500, "Failed to Convert Image to WebP"));
             }
+        } else {
+            convertedFeatureImage = blogFeatureImage.path;
         }
 
         // Upload to Cloudinary

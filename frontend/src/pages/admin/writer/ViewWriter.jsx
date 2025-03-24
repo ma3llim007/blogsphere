@@ -30,7 +30,7 @@ const ViewWriter = () => {
 
     // Verify The Moderator
     const { mutate, isPending: mutateIsPending } = useMutation({
-        mutationFn: () => crudService.patch(`writer/update-writer-status/${writerId}`, true, {}),
+        mutationFn: () => crudService.patch(`/admin/writer/update-writer-status/${writerId}`, true, {}),
         onSuccess: data => {
             navigate("/admin/writers/writer-list");
             queryClient.invalidateQueries("writerList");
