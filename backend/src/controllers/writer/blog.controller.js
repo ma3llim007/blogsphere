@@ -161,7 +161,7 @@ const editBlog = asyncHandler(async (req, res) => {
 
         // Upload to Cloudinary
         try {
-            const featureImageUpload = await uploadCloudinary(convertedFeatureImage, "sameerblogs/blogs/");
+            const featureImageUpload = await uploadCloudinary(convertedFeatureImage.path, "sameerblogs/blogs/");
             blog.blogFeatureImage = featureImageUpload.secure_url;
         } catch (_error) {
             return res.status(500).json(new ApiError(500, "Failed To Upload Feature Image."));
