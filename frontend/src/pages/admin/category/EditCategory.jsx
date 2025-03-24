@@ -11,8 +11,8 @@ import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 import { useEffect } from "react";
 import { Helmet } from "react-helmet-async";
 import { Controller, useForm } from "react-hook-form";
-import { FaEdit } from "react-icons/fa";
-import { useNavigate, useParams } from "react-router-dom";
+import { FaBackward, FaEdit } from "react-icons/fa";
+import { Link, useNavigate, useParams } from "react-router-dom";
 
 const EditCategory = () => {
     const queryClient = useQueryClient();
@@ -99,8 +99,8 @@ const EditCategory = () => {
     return (
         <>
             <Helmet>
-                <title>Edit Category | sameerCart</title>
-                <meta name="description" content="Modify an existing product category in sameerCart admin panel. Update category name, description, and status." />
+                <title>Edit Category | BlogSphere</title>
+                <meta name="description" content="Modify an existing product category in BlogSphere admin panel. Update category name, description, and status." />
                 <meta name="robots" content="noindex, nofollow" />
             </Helmet>
             <PageHeader title={"Manage Category's"} controller={"Category"} controllerUrl={"/admin/category/category-list"} page={"Edit Category"} />
@@ -113,7 +113,7 @@ const EditCategory = () => {
                                 <h4 className="text-white font-bold text-sm">{errors.root.message}</h4>
                             </div>
                         )}
-                        <div className="flex flex-wrap my-2">
+                        <div className="flex flex-wrap">
                             <div className="w-full md:w-1/2 px-2 flex-grow">
                                 <Input
                                     label="Category Name"
@@ -125,7 +125,7 @@ const EditCategory = () => {
                                 />
                             </div>
                         </div>
-                        <div className="flex flex-wrap my-2">
+                        <div className="flex flex-wrap">
                             <div className="w-full md:w-1/2 px-2 flex-grow">
                                 <Input
                                     label="Slug"
@@ -140,7 +140,7 @@ const EditCategory = () => {
                                 />
                             </div>
                         </div>
-                        <div className="flex flex-wrap my-2">
+                        <div className="flex flex-wrap">
                             <div className="w-full md:w-1/2 px-2">
                                 <Controller
                                     control={control}
@@ -167,8 +167,9 @@ const EditCategory = () => {
                                 </div>
                             </div>
                         </div>
-                        <div className="w-full border-t !mt-6">
-                            <Button disabled={isPending} className="Success my-2 btnXl cursor-pointer">
+                        <hr />
+                        <div className="w-full flex gap-2 my-2 items-center">
+                            <Button disabled={isPending} className="Success cursor-pointer">
                                 {isPending ? (
                                     <Loading height="7" weight="7" />
                                 ) : (
@@ -177,6 +178,12 @@ const EditCategory = () => {
                                     </>
                                 )}
                             </Button>
+                            |
+                            <Link to={"/admin/category/category-list"}>
+                                <Button type="button" className="Secondary cursor-pointer">
+                                    <FaBackward /> Back To Category Listing
+                                </Button>
+                            </Link>
                         </div>
                     </form>
                 </div>

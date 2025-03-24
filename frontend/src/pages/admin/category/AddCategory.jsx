@@ -82,7 +82,7 @@ const AddCategory = () => {
                                 <h4 className="text-white font-bold text-sm">{errors.root.message}</h4>
                             </div>
                         )}
-                        <div className="flex flex-wrap my-2 gap-4 md:gap-0">
+                        <div className="flex flex-wrap gap-4 md:gap-0">
                             <div className="w-full px-2">
                                 <Input
                                     label="Category Name"
@@ -94,7 +94,7 @@ const AddCategory = () => {
                                 />
                             </div>
                         </div>
-                        <div className="flex flex-wrap my-2 gap-4 md:gap-0">
+                        <div className="flex flex-wrap gap-4 md:gap-0">
                             <div className="w-full md:w-1/2 px-2">
                                 <Input
                                     label="Category Slug"
@@ -128,7 +128,7 @@ const AddCategory = () => {
                                 />
                             </div>
                         </div>
-                        <div className="w-full border-t !mt-6">
+                        <div className="w-full border-t">
                             <Button disabled={isPending} className="Primary my-2 btnXl cursor-pointer">
                                 {isPending ? (
                                     <Loading height="7" weight="7" />
