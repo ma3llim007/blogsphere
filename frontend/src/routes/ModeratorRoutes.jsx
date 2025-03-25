@@ -9,6 +9,9 @@ const ModeratorLayout = lazy(() => import("@/layouts/ModeratorLayout"));
 const Dashboard = lazy(() => import("@/pages/moderator/Dashboard"));
 const ModeratorNotFound = lazy(() => import("@/pages/moderator/ModeratorNotFound"));
 const Login = lazy(() => import("@/pages/moderator/auth/Login"));
+const Account = lazy(() => import("@/pages/moderator/Account"));
+const ChangePassword = lazy(() => import("@/pages/moderator/ChangePassword"));
+const UpdateDetails = lazy(() => import("@/pages/moderator/UpdateDetails"));
 
 // Defining Routes
 const router = createBrowserRouter([
@@ -59,6 +62,30 @@ const router = createBrowserRouter([
                 element: (
                     <Suspense fallback={<Loading />}>
                         <Dashboard />
+                    </Suspense>
+                ),
+            },
+            {
+                path: "account",
+                element: (
+                    <Suspense fallback={<Loading />}>
+                        <Account />
+                    </Suspense>
+                ),
+            },
+            {
+                path: "change-password",
+                element: (
+                    <Suspense fallback={<Loading />}>
+                        <ChangePassword />
+                    </Suspense>
+                ),
+            },
+            {
+                path: "update-moderator-details",
+                element: (
+                    <Suspense fallback={<Loading />}>
+                        <UpdateDetails />
                     </Suspense>
                 ),
             },
