@@ -54,4 +54,57 @@ const getBlog = asyncHandler(async (req, res) => {
     }
 });
 
-export { latestBlog, getOptionsCategory, getBlog };
+// Review Blog
+const reviewBlog = asyncHandler(async (req, res) => {
+    try {
+        const { _id } = req.moderator;
+        const { blogId } = req.params;
+        const { blogStatus, revisionMessage, rejectedMessage } = req.body;
+
+        if (!blogId) {
+            return res.status(422).json(new ApiError(422, "Blog ID Is Required"));
+        }
+
+        if (!isValidObjectId(blogId)) {
+            return res.status(404).json(new ApiError(404, "Invalid Blog Id"));
+        }
+
+        if (!blogStatus?.trim()) {
+            return res.status(400).json(new ApiError(400, "Blog Status Is Required"));
+        }
+
+        if (blogStatus === "Needs Revisions" && !revisionMessage?.trim()) {
+            return res.status(400).json(new ApiError(400, "Revision Message Is Required For 'Need Revision' Status"));
+        }
+
+        if (blogStatus === "Rejected" && !rejectedMessage?.trim()) {
+            return res.status(400).json(new ApiError(400, "Rejection Message Is Required For 'Rejected' Status"));
+        }
+
+        // Finding the Blog
+        const blog = await Blog.findById(blogId);
+        if (!blog) {
+            return res.status(404).json(new ApiError(404, "Blog Not Found"));
+        }
+
+        // Update Field
+        blog.blogStatus = blogStatus;
+        if (blogStatus === "Needs Revisions") {
+            blog.blogRevisionMessage = revisionMessage;
+        }
+        if (blogStatus === "Rejected") {
+            blog.blogRejectedMessage = rejectedMessage;
+        }
+        blog.blogModeratorId = _id;
+
+        await blog.save();
+        
+        return res.status(200).json(new ApiResponse(200, {}, "Blog Status Update Successfully"));
+    } catch (_error) {
+        console.error(_error);
+        
+        return res.status(500).json(new ApiError(500, "Something Went Wrong! While Review Blog"));
+    }
+});
+
+export { latestBlog, getOptionsCategory, getBlog, reviewBlog };

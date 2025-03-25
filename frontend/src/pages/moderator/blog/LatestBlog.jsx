@@ -1,5 +1,4 @@
 import Badge from "@/components/common/Badge";
-import ButtonWithAlert from "@/components/common/ButtonWithAlert";
 import Loading from "@/components/common/Loading";
 import PageHeader from "@/components/common/PageHeader";
 import Table from "@/components/common/Table";
@@ -8,13 +7,12 @@ import crudService from "@/services/crudService";
 import toastService from "@/services/toastService";
 import { statusBlogClass } from "@/utils/statusUtils";
 import { formatDateTime } from "@/utils/utils";
-import { useQuery, useQueryClient } from "@tanstack/react-query";
+import { useQuery } from "@tanstack/react-query";
 import { Helmet } from "react-helmet-async";
 import { useNavigate } from "react-router-dom";
 
 const LatestBlog = () => {
     const navigate = useNavigate();
-    const queryClient = useQueryClient();
 
     const { data, isLoading } = useQuery({
         queryKey: ["latestBlog"],
@@ -24,7 +22,6 @@ const LatestBlog = () => {
         },
     });
 
-    
     const blogColumns = [
         { accessorKey: "no", header: "No." },
         { accessorKey: "blogTitle", header: "Title" },
@@ -45,7 +42,7 @@ const LatestBlog = () => {
         { accessorKey: "blogCategory", header: "Category", cell: ({ row }) => row?.original?.blogCategory?.categoryName },
         {
             accessorKey: "blogStatus",
-            header: "Order Status",
+            header: "Blog Status",
             cell: ({ row }) => <Badge title={row.original?.blogStatus} className={`${statusBlogClass[row?.original?.blogStatus] || ""} !rounded !leading-normal`} />,
         },
         {
@@ -61,14 +58,9 @@ const LatestBlog = () => {
                         View
                     </Button>
                     |
-                    <ButtonWithAlert
-                        buttonTitle="Verify"
-                        dialogTitle="Are You Sure You Want to Verify This Blog?"
-                        dialogDesc="This Action Will Permanently Verify The Blog. Proceed?"
-                        dialogActionTitle="Verify Blog"
-                        buttonColor="Success"
-                        dialogActionfunc={() => mutate(row.original?._id)}
-                    />
+                    <Button className="Success cursor-pointer" onClick={() => navigate(`/moderator/blogs/verify-blog/${row.original._id}`)}>
+                        Review Blog
+                    </Button>
                 </div>
             ),
         },

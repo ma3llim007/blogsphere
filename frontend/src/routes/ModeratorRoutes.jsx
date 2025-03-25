@@ -14,6 +14,7 @@ const ChangePassword = lazy(() => import("@/pages/moderator/ChangePassword"));
 const UpdateDetails = lazy(() => import("@/pages/moderator/UpdateDetails"));
 const LatestBlog = lazy(() => import("@/pages/moderator/blog/LatestBlog"));
 const ViewBlog = lazy(() => import("@/pages/moderator/blog/ViewBlog"));
+const VerifyBlog = lazy(() => import("@/pages/moderator/blog/VerifyBlog"));
 
 // Defining Routes
 const router = createBrowserRouter([
@@ -111,10 +112,10 @@ const router = createBrowserRouter([
                         ),
                     },
                     {
-                        path: "verify-blog",
+                        path: "verify-blog/:blogId",
                         element: (
                             <Suspense fallback={<Loading />}>
-                                <Dashboard />
+                                <VerifyBlog />
                             </Suspense>
                         ),
                     },

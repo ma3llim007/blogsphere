@@ -67,7 +67,7 @@ const ViewBlog = () => {
                 <meta name="description" content="Viewing an existing blog post in BlogSphere admin panel. Manage SEO and content optimization." />
                 <meta name="robots" content="noindex, nofollow" />
             </Helmet>
-            <PageHeader homeUrl="/writer/dashboard" title={"Manage Blogs"} controller={"Blog Listing"} controllerUrl={"/writer/blogs/add-blog/"} page={"View Blog"} />
+            <PageHeader homeUrl="/moderator/dashboard" title={"Manage Blogs"} controller={"Blog Listing"} controllerUrl={"/moderator/blogs/add-blog/"} page={"View Blog"} />
             <section className="w-full">
                 <div className="my-4 w-full container mx-auto border-t-4 border-blue-700 rounded-lg p-2 bg-gray-100 dark:bg-slate-800">
                     <form className="space-y-5">

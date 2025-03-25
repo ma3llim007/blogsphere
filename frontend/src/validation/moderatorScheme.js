@@ -14,3 +14,9 @@ export const moderatorChangePasswordSchema = Yup.object().shape({
         .matches(/[0-9]/, "Password Must Contain At Least One Number")
         .matches(/[@$!%*?&]/, "Password Must Contain At Least One Special Character (@, $, !, %, *, ?, &)"),
 });
+
+export const moderatorBlogVerifyScheme = Yup.object().shape({
+    blogStatus: Yup.string().required("Blog status is required").oneOf(["Approved", "Needs Revisions", "Rejected"], "Invalid Status"),
+    revisionMessage: Yup.string().when("blogStatus", { is: "Needs Revisions", then: schema => schema.required("Revision Message Is Required"), otherwise: schema => schema.notRequired() }),
+    rejectedMessage: Yup.string().when("blogStatus", { is: "Rejected", then: schema => schema.required("Rejection Message Is Required"), otherwise: schema => schema.notRequired() }),
+});
