@@ -12,6 +12,8 @@ const Login = lazy(() => import("@/pages/moderator/auth/Login"));
 const Account = lazy(() => import("@/pages/moderator/Account"));
 const ChangePassword = lazy(() => import("@/pages/moderator/ChangePassword"));
 const UpdateDetails = lazy(() => import("@/pages/moderator/UpdateDetails"));
+const LatestBlog = lazy(() => import("@/pages/moderator/blog/LatestBlog"));
+const ViewBlog = lazy(() => import("@/pages/moderator/blog/ViewBlog"));
 
 // Defining Routes
 const router = createBrowserRouter([
@@ -88,6 +90,43 @@ const router = createBrowserRouter([
                         <UpdateDetails />
                     </Suspense>
                 ),
+            },
+            {
+                path: "blogs",
+                children: [
+                    {
+                        index: true,
+                        element: (
+                            <Suspense fallback={<Loading />}>
+                                <Dashboard />
+                            </Suspense>
+                        ),
+                    },
+                    {
+                        path: "latest-blog",
+                        element: (
+                            <Suspense fallback={<Loading />}>
+                                <LatestBlog />
+                            </Suspense>
+                        ),
+                    },
+                    {
+                        path: "verify-blog",
+                        element: (
+                            <Suspense fallback={<Loading />}>
+                                <Dashboard />
+                            </Suspense>
+                        ),
+                    },
+                    {
+                        path: "view-blog/:blogId",
+                        element: (
+                            <Suspense fallback={<Loading />}>
+                                <ViewBlog />
+                            </Suspense>
+                        ),
+                    },
+                ],
             },
             {
                 path: "*",

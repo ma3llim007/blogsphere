@@ -1,5 +1,5 @@
 import { AiFillDashboard } from "react-icons/ai";
-import { FaHome, FaList } from "react-icons/fa";
+import { FaBlogger, FaHome, FaList } from "react-icons/fa";
 import { Sidebar, SidebarContent, SidebarGroup, SidebarGroupContent, SidebarMenu, SidebarMenuButton, SidebarMenuItem, SidebarMenuSub, useSidebar } from "../ui/sidebar";
 import { Collapsible, CollapsibleContent, CollapsibleTrigger } from "../ui/collapsible";
 import { DropdownMenu, DropdownMenuContent, DropdownMenuGroup, DropdownMenuItem, DropdownMenuSeparator, DropdownMenuTrigger } from "../ui/dropdown-menu";
@@ -18,22 +18,21 @@ const navBar = [
         urlLink: "/moderator/dashboard",
         segment: "dashboard",
     },
-    // {
-    //     name: "Manage Blogs",
-    //     Icon: FaBlogger,
-    //     innerLists: [
-    //         {
-    //             name: "Add Blog",
-    //             urlLink: "/writer/blogs/add-blog",
-    //             Icon: FaPlus,
-    //         },
-    //         {
-    //             name: "Blog List",
-    //             urlLink: "/writer/blogs/blog-list",
-    //         },
-    //     ],
-    //     segment: "users",
-    // },
+    {
+        name: "Manage Blogs",
+        Icon: FaBlogger,
+        innerLists: [
+            {
+                name: "Latest Blogs",
+                urlLink: "/moderator/blogs/latest-blog",
+            },
+            {
+                name: "Verify Blogs",
+                urlLink: "/moderator/blogs/verify-blog",
+            },
+        ],
+        segment: "blogs",
+    },
 ];
 
 const ModeratorSideBar = ({ user, ...props }) => {
