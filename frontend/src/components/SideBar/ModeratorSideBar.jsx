@@ -1,5 +1,5 @@
 import { AiFillDashboard } from "react-icons/ai";
-import { FaBlogger, FaHome, FaList, FaPlus } from "react-icons/fa";
+import { FaHome, FaList } from "react-icons/fa";
 import { Sidebar, SidebarContent, SidebarGroup, SidebarGroupContent, SidebarMenu, SidebarMenuButton, SidebarMenuItem, SidebarMenuSub, useSidebar } from "../ui/sidebar";
 import { Collapsible, CollapsibleContent, CollapsibleTrigger } from "../ui/collapsible";
 import { DropdownMenu, DropdownMenuContent, DropdownMenuGroup, DropdownMenuItem, DropdownMenuSeparator, DropdownMenuTrigger } from "../ui/dropdown-menu";
@@ -8,6 +8,7 @@ import { Avatar, AvatarFallback, AvatarImage } from "../ui/avatar";
 import { Link, useLocation } from "react-router-dom";
 import { BadgeCheck, ChevronRight, ChevronsUpDown } from "lucide-react";
 import { MdPassword } from "react-icons/md";
+import LogOutModerator from "../moderator/LogOutModerator";
 
 const navBar = [
     { name: "Main Site", Icon: FaHome, urlLink: "/" },
@@ -17,22 +18,22 @@ const navBar = [
         urlLink: "/moderator/dashboard",
         segment: "dashboard",
     },
-    {
-        name: "Manage Blogs",
-        Icon: FaBlogger,
-        innerLists: [
-            {
-                name: "Add Blog",
-                urlLink: "/writer/blogs/add-blog",
-                Icon: FaPlus,
-            },
-            {
-                name: "Blog List",
-                urlLink: "/writer/blogs/blog-list",
-            },
-        ],
-        segment: "users",
-    },
+    // {
+    //     name: "Manage Blogs",
+    //     Icon: FaBlogger,
+    //     innerLists: [
+    //         {
+    //             name: "Add Blog",
+    //             urlLink: "/writer/blogs/add-blog",
+    //             Icon: FaPlus,
+    //         },
+    //         {
+    //             name: "Blog List",
+    //             urlLink: "/writer/blogs/blog-list",
+    //         },
+    //     ],
+    //     segment: "users",
+    // },
 ];
 
 const ModeratorSideBar = ({ user, ...props }) => {
@@ -97,7 +98,9 @@ const ModeratorSideBar = ({ user, ...props }) => {
                                         <AvatarFallback className="rounded-lg">CN</AvatarFallback>
                                     </Avatar>
                                     <div className="grid flex-1 text-left text-sm leading-tight">
-                                        <span className="truncate font-semibold">{user?.username} - Writer</span>
+                                        <span className="truncate font-semibold">
+                                            {user?.username} - <strong>Moderator</strong>
+                                        </span>
                                         <span className="truncate text-xs">{user?.email}</span>
                                     </div>
                                     <ChevronsUpDown className="ml-auto size-4" />
@@ -111,7 +114,9 @@ const ModeratorSideBar = ({ user, ...props }) => {
                                             <AvatarFallback className="rounded-lg">CN</AvatarFallback>
                                         </Avatar>
                                         <div className="grid flex-1 text-left text-sm leading-tight">
-                                            <span className="truncate font-semibold">{user?.username}</span>
+                                            <span className="truncate font-semibold">
+                                                {user?.username} - <strong>Moderator</strong>
+                                            </span>
                                             <span className="truncate text-xs">{user?.email}</span>
                                         </div>
                                     </div>
@@ -119,21 +124,21 @@ const ModeratorSideBar = ({ user, ...props }) => {
                                 <DropdownMenuSeparator />
                                 <DropdownMenuGroup>
                                     <DropdownMenuItem className="cursor-pointer" asChild>
-                                        <Link to="/writer/account">
+                                        <Link to="/moderator/account">
                                             <BadgeCheck />
                                             Account
                                         </Link>
                                     </DropdownMenuItem>
                                     <DropdownMenuSeparator />
                                     <DropdownMenuItem className="cursor-pointer" asChild>
-                                        <Link to="/writer/change-password">
+                                        <Link to="/moderator/change-password">
                                             <MdPassword />
                                             Change Password
                                         </Link>
                                     </DropdownMenuItem>
                                     <DropdownMenuSeparator />
                                     <DropdownMenuItem onSelect={e => e.preventDefault()}>
-                                        {/* <LogOutModerator /> */}
+                                        <LogOutModerator />
                                     </DropdownMenuItem>
                                 </DropdownMenuGroup>
                             </DropdownMenuContent>

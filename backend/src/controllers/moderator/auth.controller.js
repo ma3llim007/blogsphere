@@ -40,11 +40,14 @@ const loginModerator = asyncHandler(async (req, res) => {
 
     const { accessToken, refreshToken } = await generateAccessAndRefreshTokensModerator(moderatorIsExisted?._id);
 
+    const moderator = moderatorIsExisted.toObject();
+    delete moderator.password;
+    delete moderator.refreshToken;
     return res
         .status(200)
         .cookie("accessToken", accessToken, HttpOptions)
         .cookie("refreshToken", refreshToken, HttpOptions)
-        .json(new ApiResponse(200, {}, "Moderator Logged In Successfully"));
+        .json(new ApiResponse(200, moderator, "Moderator Logged In Successfully"));
 });
 
 const logOutModerator = asyncHandler(async (req, res) => {
