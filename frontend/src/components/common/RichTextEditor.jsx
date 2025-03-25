@@ -36,7 +36,7 @@ const baseTinyMceConfig = {
     autosave_retention: "2m",
     skin: "oxide-dark",
     content_css: "dark",
-    min_height: 500,
+    min_height: 900,
     quickbars_insert_toolbar: "",
     menubar: "file edit view insert format tools table help",
     toolbar_mode: "wrap",
