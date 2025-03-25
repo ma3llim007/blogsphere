@@ -133,7 +133,7 @@ const ModeratorSideBar = ({ user, ...props }) => {
                                     </DropdownMenuItem>
                                     <DropdownMenuSeparator />
                                     <DropdownMenuItem onSelect={e => e.preventDefault()}>
-                                        {/* <LogOutWriter /> */}
+                                        {/* <LogOutModerator /> */}
                                     </DropdownMenuItem>
                                 </DropdownMenuGroup>
                             </DropdownMenuContent>

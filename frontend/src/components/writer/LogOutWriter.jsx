@@ -16,6 +16,7 @@ import {
     AlertDialogTrigger,
 } from "../ui/alert-dialog";
 import { Button } from "../ui/button";
+import queryClient from "@/services/queryClientConfig";
 
 const LogOutWriter = () => {
     const dispatch = useDispatch();
@@ -23,10 +24,11 @@ const LogOutWriter = () => {
 
     const { mutate } = useMutation({
         mutationFn: () => crudService.post("writer/auth/logout", true),
-        onSuccess: data => {
+        onSuccess: async data => {
             dispatch(logoutWriter());
             toastService.info(data?.message);
-            storePersistor.purge();
+            queryClient.clear();
+            await storePersistor.purge();
         },
         onError: error => {
             toastService.error(error.message || "Something Went Wrong While Log-Out");

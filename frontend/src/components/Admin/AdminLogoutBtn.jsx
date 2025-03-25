@@ -16,6 +16,7 @@ import { useMutation } from "@tanstack/react-query";
 import crudService from "@/services/crudService";
 import { logout } from "@/store/features/admin/adminAuthSlice";
 import { storePersistor } from "@/store/store";
+import queryClient from "@/services/queryClientConfig";
 
 const LogoutBtn = () => {
     const dispatch = useDispatch();
@@ -26,6 +27,7 @@ const LogoutBtn = () => {
         onSuccess: data => {
             dispatch(logout());
             toastService.info(data?.message);
+            queryClient.clear();
             storePersistor.purge();
         },
         onError: error => {
