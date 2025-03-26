@@ -161,7 +161,7 @@ const ViewBlog = () => {
                             </Suspense>
                         </div>
                         <div className="w-full border-t">
-                            <Link to={"/writer/blogs/blog-list/"}>
+                            <Link to={-1}>
                                 <Button className="Secondary mt-4 cursor-pointer">
                                     <FaBackward /> Back To Blog Listing
                                 </Button>

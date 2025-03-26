@@ -71,7 +71,7 @@ const PendingBlogs = () => {
                 <meta name="description" content="Review and manage pending blogs on BlogSphere. Approve, edit, or request revisions." />
                 <meta name="robots" content="noindex, nofollow" />
             </Helmet>
-            <PageHeader homeUrl="writer/dashboard" title={"Manage Blogs"} controller={"Blogs"} controllerUrl={"/writer/blogs/pending-blogs/"} page={"Pending Blog's List"} />
+            <PageHeader homeUrl="/writer/dashboard" title={"Manage Blogs"} controller={"Blogs"} controllerUrl={"/writer/blogs/pending-blogs/"} page={"Pending Blog's List"} />
             <Table columns={blogColumns} data={blogData} paginationOptions={{ pageSize: 10 }} sortable loading={isLoading} />
         </>
     );
