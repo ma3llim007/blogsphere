@@ -63,7 +63,7 @@ const Table = ({ columns, data, paginationOptions = { pageSize: 10 }, sortable =
                             setPageSize(Number(e.target.value));
                             reactTable.setPageSize(Number(e.target.value));
                         }}
-                        className="mx-2 p-1 border rounded-md focus:outline-none border-gray-500 dark:bg-gray-800 dark:text-white dark:border-gray-700 transition duration-200 ease-in-out"
+                        className="mx-2 p-1 border rounded-md focus:outline-none border-gray-500 dark:bg-gray-800 dark:text-white dark:border-gray-700 transition duration-200 ease-in-out cursor-pointer"
                     >
                         {[10, 20, 30, 40, 50, 100].map(size => (
                             <option className="text-base text-inherit" key={size} value={size}>
@@ -132,10 +132,10 @@ const Table = ({ columns, data, paginationOptions = { pageSize: 10 }, sortable =
                 </div>
                 {/* Page Navigation */}
                 <div className="flex items-center space-x-2">
-                    <Button variant="outline" onClick={() => reactTable.previousPage()} disabled={!reactTable.getCanPreviousPage()}>
+                    <Button className="cursor-pointer" variant="outline" onClick={() => reactTable.previousPage()} disabled={!reactTable.getCanPreviousPage()}>
                         Previous
                     </Button>
-                    <Button variant="outline" onClick={() => reactTable.nextPage()} disabled={!reactTable.getCanNextPage()}>
+                    <Button className="cursor-pointer" variant="outline" onClick={() => reactTable.nextPage()} disabled={!reactTable.getCanNextPage()}>
                         Next
                     </Button>
                 </div>
