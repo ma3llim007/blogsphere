@@ -43,7 +43,7 @@ const VerifyBlog = () => {
     const { mutate, isPending } = useMutation({
         mutationFn: data => crudService.patch(`moderator/blog/review-blog/${blogId}`, true, data),
         onSuccess: data => {
-            navigate("/moderator/blogs/latest-blog");
+            navigate("/moderator/blogs/latest-blogs");
             queryClient.invalidateQueries("latestBlog");
             toastService.success(data?.message);
         },
