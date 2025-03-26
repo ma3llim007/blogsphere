@@ -50,7 +50,7 @@ const AddBlogs = () => {
         return () => subscription.unsubscribe();
     }, [watch, setValue]);
 
-    // get the cateogry for options
+    // get the category for options
     const { data: categoryOptions, isLoading } = useQuery({
         queryKey: ["categoryOptions"],
         queryFn: () => crudService.get("/writer/blog/options-category", true),
