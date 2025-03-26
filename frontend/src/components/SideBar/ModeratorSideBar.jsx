@@ -1,5 +1,5 @@
 import { AiFillDashboard } from "react-icons/ai";
-import { FaBlogger, FaCheckDouble, FaExclamationTriangle, FaHome, FaList, FaNewspaper, FaPlus } from "react-icons/fa";
+import { FaBlogger, FaCheckDouble, FaExclamationTriangle, FaHome, FaList, FaNewspaper } from "react-icons/fa";
 import { Sidebar, SidebarContent, SidebarGroup, SidebarGroupContent, SidebarMenu, SidebarMenuButton, SidebarMenuItem, SidebarMenuSub, useSidebar } from "../ui/sidebar";
 import { Collapsible, CollapsibleContent, CollapsibleTrigger } from "../ui/collapsible";
 import { DropdownMenu, DropdownMenuContent, DropdownMenuGroup, DropdownMenuItem, DropdownMenuSeparator, DropdownMenuTrigger } from "../ui/dropdown-menu";
@@ -35,7 +35,7 @@ const navBar = [
             },
             {
                 name: "Needs Revisions Blogs",
-                urlLink: "/moderator/blogs/need-revisions-blog",
+                urlLink: "/moderator/blogs/needs-revisions-blog",
                 Icon: BiRevision,
             },
             {

@@ -127,6 +127,8 @@ const ViewBlog = () => {
                                     error={errors.blogStatus?.message}
                                     {...register("blogStatus")}
                                     defaultValue={data?.data?.blogStatus}
+                                    disabled
+                                    readOnly
                                 />
                             </div>
                         </div>

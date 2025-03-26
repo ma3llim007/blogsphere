@@ -124,8 +124,28 @@ const approachBlog = asyncHandler(async (req, res) => {
 
         return res.status(200).json(new ApiResponse(200, blogs, "Approved Blogs Fetch Successfully"));
     } catch (_error) {
-        return res.status(500).json(new ApiError(500, "Something Went Wrong! While Fetching Blog"));
+        return res.status(500).json(new ApiError(500, "Something Went Wrong! While Fetching Approved Blog"));
     }
 });
 
-export { latestBlog, getOptionsCategory, getBlog, reviewBlog, approachBlog };
+// Needs Revision Blog
+const needRevisionBlog = asyncHandler(async (req, res) => {
+    const moderatorId = req.moderator._id;
+
+    try {
+        const blogs = await Blog.find({ blogModeratorId: moderatorId, blogStatus: "Needs Revisions" })
+            .populate("blogCategory", "categoryName")
+            .select("-blogShortDescription -blogDescription -blogAuthorId -createdAt")
+            .lean();
+
+        if (!blogs.length) {
+            return res.status(200).json(new ApiResponse(200, {}, "No Blog Found"));
+        }
+
+        return res.status(200).json(new ApiResponse(200, blogs, "Needs Revisions Blogs Fetch Successfully"));
+    } catch (_error) {
+        return res.status(500).json(new ApiError(500, "Something Went Wrong! While Fetching Needs Revisions Blog"));
+    }
+});
+
+export { latestBlog, getOptionsCategory, getBlog, reviewBlog, approachBlog,needRevisionBlog };
