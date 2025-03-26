@@ -15,10 +15,11 @@ import { Suspense, useEffect } from "react";
 import { Helmet } from "react-helmet-async";
 import { useForm } from "react-hook-form";
 import { FaBackward } from "react-icons/fa";
-import { Link, useParams } from "react-router-dom";
+import { Link, useLocation, useParams } from "react-router-dom";
 
 const ViewBlog = () => {
     const { blogId } = useParams();
+    const location = useLocation();
 
     const {
         register,
@@ -58,7 +59,7 @@ const ViewBlog = () => {
                 <meta name="description" content="Viewing an existing blog post in BlogSphere admin panel. Manage SEO and content optimization." />
                 <meta name="robots" content="noindex, nofollow" />
             </Helmet>
-            <PageHeader homeUrl="/moderator/dashboard" title={"Manage Blogs"} controller={"Blog Listing"} controllerUrl={"/moderator/blogs/add-blog/"} page={"View Blog"} />
+            <PageHeader homeUrl="/moderator/dashboard" title={"Manage Blogs"} controller={"Blog Listing"} controllerUrl={location.pathname} page={"View Blog"} />
             <section className="w-full">
                 <div className="my-4 w-full container mx-auto border-t-4 border-blue-700 rounded-lg p-2 bg-gray-100 dark:bg-slate-800">
                     <form className="space-y-5">
@@ -121,8 +122,8 @@ const ViewBlog = () => {
                             <div className="w-full md:w-1/2 px-2 gap-4 md:gap-0">
                                 <Select
                                     label="Blog Status"
-                                    placeholder="Select The Blog Status"
-                                    title="Select The Blog Status"
+                                    placeholder="View The Blog Status"
+                                    title="View The Blog Status"
                                     options={allBlogOptions}
                                     error={errors.blogStatus?.message}
                                     {...register("blogStatus")}
@@ -140,7 +141,9 @@ const ViewBlog = () => {
                                     placeholder="View Needs Revisions"
                                     className="text-xl rounded-sm p-3 border border-gray-300 focus:outline-none focus:ring-2 focus:ring-blue-800"
                                     rows={5}
-                                    value={data?.data?.blogRevisionMessage}
+                                    value={data?.data?.blogRevisionMessage || ""}
+                                    readOnly
+                                    disabled
                                 />
                             </div>
                         ) : null}

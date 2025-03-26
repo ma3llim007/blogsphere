@@ -71,11 +71,11 @@ const LatestBlog = () => {
     return (
         <>
             <Helmet>
-                <title>Manage Blog Posts | BlogSphere</title>
-                <meta name="description" content="View and manage all blog posts on BlogSphere. Edit, delete, and update content." />
-                <meta name="robots" content="noindex, nofollow" />
+                <title>Latest Blog Posts | BlogSphere</title>
+                <meta name="description" content="Explore the latest blog posts on BlogSphere. Stay updated with fresh content and insights." />
+                <meta name="robots" content="index, follow" />
             </Helmet>
-            <PageHeader homeUrl="moderator/dashboard" title={"Manage Blogs"} controller={"Blogs"} controllerUrl={"/moderator/blogs/latest-blog/"} page={"Blog's List"} />
+            <PageHeader homeUrl="/moderator/dashboard" title={"Manage Blogs"} controller={"Blogs"} controllerUrl={"/moderator/blogs/latest-blogs/"} page={"Latest Blog's List"} />
             <Table columns={blogColumns} data={blogData} paginationOptions={{ pageSize: 10 }} sortable loading={isLoading} />
         </>
     );

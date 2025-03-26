@@ -78,11 +78,11 @@ const NeedsRevisionBlog = () => {
     return (
         <>
             <Helmet>
-                <title>Manage Blog Posts | BlogSphere</title>
-                <meta name="description" content="View and manage all blog posts on BlogSphere. Edit, delete, and update content." />
+                <title>Blogs Needing Revision | BlogSphere</title>
+                <meta name="description" content="Review and revise blog posts that need improvements on BlogSphere. Edit, update, and refine content." />
                 <meta name="robots" content="noindex, nofollow" />
             </Helmet>
-            <PageHeader homeUrl="moderator/dashboard" title={"Manage Blogs"} controller={"Blogs"} controllerUrl={"/moderator/blogs/needs-revisions-blog/"} page={"Needs Revisions Listing"} />
+            <PageHeader homeUrl="/moderator/dashboard" title={"Manage Blogs"} controller={"Blogs"} controllerUrl={"/moderator/blogs/needs-revisions-blogs/"} page={"Needs Revisions Listing"} />
             <Table columns={blogColumns} data={blogData} paginationOptions={{ pageSize: 10 }} sortable loading={isLoading} />
         </>
     );

@@ -21,7 +21,7 @@ const RejectedBlogs = () => {
             toastService.error(err?.message || "Failed to fetch Data.");
         },
     });
-    
+
     const blogColumns = [
         { accessorKey: "no", header: "No." },
         { accessorKey: "blogTitle", header: "Title" },
@@ -77,11 +77,11 @@ const RejectedBlogs = () => {
     return (
         <>
             <Helmet>
-                <title>Manage Blog Posts | BlogSphere</title>
-                <meta name="description" content="View and manage all blog posts on BlogSphere. Edit, delete, and update content." />
+                <title>Rejected Blogs | BlogSphere</title>
+                <meta name="description" content="View and manage rejected blog posts on BlogSphere. Review reasons, make edits, and resubmit content." />
                 <meta name="robots" content="noindex, nofollow" />
             </Helmet>
-            <PageHeader homeUrl="moderator/dashboard" title={"Manage Blogs"} controller={"Blogs"} controllerUrl={"/moderator/blogs/latest-blog/"} page={"Blog's List"} />
+            <PageHeader homeUrl="/moderator/dashboard" title={"Manage Blogs"} controller={"Blogs"} controllerUrl={"/moderator/blogs/rejected-blogs/"} page={"Rejected Blog's List"} />
             <Table columns={blogColumns} data={blogData} paginationOptions={{ pageSize: 10 }} sortable loading={isLoading} />
         </>
     );
