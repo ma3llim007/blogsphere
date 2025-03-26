@@ -132,6 +132,30 @@ const ViewBlog = () => {
                                 />
                             </div>
                         </div>
+                        {data?.data?.blogStatus === "Needs Revisions" ? (
+                            <div className="w-full px-2">
+                                <TextArea
+                                    name="Needs Revisions"
+                                    label="Needs Revisions"
+                                    placeholder="View Needs Revisions"
+                                    className="text-xl rounded-sm p-3 border border-gray-300 focus:outline-none focus:ring-2 focus:ring-blue-800"
+                                    rows={5}
+                                    value={data?.data?.blogRevisionMessage}
+                                />
+                            </div>
+                        ) : null}
+                        {data?.data?.blogStatus === "Rejected" ? (
+                            <div className="w-full px-2">
+                                <TextArea
+                                    name="Needs Revisions"
+                                    label="Needs Revisions"
+                                    placeholder="View Needs Revisions"
+                                    className="text-xl rounded-sm p-3 border border-gray-300 focus:outline-none focus:ring-2 focus:ring-blue-800"
+                                    rows={5}
+                                    value={data?.data?.blogRejectedMessage}
+                                />
+                            </div>
+                        ) : null}
                         <div className="w-full px-2">
                             <TextArea
                                 name="blogShortDescription"
