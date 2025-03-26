@@ -34,7 +34,7 @@ const RejectedBlogs = () => {
             accessorKey: "blogRejectedMessage",
             header: "Rejected Message",
             cell: ({ row }) => (
-                <div className="w-[400px]">
+                <div className="max-w-[300px]">
                     <p className="text-wrap line-clamp-4">{row.getValue("blogRejectedMessage")}</p>
                 </div>
             ),
