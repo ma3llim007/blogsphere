@@ -5,7 +5,10 @@ import { Link } from "react-router-dom";
 const PageHeader = ({ homeUrl = "/admin/dashboard", title, controller, controllerUrl, subController, subControllerUrl, page }) => {
     return (
         <section className="w-full flex items-center justify-between py-2 select-none">
-            <h1 className="text-3xl font-bold">{title}</h1>
+            <div className="flex items-end gap-3">
+                <h1 className="text-3xl font-bold">{title}</h1>
+                <h2 className="text-xl font-medium text-gray-600 underline">{page}</h2>
+            </div>
             <Breadcrumb className="hidden lg:block">
                 <BreadcrumbList>
                     <BreadcrumbItem>
