@@ -65,7 +65,7 @@ const ChangePassword = () => {
                                 <h4 className="text-white font-bold text-sm">{errors.root.message}</h4>
                             </div>
                         )}
-                        <div className="flex flex-wrap my-2 gap-4 md:gap-0">
+                        <div className="flex flex-wrap gap-4 md:gap-0">
                             <div className="w-full px-2 gap-4 md:gap-0">
                                 <Input
                                     label="Password"
