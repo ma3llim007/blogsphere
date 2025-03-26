@@ -8,7 +8,7 @@ import { DropdownMenuLabel } from "../ui/dropdown-menu";
 import { Avatar, AvatarFallback, AvatarImage } from "../ui/avatar";
 import { AiFillDashboard } from "react-icons/ai";
 import LogOutWriter from "../writer/LogOutWriter";
-import { MdPassword } from "react-icons/md";
+import { MdOutlineLibraryBooks, MdPassword } from "react-icons/md";
 import { BiRevision } from "react-icons/bi";
 
 const navBar = [
@@ -51,6 +51,11 @@ const navBar = [
                 name: "Rejected Blogs",
                 urlLink: "/writer/blogs/rejected-blogs",
                 Icon: FaExclamationTriangle,
+            },
+            {
+                name: "All Blogs",
+                urlLink: "/writer/blogs/blog-list",
+                Icon: MdOutlineLibraryBooks,
             },
         ],
         segment: "blogs",

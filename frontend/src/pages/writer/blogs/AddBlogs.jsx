@@ -80,7 +80,7 @@ const AddBlogs = () => {
                 <meta name="description" content="Create and publish a new blog post on BlogSphere admin panel. Manage content and SEO settings." />
                 <meta name="robots" content="noindex, nofollow" />
             </Helmet>
-            <PageHeader title={"Manage Blogs"} controller={"Blogs"} controllerUrl={"/writer/blogs/add-blog/"} page={"Add Blog's"} />
+            <PageHeader homeUrl="/writer/dashboard" title={"Manage Blogs"} controller={"Blogs"} controllerUrl={"/writer/blogs/add-blog/"} page={"Add Blog's"} />
             <section className="w-full">
                 <div className="my-4 w-full container mx-auto border-t-4 border-blue-700 rounded-lg p-2 bg-gray-100 dark:bg-slate-800">
                     <form className="space-y-5" onSubmit={handleSubmit(data => mutate(data))} encType="multipart/form-data">
