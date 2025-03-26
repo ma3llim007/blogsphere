@@ -2,13 +2,14 @@ import { Link, useLocation } from "react-router-dom";
 import { Sidebar, SidebarContent, SidebarGroup, SidebarGroupContent, SidebarMenu, SidebarMenuButton, SidebarMenuItem, SidebarMenuSub, useSidebar } from "../ui/sidebar";
 import { Collapsible, CollapsibleContent, CollapsibleTrigger } from "../ui/collapsible";
 import { BadgeCheck, ChevronRight, ChevronsUpDown } from "lucide-react";
-import { FaBlogger, FaHome, FaList, FaPlus } from "react-icons/fa";
+import { FaBlogger, FaExclamationTriangle, FaFileAlt, FaHome, FaList, FaPlus, FaRegClock } from "react-icons/fa";
 import { DropdownMenu, DropdownMenuContent, DropdownMenuGroup, DropdownMenuItem, DropdownMenuSeparator, DropdownMenuTrigger } from "../ui/dropdown-menu";
 import { DropdownMenuLabel } from "../ui/dropdown-menu";
 import { Avatar, AvatarFallback, AvatarImage } from "../ui/avatar";
 import { AiFillDashboard } from "react-icons/ai";
 import LogOutWriter from "../writer/LogOutWriter";
 import { MdPassword } from "react-icons/md";
+import { BiRevision } from "react-icons/bi";
 
 const navBar = [
     { name: "Main Site", Icon: FaHome, urlLink: "/" },
@@ -28,8 +29,28 @@ const navBar = [
                 Icon: FaPlus,
             },
             {
-                name: "Blog List",
-                urlLink: "/writer/blogs/blog-list",
+                name: "Draft Blogs",
+                urlLink: "/writer/blogs/draft-blogs",
+                Icon: FaFileAlt,
+            },
+            {
+                name: "Pending Blogs",
+                urlLink: "/writer/blogs/pending-blogs",
+                Icon: FaRegClock,
+            },
+            {
+                name: "Approved Blogs",
+                urlLink: "/writer/blogs/approved-blogs",
+            },
+            {
+                name: "Revision Blogs",
+                urlLink: "/writer/blogs/revision-blogs",
+                Icon: BiRevision,
+            },
+            {
+                name: "Rejected Blogs",
+                urlLink: "/writer/blogs/rejected-blogs",
+                Icon: FaExclamationTriangle,
             },
         ],
         segment: "blogs",

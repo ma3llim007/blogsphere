@@ -126,7 +126,7 @@ const EditBlog = () => {
                                 <h4 className="text-white font-bold text-sm">{errors.root.message}</h4>
                             </div>
                         )}
-                        <div className="flex flex-wrap gap-4 md:gap-0">
+                        <div className="flex flex-wrap my-2 gap-4 md:gap-0">
                             <div className="w-full px-2">
                                 <Input
                                     label="Blog Title"
@@ -138,7 +138,7 @@ const EditBlog = () => {
                                 />
                             </div>
                         </div>
-                        <div className="flex flex-wrap gap-4 md:gap-0">
+                        <div className="flex flex-wrap my-2 gap-4 md:gap-0">
                             <div className="w-full px-2">
                                 <Input
                                     label="Blog Slug"
@@ -153,7 +153,7 @@ const EditBlog = () => {
                                 />
                             </div>
                         </div>
-                        <div className="flex flex-wrap gap-4 md:gap-0">
+                        <div className="flex flex-wrap my-2 gap-4 md:gap-0">
                             <div className="w-full md:w-1/2 px-2 gap-4 md:gap-0">
                                 <Controller
                                     control={control}
@@ -180,7 +180,7 @@ const EditBlog = () => {
                                 </div>
                             </div>
                         </div>
-                        <div className="flex flex-wrap gap-4 md:gap-0">
+                        <div className="flex flex-wrap my-2 gap-4 md:gap-0">
                             <div className="w-full md:w-1/2 px-2 gap-4 md:gap-0">
                                 <Select
                                     label="Category"

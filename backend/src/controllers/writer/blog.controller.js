@@ -250,4 +250,44 @@ const getBlog = asyncHandler(async (req, res) => {
     }
 });
 
-export { addBlog, blogs, getOptionsCategory, deleteBlog, getBlog, editBlog };
+// Needs Revision Blog
+const needsRevisionBlogs = asyncHandler(async (req, res) => {
+    const writerId = req.writer._id;
+
+    try {
+        const blogs = await Blog.find({ blogAuthorId: writerId, blogStatus: "Needs Revisions" })
+            .populate("blogCategory", "categoryName")
+            .select("-blogShortDescription -blogDescription -blogAuthorId -createdAt")
+            .lean();
+
+        if (!blogs.length) {
+            return res.status(200).json(new ApiResponse(200, {}, "No Blog Found"));
+        }
+
+        return res.status(200).json(new ApiResponse(200, blogs, "Needs Revisions Blogs Fetch Successfully"));
+    } catch (_error) {
+        return res.status(500).json(new ApiError(500, "Something Went Wrong! While Fetching Needs Revisions Blog"));
+    }
+});
+
+// Rejected Blog
+const rejectedBlogs = asyncHandler(async (req, res) => {
+    const writerId = req.writer._id;
+
+    try {
+        const blogs = await Blog.find({ blogAuthorId: writerId, blogStatus: "Rejected" })
+            .populate("blogCategory", "categoryName")
+            .select("-blogShortDescription -blogDescription -blogAuthorId -createdAt")
+            .lean();
+
+        if (!blogs.length) {
+            return res.status(200).json(new ApiResponse(200, {}, "No Blog Found"));
+        }
+
+        return res.status(200).json(new ApiResponse(200, blogs, "Rejected Blogs Fetch Successfully"));
+    } catch (_error) {
+        return res.status(500).json(new ApiError(500, "Something Went Wrong! While Fetching Rejected Blogs"));
+    }
+});
+
+export { addBlog, blogs, getOptionsCategory, deleteBlog, getBlog, editBlog, needsRevisionBlogs, rejectedBlogs };
