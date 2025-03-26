@@ -17,7 +17,7 @@ const getOptionsCategory = asyncHandler(async (req, res) => {
 });
 
 // latest Blog
-const latestBlog = asyncHandler(async (req, res) => {
+const latestBlogs = asyncHandler(async (req, res) => {
     try {
         const blogs = await Blog.find({ blogStatus: "Ready To Publish" }).populate("blogCategory", "categoryName").select("-blogShortDescription -blogDescription -blogAuthorId -createdAt").lean();
         if (!blogs.length) {
@@ -43,8 +43,8 @@ const getBlog = asyncHandler(async (req, res) => {
         }
 
         // Finding the Blog
-        const blog = await Blog.findById(blogId).populate("blogCategory","categoryName");
-        
+        const blog = await Blog.findById(blogId).populate("blogCategory", "categoryName");
+
         if (!blog) {
             return res.status(404).json(new ApiError(404, "Blog Not Found"));
         }
@@ -109,7 +109,7 @@ const reviewBlog = asyncHandler(async (req, res) => {
 });
 
 // approach Blog
-const approachBlog = asyncHandler(async (req, res) => {
+const approvedBlogs = asyncHandler(async (req, res) => {
     const moderatorId = req.moderator._id;
 
     try {
@@ -129,7 +129,7 @@ const approachBlog = asyncHandler(async (req, res) => {
 });
 
 // Needs Revision Blog
-const needRevisionBlog = asyncHandler(async (req, res) => {
+const needRevisionBlogs = asyncHandler(async (req, res) => {
     const moderatorId = req.moderator._id;
 
     try {
@@ -148,4 +148,24 @@ const needRevisionBlog = asyncHandler(async (req, res) => {
     }
 });
 
-export { latestBlog, getOptionsCategory, getBlog, reviewBlog, approachBlog,needRevisionBlog };
+// Rejected Blog
+const rejectedBlogs = asyncHandler(async (req, res) => {
+    const moderatorId = req.moderator._id;
+
+    try {
+        const blogs = await Blog.find({ blogModeratorId: moderatorId, blogStatus: "Rejected" })
+            .populate("blogCategory", "categoryName")
+            .select("-blogShortDescription -blogDescription -blogAuthorId -createdAt")
+            .lean();
+
+        if (!blogs.length) {
+            return res.status(200).json(new ApiResponse(200, {}, "No Blog Found"));
+        }
+
+        return res.status(200).json(new ApiResponse(200, blogs, "Rejected Blogs Fetch Successfully"));
+    } catch (_error) {
+        return res.status(500).json(new ApiError(500, "Something Went Wrong! While Fetching Rejected Blogs"));
+    }
+});
+
+export { latestBlogs, getOptionsCategory, getBlog, reviewBlog, approvedBlogs, needRevisionBlogs, rejectedBlogs };
