@@ -11,12 +11,12 @@ import { useQuery } from "@tanstack/react-query";
 import { Helmet } from "react-helmet-async";
 import { useNavigate } from "react-router-dom";
 
-const ApproachBlog = () => {
+const ApprovedBlogs = () => {
     const navigate = useNavigate();
 
     const { data, isLoading } = useQuery({
-        queryKey: ["approachBlog"],
-        queryFn: () => crudService.get("moderator/blog/approach-blog", true),
+        queryKey: ["approvedBlogs"],
+        queryFn: () => crudService.get("moderator/blog/approved-blogs", true),
         onError: err => {
             toastService.error(err?.message || "Failed to fetch Data.");
         },
@@ -77,4 +77,4 @@ const ApproachBlog = () => {
     );
 };
 
-export default ApproachBlog;
+export default ApprovedBlogs;

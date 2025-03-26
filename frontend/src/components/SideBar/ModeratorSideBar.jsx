@@ -25,22 +25,22 @@ const navBar = [
         innerLists: [
             {
                 name: "Latest Blogs",
-                urlLink: "/moderator/blogs/latest-blog",
+                urlLink: "/moderator/blogs/latest-blogs",
                 Icon: FaNewspaper,
             },
             {
-                name: "Approach Blogs",
-                urlLink: "/moderator/blogs/approach-blog",
+                name: "Approved Blogs",
+                urlLink: "/moderator/blogs/approved-blogs",
                 Icon: FaCheckDouble,
             },
             {
                 name: "Needs Revisions Blogs",
-                urlLink: "/moderator/blogs/needs-revisions-blog",
+                urlLink: "/moderator/blogs/needs-revisions-blogs",
                 Icon: BiRevision,
             },
             {
                 name: "Rejected Blogs",
-                urlLink: "/moderator/blogs/rejected-blog",
+                urlLink: "/moderator/blogs/rejected-blogs",
                 Icon: FaExclamationTriangle,
             },
         ],

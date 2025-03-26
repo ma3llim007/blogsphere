@@ -15,7 +15,7 @@ const UpdateDetails = lazy(() => import("@/pages/moderator/UpdateDetails"));
 const LatestBlog = lazy(() => import("@/pages/moderator/blog/LatestBlog"));
 const ViewBlog = lazy(() => import("@/pages/moderator/blog/ViewBlog"));
 const VerifyBlog = lazy(() => import("@/pages/moderator/blog/VerifyBlog"));
-const ApproachBlog = lazy(() => import("@/pages/moderator/blog/ApproachBlog"));
+const ApprovedBlogs = lazy(() => import("@/pages/moderator/blog/ApprovedBlogs"));
 const NeedsRevisionBlog = lazy(() => import("@/pages/moderator/blog/NeedsRevisionBlog"));
 
 // Defining Routes
@@ -106,7 +106,7 @@ const router = createBrowserRouter([
                         ),
                     },
                     {
-                        path: "latest-blog",
+                        path: "latest-blogs",
                         element: (
                             <Suspense fallback={<Loading />}>
                                 <LatestBlog />
@@ -130,15 +130,15 @@ const router = createBrowserRouter([
                         ),
                     },
                     {
-                        path: "approach-blog",
+                        path: "approved-blogs",
                         element: (
                             <Suspense fallback={<Loading />}>
-                                <ApproachBlog />
+                                <ApprovedBlogs />
                             </Suspense>
                         ),
                     },
                     {
-                        path: "needs-revisions-blog",
+                        path: "needs-revisions-blogs",
                         element: (
                             <Suspense fallback={<Loading />}>
                                 <NeedsRevisionBlog />
