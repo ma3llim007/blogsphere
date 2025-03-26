@@ -1,5 +1,17 @@
 import { Router } from "express";
-import { addBlog, approvedBlogs, blogs, deleteBlog, draftBlogs, editBlog, getBlog, getOptionsCategory, needsRevisionBlogs, pendingBlogs } from "../../controllers/writer/blog.controller.js";
+import {
+    addBlog,
+    approvedBlogs,
+    blogs,
+    deleteBlog,
+    draftBlogs,
+    editBlog,
+    getBlog,
+    getOptionsCategory,
+    needsRevisionBlogs,
+    pendingBlogs,
+    rejectedBlogs,
+} from "../../controllers/writer/blog.controller.js";
 import { upload } from "../../middlewares/multer.middleware.js";
 import authenticateAndVerifyWriter from "../../middlewares/authenticateAndVerifyWriter.js";
 
@@ -14,6 +26,7 @@ router.route("/draft-blogs").get(draftBlogs);
 router.route("/pending-blogs").get(pendingBlogs);
 router.route("/approved-blogs").get(approvedBlogs);
 router.route("/need-revisions-blogs").get(needsRevisionBlogs);
+router.route("/rejected-blogs").get(rejectedBlogs);
 router.route("/edit-blog").patch(upload.single("blogFeatureImage"), editBlog);
 router.route("/delete-blog/:blogId").delete(deleteBlog);
 router.route("/blog/:blogId").get(getBlog);
