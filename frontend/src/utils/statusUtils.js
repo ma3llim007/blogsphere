@@ -12,6 +12,14 @@ const moderatorBlogOptions = [
     { _id: "Rejected", label: "Rejected" },
 ];
 
+const allBlogOptions = [
+    { _id: "Draft", label: "Draft" },
+    { _id: "Ready To Publish", label: "Ready To Publish" },
+    { _id: "Needs Revisions", label: "Needs Revisions" },
+    { _id: "Approved", label: "Approved" },
+    { _id: "Rejected", label: "Rejected" },
+];
+
 const statusBlogClass = {
     Draft: "Secondary",
     "Ready To Publish": "Info",
@@ -21,4 +29,4 @@ const statusBlogClass = {
     Rejected: "Danger",
 };
 
-export { WRITER_BLOG_STATUSES, BLOG_STATUSES, writerBlogOptions, statusBlogClass, moderatorBlogOptions };
+export { WRITER_BLOG_STATUSES, BLOG_STATUSES, writerBlogOptions, statusBlogClass, moderatorBlogOptions, allBlogOptions };

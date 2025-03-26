@@ -15,6 +15,7 @@ const UpdateDetails = lazy(() => import("@/pages/moderator/UpdateDetails"));
 const LatestBlog = lazy(() => import("@/pages/moderator/blog/LatestBlog"));
 const ViewBlog = lazy(() => import("@/pages/moderator/blog/ViewBlog"));
 const VerifyBlog = lazy(() => import("@/pages/moderator/blog/VerifyBlog"));
+const ApproachBlog = lazy(() => import("@/pages/moderator/blog/ApproachBlog"));
 
 // Defining Routes
 const router = createBrowserRouter([
@@ -124,6 +125,14 @@ const router = createBrowserRouter([
                         element: (
                             <Suspense fallback={<Loading />}>
                                 <ViewBlog />
+                            </Suspense>
+                        ),
+                    },
+                    {
+                        path: "approach-blog",
+                        element: (
+                            <Suspense fallback={<Loading />}>
+                                <ApproachBlog />
                             </Suspense>
                         ),
                     },

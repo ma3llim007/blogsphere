@@ -43,7 +43,8 @@ const getBlog = asyncHandler(async (req, res) => {
         }
 
         // Finding the Blog
-        const blog = await Blog.findById(blogId);
+        const blog = await Blog.findById(blogId).populate("blogCategory","categoryName");
+        
         if (!blog) {
             return res.status(404).json(new ApiError(404, "Blog Not Found"));
         }
@@ -98,13 +99,33 @@ const reviewBlog = asyncHandler(async (req, res) => {
         blog.blogModeratorId = _id;
 
         await blog.save();
-        
+
         return res.status(200).json(new ApiResponse(200, {}, "Blog Status Update Successfully"));
     } catch (_error) {
         console.error(_error);
-        
+
         return res.status(500).json(new ApiError(500, "Something Went Wrong! While Review Blog"));
     }
 });
 
-export { latestBlog, getOptionsCategory, getBlog, reviewBlog };
+// approach Blog
+const approachBlog = asyncHandler(async (req, res) => {
+    const moderatorId = req.moderator._id;
+
+    try {
+        const blogs = await Blog.find({ blogModeratorId: moderatorId, blogStatus: "Approved" })
+            .populate("blogCategory", "categoryName")
+            .select("-blogShortDescription -blogDescription -blogAuthorId -createdAt")
+            .lean();
+
+        if (!blogs.length) {
+            return res.status(200).json(new ApiResponse(200, {}, "No Blog Found"));
+        }
+
+        return res.status(200).json(new ApiResponse(200, blogs, "Approved Blogs Fetch Successfully"));
+    } catch (_error) {
+        return res.status(500).json(new ApiError(500, "Something Went Wrong! While Fetching Blog"));
+    }
+});
+
+export { latestBlog, getOptionsCategory, getBlog, reviewBlog, approachBlog };

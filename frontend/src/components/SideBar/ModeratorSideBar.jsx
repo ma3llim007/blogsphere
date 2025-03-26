@@ -1,5 +1,5 @@
 import { AiFillDashboard } from "react-icons/ai";
-import { FaBlogger, FaHome, FaList } from "react-icons/fa";
+import { FaBlogger, FaCheckDouble, FaExclamationTriangle, FaHome, FaList, FaNewspaper, FaPlus } from "react-icons/fa";
 import { Sidebar, SidebarContent, SidebarGroup, SidebarGroupContent, SidebarMenu, SidebarMenuButton, SidebarMenuItem, SidebarMenuSub, useSidebar } from "../ui/sidebar";
 import { Collapsible, CollapsibleContent, CollapsibleTrigger } from "../ui/collapsible";
 import { DropdownMenu, DropdownMenuContent, DropdownMenuGroup, DropdownMenuItem, DropdownMenuSeparator, DropdownMenuTrigger } from "../ui/dropdown-menu";
@@ -8,6 +8,7 @@ import { Avatar, AvatarFallback, AvatarImage } from "../ui/avatar";
 import { Link, useLocation } from "react-router-dom";
 import { BadgeCheck, ChevronRight, ChevronsUpDown } from "lucide-react";
 import { MdPassword } from "react-icons/md";
+import { BiRevision } from "react-icons/bi";
 import LogOutModerator from "../moderator/LogOutModerator";
 
 const navBar = [
@@ -25,10 +26,22 @@ const navBar = [
             {
                 name: "Latest Blogs",
                 urlLink: "/moderator/blogs/latest-blog",
+                Icon: FaNewspaper,
             },
             {
-                name: "Verify Blogs",
-                urlLink: "/moderator/blogs/verify-blog",
+                name: "Approach Blogs",
+                urlLink: "/moderator/blogs/approach-blog",
+                Icon: FaCheckDouble,
+            },
+            {
+                name: "Needs Revisions Blogs",
+                urlLink: "/moderator/blogs/need-revisions-blog",
+                Icon: BiRevision,
+            },
+            {
+                name: "Rejected Blogs",
+                urlLink: "/moderator/blogs/rejected-blog",
+                Icon: FaExclamationTriangle,
             },
         ],
         segment: "blogs",
