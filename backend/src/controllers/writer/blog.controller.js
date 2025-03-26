@@ -269,6 +269,27 @@ const draftBlogs = asyncHandler(async (req, res) => {
         return res.status(500).json(new ApiError(500, "Something Went Wrong! While Fetching Draft Blog"));
     }
 });
+
+// pending Blogs
+const pendingBlogs = asyncHandler(async (req, res) => {
+    const writerId = req.writer._id;
+
+    try {
+        const blogs = await Blog.find({ blogAuthorId: writerId, blogStatus: "Ready To Publish" })
+            .populate("blogCategory", "categoryName")
+            .select("-blogShortDescription -blogDescription -blogAuthorId -createdAt")
+            .lean();
+
+        if (!blogs.length) {
+            return res.status(200).json(new ApiResponse(200, {}, "No Blog Found"));
+        }
+
+        return res.status(200).json(new ApiResponse(200, blogs, "Pending Blogs Fetch Successfully"));
+    } catch (_error) {
+        return res.status(500).json(new ApiError(500, "Something Went Wrong! While Fetching Pending Blogs"));
+    }
+});
+
 // Needs Revision Blog
 const needsRevisionBlogs = asyncHandler(async (req, res) => {
     const writerId = req.writer._id;
@@ -309,4 +330,4 @@ const rejectedBlogs = asyncHandler(async (req, res) => {
     }
 });
 
-export { addBlog, blogs, getOptionsCategory, deleteBlog, getBlog, editBlog, needsRevisionBlogs, rejectedBlogs,draftBlogs };
+export { addBlog, blogs, getOptionsCategory, deleteBlog, getBlog, editBlog, needsRevisionBlogs, rejectedBlogs, draftBlogs, pendingBlogs };
