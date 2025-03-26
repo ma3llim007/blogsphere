@@ -47,6 +47,15 @@ const RejectedBlogs = () => {
             cell: ({ row }) => <div className="w-[150px] break-words text-wrap">{row.getValue("blogSlug")}</div>,
         },
         {
+            accessorKey: "blogRejectedMessage",
+            header: "Rejected Message",
+            cell: ({ row }) => (
+                <div className="max-w-[300px]">
+                    <p className="text-wrap line-clamp-4">{row.getValue("blogRejectedMessage")}</p>
+                </div>
+            ),
+        },
+        {
             accessorKey: "blogFeatureImage",
             header: "Feature Image",
             cell: ({ row }) => (
