@@ -98,7 +98,7 @@ const BlogsList = () => {
                 <meta name="description" content="View and manage all blog posts on BlogSphere. Edit, delete, and update content." />
                 <meta name="robots" content="noindex, nofollow" />
             </Helmet>
-            <PageHeader homeUrl="writer/dashboard" title={"Manage Blogs"} controller={"Blogs"} controllerUrl={"/writer/blogs/blog-list/"} page={"Blog's List"} />
+            <PageHeader homeUrl="writer/dashboard" title={"Manage Blogs"} controller={"Blogs"} controllerUrl={"/writer/blogs/blog-list/"} page={"All Blog's List"} />
             <Table columns={blogColumns} data={blogData} paginationOptions={{ pageSize: 10 }} sortable loading={isLoading} />
         </>
     );
