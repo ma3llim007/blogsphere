@@ -141,6 +141,14 @@ const router = createBrowserRouter([
                         ),
                     },
                     {
+                        path: "revision-blogs",
+                        element: (
+                            <Suspense fallback={<Loading />}>
+                                <NeedsRevisionBlogs />
+                            </Suspense>
+                        ),
+                    },
+                    {
                         path: "rejected-blogs",
                         element: (
                             <Suspense fallback={<Loading />}>
@@ -169,14 +177,6 @@ const router = createBrowserRouter([
                         element: (
                             <Suspense fallback={<Loading />}>
                                 <EditBlog />
-                            </Suspense>
-                        ),
-                    },
-                    {
-                        path: "needs-revisions-blogs",
-                        element: (
-                            <Suspense fallback={<Loading />}>
-                                <NeedsRevisionBlogs />
                             </Suspense>
                         ),
                     },
