@@ -82,23 +82,27 @@ const reviewBlog = asyncHandler(async (req, res) => {
             return res.status(400).json(new ApiError(400, "Rejection Message Is Required For 'Rejected' Status"));
         }
 
-        // Finding the Blog
-        const blog = await Blog.findById(blogId);
-        if (!blog) {
+        // Building the update object dynamically
+        const updateFields = {
+            blogStatus,
+            blogModeratorId: _id,
+        };
+
+        if (blogStatus === "Needs Revisions") {
+            updateFields.blogRevisionMessage = revisionMessage;
+            updateFields.$unset = { blogRejectedMessage: "" };
+        } else if (blogStatus === "Rejected") {
+            updateFields.blogRejectedMessage = rejectedMessage;
+            updateFields.$unset = { blogRevisionMessage: "" };
+        } else {
+            updateFields.$unset = { blogRejectedMessage: "", blogRevisionMessage: "" };
+        }
+
+        // Update The Blog
+        const updateBlogs = await Blog.findByIdAndUpdate(blogId, updateFields, { new: true });
+        if (!updateBlogs) {
             return res.status(404).json(new ApiError(404, "Blog Not Found"));
         }
-
-        // Update Field
-        blog.blogStatus = blogStatus;
-        if (blogStatus === "Needs Revisions") {
-            blog.blogRevisionMessage = revisionMessage;
-        }
-        if (blogStatus === "Rejected") {
-            blog.blogRejectedMessage = rejectedMessage;
-        }
-        blog.blogModeratorId = _id;
-
-        await blog.save();
 
         return res.status(200).json(new ApiResponse(200, {}, "Blog Status Update Successfully"));
     } catch (_error) {

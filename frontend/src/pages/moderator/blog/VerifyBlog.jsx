@@ -9,7 +9,7 @@ import toastService from "@/services/toastService";
 import { moderatorBlogOptions } from "@/utils/statusUtils";
 import { moderatorBlogVerifyScheme } from "@/validation/moderatorScheme";
 import { yupResolver } from "@hookform/resolvers/yup";
-import { useMutation } from "@tanstack/react-query";
+import { useMutation, useQuery } from "@tanstack/react-query";
 import { useEffect } from "react";
 import { Helmet } from "react-helmet-async";
 import { useForm } from "react-hook-form";
@@ -25,7 +25,15 @@ const VerifyBlog = () => {
         setValue,
         setError,
         watch,
-    } = useForm({ mode: "onChange", resolver: yupResolver(moderatorBlogVerifyScheme) });
+    } = useForm({ mode: "onChange", resolver: yupResolver(moderatorBlogVerifyScheme)});
+
+    const { data, isLoading } = useQuery({
+        queryKey: ["blog", blogId],
+        queryFn: () => crudService.get(`/moderator/blog/blog/${blogId}`, true),
+        onError: err => {
+            toastService.error(err?.message || "Failed to fetch Data.");
+        },
+    });
 
     // Watch for blogStatus change
     const blogStatus = watch("blogStatus");
@@ -53,7 +61,7 @@ const VerifyBlog = () => {
         },
     });
 
-    if (isPending) {
+    if (isPending || isLoading) {
         return <Loading />;
     }
     return (
@@ -74,7 +82,7 @@ const VerifyBlog = () => {
                             </div>
                         )}
                         <div className="flex flex-wrap gap-4 md:gap-0">
-                            <div className="w-full px-2 gap-4 md:gap-0">
+                            <div className="w-2/3 px-2 gap-4 md:gap-0">
                                 <Select
                                     label="Blog Status"
                                     placeholder="Select The Blog Status"
@@ -87,7 +95,20 @@ const VerifyBlog = () => {
                                 />
                             </div>
                         </div>
-                        {blogStatus === "Needs Revisions" && (
+                        {data?.data?.blogRevisionMessage ? (
+                            <div className="w-full px-2">
+                                <TextArea
+                                    label="Previous Revision Message"
+                                    placeholder="View The Previous Revision Message"
+                                    className="text-xl rounded-sm p-3 border border-gray-300 focus:outline-none focus:ring-2 focus:ring-blue-800"
+                                    rows={2}
+                                    value={data?.data?.blogRevisionMessage}
+                                    readOnly
+                                    disabled
+                                />
+                            </div>
+                        ) : null}
+                        {blogStatus === "Needs Revisions" ? (
                             <div className="w-full px-2">
                                 <TextArea
                                     name="revisionMessage"
@@ -99,9 +120,9 @@ const VerifyBlog = () => {
                                     {...register("revisionMessage")}
                                 />
                             </div>
-                        )}
+                        ) : null}
 
-                        {blogStatus === "Rejected" && (
+                        {blogStatus === "Rejected" ? (
                             <div className="w-full px-2">
                                 <TextArea
                                     name="rejectedMessage"
@@ -113,7 +134,7 @@ const VerifyBlog = () => {
                                     {...register("rejectedMessage")}
                                 />
                             </div>
-                        )}
+                        ) : null}
                         <div className="w-full border-t flex gap-2 items-center pt-2 mb-1">
                             <Button type="submit" className="Primary cursor-pointer">
                                 Verify Blog
