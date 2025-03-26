@@ -7,7 +7,7 @@ import TextArea from "@/components/common/TextArea";
 import { Button } from "@/components/ui/button";
 import crudService from "@/services/crudService";
 import toastService from "@/services/toastService";
-import { writerBlogOptions } from "@/utils/statusUtils";
+import { allBlogOptions } from "@/utils/statusUtils";
 import { editBlogScheme } from "@/validation/writerSchema";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { useQuery } from "@tanstack/react-query";
@@ -30,15 +30,6 @@ const ViewBlog = () => {
         resolver: yupResolver(editBlogScheme),
     });
 
-    // get the cateogry for options
-    const { data: categoryOptions, isLoading: categoryOptionsIsLoading } = useQuery({
-        queryKey: ["categoryOptions"],
-        queryFn: () => crudService.get("/writer/blog/options-category", true),
-        onError: err => {
-            toastService.error(err?.message || "Failed to fetch Data.");
-        },
-    });
-
     const { data, isLoading, isSuccess } = useQuery({
         queryKey: ["blog", blogId],
         queryFn: () => crudService.get(`/writer/blog/blog/${blogId}`, true),
@@ -54,12 +45,12 @@ const ViewBlog = () => {
             setValue("blogSlug", blogSlug);
             setValue("blogShortDescription", blogShortDescription);
             setValue("blogDescription", blogDescription);
-            setValue("blogCategory", blogCategory);
+            setValue("blogCategory", blogCategory.categoryName);
             setValue("blogStatus", blogStatus);
         }
     }, [isSuccess, data, setValue]);
 
-    if (isLoading || categoryOptionsIsLoading) return <Loading />;
+    if (isLoading) return <Loading />;
     return (
         <>
             <Helmet>
@@ -115,29 +106,29 @@ const ViewBlog = () => {
                         </div>
                         <div className="flex flex-wrap gap-4 md:gap-0">
                             <div className="w-full md:w-1/2 px-2 gap-4 md:gap-0">
-                                <Select
+                                <Input
                                     label="Category"
-                                    placeholder="Select The Category"
-                                    title="Select The Category"
-                                    options={categoryOptions?.data}
-                                    error={errors.blogCategory?.message}
+                                    placeholder="View The Category"
+                                    {...register("blogCategory")}
                                     disabled
                                     readOnly
-                                    {...register("blogCategory")}
-                                    defaultValue={data?.data?.blogCategory}
+                                    onPaste={e => e.preventDefault()}
+                                    onCopy={e => e.preventDefault()}
+                                    className="text-xl rounded-sm p-3 border border-gray-300 focus:outline-none focus:ring-2 focus:ring-blue-400"
+                                    error={errors.blogCategory?.message}
                                 />
                             </div>
                             <div className="w-full md:w-1/2 px-2 gap-4 md:gap-0">
                                 <Select
-                                    label="Category"
-                                    placeholder="Select The Category"
-                                    title="Select The Category"
-                                    options={writerBlogOptions}
+                                    label="Blog Status"
+                                    placeholder="View The Blog Status"
+                                    title="View The Blog Status"
+                                    options={allBlogOptions}
                                     error={errors.blogStatus?.message}
+                                    {...register("blogStatus")}
+                                    defaultValue={data?.data?.blogStatus}
                                     disabled
                                     readOnly
-                                    {...register("blogStatus")}
-                                    defaultValue="default"
                                 />
                             </div>
                         </div>

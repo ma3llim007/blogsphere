@@ -239,7 +239,7 @@ const getBlog = asyncHandler(async (req, res) => {
         }
 
         // Finding the Blog
-        const blog = await Blog.findById(blogId);
+        const blog = await Blog.findById(blogId).populate("blogCategory", "categoryName");
         if (!blog) {
             return res.status(404).json(new ApiError(404, "Blog Not Found"));
         }
