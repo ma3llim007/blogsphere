@@ -39,7 +39,7 @@ const blogScheme = new Schema(
         },
         blogStatus: {
             type: String,
-            enum: ["Draft", "Ready To Publish", "Pending Review", "Needs Revisions", "Approved", "Rejected"],
+            enum: ["Draft", "Ready To Publish", "Needs Revisions", "Approved", "Rejected"],
             default: "Draft",
         },
         blogAuthorId: {
