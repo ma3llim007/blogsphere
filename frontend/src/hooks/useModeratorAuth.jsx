@@ -10,7 +10,7 @@ const useModeratorAuth = () => {
 
     // Using React Query to check authentication status
     const { data, isError, isLoading } = useQuery({
-        queryKey: ["writerStatus"],
+        queryKey: ["moderatorStatus"],
         queryFn: () => crudService.get("moderator/auth/check-session-moderator", true),
         retry: false,
         staleTime: 5 * 60 * 1000,
