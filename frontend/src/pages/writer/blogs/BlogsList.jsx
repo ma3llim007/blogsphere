@@ -1,5 +1,4 @@
 import Badge from "@/components/common/Badge";
-import ButtonWithAlert from "@/components/common/ButtonWithAlert";
 import Loading from "@/components/common/Loading";
 import PageHeader from "@/components/common/PageHeader";
 import Table from "@/components/common/Table";
@@ -8,32 +7,18 @@ import crudService from "@/services/crudService";
 import toastService from "@/services/toastService";
 import { statusBlogClass } from "@/utils/statusUtils";
 import { formatDateTime } from "@/utils/utils";
-import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
+import { useQuery } from "@tanstack/react-query";
 import { Helmet } from "react-helmet-async";
 import { useNavigate } from "react-router-dom";
 
 const BlogsList = () => {
     const navigate = useNavigate();
-    const queryClient = useQueryClient();
 
     const { data, isLoading } = useQuery({
         queryKey: ["blogList"],
         queryFn: () => crudService.get("writer/blog/blogs", true),
         onError: err => {
             toastService.error(err?.message || "Failed to fetch Data.");
-        },
-    });
-
-    // delete Category
-    const { mutate: deleteBlog, isPending: deleteIsPending } = useMutation({
-        mutationFn: id => crudService.delete(`/writer/blog/delete-blog/${id}`, true),
-        onSuccess: data => {
-            queryClient.invalidateQueries("blogList");
-            toastService.success(data?.message);
-        },
-        onError: error => {
-            const errorMessage = error?.response?.data?.message || error?.message || "An error occurred";
-            toastService.error(errorMessage);
         },
     });
 
@@ -69,28 +54,16 @@ const BlogsList = () => {
             header: "Actions",
             cell: ({ row }) => (
                 <div className="flex gap-1 items-center flex-wrap">
-                    <Button className="Primary cursor-pointer" onClick={() => navigate(`/writer/blogs/edit-blog/${row.original._id}`)}>
-                        Edit
-                    </Button>
-                    |
                     <Button className="Info cursor-pointer" onClick={() => navigate(`/writer/blogs/view-blog/${row.original._id}`)}>
                         View
                     </Button>
-                    |
-                    <ButtonWithAlert
-                        buttonTitle="Delete"
-                        dialogTitle="Are You Sure You Want to Delete This Blog?"
-                        dialogDesc="This Action Will Permanently Delete The Blog. Proceed?"
-                        dialogActionTitle="Delete Blog"
-                        dialogActionfunc={() => deleteBlog(row.original?._id)}
-                    />
                 </div>
             ),
         },
     ];
 
     const blogData = Array.isArray(data?.data) ? data?.data?.map((item, index) => ({ no: index + 1, ...item })) : [];
-    if (isLoading || deleteIsPending) return <Loading />;
+    if (isLoading) return <Loading />;
     return (
         <>
             <Helmet>
