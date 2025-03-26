@@ -18,7 +18,7 @@ import { Controller, useForm } from "react-hook-form";
 import { FaEdit } from "react-icons/fa";
 import { useNavigate, useParams } from "react-router-dom";
 
-const EditBlog = () => {
+const UpdateRevisionBlog = () => {
     const queryClient = useQueryClient();
     const navigate = useNavigate();
     const { blogId } = useParams();
@@ -112,15 +112,22 @@ const EditBlog = () => {
     return (
         <>
             <Helmet>
-                <title>Edit Blog Post | BlogSphere</title>
-                <meta name="description" content="Modify and update an existing blog post in BlogSphere admin panel. Manage SEO and content optimization." />
+                <title>Update Revision Blog | BlogSphere</title>
+                <meta name="description" content="Review and update blog posts requiring revisions in BlogSphere. Improve content and resubmit for approval." />
                 <meta name="robots" content="noindex, nofollow" />
             </Helmet>
             <PageHeader homeUrl="/writer/dashboard" title={"Manage Blogs"} controller={"Blog Listing"} controllerUrl={"/writer/blogs/blog-list"} page={"Edit Blog"} />
             <section className="w-full">
                 <div className="my-4 w-full container mx-auto border-t-4 border-blue-700 rounded-lg p-2 bg-gray-100 dark:bg-slate-800">
                     <form className="space-y-5" onSubmit={handleSubmit(data => mutate(data))} encType="multipart/form-data">
-                        <h1 className="text-xl font-bold my-4 px-2">Edit Blog</h1>
+                        <div className="w-full">
+                            <h1 className="text-xl font-bold my-4 px-2">Edit Blog</h1>
+                            {data?.data?.blogStatus === "Needs Revisions" ? (
+                                <div className="w-full my-4 bg-purple-500 rounded border border-purple-600 py-3 px-4">
+                                    <h2 className="text-white font-bold text-sm">{data?.data?.blogRevisionMessage}</h2>
+                                </div>
+                            ) : null}
+                        </div>
                         {errors.root && (
                             <div className="w-full my-4 bg-red-500 text-center rounded-md border border-red-600 py-3 px-4">
                                 <h4 className="text-white font-bold text-sm">{errors.root.message}</h4>
@@ -206,6 +213,7 @@ const EditBlog = () => {
                                 />
                             </div>
                         </div>
+
                         <div className="w-full px-2">
                             <TextArea
                                 name="blogShortDescription"
@@ -243,4 +251,4 @@ const EditBlog = () => {
     );
 };
 
-export default EditBlog;
+export default UpdateRevisionBlog;

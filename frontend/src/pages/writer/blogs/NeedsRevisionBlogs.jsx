@@ -34,7 +34,7 @@ const NeedsRevisionBlog = () => {
             accessorKey: "blogRevisionMessage",
             header: "Revision Message",
             cell: ({ row }) => (
-            <div className="max-w-[300px]">
+                <div className="max-w-[300px]">
                     <p className="text-wrap line-clamp-4">{row.getValue("blogRevisionMessage")}</p>
                 </div>
             ),
@@ -64,8 +64,12 @@ const NeedsRevisionBlog = () => {
             header: "Actions",
             cell: ({ row }) => (
                 <div className="flex gap-1 items-center flex-wrap">
-                    <Button className="Info cursor-pointer" onClick={() => navigate(`/moderator/blogs/view-blog/${row.original._id}`)}>
+                    <Button className="Info cursor-pointer" onClick={() => navigate(`/writer/blogs/view-blog/${row.original._id}`)}>
                         View
+                    </Button>
+                    |
+                    <Button className="Primary cursor-pointer" onClick={() => navigate(`/writer/blogs/update-revision-blog/${row.original._id}`)}>
+                        Update Blog
                     </Button>
                 </div>
             ),
