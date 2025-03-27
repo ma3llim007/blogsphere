@@ -19,14 +19,14 @@ const Dashboard = () => {
     });
 
     const { cards, blogStatusChart, categoryChart } = data?.data || {};
-
+    
     const columns = [
         { count: cards?.totalBlogs, Icon: FaBlogger, label: "Total Blogs" },
         { count: cards?.totalDraftBlogs, Icon: FaFileAlt, label: "Draft Blogs" },
         { count: cards?.totalReadyToPublishBlogs, Icon: FaClipboardList, label: "Ready To Publish Blogs" },
         { count: cards?.totalNeedsRevisionBlogs, Icon: FaEdit, label: "Needs Revisions Blogs" },
-        { count: cards?.totalUser, Icon: FaCheckCircle, label: "Approved Blogs" },
-        { count: cards?.totalUser, Icon: FaTimesCircle, label: "Rejected Blogs" },
+        { count: cards?.totalApprovedBlogs, Icon: FaCheckCircle, label: "Approved Blogs" },
+        { count: cards?.totalRejectedBlogs, Icon: FaTimesCircle, label: "Rejected Blogs" },
     ];
 
     if (isPending) {
