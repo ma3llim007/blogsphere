@@ -19,14 +19,14 @@ const Dashboard = () => {
     });
 
     const { cards, blogStatusChart, categoryChart } = data?.data || {};
-    
-    const columns = [
-        { count: cards?.totalBlogs, Icon: FaBlogger, label: "Total Blogs" },
-        { count: cards?.totalDraftBlogs, Icon: FaFileAlt, label: "Draft Blogs" },
-        { count: cards?.totalReadyToPublishBlogs, Icon: FaClipboardList, label: "Ready To Publish Blogs" },
-        { count: cards?.totalNeedsRevisionBlogs, Icon: FaEdit, label: "Needs Revisions Blogs" },
-        { count: cards?.totalApprovedBlogs, Icon: FaCheckCircle, label: "Approved Blogs" },
-        { count: cards?.totalRejectedBlogs, Icon: FaTimesCircle, label: "Rejected Blogs" },
+
+    const cardData = [
+        { count: cards?.totalBlogs, Icon: FaBlogger, label: "Total Blogs", color: "text-white" },
+        { count: cards?.totalDraftBlogs, Icon: FaFileAlt, label: "Draft Blogs", color: "text-gray-100" },
+        { count: cards?.totalReadyToPublishBlogs, Icon: FaClipboardList, label: "Ready To Publish Blogs", color: "text-blue-500" },
+        { count: cards?.totalNeedsRevisionBlogs, Icon: FaEdit, label: "Needs Revisions Blogs", color: "text-orange-600" },
+        { count: cards?.totalApprovedBlogs, Icon: FaCheckCircle, label: "Approved Blogs", color: "text-green-500" },
+        { count: cards?.totalRejectedBlogs, Icon: FaTimesCircle, label: "Rejected Blogs", color: "text-red-500" },
     ];
 
     if (isPending) {
@@ -41,17 +41,17 @@ const Dashboard = () => {
             </Helmet>
             <PageHeader homeUrl="/writer/dashboard/" title={"Dashboard"} controller={"Dashboard"} controllerUrl={"/writer/dashboard/"} />
             <section className="container mx-auto px-4 mb-10">
-                <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-3 gap-6 select-none">
-                    {columns.map((Card, index) => (
+                <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-2 lg:grid-cols-3 gap-6 select-none">
+                    {cardData.map(({ count, Icon, color, label }, index) => (
                         <div
                             key={index}
                             className="w-full border border-gray-700 dark:border-gray-500/30 p-4 rounded-lg shadow-md transition-transform transform hover:scale-105 bg-gray-100 dark:bg-gray-800 hover:shadow-lg hover:shadow-blue-500/40 dark:hover:shadow-blue-400/20 cursor-pointer space-y-4"
                         >
                             <div className="flex items-center gap-4 text-3xl font-semibold text-gray-900 dark:text-gray-100">
-                                {Card.Icon && <Card.Icon size={25} />}
-                                <h4>{Card.count || 0}</h4>
+                                {Icon && <Icon size={25} className={color} />}
+                                <h4>{count || 0}</h4>
                             </div>
-                            <p className="text-lg font-bold text-gray-700 dark:text-gray-300">{Card.label}</p>
+                            <p className="text-lg font-bold text-gray-700 dark:text-gray-300">{label}</p>
                         </div>
                     ))}
                 </div>
