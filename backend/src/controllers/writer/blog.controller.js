@@ -77,7 +77,11 @@ const addBlog = asyncHandler(async (req, res) => {
 const blogs = asyncHandler(async (req, res) => {
     const id = req.writer._id;
     try {
-        const blogs = await Blog.find({ blogAuthorId: id }).populate("blogCategory", "categoryName").select("-blogShortDescription -blogDescription -blogAuthorId -createdAt").lean();
+        const blogs = await Blog.find({ blogAuthorId: id })
+            .populate("blogCategory", "categoryName")
+            .populate("blogModeratorId", "firstName lastName")
+            .select("-blogShortDescription -blogDescription -blogAuthorId -createdAt")
+            .lean();
         if (!blogs.length) {
             return res.status(200).json(new ApiResponse(200, {}, "No Blog Found"));
         }
@@ -297,6 +301,7 @@ const approvedBlogs = asyncHandler(async (req, res) => {
     try {
         const blogs = await Blog.find({ blogAuthorId: writerId, blogStatus: "Approved" })
             .populate("blogCategory", "categoryName")
+            .populate("blogModeratorId", "firstName lastName")
             .select("-blogShortDescription -blogDescription -blogAuthorId -createdAt")
             .lean();
 
@@ -317,6 +322,7 @@ const needsRevisionBlogs = asyncHandler(async (req, res) => {
     try {
         const blogs = await Blog.find({ blogAuthorId: writerId, blogStatus: "Needs Revisions" })
             .populate("blogCategory", "categoryName")
+            .populate("blogModeratorId", "firstName lastName")
             .select("-blogShortDescription -blogDescription -blogAuthorId -createdAt")
             .lean();
 
@@ -337,6 +343,7 @@ const rejectedBlogs = asyncHandler(async (req, res) => {
     try {
         const blogs = await Blog.find({ blogAuthorId: writerId, blogStatus: "Rejected" })
             .populate("blogCategory", "categoryName")
+            .populate("blogModeratorId", "firstName lastName")
             .select("-blogShortDescription -blogDescription -blogAuthorId -createdAt")
             .lean();
 
