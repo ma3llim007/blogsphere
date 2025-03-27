@@ -5,8 +5,12 @@ import { Category } from "../../models/category.model.js";
 const dashboardAnalytic = asyncHandler(async (req, res) => {
     const writerId = req.writer._id;
     try {
-        // Aggregation pipeline to fetch count in single query
-        const [blogStatus] = await Promise.all([
+        // Define all blog statuses
+        const blogStatuses = ["Draft", "Ready To Publish", "Needs Revisions", "Approved", "Rejected"];
+
+        // Run all aggregations in parallel for efficiency
+        const [blogStatus, blogCategoryChart] = await Promise.all([
+            // Count blogs by status
             Blog.aggregate([
                 { $match: { blogAuthorId: writerId } },
                 {
@@ -16,6 +20,35 @@ const dashboardAnalytic = asyncHandler(async (req, res) => {
                     },
                 },
             ]),
+
+            // Count blogs by category (ensuring categories with 0 blogs are included)
+            Category.aggregate([
+                {
+                    $lookup: {
+                        from: "blogs",
+                        let: { categoryId: "$_id" },
+                        pipeline: [
+                            {
+                                $match: {
+                                    $expr: {
+                                        $and: [{ $eq: ["$blogCategory", "$$categoryId"] }, { $eq: ["$blogAuthorId", writerId] }],
+                                    },
+                                },
+                            },
+                            { $group: { _id: null, count: { $sum: 1 } } },
+                        ],
+                        as: "blogs",
+                    },
+                },
+                {
+                    $project: {
+                        _id: 0,
+                        category: "$categoryName",
+                        value: { $ifNull: [{ $arrayElemAt: ["$blogs.count", 0] }, 0] }, // Default to 0
+                    },
+                },
+                { $sort: { value: -1 } },
+            ]),
         ]);
 
         // Convert order aggregation result to a lookup object
@@ -24,72 +57,14 @@ const dashboardAnalytic = asyncHandler(async (req, res) => {
             return acc;
         }, {});
 
-        // Extract Blogs safely
-        const totalBlogs = blogStatus?.reduce((sum, { count }) => sum + count, 0);
-        const totalDraftBlogs = blogCountMap["Draft"] || 0;
-        const totalReadyToPublishBlogs = blogCountMap["Ready To Publish"] || 0;
-        const totalNeedsRevisionBlogs = blogCountMap["Needs Revisions"] || 0;
-        const totalApprovedBlogs = blogCountMap["Approved"] || 0;
-        const totalRejectedBlogs = blogCountMap["Rejected"] || 0;
+        // Ensure all blog statuses exist in the response
+        const blogStatusChartArray = blogStatuses.map((status) => ({
+            name: status,
+            value: blogCountMap[status] || 0,
+        }));
 
-        // Blogs By Category
-        const blogCategoryChart = await Category.aggregate([
-            {
-                $lookup: {
-                    from: "blogs",
-                    let: { categoryId: "$_id" },
-                    pipeline: [
-                        {
-                            $match: { $expr: { $and: [{ $eq: ["$blogCategory", "$$categoryId"] }, { $eq: ["$blogAuthorId", writerId] }] } },
-                        },
-                        {
-                            $group: {
-                                _id: null,
-                                count: { $sum: 1 },
-                            },
-                        },
-                    ],
-                    as: "blogs",
-                },
-            },
-            {
-                $project: {
-                    _id: 0,
-                    category: "$categoryName",
-                    value: {
-                        $ifNull: [{ $arrayElemAt: ["$blogs.count", 0] }, 0],
-                    },
-                },
-            },
-        ]);
-
-        const blogStatuses = ["Draft", "Ready To Publish", "Needs Revisions", "Approved", "Rejected"];
-        // Blogs By Blog Status
-        const [blogStatusData] = await Blog.aggregate([
-            { $match: { blogAuthorId: writerId } },
-            {
-                $group: {
-                    _id: "$blogStatus",
-                    count: { $sum: 1 },
-                },
-            },
-            {
-                $group: {
-                    _id: null,
-                    data: { $push: { k: "$_id", v: "$count" } },
-                },
-            },
-            {
-                $project: {
-                    _id: 0,
-                    blogStatusChart: {
-                        $mergeObjects: [blogStatuses.reduce((acc, status) => ({ ...acc, [status]: 0 }), {}), { $arrayToObject: "$data" }],
-                    },
-                },
-            },
-        ]);
-        // Convert blogStatusChart into an array for Pie Chart
-        const blogStatusChartArray = Object.entries(blogStatusData?.blogStatusChart || {}).map(([name, value]) => ({ name, value }));
+        // Calculate total blog counts
+        const totalBlogs = blogStatusChartArray.reduce((sum, { value }) => sum + value, 0);
 
         return res.status(200).json(
             new ApiResponse(
@@ -97,11 +72,11 @@ const dashboardAnalytic = asyncHandler(async (req, res) => {
                 {
                     cards: {
                         totalBlogs,
-                        totalDraftBlogs,
-                        totalReadyToPublishBlogs,
-                        totalNeedsRevisionBlogs,
-                        totalApprovedBlogs,
-                        totalRejectedBlogs,
+                        totalDraftBlogs: blogCountMap["Draft"] || 0,
+                        totalReadyToPublishBlogs: blogCountMap["Ready To Publish"] || 0,
+                        totalNeedsRevisionBlogs: blogCountMap["Needs Revisions"] || 0,
+                        totalApprovedBlogs: blogCountMap["Approved"] || 0,
+                        totalRejectedBlogs: blogCountMap["Rejected"] || 0,
                     },
                     categoryChart: blogCategoryChart,
                     blogStatusChart: blogStatusChartArray,
