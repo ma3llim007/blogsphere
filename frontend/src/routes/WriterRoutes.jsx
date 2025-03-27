@@ -6,7 +6,7 @@ const AuthLayout = lazy(() => import("@/layouts/AuthLayout"));
 const WriterLayout = lazy(() => import("@/layouts/WriterLayout"));
 // Pages
 const LoginWriter = lazy(() => import("@/pages/writer/auth/LoginWriter"));
-const Dashboard = lazy(() => import("@/pages/moderator/Dashboard"));
+const Dashboard = lazy(() => import("@/pages/writer/Dashboard"));
 const WriterNotFound = lazy(() => import("@/pages/writer/WriterNotFound"));
 const Account = lazy(() => import("@/pages/writer/Account"));
 const ChangePassword = lazy(() => import("@/pages/writer/ChangePassword"));

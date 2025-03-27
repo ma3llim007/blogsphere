@@ -8,9 +8,11 @@ import admin_writerRouter from "./admin/writeAuth.routes.js";
 // Moderator Router
 import moderator_AuthRouter from "./moderator/auth.routes.js";
 import moderator_blogRouter from "./moderator/blog.routes.js";
+
 // Writer Router
 import writer_AuthRouter from "./writer/auth.routes.js";
 import writer_BlogRouter from "./writer/blog.routes.js";
+import writer_dashboardRouter from "./writer/dashboard.routes.js";
 
 // Admin Routes
 const adminRoutes = Router();
@@ -29,5 +31,6 @@ moderatorRoutes.use("/blog", moderator_blogRouter);
 const writerRoutes = Router();
 writerRoutes.use("/auth", writer_AuthRouter);
 writerRoutes.use("/blog", writer_BlogRouter);
+writerRoutes.use("/dashboard", writer_dashboardRouter);
 
 export { adminRoutes, writerRoutes, moderatorRoutes };
