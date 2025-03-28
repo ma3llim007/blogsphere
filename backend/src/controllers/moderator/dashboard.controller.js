@@ -1,5 +1,4 @@
 import { Blog } from "../../models/blog.model.js";
-import { Category } from "../../models/category.model.js";
 import { ApiError, ApiResponse, asyncHandler } from "../../utils/Api.utils.js";
 
 const dashboardAnalytic = asyncHandler(async (req, res) => {
@@ -34,12 +33,14 @@ const dashboardAnalytic = asyncHandler(async (req, res) => {
             value: blogCountMap[status] || 0,
         }));
 
+        const latestBlogs = await Blog.countDocuments({ blogStatus: "Ready To Publish" });
+
         return res.status(200).json(
             new ApiResponse(
                 200,
                 {
                     cards: {
-                        latestBlogs: blogCountMap["Ready To Publish"] || 0,
+                        latestBlogs: latestBlogs || 0,
                         totalNeedsRevisionBlogs: blogCountMap["Needs Revisions"] || 0,
                         totalApprovedBlogs: blogCountMap["Approved"] || 0,
                         totalRejectedBlogs: blogCountMap["Rejected"] || 0,
