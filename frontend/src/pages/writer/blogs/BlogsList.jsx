@@ -60,7 +60,7 @@ const BlogsList = () => {
             header: "Order Status",
             cell: ({ row }) => <Badge title={row.original?.blogStatus} className={`${statusBlogClass[row?.original?.blogStatus] || ""} !rounded !leading-normal`} />,
         },
-        { header: "Verify By", cell: ({ row }) => `${row?.original?.blogModeratorId?.firstName} ${row?.original?.blogModeratorId?.lastName}` },
+        { header: "Verify By", cell: ({ row }) => `${row?.original?.blogModeratorId?.firstName || "-"} ${row?.original?.blogModeratorId?.lastName || "-"}` },
         {
             accessorKey: "updatedAt",
             header: "Date Time",
