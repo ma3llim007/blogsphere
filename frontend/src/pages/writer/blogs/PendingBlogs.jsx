@@ -42,7 +42,7 @@ const PendingBlogs = () => {
         { accessorKey: "blogCategory", header: "Category", cell: ({ row }) => row?.original?.blogCategory?.categoryName },
         {
             accessorKey: "blogStatus",
-            header: "Order Status",
+            header: "Blog Status",
             cell: ({ row }) => <Badge title={row.original?.blogStatus} className={`${statusBlogClass[row?.original?.blogStatus] || ""} !rounded !leading-normal`} />,
         },
         {
