@@ -29,4 +29,15 @@ const statusBlogClass = {
     Rejected: "Danger",
 };
 
-export { WRITER_BLOG_STATUSES, BLOG_STATUSES, writerBlogOptions, statusBlogClass, moderatorBlogOptions, allBlogOptions };
+const getStatusColor = status => {
+    const colors = {
+        Draft: "#9CA3AF", // Gray
+        "Ready To Publish": "#FACC15", // Yellow
+        "Needs Revisions": "#F97316", // Orange
+        Approved: "#22C55E", // Green
+        Rejected: "#EF4444", // Red
+    };
+    return colors[status] || "#3b82f6"; // Default Blue
+};
+
+export { WRITER_BLOG_STATUSES, BLOG_STATUSES, writerBlogOptions, statusBlogClass, moderatorBlogOptions, allBlogOptions, getStatusColor };

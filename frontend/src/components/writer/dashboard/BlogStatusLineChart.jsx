@@ -1,4 +1,5 @@
-import { BarChart, Bar, XAxis, YAxis, Tooltip, ResponsiveContainer, CartesianGrid } from "recharts";
+import { getStatusColor } from "@/utils/statusUtils";
+import { BarChart, Bar, XAxis, YAxis, Tooltip, ResponsiveContainer, CartesianGrid, Cell } from "recharts";
 const BlogStatusLineChart = ({ data }) => {
     if (!data || data.length === 0) {
         return <p className="text-xl font-bold text-center underline">No data available</p>;
@@ -12,7 +13,11 @@ const BlogStatusLineChart = ({ data }) => {
                     <XAxis dataKey="name" tick={{ fill: "white" }} />
                     <YAxis tick={{ fill: "white" }} />
                     <Tooltip contentStyle={{ backgroundColor: "#333", color: "white" }} />
-                    <Bar dataKey="value" fill="#3b82f6" b/>
+                    <Bar dataKey="value" fill="#3b82f6">
+                        {data.map((entry, index) => (
+                            <Cell key={`cell-${index}`} fill={getStatusColor(entry.name)} />
+                        ))}
+                    </Bar>
                 </BarChart>
             </ResponsiveContainer>
         </>
