@@ -73,6 +73,10 @@
 }
 
 @theme inline {
+    --color-blue-violet: #473BF0;
+    --color-dark: #161C2D;
+    --color-light: #F5F5F5;
+    --color-white: #FFFFFF;
     --radius-sm: calc(var(--radius) - 4px);
     --radius-md: calc(var(--radius) - 2px);
     --radius-lg: var(--radius);
@@ -192,6 +196,7 @@
     .btnFull {
         @apply block w-full h-14 px-8 text-2xl;
     }
+    
 }
 
 /* Custom Scrollbar for WebKit Browsers (Chrome, Edge, Safari) */
