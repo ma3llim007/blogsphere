@@ -7,7 +7,7 @@ const Footer = lazy(() => import("@/components/client/Footer"));
 
 const PublicLayout = () => {
     return (
-        <div className="w-full flex flex-col min-h-screen">
+        <div className="w-full flex flex-col min-h-screen font-DmSans">
             <Suspense fallback={<Loading />}>
                 <Header />
             </Suspense>

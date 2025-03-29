@@ -1,3 +1,4 @@
+@import url('https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,100..1000;1,9..40,100..1000&display=swap');
 @import "tailwindcss";
 @import "tw-animate-css";
 
@@ -73,6 +74,7 @@
 }
 
 @theme inline {
+    --font-DmSans: "DM Sans", sans-serif;
     --color-blue-violet: #473BF0;
     --color-dark: #161C2D;
     --color-light: #F5F5F5;
@@ -196,7 +198,7 @@
     .btnFull {
         @apply block w-full h-14 px-8 text-2xl;
     }
-    
+
 }
 
 /* Custom Scrollbar for WebKit Browsers (Chrome, Edge, Safari) */
@@ -231,7 +233,6 @@
 /* Scrollbar for Microsoft Edge (Legacy) */
 body {
     -ms-overflow-style: none;
-    /* Hides default scrollbar */
 }
 
 /* Smooth Scroll Effect */
