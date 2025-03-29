@@ -1,6 +1,6 @@
 import AdminRoutes from "./routes/AdminRoutes";
+import ClientRoutes from "./routes/ClientRoutes";
 import ModeratorRoutes from "./routes/ModeratorRoutes";
-import PublicRoutes from "./routes/PublicRoutes";
 import WriterRoutes from "./routes/WriterRoutes";
 
 const App = () => {
@@ -17,7 +17,7 @@ const App = () => {
         role = "writer";
     }
 
-    return <>{role === "admin" ? <AdminRoutes /> : role === "moderator" ? <ModeratorRoutes /> : role === "writer" ? <WriterRoutes /> : <PublicRoutes />}</>;
+    return <>{role === "admin" ? <AdminRoutes /> : role === "moderator" ? <ModeratorRoutes /> : role === "writer" ? <WriterRoutes /> : <ClientRoutes />}</>;
 };
 
 export default App;
