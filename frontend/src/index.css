@@ -192,10 +192,6 @@
     .btnFull {
         @apply block w-full h-14 px-8 text-2xl;
     }
-
-    .font-responsive {
-        @apply text-base sm:text-lg md:text-xl lg:text-2xl;
-    }
 }
 
 /* Custom Scrollbar for WebKit Browsers (Chrome, Edge, Safari) */
