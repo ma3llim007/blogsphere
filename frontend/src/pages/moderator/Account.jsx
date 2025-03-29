@@ -13,7 +13,7 @@ import { Link } from "react-router-dom";
 const Account = () => {
     // fetching data of writer
     const { data: responseData, isPending } = useQuery({
-        queryKey: ["moderatorAccount"],
+        queryKey: ["dashboard"],
         queryFn: () => crudService.get(`moderator/auth/moderator`, true),
         onError: err => {
             toastService.error(err?.message || "Failed to fetch Data.");

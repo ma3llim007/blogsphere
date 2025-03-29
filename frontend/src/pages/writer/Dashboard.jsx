@@ -11,7 +11,7 @@ import BlogStatusChart from "@/components/writer/dashboard/BlogStatusChart";
 const Dashboard = () => {
     // fetching data of writer
     const { data, isPending } = useQuery({
-        queryKey: ["writerAccount"],
+        queryKey: ["dashboard"],
         queryFn: () => crudService.get(`writer/dashboard/analytic`, true),
         onError: err => {
             toastService.error(err?.message || "Failed to fetch Data.");
