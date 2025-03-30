@@ -1,20 +1,20 @@
 import { Router } from "express";
-// Admin Router
+// Admin Import
 import admin_authRouter from "./admin/auth.routes.js";
 import admin_categoryRouter from "./admin/category.routes.js";
 import admin_blogRouter from "./admin/blog.routes.js";
 import admin_moderatorRouter from "./admin/moderator.routes.js";
 import admin_writerRouter from "./admin/writeAuth.routes.js";
-
-// Moderator Router
+// Moderator Import
 import moderator_AuthRouter from "./moderator/auth.routes.js";
 import moderator_blogRouter from "./moderator/blog.routes.js";
 import moderator_dashboardRouter from "./moderator/dashboard.routes.js";
-
-// Writer Router
+// Writer Import
 import writer_AuthRouter from "./writer/auth.routes.js";
 import writer_BlogRouter from "./writer/blog.routes.js";
 import writer_dashboardRouter from "./writer/dashboard.routes.js";
+// Client Import
+import client_categoryRouter from "./client/category.routes.js";
 
 // Admin Routes
 const adminRoutes = Router();
@@ -36,4 +36,8 @@ writerRoutes.use("/auth", writer_AuthRouter);
 writerRoutes.use("/blog", writer_BlogRouter);
 writerRoutes.use("/dashboard", writer_dashboardRouter);
 
-export { adminRoutes, writerRoutes, moderatorRoutes };
+// Client Routes
+const clientRoutes = Router();
+clientRoutes.use("/category", client_categoryRouter);
+
+export { adminRoutes, writerRoutes, moderatorRoutes, clientRoutes };

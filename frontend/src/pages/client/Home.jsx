@@ -1,6 +1,6 @@
 const Home = () => {
     return (
-        <section className="container mx-auto">
+        <section>
             <h1>Starting Heading</h1>
             <div>
                 Lorem ipsum dolor sit amet consectetur adipisicing elit. Facere deserunt harum nihil qui numquam praesentium maiores omnis reiciendis cum ducimus. Temporibus ex explicabo eos quod quos
