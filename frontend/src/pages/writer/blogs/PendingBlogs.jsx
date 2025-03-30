@@ -57,6 +57,10 @@ const PendingBlogs = () => {
                     <Button className="Info cursor-pointer" onClick={() => navigate(`/writer/blogs/view-blog/${row.original._id}`)}>
                         View
                     </Button>
+                    |
+                    <Button className="Primary cursor-pointer" onClick={() => navigate(`/writer/blogs/edit-blog/${row.original._id}`)}>
+                        Edit
+                    </Button>
                 </div>
             ),
         },
