@@ -4,7 +4,7 @@ import { useQuery, useQueryClient } from "@tanstack/react-query";
 import { lazy, Suspense, useEffect } from "react";
 import { Outlet } from "react-router-dom";
 
-const Header = lazy(() => import("@/components/client/Header"));
+const Header = lazy(() => import("@/components/client/Header/Header"));
 const Footer = lazy(() => import("@/components/client/Footer"));
 
 const PublicLayout = () => {
@@ -34,7 +34,7 @@ const PublicLayout = () => {
     return (
         <div className="w-full flex flex-col min-h-screen font-DmSans overflow-hidden">
             <Suspense fallback={<Loading />}>
-                <Header data={data} />
+                <Header categories={data?.data} />
             </Suspense>
             <main className="grow container mx-auto px-4 sm:px-6 lg:px-8">
                 <Outlet />
