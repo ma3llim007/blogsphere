@@ -19,10 +19,8 @@ const HomeBanner = () => {
                     </div>
                     <div className="flex flex-col gap-4">
                         <div className="bg-white flex gap-4 p-2">
-                            <div className="flex gap-5 rounded-md">
-                                <div className="w-40">
-                                    <img src="https://res.cloudinary.com/dkrkceyqn/image/upload/v1703475222/post24_4434974ae8.jpg" alt="Image" className="w-full h-full object-cover rounded-md" />
-                                </div>
+                            <div className="w-40">
+                                <img src="https://res.cloudinary.com/dkrkceyqn/image/upload/v1703475222/post24_4434974ae8.jpg" alt="Image" className="w-full h-full object-cover rounded-md" />
                             </div>
                             <div className="grow space-y-3 py-4">
                                 <p className="bg-light text-blue-violet max-w-fit text-sm px-3 py-1 rounded-2xl lg:text-base font-bold">Smartphones</p>
@@ -33,10 +31,8 @@ const HomeBanner = () => {
                             </div>
                         </div>
                         <div className="bg-white flex gap-4 p-2">
-                            <div className="flex gap-5 rounded-md">
-                                <div className="w-40">
-                                    <img src="https://res.cloudinary.com/dkrkceyqn/image/upload/v1703475222/post24_4434974ae8.jpg" alt="Image" className="w-full h-full object-cover rounded-md" />
-                                </div>
+                            <div className="w-40">
+                                <img src="https://res.cloudinary.com/dkrkceyqn/image/upload/v1703475222/post24_4434974ae8.jpg" alt="Image" className="w-full h-full object-cover rounded-md" />
                             </div>
                             <div className="grow space-y-3 py-4">
                                 <p className="bg-light text-blue-violet max-w-fit text-sm px-3 py-1 rounded-2xl lg:text-base font-bold">Smartphones</p>
@@ -47,10 +43,8 @@ const HomeBanner = () => {
                             </div>
                         </div>
                         <div className="bg-white flex gap-4 p-2">
-                            <div className="flex gap-5 rounded-md">
-                                <div className="w-40">
-                                    <img src="https://res.cloudinary.com/dkrkceyqn/image/upload/v1703475222/post24_4434974ae8.jpg" alt="Image" className="w-full h-full object-cover rounded-md" />
-                                </div>
+                            <div className="w-40">
+                                <img src="https://res.cloudinary.com/dkrkceyqn/image/upload/v1703475222/post24_4434974ae8.jpg" alt="Image" className="w-full h-full object-cover rounded-md" />
                             </div>
                             <div className="grow space-y-3 py-4">
                                 <p className="bg-light text-blue-violet max-w-fit text-sm px-3 py-1 rounded-2xl lg:text-base font-bold">Smartphones</p>
