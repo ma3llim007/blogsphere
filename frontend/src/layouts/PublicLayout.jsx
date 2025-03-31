@@ -36,7 +36,7 @@ const PublicLayout = () => {
             <Suspense fallback={<Loading />}>
                 <Header categories={data?.data} />
             </Suspense>
-            <main className="grow container mx-auto px-4 sm:px-6 lg:px-8">
+            <main className="grow">
                 <Outlet />
             </main>
             <Suspense fallback={<Loading />}>
