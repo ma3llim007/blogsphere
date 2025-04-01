@@ -80,7 +80,6 @@
     --color-darker: #121625;
     --color-light: #F5F5F5;
     --color-white: #FFFFFF;
-    --color-blackColor: #161c2d;
     --radius-sm: calc(var(--radius) - 4px);
     --radius-md: calc(var(--radius) - 2px);
     --radius-lg: var(--radius);
