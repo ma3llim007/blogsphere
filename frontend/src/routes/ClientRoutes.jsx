@@ -3,10 +3,11 @@ import { RouterProvider } from "react-router";
 import { createBrowserRouter } from "react-router-dom";
 import PublicLayout from "@/layouts/PublicLayout";
 import Loading from "@/components/common/Loading";
-
+// Page
 const Home = lazy(() => import("@/pages/client/Home"));
 const PrivacyPolicy = lazy(() => import("@/pages/client/PrivacyPolicy"));
 const TermsConditions = lazy(() => import("@/pages/client/TermsConditions"));
+const ContactUs = lazy(() => import("@/pages/client/ContactUs"));
 
 const ClientRoutes = () => {
     // Defining Routes
@@ -36,6 +37,14 @@ const ClientRoutes = () => {
                     element: (
                         <Suspense fallback={<Loading />}>
                             <TermsConditions />
+                        </Suspense>
+                    ),
+                },
+                {
+                    path: "contact-us",
+                    element: (
+                        <Suspense fallback={<Loading />}>
+                            <ContactUs />
                         </Suspense>
                     ),
                 },
