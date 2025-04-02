@@ -6,6 +6,7 @@ import Loading from "@/components/common/Loading";
 
 const Home = lazy(() => import("@/pages/client/Home"));
 const PrivacyPolicy = lazy(() => import("@/pages/client/PrivacyPolicy"));
+const TermsConditions = lazy(() => import("@/pages/client/TermsConditions"));
 
 const ClientRoutes = () => {
     // Defining Routes
@@ -27,6 +28,14 @@ const ClientRoutes = () => {
                     element: (
                         <Suspense fallback={<Loading />}>
                             <PrivacyPolicy />
+                        </Suspense>
+                    ),
+                },
+                {
+                    path: "terms-conditions",
+                    element: (
+                        <Suspense fallback={<Loading />}>
+                            <TermsConditions />
                         </Suspense>
                     ),
                 },
