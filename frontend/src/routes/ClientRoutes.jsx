@@ -11,7 +11,7 @@ const ClientRoutes = () => {
     // Defining Routes
     const router = createBrowserRouter([
         {
-            path: "",
+            path: "/",
             element: <PublicLayout />,
             children: [
                 {
