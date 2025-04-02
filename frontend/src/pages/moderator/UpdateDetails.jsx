@@ -28,7 +28,7 @@ const UpdateDetails = () => {
     // fetching data of moderator
     const { data: responseData, isPending: moderatorIsPending } = useQuery({
         queryKey: ["moderatorAccount"],
-        queryFn: () => crudService.get(`moderator/auth/moderator`, true),
+        queryFn: () => crudService.get(`moderator/auth/moderator`),
         onError: err => {
             toastService.error(err?.message || "Failed to fetch Data.");
         },
@@ -45,7 +45,7 @@ const UpdateDetails = () => {
     }, [responseData, setValue]);
 
     const { mutate, isPending } = useMutation({
-        mutationFn: data => crudService.patch("/moderator/auth/update-moderator", true, data),
+        mutationFn: data => crudService.patch("/moderator/auth/update-moderator", data),
         onSuccess: data => {
             navigate("/moderator/account");
             queryClient.invalidateQueries("moderatorAccount");

@@ -28,7 +28,7 @@ const ChangePassword = () => {
     });
 
     const { mutate, isPending } = useMutation({
-        mutationFn: data => crudService.patch("/moderator/auth/change-password", true, data),
+        mutationFn: data => crudService.patch("/moderator/auth/change-password", data),
         onSuccess: data => {
             dispatch(logoutWriter());
             queryClient.clear();

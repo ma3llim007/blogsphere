@@ -21,10 +21,9 @@ import { Button } from "../ui/button";
 const LogOutModerator = () => {
     const dispatch = useDispatch();
     const { moderator } = useSelector(state => state.moderatorAuth);
-    
 
     const { mutate } = useMutation({
-        mutationFn: () => crudService.post("moderator/auth/logout", true),
+        mutationFn: () => crudService.post("moderator/auth/logout"),
         onSuccess: async data => {
             dispatch(logoutModerator());
             toastService.info(data?.message);

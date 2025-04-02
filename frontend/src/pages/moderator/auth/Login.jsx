@@ -26,7 +26,7 @@ const Login = () => {
     });
 
     const { mutate, isPending } = useMutation({
-        mutationFn: data => crudService.post("/moderator/auth/login", true, data),
+        mutationFn: data => crudService.post("/moderator/auth/login", data),
         onError: error => {
             const message = error.response?.data?.message || "An unexpected error occurred.";
             setError("root", { message });

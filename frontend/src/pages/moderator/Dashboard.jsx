@@ -11,7 +11,7 @@ const Dashboard = () => {
     // fetching data of writer
     const { data, isPending } = useQuery({
         queryKey: ["moderatorAccount"],
-        queryFn: () => crudService.get(`moderator/dashboard/analytic`, true),
+        queryFn: () => crudService.get(`moderator/dashboard/analytic`),
         onError: err => {
             toastService.error(err?.message || "Failed to fetch Data.");
         },

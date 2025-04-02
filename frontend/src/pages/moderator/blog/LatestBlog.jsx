@@ -16,7 +16,7 @@ const LatestBlog = () => {
 
     const { data, isLoading } = useQuery({
         queryKey: ["latestBlog"],
-        queryFn: () => crudService.get("moderator/blog/latest-blogs", true),
+        queryFn: () => crudService.get("moderator/blog/latest-blogs"),
         onError: err => {
             toastService.error(err?.message || "Failed to fetch Data.");
         },

@@ -29,7 +29,7 @@ const VerifyBlog = () => {
 
     const { data, isLoading } = useQuery({
         queryKey: ["blog", blogId],
-        queryFn: () => crudService.get(`/moderator/blog/blog/${blogId}`, true),
+        queryFn: () => crudService.get(`/moderator/blog/blog/${blogId}`),
         onError: err => {
             toastService.error(err?.message || "Failed to fetch Data.");
         },
@@ -49,7 +49,7 @@ const VerifyBlog = () => {
     }, [blogStatus, setValue]);
 
     const { mutate, isPending } = useMutation({
-        mutationFn: data => crudService.patch(`moderator/blog/review-blog/${blogId}`, true, data),
+        mutationFn: data => crudService.patch(`moderator/blog/review-blog/${blogId}`, data),
         onSuccess: data => {
             navigate("/moderator/blogs/latest-blogs");
             queryClient.invalidateQueries("latestBlog");
