@@ -1,31 +1,30 @@
 import axiosInstance from "./apiInstance";
 
+/**
+ * Generic API request handler to avoid repetitive code.
+ * @param {string} method - HTTP method (get, post, put, delete, patch)
+ * @param {string} url - API endpoint
+ * @param {Object} [data={}] - Request body (for POST, PUT, PATCH)
+ * @param {Object} [config={}] - Additional Axios config (headers, params, etc.)
+ * @returns {Promise<any>} - API response data
+ **/
+const handleRequest = async (method, url, data = {}, config = {}) => {
+    try {
+        const response = await axiosInstance({ method, url, data, ...config });
+        return response.data;
+    } catch (error) {
+        console.error(`API Error [${method.toUpperCase()} ${url}]:`, error);
+        throw error;
+    }
+};
+
+// CRUD Service
 const crudService = {
-    get: async (url, params = {}) => {
-        const response = await axiosInstance.get(url, { params });
-        return response.data;
-    },
-    post: async (url, data = {}, contentType = "application/json", moreHeaders = {}) => {
-        const response = await axiosInstance.post(url, data, {
-            headers: {
-                "Content-Type": contentType,
-                ...moreHeaders,
-            },
-        });
-        return response.data;
-    },
-    put: async (url, data = {}) => {
-        const response = await axiosInstance.put(url, data);
-        return response.data;
-    },
-    delete: async url => {
-        const response = await axiosInstance.delete(url);
-        return response.data;
-    },
-    patch: async (url, data = {}) => {
-        const response = await axiosInstance.patch(url, data);
-        return response.data;
-    },
+    get: (url, params = {}, headers = {}) => handleRequest("get", url, {}, { params, headers }),
+    post: (url, data = {}, contentType = "application/json", moreHeaders = {}) => handleRequest("post", url, data, { headers: { "Content-Type": contentType, ...moreHeaders } }),
+    put: (url, data = {}, contentType = "application/json", moreHeaders = {}) => handleRequest("put", url, data, { headers: { "Content-Type": contentType, ...moreHeaders } }),
+    patch: (url, data = {}, contentType = "application/json", moreHeaders = {}) => handleRequest("patch", url, data, { headers: { "Content-Type": contentType, ...moreHeaders } }),
+    delete: (url, headers = {}) => handleRequest("delete", url, {}, { headers }),
 };
 
 export default crudService;
