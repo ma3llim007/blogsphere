@@ -17,7 +17,7 @@ const CategoryList = () => {
     // fetching category
     const { data, isLoading } = useQuery({
         queryKey: ["categoryList"],
-        queryFn: () => crudService.get("/admin/category/categories", true),
+        queryFn: () => crudService.get("/admin/category/categories"),
         onError: err => {
             toastService.error(err?.message || "Failed to fetch Data.");
         },
@@ -25,7 +25,7 @@ const CategoryList = () => {
 
     // delete Category
     const { mutate: deleteCategory, isPending } = useMutation({
-        mutationFn: id => crudService.delete(`/admin/category/delete-category/${id}`, true),
+        mutationFn: id => crudService.delete(`/admin/category/delete-category/${id}`),
         onSuccess: data => {
             queryClient.invalidateQueries("categoryList");
             toastService.success(data?.message);

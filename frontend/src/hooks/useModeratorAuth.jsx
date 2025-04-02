@@ -11,7 +11,7 @@ const useModeratorAuth = () => {
     // Using React Query to check authentication status
     const { data, isError, isLoading } = useQuery({
         queryKey: ["moderatorStatus"],
-        queryFn: () => crudService.get("moderator/auth/check-session-moderator", true),
+        queryFn: () => crudService.get("moderator/auth/check-session-moderator"),
         retry: false,
         staleTime: 5 * 60 * 1000,
         onError: error => toastService.error(error.message || "Error checking authentication status"),

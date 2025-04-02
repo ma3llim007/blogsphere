@@ -26,7 +26,7 @@ const AddModerator = () => {
     });
 
     const { mutate, isPending } = useMutation({
-        mutationFn: data => crudService.post("/admin/moderator/register-moderator", true, data),
+        mutationFn: data => crudService.post("/admin/moderator/register-moderator", data),
         onSuccess: data => {
             navigate("/admin/moderator/moderator-list");
             queryClient.invalidateQueries("moderatorList");

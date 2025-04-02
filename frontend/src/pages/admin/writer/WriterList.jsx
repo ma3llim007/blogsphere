@@ -17,14 +17,14 @@ const WriterList = () => {
 
     const { data, isLoading } = useQuery({
         queryKey: ["writerList"],
-        queryFn: () => crudService.get("/admin/writer/writers", true),
+        queryFn: () => crudService.get("/admin/writer/writers"),
         onError: err => {
             toastService.error(err?.message || "Failed to fetch Data.");
         },
     });
 
     const { mutate, isPending } = useMutation({
-        mutationFn: id => crudService.delete(`/writer/delete-writer/${id}`, true),
+        mutationFn: id => crudService.delete(`/writer/delete-writer/${id}`),
         onSuccess: data => {
             queryClient.invalidateQueries("writerList");
             toastService.success(data?.message);
