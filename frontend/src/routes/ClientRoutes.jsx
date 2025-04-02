@@ -5,6 +5,7 @@ import PublicLayout from "@/layouts/PublicLayout";
 import Loading from "@/components/common/Loading";
 
 const Home = lazy(() => import("@/pages/client/Home"));
+const PrivacyPolicy = lazy(() => import("@/pages/client/PrivacyPolicy"));
 
 const ClientRoutes = () => {
     // Defining Routes
@@ -18,6 +19,14 @@ const ClientRoutes = () => {
                     element: (
                         <Suspense fallback={<Loading />}>
                             <Home />
+                        </Suspense>
+                    ),
+                },
+                {
+                    path: "privacy-policy",
+                    element: (
+                        <Suspense fallback={<Loading />}>
+                            <PrivacyPolicy />
                         </Suspense>
                     ),
                 },
