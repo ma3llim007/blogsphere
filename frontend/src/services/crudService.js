@@ -1,13 +1,11 @@
-import { axiosInstanceAuth, axiosInstancePublic } from "./apiInstance";
+import axiosInstance from "./apiInstance";
 
 const crudService = {
-    get: async (url, authRequired = false, params = {}) => {
-        const axiosInstance = authRequired ? axiosInstanceAuth : axiosInstancePublic;
+    get: async (url, params = {}) => {
         const response = await axiosInstance.get(url, { params });
         return response.data;
     },
-    post: async (url, authRequired = false, data = {}, contentType = "application/json", moreHeaders = {}) => {
-        const axiosInstance = authRequired ? axiosInstanceAuth : axiosInstancePublic;
+    post: async (url, data = {}, contentType = "application/json", moreHeaders = {}) => {
         const response = await axiosInstance.post(url, data, {
             headers: {
                 "Content-Type": contentType,
@@ -16,18 +14,15 @@ const crudService = {
         });
         return response.data;
     },
-    put: async (url, authRequired = false, data = {}) => {
-        const axiosInstance = authRequired ? axiosInstanceAuth : axiosInstancePublic;
+    put: async (url, data = {}) => {
         const response = await axiosInstance.put(url, data);
         return response.data;
     },
-    delete: async (url, authRequired = false) => {
-        const axiosInstance = authRequired ? axiosInstanceAuth : axiosInstancePublic;
+    delete: async url => {
         const response = await axiosInstance.delete(url);
         return response.data;
     },
-    patch: async (url, authRequired = false, data = {}) => {
-        const axiosInstance = authRequired ? axiosInstanceAuth : axiosInstancePublic;
+    patch: async (url, data = {}) => {
         const response = await axiosInstance.patch(url, data);
         return response.data;
     },
