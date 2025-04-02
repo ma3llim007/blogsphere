@@ -33,12 +33,12 @@ const Header = ({ categories }) => {
                     <nav className="hidden md:block gap-6 font-medium text-lg grow justify-center">
                         <ul className="flex gap-6 text-lg justify-center">
                             <li>
-                                <NavLink to="/" className="hover:text-primary transition">
+                                <NavLink to="/" className="hover:text-blue-violet transition">
                                     Home
                                 </NavLink>
                             </li>
                             <li>
-                                <NavLink to="/about-us" className="hover:text-primary transition">
+                                <NavLink to="/about-us" className="hover:text-blue-violet transition">
                                     About Us
                                 </NavLink>
                             </li>
@@ -74,12 +74,12 @@ const Header = ({ categories }) => {
                                 </DropdownMenu>
                             </li>
                             <li>
-                                <NavLink to="/blogs" className="hover:text-primary transition">
+                                <NavLink to="/blogs" className="hover:text-blue-violet transition">
                                     Blogs
                                 </NavLink>
                             </li>
                             <li>
-                                <NavLink to="/contact-us" className="hover:text-primary transition">
+                                <NavLink to="/contact-us" className="hover:text-blue-violet transition">
                                     Contact Us
                                 </NavLink>
                             </li>
