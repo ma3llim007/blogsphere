@@ -19,7 +19,7 @@ const ViewWriter = () => {
     // fetching data of order
     const { data: responseData, isPending } = useQuery({
         queryKey: ["viewWriter", writerId],
-        queryFn: () => crudService.get(`/admin/writer/writer/${writerId}`, true),
+        queryFn: () => crudService.get(`/admin/writer/writer/${writerId}`),
         onError: err => {
             toastService.error(err?.message || "Failed to fetch Data.");
         },
@@ -30,7 +30,7 @@ const ViewWriter = () => {
 
     // Verify The Moderator
     const { mutate, isPending: mutateIsPending } = useMutation({
-        mutationFn: () => crudService.patch(`/admin/writer/update-writer-status/${writerId}`, true, {}),
+        mutationFn: () => crudService.patch(`/admin/writer/update-writer-status/${writerId}`, {}),
         onSuccess: data => {
             navigate("/admin/writers/writer-list");
             queryClient.invalidateQueries("writerList");
@@ -56,41 +56,41 @@ const ViewWriter = () => {
                     <div className="w-full border bg-gray-700/20 dark:bg-gray-950/50 shadow-md rounded-sm select-none">
                         <table className="table-auto w-full text-lg border-collapse select-none">
                             <tbody className="divide-y">
-                                <tr className="hover:bg-gray-300 hover:bg-opacity-60 dark:hover:bg-gray-800 transition">
-                                    <th scope="col" colSpan={2} className="text-left p-3 text-2xl font-bold underline">
-                                        User Details
+                                <tr className="hover:bg-opacity-60">
+                                    <th scope="col" colSpan={2} className="text-center p-3 text-3xl font-bold underline">
+                                        Writer Details
                                     </th>
                                 </tr>
-                                <tr className="hover:bg-gray-300 hover:bg-opacity-60 dark:hover:bg-gray-800 transition">
+                                <tr className="hover:bg-opacity-60 dark:hover:bg-gray-800 transition">
                                     <th className="text-left p-3 font-semibold">First Name</th>
                                     <td className="p-3 text-left">{capitalizeWords(data?.firstName) || "-"}</td>
                                 </tr>
-                                <tr className="hover:bg-gray-300 hover:bg-opacity-60 dark:hover:bg-gray-800 transition">
+                                <tr className="hover:bg-opacity-60 dark:hover:bg-gray-800 transition">
                                     <th className="text-left p-3 font-semibold">Last Name</th>
                                     <td className="p-3 text-left">{capitalizeWords(data?.lastName) || "-"}</td>
                                 </tr>
-                                <tr className="hover:bg-gray-300 hover:bg-opacity-60 dark:hover:bg-gray-800 transition">
+                                <tr className="hover:bg-opacity-60 dark:hover:bg-gray-800 transition">
                                     <th className="text-left p-3 font-semibold">Username</th>
                                     <td className="p-3 text-left">{data?.username || "-"}</td>
                                 </tr>
-                                <tr className="hover:bg-gray-300 hover:bg-opacity-60 dark:hover:bg-gray-800 transition">
+                                <tr className="hover:bg-opacity-60 dark:hover:bg-gray-800 transition">
                                     <th className="text-left p-3 font-semibold">E-Mail</th>
                                     <td className="p-3 text-left">{data?.email || "-"}</td>
                                 </tr>
-                                <tr className="hover:bg-gray-300 hover:bg-opacity-60 dark:hover:bg-gray-800 transition">
+                                <tr className="hover:bg-opacity-60 dark:hover:bg-gray-800 transition">
                                     <th className="text-left p-3 font-semibold">Phone Number</th>
                                     <td className="p-3 text-left">{data?.phoneNumber || "-"}</td>
                                 </tr>
-                                <tr className="hover:bg-gray-300 hover:bg-opacity-60 dark:hover:bg-gray-800 transition">
+                                <tr className="hover:bg-opacity-60 dark:hover:bg-gray-800 transition">
                                     <th className="text-left p-3 font-semibold">Phone Number</th>
                                     <td className="p-3 text-left">{data?.writerVerify ? <Badge title="Verify" /> : <Badge title="Not Verify" className="Danger" />}</td>
                                 </tr>
-                                <tr className="hover:bg-gray-300 hover:bg-opacity-60 dark:hover:bg-gray-800 transition">
+                                <tr className="hover:bg-opacity-60 dark:hover:bg-gray-800 transition">
                                     <th className="text-left p-3 font-semibold">Create At</th>
                                     <td className="p-3 text-left">{formatDateTime(data?.createdAt)}</td>
                                 </tr>
                                 {!data?.writerVerify ? (
-                                    <tr className="hover:bg-gray-300 hover:bg-opacity-60 dark:hover:bg-gray-800 transition">
+                                    <tr className="hover:bg-opacity-60 dark:hover:bg-gray-800 transition">
                                         <th className="text-left p-3 font-semibold">Verify Writer</th>
                                         <td className="p-3 text-left">
                                             <ButtonWithAlert
