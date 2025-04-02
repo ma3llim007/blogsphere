@@ -29,7 +29,7 @@ const PrivacyPolicy = () => {
                         <p className="text-gray-700">
                             In this privacy policy, Personal Data refers to any information that can identify you as an individual. Processing means any operation performed on your personal data,
                             such as collecting, storing, or using it. Data subject refers to you as the individual whose data is being processed. Child refers to individuals under the age of 16,
-                            and We/Us refers to [Your Name or Website Name], the controller of the data.
+                            and We/Us refers to BlogSphere, the controller of the data.
                         </p>
                     </div>
 
