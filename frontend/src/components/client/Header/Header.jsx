@@ -1,4 +1,4 @@
-import { Link, NavLink } from "react-router-dom";
+import { Link, NavLink, useLocation } from "react-router-dom";
 import { FaRegUserCircle, FaSearch } from "react-icons/fa";
 import { GoSidebarExpand } from "react-icons/go";
 import { IoIosArrowDown } from "react-icons/io";
@@ -9,6 +9,8 @@ import HeaderSidebar from "./HeaderSidebar";
 
 const Header = ({ categories }) => {
     const [isOpenModel, setIsOpenModel] = useState(false);
+    const location = useLocation();
+    const pathName = location.pathname;
 
     const handleModel = () => {
         setIsOpenModel(prev => !prev);
@@ -33,12 +35,12 @@ const Header = ({ categories }) => {
                     <nav className="hidden md:block gap-6 font-medium text-lg grow justify-center">
                         <ul className="flex gap-6 text-lg justify-center">
                             <li>
-                                <NavLink to="/" className="hover:text-blue-violet transition">
+                                <NavLink to="/" className={`hover:text-blue-violet transition ${pathName === "/" ? "text-blue-violet" : null}`}>
                                     Home
                                 </NavLink>
                             </li>
                             <li>
-                                <NavLink to="/about-us" className="hover:text-blue-violet transition">
+                                <NavLink to="/about-us" className={`hover:text-blue-violet transition ${pathName === "/about-us" ? "text-blue-violet" : null}`}>
                                     About Us
                                 </NavLink>
                             </li>
@@ -74,12 +76,12 @@ const Header = ({ categories }) => {
                                 </DropdownMenu>
                             </li>
                             <li>
-                                <NavLink to="/blogs" className="hover:text-blue-violet transition">
+                                <NavLink to="/blogs" className={`hover:text-blue-violet transition ${pathName === "/blogs" ? "text-blue-violet" : null}`}>
                                     Blogs
                                 </NavLink>
                             </li>
                             <li>
-                                <NavLink to="/contact-us" className="hover:text-blue-violet transition">
+                                <NavLink to="/contact-us" className={`hover:text-blue-violet transition ${pathName === "/contact-us" ? "text-blue-violet" : null}`}>
                                     Contact Us
                                 </NavLink>
                             </li>
