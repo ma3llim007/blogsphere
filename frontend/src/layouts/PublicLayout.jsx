@@ -2,13 +2,14 @@ import Loading from "@/components/common/Loading";
 import crudService from "@/services/crudService";
 import { useQuery, useQueryClient } from "@tanstack/react-query";
 import { lazy, Suspense, useEffect } from "react";
-import { Outlet } from "react-router-dom";
+import { Outlet, useLocation } from "react-router-dom";
 
 const Header = lazy(() => import("@/components/client/Header/Header"));
 const Footer = lazy(() => import("@/components/client/Footer"));
 
 const PublicLayout = () => {
     const queryClient = useQueryClient();
+    const location = useLocation();
 
     // Prefetch Data When the components mounts
     useEffect(() => {
@@ -27,10 +28,13 @@ const PublicLayout = () => {
         cacheTime: 1000 * 60 * 60 * 72, // 72 hours
     });
 
+    useEffect(() => {
+        window.scrollTo(0, 0);
+    }, [location.pathname]);
+
     if (isLoading) {
         return <Loading />;
     }
-    
     return (
         <div className="w-full flex flex-col min-h-screen font-DmSans overflow-hidden">
             <Suspense fallback={<Loading />}>
