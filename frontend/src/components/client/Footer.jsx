@@ -37,10 +37,10 @@ const Footer = () => {
                     <Container>
                         <div className="flex flex-col md:flex-row justify-between py-7 items-center text-center md:text-left">
                             <p className="flex items-center gap-1 text-sm sm:text-base">
-                                <FaRegCopyright /> {currentYear()} <span>Mohd Sameer</span> | Designed & Inspired by <span className="font-bold">Tozi.</span>
+                                <FaRegCopyright /> {currentYear()} Mohd Sameer | Designed & Inspired by <span className="font-bold">Tozi.</span>
                             </p>
                             <div className="flex gap-2 items-center">
-                                <Link to="/privacy-policy">Privacy Policy</Link> | <Link to="/terms">Terms & Conditions</Link>
+                                <Link to="/privacy-policy">Privacy Policy</Link> | <Link to="/terms-conditions">Terms & Conditions</Link>
                             </div>
                         </div>
                     </Container>
