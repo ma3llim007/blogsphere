@@ -53,14 +53,14 @@ const AddBlogs = () => {
     // get the category for options
     const { data: categoryOptions, isLoading } = useQuery({
         queryKey: ["categoryOptions"],
-        queryFn: () => crudService.get("/writer/blog/options-category", true),
+        queryFn: () => crudService.get("/writer/blog/options-category"),
         onError: err => {
             toastService.error(err?.message || "Failed to fetch Data.");
         },
     });
 
     const { mutate, isPending } = useMutation({
-        mutationFn: data => crudService.post("/writer/blog/add-blog", true, data, "multipart/form-data"),
+        mutationFn: data => crudService.post("/writer/blog/add-blog", data, "multipart/form-data"),
         onSuccess: data => {
             navigate("/writer/blogs/blog-list");
             queryClient.invalidateQueries("blogList");

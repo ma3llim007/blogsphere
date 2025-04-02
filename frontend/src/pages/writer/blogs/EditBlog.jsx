@@ -39,7 +39,7 @@ const EditBlog = () => {
     // get the category for options
     const { data: categoryOptions, isLoading: categoryOptionsIsLoading } = useQuery({
         queryKey: ["categoryOptions"],
-        queryFn: () => crudService.get("/writer/blog/options-category", true),
+        queryFn: () => crudService.get("/writer/blog/options-category"),
         onError: err => {
             toastService.error(err?.message || "Failed to fetch Data.");
         },
@@ -47,7 +47,7 @@ const EditBlog = () => {
 
     const { data, isLoading, isSuccess } = useQuery({
         queryKey: ["blog", blogId],
-        queryFn: () => crudService.get(`/writer/blog/blog/${blogId}`, true),
+        queryFn: () => crudService.get(`/writer/blog/blog/${blogId}`),
         onError: err => {
             toastService.error(err?.message || "Failed to fetch Data.");
         },
@@ -95,7 +95,7 @@ const EditBlog = () => {
             }
             formData.append("blogId", blogId);
 
-            return crudService.patch("/writer/blog/edit-blog", true, formData, "multipart/form-data");
+            return crudService.patch("/writer/blog/edit-blog", formData, "multipart/form-data");
         },
         onSuccess: data => {
             navigate("/writer/blogs/blog-list");

@@ -19,7 +19,7 @@ const RejectedBlogs = () => {
 
     const { data, isLoading } = useQuery({
         queryKey: ["rejectedBlogs"],
-        queryFn: () => crudService.get("writer/blog/rejected-blogs", true),
+        queryFn: () => crudService.get("writer/blog/rejected-blogs"),
         onError: err => {
             toastService.error(err?.message || "Failed to fetch Data.");
         },
@@ -27,7 +27,7 @@ const RejectedBlogs = () => {
 
     // delete Category
     const { mutate: deleteBlog, isPending: deleteIsPending } = useMutation({
-        mutationFn: id => crudService.delete(`/writer/blog/delete-blog/${id}`, true),
+        mutationFn: id => crudService.delete(`/writer/blog/delete-blog/${id}`),
         onSuccess: data => {
             queryClient.invalidateQueries("rejectedBlogs");
             toastService.success(data?.message);

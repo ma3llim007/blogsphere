@@ -26,7 +26,7 @@ const LoginWriter = () => {
     });
 
     const { mutate, isPending } = useMutation({
-        mutationFn: data => crudService.post("/writer/auth/login", true, data),
+        mutationFn: data => crudService.post("/writer/auth/login", data),
         onError: error => {
             const message = error.response?.data?.message || "An unexpected error occurred.";
             setError("root", { message });

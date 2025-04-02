@@ -32,7 +32,7 @@ const ViewBlog = () => {
 
     const { data, isLoading, isSuccess } = useQuery({
         queryKey: ["blog", blogId],
-        queryFn: () => crudService.get(`/writer/blog/blog/${blogId}`, true),
+        queryFn: () => crudService.get(`/writer/blog/blog/${blogId}`),
         onError: err => {
             toastService.error(err?.message || "Failed to fetch Data.");
         },

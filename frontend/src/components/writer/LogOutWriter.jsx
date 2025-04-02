@@ -23,7 +23,7 @@ const LogOutWriter = () => {
     const { writer } = useSelector(state => state.writerAuth);
 
     const { mutate } = useMutation({
-        mutationFn: () => crudService.post("writer/auth/logout", true),
+        mutationFn: () => crudService.post("writer/auth/logout"),
         onSuccess: async data => {
             dispatch(logoutWriter());
             toastService.info(data?.message);

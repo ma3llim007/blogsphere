@@ -30,7 +30,7 @@ const UpdateWriterDetails = () => {
     // fetching data of Writer
     const { data: responseData, isPending: writerIsPending } = useQuery({
         queryKey: ["writerAccount"],
-        queryFn: () => crudService.get(`writer/auth/writer`, true),
+        queryFn: () => crudService.get(`writer/auth/writer`),
         onError: err => {
             toastService.error(err?.message || "Failed to fetch Data.");
         },
@@ -47,7 +47,7 @@ const UpdateWriterDetails = () => {
     }, [responseData, setValue]);
 
     const { mutate, isPending } = useMutation({
-        mutationFn: data => crudService.patch("/writer/auth/update-writer", true, data),
+        mutationFn: data => crudService.patch("/writer/auth/update-writer", data),
         onSuccess: data => {
             navigate("/writer/account");
             queryClient.invalidateQueries("writerList");
@@ -70,7 +70,7 @@ const UpdateWriterDetails = () => {
                 <meta name="robots" content="noindex, nofollow" />
             </Helmet>
             <PageHeader
-                homeUrl="/writer/dashboard" 
+                homeUrl="/writer/dashboard"
                 title={"Manage Account"}
                 controller={"Dashboard"}
                 controllerUrl={"/writer/dashboard"}

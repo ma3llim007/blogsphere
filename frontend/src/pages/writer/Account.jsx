@@ -14,7 +14,7 @@ const Account = () => {
     // fetching data of writer
     const { data: responseData, isPending } = useQuery({
         queryKey: ["writerAccount"],
-        queryFn: () => crudService.get(`writer/auth/writer`, true),
+        queryFn: () => crudService.get(`writer/auth/writer`),
         onError: err => {
             toastService.error(err?.message || "Failed to fetch Data.");
         },

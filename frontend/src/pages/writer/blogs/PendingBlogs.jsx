@@ -16,7 +16,7 @@ const PendingBlogs = () => {
 
     const { data, isLoading } = useQuery({
         queryKey: ["pendingBlogs"],
-        queryFn: () => crudService.get("writer/blog/pending-blogs", true),
+        queryFn: () => crudService.get("writer/blog/pending-blogs"),
         onError: err => {
             toastService.error(err?.message || "Failed to fetch Data.");
         },
