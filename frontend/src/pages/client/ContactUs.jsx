@@ -2,7 +2,7 @@ import { Link } from "react-router-dom";
 import PageBanner from "@/components/client/PageBanner";
 import Container from "@/components/common/Container";
 import { Breadcrumb, BreadcrumbItem, BreadcrumbList, BreadcrumbPage, BreadcrumbSeparator } from "@/components/ui/breadcrumb";
-import ContactUsImage from "../../assets/contact/contact-us.webp";
+import ContactUsImage from "../../assets/client/contact-us.webp";
 import { Button } from "@/components/ui/button";
 import Input from "@/components/common/Input";
 import TextArea from "@/components/common/TextArea";
