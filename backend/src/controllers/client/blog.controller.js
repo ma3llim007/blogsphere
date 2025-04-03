@@ -17,7 +17,7 @@ const blogs = asyncHandler(async (req, res) => {
             page = totalPages;
         }
 
-        const blogs = await Blog.find({ blogStatus: "Approved" }).skip(skip).limit(limit).sort({ createdAt: -1 }).select("blogTitle blogSlug blogFeatureImage blogShortDescription createdAt");
+        const blogs = await Blog.find({ blogStatus: "Approved" }).skip(skip).limit(limit).sort({ createdAt: -1 }).populate("blogCategory", "categoryName").select("blogTitle blogSlug blogFeatureImage blogShortDescription blogCategory createdAt");
 
         // If no blogs are found, handle the empty state
         if (!blogs.length) {
