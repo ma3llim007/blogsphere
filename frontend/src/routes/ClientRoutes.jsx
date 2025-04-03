@@ -8,6 +8,7 @@ const Home = lazy(() => import("@/pages/client/Home"));
 const PrivacyPolicy = lazy(() => import("@/pages/client/PrivacyPolicy"));
 const TermsConditions = lazy(() => import("@/pages/client/TermsConditions"));
 const ContactUs = lazy(() => import("@/pages/client/ContactUs"));
+const AboutUs = lazy(() => import("@/pages/client/AboutUs"));
 
 const ClientRoutes = () => {
     // Defining Routes
@@ -21,6 +22,14 @@ const ClientRoutes = () => {
                     element: (
                         <Suspense fallback={<Loading />}>
                             <Home />
+                        </Suspense>
+                    ),
+                },
+                {
+                    path: "about-us",
+                    element: (
+                        <Suspense fallback={<Loading />}>
+                            <AboutUs />
                         </Suspense>
                     ),
                 },
