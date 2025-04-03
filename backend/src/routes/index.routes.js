@@ -15,6 +15,7 @@ import writer_BlogRouter from "./writer/blog.routes.js";
 import writer_dashboardRouter from "./writer/dashboard.routes.js";
 // Client Import
 import client_categoryRouter from "./client/category.routes.js";
+import client_blogRouter from "./client/blog.routes.js";
 
 // Admin Routes
 const adminRoutes = Router();
@@ -39,5 +40,6 @@ writerRoutes.use("/dashboard", writer_dashboardRouter);
 // Client Routes
 const clientRoutes = Router();
 clientRoutes.use("/category", client_categoryRouter);
+clientRoutes.use("/blog", client_blogRouter);
 
 export { adminRoutes, writerRoutes, moderatorRoutes, clientRoutes };
