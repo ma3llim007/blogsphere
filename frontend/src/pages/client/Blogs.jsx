@@ -3,99 +3,38 @@ import PageBanner from "@/components/client/PageBanner";
 import Container from "@/components/common/Container";
 import { Breadcrumb, BreadcrumbItem, BreadcrumbList, BreadcrumbPage, BreadcrumbSeparator } from "@/components/ui/breadcrumb";
 import BlogCard from "@/components/client/blogs/BlogCard";
+import crudService from "@/services/crudService";
+import { useInView } from "react-intersection-observer";
+import { useInfiniteQuery } from "@tanstack/react-query";
+import { useEffect } from "react";
+import Loading from "@/components/common/Loading";
+import Loader from "@/components/client/Loader";
 
-const blogsContent = [
-    {
-        _id: 1,
-        category: "Category",
-        blogImage: "https://res.cloudinary.com/dkrkceyqn/image/upload/v1703418605/post13_1db38b91e8.jpg",
-        title: "Top 5 Best SmartPhone 2023",
-        shortDescription:"What you eat directly impacts brain function, focus, and overall mental clarity. Learn how proper nutrition enhances cognitive performance, reduces brain fog, and improves mood, along with the best foods for optimal brain health.",
-        date: "May 28th, 2023",
-    },
-    {
-        _id: 2,
-        category: "Category",
-        blogImage: "https://res.cloudinary.com/dkrkceyqn/image/upload/v1703418605/post13_1db38b91e8.jpg",
-        title: "Top 5 Best SmartPhone 2023",
-        shortDescription:"What you eat directly impacts brain function, focus, and overall mental clarity. Learn how proper nutrition enhances cognitive performance, reduces brain fog, and improves mood, along with the best foods for optimal brain health.",
-        date: "May 28th, 2023",
-    },
-    {
-        _id: 3,
-        category: "Category",
-        blogImage: "https://res.cloudinary.com/dkrkceyqn/image/upload/v1703418605/post13_1db38b91e8.jpg",
-        title: "Top 5 Best SmartPhone 2023",
-        shortDescription:"What you eat directly impacts brain function, focus, and overall mental clarity. Learn how proper nutrition enhances cognitive performance, reduces brain fog, and improves mood, along with the best foods for optimal brain health.",
-        date: "May 28th, 2023",
-    },
-    {
-        _id: 4,
-        category: "Category",
-        blogImage: "https://res.cloudinary.com/dkrkceyqn/image/upload/v1703418605/post13_1db38b91e8.jpg",
-        title: "Top 5 Best SmartPhone 2023",
-        shortDescription:"What you eat directly impacts brain function, focus, and overall mental clarity. Learn how proper nutrition enhances cognitive performance, reduces brain fog, and improves mood, along with the best foods for optimal brain health.",
-        date: "May 28th, 2023",
-    },
-    {
-        _id: 5,
-        category: "Category",
-        blogImage: "https://res.cloudinary.com/dkrkceyqn/image/upload/v1703418605/post13_1db38b91e8.jpg",
-        title: "Top 5 Best SmartPhone 2023",
-        shortDescription:"What you eat directly impacts brain function, focus, and overall mental clarity. Learn how proper nutrition enhances cognitive performance, reduces brain fog, and improves mood, along with the best foods for optimal brain health.",
-        date: "May 28th, 2023",
-    },
-    {
-        _id: 6,
-        category: "Category",
-        blogImage: "https://res.cloudinary.com/dkrkceyqn/image/upload/v1703418605/post13_1db38b91e8.jpg",
-        title: "Top 5 Best SmartPhone 2023",
-        shortDescription:"What you eat directly impacts brain function, focus, and overall mental clarity. Learn how proper nutrition enhances cognitive performance, reduces brain fog, and improves mood, along with the best foods for optimal brain health.",
-        date: "May 28th, 2023",
-    },
-    {
-        _id: 7,
-        category: "Category",
-        blogImage: "https://res.cloudinary.com/dkrkceyqn/image/upload/v1703418605/post13_1db38b91e8.jpg",
-        title: "Top 5 Best SmartPhone 2023",
-        shortDescription:"What you eat directly impacts brain function, focus, and overall mental clarity. Learn how proper nutrition enhances cognitive performance, reduces brain fog, and improves mood, along with the best foods for optimal brain health.",
-        date: "May 28th, 2023",
-    },
-    {
-        _id: 8,
-        category: "Category",
-        blogImage: "https://res.cloudinary.com/dkrkceyqn/image/upload/v1703418605/post13_1db38b91e8.jpg",
-        title: "Top 5 Best SmartPhone 2023",
-        shortDescription:"What you eat directly impacts brain function, focus, and overall mental clarity. Learn how proper nutrition enhances cognitive performance, reduces brain fog, and improves mood, along with the best foods for optimal brain health.",
-        date: "May 28th, 2023",
-    },
-    {
-        _id: 9,
-        category: "Category",
-        blogImage: "https://res.cloudinary.com/dkrkceyqn/image/upload/v1703418605/post13_1db38b91e8.jpg",
-        title: "Top 5 Best SmartPhone 2023",
-        shortDescription:"What you eat directly impacts brain function, focus, and overall mental clarity. Learn how proper nutrition enhances cognitive performance, reduces brain fog, and improves mood, along with the best foods for optimal brain health.",
-        date: "May 28th, 2023",
-    },
-    {
-        _id: 10,
-        category: "Category",
-        blogImage: "https://res.cloudinary.com/dkrkceyqn/image/upload/v1703418605/post13_1db38b91e8.jpg",
-        title: "Top 5 Best SmartPhone 2023",
-        shortDescription:"What you eat directly impacts brain function, focus, and overall mental clarity. Learn how proper nutrition enhances cognitive performance, reduces brain fog, and improves mood, along with the best foods for optimal brain health.",
-        date: "May 28th, 2023",
-    },
-    {
-        _id: 11,
-        category: "Category",
-        blogImage: "https://res.cloudinary.com/dkrkceyqn/image/upload/v1703418605/post13_1db38b91e8.jpg",
-        title: "Top 5 Best SmartPhone 2023",
-        shortDescription:"What you eat directly impacts brain function, focus, and overall mental clarity. Learn how proper nutrition enhances cognitive performance, reduces brain fog, and improves mood, along with the best foods for optimal brain health.",
-        date: "May 28th, 2023",
-    },
-];
+const fetchBlogs = async ({ pageParam = 1 }) => {
+    const { data } = await crudService.get(`blog/blogs?page=${pageParam}&limit=9`);
+    return data;
+};
 
 const Blogs = () => {
+    const { ref, inView } = useInView();
+
+    const { data, fetchNextPage, hasNextPage, isFetchingNextPage, isLoading } = useInfiniteQuery({
+        queryKey: ["blogs"],
+        queryFn: ({ pageParam = 1 }) => fetchBlogs({ pageParam }),
+        getNextPageParam: lastPage => (lastPage?.totalPages > lastPage.page ? lastPage.page + 1 : undefined),
+    });
+
+    // Trigger fetching when the user scrolls to the bottom
+    useEffect(() => {
+        if (inView && hasNextPage) {
+            fetchNextPage().catch(console.error);
+        }
+    }, [inView, hasNextPage, fetchNextPage]);
+
+    if (isLoading) {
+        return <Loading />;
+    }
+
     return (
         <>
             <PageBanner title="Blogs">
@@ -115,11 +54,16 @@ const Blogs = () => {
             </PageBanner>
             <Container>
                 <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 my-7 lg:my-14">
-                    {blogsContent?.map(blog => (
-                        <BlogCard blog={blog} key={blog?._id} />
-                    ))}
+                    {data?.pages
+                        .flatMap(page => page.blogs)
+                        .map(blog => (
+                            <BlogCard blog={blog} key={blog?._id} />
+                        ))}
                 </div>
             </Container>
+            <div ref={ref} className="text-center my-5">
+                {isFetchingNextPage ? <Loader text="Loading More Blogs..." /> : null}
+            </div>
         </>
     );
 };
