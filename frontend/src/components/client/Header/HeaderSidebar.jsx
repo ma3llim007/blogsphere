@@ -36,9 +36,7 @@ const HeaderSidebar = ({ isOpenModel, handleModel, categories }) => {
                             <nav className="group rounded-md" key="categories">
                                 <input type="checkbox" id="toggle-categories" className="hidden peer" />
                                 <label htmlFor="toggle-categories" className="flex justify-between items-center py-2 cursor-pointer rounded-md">
-                                    <Link onClick={handleModel} to="/categories">
-                                        Category
-                                    </Link>
+                                    Category
                                     <div className="px-1 py-1 text-base">
                                         <MdKeyboardArrowDown size={25} className="transform peer-checked:rotate-180 transition-transform duration-300" />
                                     </div>
