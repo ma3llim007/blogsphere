@@ -6,13 +6,18 @@ import BlogCard from "@/components/client/blogs/BlogCard";
 import crudService from "@/services/crudService";
 import { useInView } from "react-intersection-observer";
 import { useInfiniteQuery } from "@tanstack/react-query";
-import { useEffect } from "react";
+import { useCallback, useEffect } from "react";
 import Loading from "@/components/common/Loading";
 import Loader from "@/components/client/Loader";
 
 const fetchBlogs = async ({ pageParam = 1 }) => {
-    const { data } = await crudService.get(`blog/blogs?page=${pageParam}&limit=9`);
-    return data;
+    try {
+        const { data } = await crudService.get(`blog/blogs?page=${pageParam}&limit=9`);
+        return data;
+    } catch (error) {
+        console.error("Error fetching blogs:", error);
+        throw new Error("Failed to load blogs.");
+    }
 };
 
 const Blogs = () => {
@@ -24,12 +29,15 @@ const Blogs = () => {
         getNextPageParam: lastPage => (lastPage?.totalPages > lastPage.page ? lastPage.page + 1 : undefined),
     });
 
-    // Trigger fetching when the user scrolls to the bottom
-    useEffect(() => {
+    const loadMore = useCallback(() => {
         if (inView && hasNextPage) {
-            fetchNextPage().catch(console.error);
+            fetchNextPage().catch(err => console.error("Error fetching next page:", err));
         }
     }, [inView, hasNextPage, fetchNextPage]);
+
+    // Trigger fetching when the user scrolls to the bottom
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+    useEffect(loadMore, [inView]);
 
     if (isLoading) {
         return <Loading />;
@@ -55,7 +63,7 @@ const Blogs = () => {
             <Container>
                 <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 my-7 lg:my-14">
                     {data?.pages
-                        .flatMap(page => page.blogs)
+                        .reduce((acc, page) => [...acc, ...page.blogs], [])
                         .map(blog => (
                             <BlogCard blog={blog} key={blog?._id} />
                         ))}
