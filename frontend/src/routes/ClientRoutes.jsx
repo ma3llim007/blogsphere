@@ -10,6 +10,7 @@ const TermsConditions = lazy(() => import("@/pages/client/TermsConditions"));
 const ContactUs = lazy(() => import("@/pages/client/ContactUs"));
 const AboutUs = lazy(() => import("@/pages/client/AboutUs"));
 const Blogs = lazy(() => import("@/pages/client/Blogs"));
+const CategoryByBlogs = lazy(() => import("@/pages/client/CategoryByBlogs"));
 
 const ClientRoutes = () => {
     // Defining Routes
@@ -39,6 +40,14 @@ const ClientRoutes = () => {
                     element: (
                         <Suspense fallback={<Loading />}>
                             <Blogs />
+                        </Suspense>
+                    ),
+                },
+                {
+                    path: ":category/blogs",
+                    element: (
+                        <Suspense fallback={<Loading />}>
+                            <CategoryByBlogs />
                         </Suspense>
                     ),
                 },
