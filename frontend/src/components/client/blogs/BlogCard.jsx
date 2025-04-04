@@ -5,7 +5,7 @@ import { Link } from "react-router-dom";
 const BlogCard = ({ blog }) => {
     return (
         <div className="relative bg-white shadow-lg rounded-xl overflow-hidden hover:shadow-xl transition-shadow duration-300 group cursor-pointer" key={blog?._id}>
-            <Link to={`blog-detail/${blog?.blogSlug}`} aria-label={capitalizeWords(blog?.blogTitle)}>
+            <Link to={`/blog-detail/${blog?.blogSlug}`} aria-label={capitalizeWords(blog?.blogTitle)}>
                 <div className="relative group overflow-hidden rounded-lg">
                     <img src={blog?.blogFeatureImage} alt={capitalizeWords(blog?.blogTitle)} className="w-full h-60 object-cover transition-transform duration-300 group-hover:scale-105" />
                     {/* White Overlay On Hover */}
@@ -15,7 +15,7 @@ const BlogCard = ({ blog }) => {
                     </span>
                 </div>
             </Link>
-            <Link to={`blog-detail/${blog?.blogSlug}`}>
+            <Link to={`/blog-detail/${blog?.blogSlug}`}>
                 <div className="px-3 py-5 space-y-3 relative z-10">
                     <h3 className="text-lg font-bold text-gray-900 hover:text-blue-violet transition duration-300 line-clamp-2">{capitalizeWords(blog?.blogTitle)}</h3>
                     <p className="line-clamp-2 text-gray-700">{blog?.blogShortDescription}</p>
