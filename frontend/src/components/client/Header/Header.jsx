@@ -83,7 +83,7 @@ const Header = ({ categories }) => {
                         </ul>
                     </nav>
                 </div>
-                <GoSidebarExpand onClick={() => setIsOpenModel(true)} className="lg:hidden" size={23} />
+                <GoSidebarExpand onClick={() => setIsOpenModel(true)} className="lg:hidden cursor-pointer" size={23} />
             </header>
             <HeaderSidebar isOpenModel={isOpenModel} handleModel={handleModel} categories={categories} />
         </>
