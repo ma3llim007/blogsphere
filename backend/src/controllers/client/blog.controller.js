@@ -22,9 +22,9 @@ const blogs = asyncHandler(async (req, res) => {
         const blogs = await Blog.find({ blogStatus: "Approved" })
             .skip(skip)
             .limit(limit)
-            .sort({ createdAt: -1 })
+            .sort({ updatedAt: -1 })
             .populate("blogCategory", "categoryName")
-            .select("blogTitle blogSlug blogFeatureImage blogShortDescription blogCategory createdAt");
+            .select("blogTitle blogSlug blogFeatureImage blogShortDescription blogCategory updatedAt");
 
         // If no blogs are found, handle the empty state
         if (!blogs.length) {
@@ -63,9 +63,9 @@ const categoryByBlogs = asyncHandler(async (req, res) => {
         const blogs = await Blog.find({ blogStatus: "Approved", blogCategory: category?._id })
             .skip(skip)
             .limit(limit)
-            .sort({ createdAt: -1 })
+            .sort({ updatedAt: -1 })
             .populate("blogCategory", "categoryName")
-            .select("blogTitle blogSlug blogFeatureImage blogShortDescription blogCategory createdAt");
+            .select("blogTitle blogSlug blogFeatureImage blogShortDescription blogCategory updatedAt");
 
         // If no blogs are found, handle the empty state
         if (!blogs.length) {
@@ -78,4 +78,34 @@ const categoryByBlogs = asyncHandler(async (req, res) => {
     }
 });
 
-export { blogs, categoryByBlogs };
+// View Blog Details
+const blogDetails = asyncHandler(async (req, res) => {
+    const { blogSlug } = req.params;
+    if (!blogSlug) {
+        return res.status(422).json(new ApiError(422, "Blog Slug Is Required"));
+    }
+
+    try {
+        const blog = await Blog.findOne({ blogSlug }, "-blogSlug -blogShortDescription -blogStatus -createdAt -blogModeratorId -__v")
+            .populate({ path: "blogCategory", select: "categoryName" })
+            .populate({ path: "blogAuthorId", select: "firstName lastName" })
+            .lean();
+
+        if (!blog) {
+            return res.status(400).json(new ApiError(400, "Blog Not Found"));
+        }
+
+        // Fetch related blogs
+        const relatedBlogs = await Blog.aggregate([
+            { $match: { _id: { $ne: blog?._id }, blogStatus: "Approved", blogCategory: blog.blogCategory._id } },
+            { $sample: { size: 4 } },
+            { $project: { blogTitle: 1, blogSlug: 1, blogFeatureImage: 1, updatedAt: 1 } },
+        ]);
+        
+        return res.status(200).json(new ApiResponse(200, { blog, relatedBlogs }, "Blog Details Fetch Successfully"));
+    } catch (_error) {
+        return res.status(500).json(new ApiError(500, "Something Went Wrong While Fetching Blogs Details"));
+    }
+});
+
+export { blogs, categoryByBlogs, blogDetails };
