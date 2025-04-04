@@ -41,7 +41,7 @@ const BlogDetails = () => {
                         </BreadcrumbItem>
                         <BreadcrumbSeparator />
                         <BreadcrumbItem>
-                            <Link className="text-gray-700 hover:text-blue-violet" to={-1}>
+                            <Link className="text-gray-700 hover:text-blue-violet" to={"/blogs"}>
                                 Blogs
                             </Link>
                         </BreadcrumbItem>
