@@ -16,6 +16,7 @@ import writer_dashboardRouter from "./writer/dashboard.routes.js";
 // Client Import
 import client_categoryRouter from "./client/category.routes.js";
 import client_blogRouter from "./client/blog.routes.js";
+import client_enquiryRouter from "./client/enquiry.routes.js";
 
 // Admin Routes
 const adminRoutes = Router();
@@ -41,5 +42,6 @@ writerRoutes.use("/dashboard", writer_dashboardRouter);
 const clientRoutes = Router();
 clientRoutes.use("/category", client_categoryRouter);
 clientRoutes.use("/blog", client_blogRouter);
+clientRoutes.use("/enquiry", client_enquiryRouter);
 
 export { adminRoutes, writerRoutes, moderatorRoutes, clientRoutes };

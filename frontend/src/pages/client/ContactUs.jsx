@@ -7,8 +7,38 @@ import { Button } from "@/components/ui/button";
 import Input from "@/components/common/Input";
 import TextArea from "@/components/common/TextArea";
 import { FaClock, FaMapMarkerAlt, FaPhoneAlt } from "react-icons/fa";
+import { useForm } from "react-hook-form";
+import { yupResolver } from "@hookform/resolvers/yup";
+import { enquirySchema } from "@/validation/clientSchema";
+import { useMutation } from "@tanstack/react-query";
+import crudService from "@/services/crudService";
+import toastService from "@/services/toastService";
+import Loading from "@/components/common/Loading";
 
 const ContactUs = () => {
+    const {
+        register,
+        formState: { errors },
+        setError,
+        handleSubmit,
+        reset,
+    } = useForm({ mode: "onChange", resolver: yupResolver(enquirySchema) });
+
+    const { mutate, isPending } = useMutation({
+        mutationFn: data => crudService.post("enquiry/save", data),
+        onSuccess: data => {
+            toastService.success(data?.message);
+            reset();
+        },
+        onError: error => {
+            const message = error?.response?.data?.message || error?.message;
+            setError("root", { message });
+        },
+    });
+
+    if (isPending) {
+        return <Loading />;
+    }
     return (
         <>
             <PageBanner title="Contact Us">
@@ -30,17 +60,52 @@ const ContactUs = () => {
                 <div className="my-7 lg:my-14 lg:mx-20 grid grid-cols-1 lg:grid-cols-2 gap-5 lg:gap-10 items-center">
                     <img src={ContactUsImage} className="w-full object-cover" alt="Contact Us" />
                     <div className="bg-white">
-                        <form className="space-y-4">
-                            <Input className="w-full !bg-light !border-none px-4 py-3 !rounded text-base focus:outline-none" type="text" name="name" placeholder="Your Name" />
-                            <Input className="w-full !bg-light !border-none px-4 py-3 !rounded text-base focus:outline-none" type="text" name="email" placeholder="Your Email Address" />
-                            <Input className="w-full !bg-light !border-none px-4 py-3 !rounded text-base focus:outline-none" type="text" name="phoneNumber" placeholder="Your Phone Number" />
-                            <Input className="w-full !bg-light !border-none px-4 py-3 !rounded text-base focus:outline-none" type="text" name="subject" placeholder="Your Subject" />
+                        {errors.root && (
+                            <div className="w-full my-4 bg-red-500 text-center rounded-md border border-red-600 py-3 px-4">
+                                <h4 className="text-white font-bold text-sm">{errors.root.message}</h4>
+                            </div>
+                        )}
+                        <form onSubmit={handleSubmit(mutate)} className="space-y-4">
+                            <Input
+                                className="w-full !bg-light !border-none px-4 py-3 !rounded text-base focus:outline-none"
+                                type="text"
+                                name="name"
+                                placeholder="Your Name"
+                                {...register("name")}
+                                error={errors?.name?.message}
+                            />
+                            <Input
+                                className="w-full !bg-light !border-none px-4 py-3 !rounded text-base focus:outline-none"
+                                type="text"
+                                name="email"
+                                placeholder="Your Email Address"
+                                {...register("email")}
+                                error={errors?.email?.message}
+                            />
+                            <Input
+                                className="w-full !bg-light !border-none px-4 py-3 !rounded text-base focus:outline-none"
+                                type="text"
+                                name="phoneNumber"
+                                placeholder="Your Phone Number"
+                                {...register("phoneNumber")}
+                                error={errors?.phoneNumber?.message}
+                            />
+                            <Input
+                                className="w-full !bg-light !border-none px-4 py-3 !rounded text-base focus:outline-none"
+                                type="text"
+                                name="subject"
+                                placeholder="Your Subject"
+                                {...register("subject")}
+                                error={errors?.subject?.message}
+                            />
                             <TextArea
                                 className="w-full !bg-light !border-none px-4 py-3 !rounded text-base focus:outline-none resize-none"
                                 rows={5}
                                 name="message"
                                 id="message"
                                 placeholder="Write Your Message..."
+                                {...register("message")}
+                                error={errors?.message?.message}
                             />
                             <Button className="cursor-pointer bg-blue-violet text-base px-6 py-5">Send Message</Button>
                         </form>
