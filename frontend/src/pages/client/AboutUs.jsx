@@ -33,7 +33,7 @@ const AboutUs = () => {
                         {/* About BlogSphere */}
                         <div className="space-y-4">
                             <h2 className="text-3xl font-bold text-gray-900">
-                                About <span className="text-blue-600">BlogSphere</span>
+                                About <span className="text-blue-violet">BlogSphere</span>
                             </h2>
                             <p className="text-gray-700 leading-relaxed">
                                 BlogSphere is your go-to platform for insightful articles, engaging content, and the latest trends in various industries. Our mission is to provide high-quality,
@@ -43,7 +43,7 @@ const AboutUs = () => {
                         {/* About Our Team */}
                         <div className="space-y-4">
                             <h2 className="text-3xl font-bold text-gray-900">
-                                Meet Our <span className="text-blue-600">Team</span>
+                                Meet Our <span className="text-blue-violet">Team</span>
                             </h2>
                             <p className="text-gray-700 leading-relaxed">
                                 Our dedicated team of writers, researchers, and industry experts work tirelessly to bring you the best content. We believe in the power of knowledge and storytelling to
