@@ -1,5 +1,5 @@
 import { Link, NavLink, useLocation } from "react-router-dom";
-import { FaRegUserCircle, FaSearch } from "react-icons/fa";
+import { FaSearch } from "react-icons/fa";
 import { GoSidebarExpand } from "react-icons/go";
 import { IoIosArrowDown } from "react-icons/io";
 import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuTrigger } from "@/components/ui/dropdown-menu";
@@ -33,7 +33,7 @@ const Header = ({ categories }) => {
 
                     {/* Navigation */}
                     <nav className="hidden md:block gap-6 font-medium text-lg grow justify-center">
-                        <ul className="flex gap-6 text-lg justify-center">
+                        <ul className="flex gap-6 text-lg justify-end">
                             <li>
                                 <NavLink to="/" className={`hover:text-blue-violet transition ${pathName === "/" ? "text-blue-violet" : null}`}>
                                     Home
@@ -83,18 +83,7 @@ const Header = ({ categories }) => {
                         </ul>
                     </nav>
                 </div>
-
-                {/* Login/Register */}
-                <div className="flex gap-4 items-center">
-                    <NavLink to="/login" className="flex items-center gap-2 text-sm md:text-base lg:text-sm xl:text-lg font-medium group relative">
-                        <FaRegUserCircle className="text-blue-violet transition hidden lg:block" size={20} />
-                        <span className="relative">
-                            <span className="group-hover:text-blue-violet transition">Login / Register</span>
-                            <span className="absolute left-0 bottom-0 h-[2px] w-full bg-primary transition-transform scale-x-0 group-hover:scale-x-100"></span>
-                        </span>
-                    </NavLink>
-                    <GoSidebarExpand onClick={() => setIsOpenModel(true)} className="lg:hidden" size={23} />
-                </div>
+                <GoSidebarExpand onClick={() => setIsOpenModel(true)} className="lg:hidden" size={23} />
             </header>
             <HeaderSidebar isOpenModel={isOpenModel} handleModel={handleModel} categories={categories} />
         </>
