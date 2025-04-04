@@ -15,6 +15,15 @@ const currentYear = () => {
     return date.getFullYear();
 };
 
+const slugToText = str => {
+    return str
+        .trim()
+        .replace(/-+/g, " ")
+        .split(" ")
+        .map(word => word.charAt(0).toUpperCase() + word.slice(1).toLowerCase())
+        .join(" ");
+};
+
 const capitalizeWords = str => {
     return str
         ?.trim()
@@ -63,4 +72,4 @@ const slugTransform = value => {
     return "";
 };
 
-export { formatDateTime, currentYear, capitalizeWords, isValidExtensions, isValidFileType, slugTransform };
+export { formatDateTime, currentYear, capitalizeWords, isValidExtensions, isValidFileType, slugTransform, slugToText };
