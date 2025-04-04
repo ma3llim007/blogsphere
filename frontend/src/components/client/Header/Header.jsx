@@ -67,11 +67,6 @@ const Header = ({ categories }) => {
                                                 </Link>
                                             </DropdownMenuItem>
                                         ))}
-                                        <DropdownMenuItem key={"view-all-categories"} asChild className="px-3 py-2 cursor-pointer text-base font-semibold">
-                                            <Link to={`/categories`} className="p-4 border-opacity-50 border-gray-500">
-                                                View All Categories
-                                            </Link>
-                                        </DropdownMenuItem>
                                     </DropdownMenuContent>
                                 </DropdownMenu>
                             </li>
