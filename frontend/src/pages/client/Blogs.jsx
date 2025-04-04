@@ -69,7 +69,7 @@ const Blogs = () => {
                         ))}
                 </div>
             </Container>
-            <div ref={ref} className="text-center my-5">
+            <div ref={ref} className="text-center my-5" aria-live="polite">
                 {isFetchingNextPage ? <Loader text="Loading More Blogs..." /> : null}
             </div>
         </>
