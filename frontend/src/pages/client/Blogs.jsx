@@ -43,6 +43,8 @@ const Blogs = () => {
         return <Loading />;
     }
 
+    const blogs = data?.pages?.flatMap(page => page.blogs) || [];
+
     return (
         <>
             <PageBanner title="Blogs">
@@ -62,11 +64,13 @@ const Blogs = () => {
             </PageBanner>
             <Container>
                 <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 my-7 lg:my-14">
-                    {data?.pages
-                        .reduce((acc, page) => [...acc, ...page.blogs], [])
-                        .map(blog => (
-                            <BlogCard blog={blog} key={blog?._id} />
-                        ))}
+                    {blogs?.length > 0 ? (
+                        blogs.map(blog => <BlogCard blog={blog} key={blog?._id} />)
+                    ) : (
+                        <div className="w-full border py-10 text-center col-span-full">
+                            <h2 className="text-3xl underline font-bold text-blue-violet underline-offset-9">No Blogs Found</h2>
+                        </div>
+                    )}
                 </div>
             </Container>
             <div ref={ref} className="text-center my-5" aria-live="polite">
