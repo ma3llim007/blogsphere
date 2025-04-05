@@ -101,11 +101,52 @@ const blogDetails = asyncHandler(async (req, res) => {
             { $sample: { size: 4 } },
             { $project: { blogTitle: 1, blogSlug: 1, blogFeatureImage: 1, updatedAt: 1 } },
         ]);
-        
+
         return res.status(200).json(new ApiResponse(200, { blog, relatedBlogs }, "Blog Details Fetch Successfully"));
     } catch (_error) {
         return res.status(500).json(new ApiError(500, "Something Went Wrong While Fetching Blogs Details"));
     }
 });
 
-export { blogs, categoryByBlogs, blogDetails };
+const latestRandomBlogs = asyncHandler(async (req, res) => {
+    try {
+        // Latest Blogs
+        const latestBlogs = await Blog.find({ blogStatus: "Approved" })
+            .sort({ updatedAt: -1 })
+            .limit(9)
+            .populate("blogCategory", "categoryName")
+            .select("blogTitle  blogCategory updatedAt blogFeatureImage");
+
+        // random Blogs
+        const randomBlogs = await Blog.aggregate([
+            { $match: { blogStatus: "Approved" } },
+            { $sample: { size: 4 } },
+            {
+                $lookup: {
+                    from: "categories",
+                    localField: "blogCategory",
+                    foreignField: "_id",
+                    as: "category",
+                },
+            },
+            { $unwind: "$category" },
+            {
+                $project: {
+                    blogTitle: 1,
+                    blogSlug: 1,
+                    blogFeatureImage: 1,
+                    category: "$category.categoryName",
+                    updatedAt: 1,
+                },
+            },
+        ]);
+
+        return res.status(200).json(new ApiResponse(200, { latestBlogs,randomBlogs }, "Latest Blogs Fetch Successfully"));
+    } catch (_error) {
+        console.error(_error);
+
+        return res.status(500).json(new ApiError(500, "Something Went Wrong While Fetching Latest Blogs"));
+    }
+});
+
+export { blogs, categoryByBlogs, blogDetails, latestRandomBlogs };
