@@ -2,6 +2,7 @@ import { FaArrowUp, FaFacebook, FaInstagram, FaLinkedinIn, FaRegCopyright, FaTwi
 import Container from "../common/Container";
 import { Link } from "react-router-dom";
 import { currentYear } from "@/utils/utils";
+import logo from "../../assets/client/logo-white.svg"
 
 const socialLinks = [
     { href: "https://www.facebook.com/Ma3llim007/", icon: <FaFacebook />, label: "Facebook" },
@@ -16,8 +17,8 @@ const Footer = () => {
             <footer className="bg-dark text-white">
                 <Container>
                     <div className="my-10 flex flex-col justify-center items-center gap-5 md:flex-row md:justify-between">
-                        <Link to="/" className="w-16">
-                            <img src="https://res.cloudinary.com/dkrkceyqn/image/upload/v1703414042/white_logo_ec9180b142.png" alt="Logo" className="w-full h-auto object-cover" />
+                        <Link to="/" className="w-40">
+                            <img src={logo} alt="BlogSphere" className="w-full h-auto object-cover" />
                         </Link>
                         <div className="flex gap-5 items-center">
                             <h3 className="text-xl lg:text-2xl items-center font-bold">Follow Us</h3>

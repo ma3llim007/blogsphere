@@ -6,6 +6,7 @@ import { capitalizeWords } from "@/utils/utils";
 import { useState } from "react";
 import HeaderSidebar from "./HeaderSidebar";
 import SearchInput from "./SearchInput";
+import logo from "../../../assets/client/logo.svg"
 
 const Header = ({ categories }) => {
     const [isOpenModel, setIsOpenModel] = useState(false);
@@ -20,8 +21,8 @@ const Header = ({ categories }) => {
         <>
             <header className="container mx-auto flex items-center justify-between py-4  px-4 gap-8">
                 {/* Logo */}
-                <Link to="/" className="w-16 flex-shrink-0">
-                    <img src="https://res.cloudinary.com/dkrkceyqn/image/upload/v1703414030/black_logo_04ad91cfe6.png" alt="Logo" className="w-full h-auto object-cover" />
+                <Link to="/" className="w-36 flex-shrink-0">
+                    <img src={logo} alt="BlogSphere" className="w-full object-cover" />
                 </Link>
 
                 {/* Navigation & Search */}
