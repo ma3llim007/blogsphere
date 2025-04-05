@@ -4,6 +4,16 @@ import { Category } from "../../models/category.model.js";
 const headerCategory = asyncHandler(async (req, res) => {
     try {
         const categories = await Category.find().select("categoryName categorySlug");
+
+        return res.status(200).json(new ApiResponse(200, categories, "Categories Fetch Successfully"));
+    } catch (_error) {
+        return res.status(500).json(new ApiError(500, "Something Went Wrong! While Fetching Header Categories"));
+    }
+});
+
+const categories = asyncHandler(async (req, res) => {
+    try {
+        const categories = await Category.find().select("categoryName categorySlug categoryImage");
         
         return res.status(200).json(new ApiResponse(200, categories, "Categories Fetch Successfully"));
     } catch (_error) {
@@ -11,4 +21,4 @@ const headerCategory = asyncHandler(async (req, res) => {
     }
 });
 
-export { headerCategory };
+export { headerCategory, categories };
