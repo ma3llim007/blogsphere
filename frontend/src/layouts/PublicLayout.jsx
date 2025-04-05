@@ -1,3 +1,4 @@
+import Footer from "@/components/client/Footer";
 import Loading from "@/components/common/Loading";
 import crudService from "@/services/crudService";
 import toastService from "@/services/toastService";
@@ -6,7 +7,6 @@ import { lazy, Suspense, useEffect } from "react";
 import { Outlet, useLocation } from "react-router-dom";
 
 const Header = lazy(() => import("@/components/client/Header/Header"));
-const Footer = lazy(() => import("@/components/client/Footer"));
 
 const PublicLayout = () => {
     const queryClient = useQueryClient();
@@ -52,9 +52,9 @@ const PublicLayout = () => {
             <main className="grow">
                 <Outlet />
             </main>
-            <Suspense fallback={<Loading />}>
+            <footer className="bg-dark text-white h-44 shrink-0">
                 <Footer />
-            </Suspense>
+            </footer>
         </div>
     );
 };
