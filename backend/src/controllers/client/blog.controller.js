@@ -115,7 +115,7 @@ const latestRandomBlogs = asyncHandler(async (req, res) => {
             .sort({ updatedAt: -1 })
             .limit(9)
             .populate("blogCategory", "categoryName")
-            .select("blogTitle  blogCategory updatedAt blogFeatureImage");
+            .select("blogTitle blogSlug blogShortDescription blogCategory updatedAt blogFeatureImage");
 
         // random Blogs
         const randomBlogs = await Blog.aggregate([
