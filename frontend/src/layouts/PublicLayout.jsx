@@ -1,5 +1,6 @@
 import Loading from "@/components/common/Loading";
 import crudService from "@/services/crudService";
+import toastService from "@/services/toastService";
 import { useQuery, useQueryClient } from "@tanstack/react-query";
 import { lazy, Suspense, useEffect } from "react";
 import { Outlet, useLocation } from "react-router-dom";
@@ -16,6 +17,10 @@ const PublicLayout = () => {
         queryClient.prefetchQuery({
             queryKey: ["headerCategory"],
             queryFn: () => crudService.get("category/get-categories"),
+            onError: error => {
+                const message = error?.response?.data?.message || error?.message;
+                toastService.error(message || "Failed to fetch Data.");
+            },
             staleTime: 1000 * 60 * 60 * 48, // Data is fresh for 48 hours
             cacheTime: 1000 * 60 * 60 * 72, // Cache remains for 72 hours
         });
@@ -24,6 +29,10 @@ const PublicLayout = () => {
     const { data, isLoading } = useQuery({
         queryKey: ["headerCategory"],
         queryFn: () => crudService.get("category/get-categories"),
+        onError: error => {
+            const message = error?.response?.data?.message || error?.message;
+            toastService.error(message || "Failed to fetch Data.");
+        },
         staleTime: 1000 * 60 * 60 * 48, // 48 hours
         cacheTime: 1000 * 60 * 60 * 72, // 72 hours
     });
