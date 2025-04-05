@@ -22,7 +22,7 @@ const Header = ({ categories }) => {
             <header className="container mx-auto flex items-center justify-between py-4  px-4 gap-8">
                 {/* Logo */}
                 <Link to="/" className="w-36 flex-shrink-0">
-                    <img src={logo} alt="BlogSphere" className="w-full object-cover" />
+                    <img width={"100%"} height={"100%"} src={logo} alt="BlogSphere" className="w-full object-cover" />
                 </Link>
 
                 {/* Navigation & Search */}

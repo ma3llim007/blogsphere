@@ -28,7 +28,8 @@ const CategorySection = () => {
                             <Link to={`/${category.categorySlug}/blogs`} className="block relative">
                                 <img
                                     src={category?.categoryImage}
-                                    alt={capitalizeWords(category?.categoryName)}
+                                    alt={category?.categoryName}
+                                    aria-hidden="true"
                                     className="w-full h-52 object-cover transition-transform duration-300 group-hover:scale-105"
                                 />
                                 {/* Overlay */}

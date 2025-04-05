@@ -18,7 +18,7 @@ const Footer = () => {
                 <Container>
                     <div className="my-10 flex flex-col justify-center items-center gap-5 md:flex-row md:justify-between">
                         <Link to="/" className="w-40">
-                            <img src={logo} alt="BlogSphere" className="w-full h-auto object-cover" />
+                            <img width={"100%"} height={"100%"} src={logo} alt="BlogSphere" className="w-full h-auto object-cover" />
                         </Link>
                         <div className="flex gap-5 items-center">
                             <h3 className="text-xl lg:text-2xl items-center font-bold">Follow Us</h3>
