@@ -49,7 +49,7 @@ const Header = ({ categories }) => {
                                 <DropdownMenu>
                                     <div className="flex items-center gap-1">
                                         <DropdownMenuTrigger asChild>
-                                            <button className="flex items-center gap-1 cursor-pointer">
+                                            <button className={`flex items-center gap-1 cursor-pointer ${pathName.includes("/blogs") ? "text-blue-violet" : null}`}>
                                                 Category&apos;s
                                                 <IoIosArrowDown />
                                             </button>
@@ -62,7 +62,10 @@ const Header = ({ categories }) => {
                                     >
                                         {categories?.map(category => (
                                             <DropdownMenuItem key={category._id} asChild className="px-3 py-2 cursor-pointer text-base font-semibold">
-                                                <Link to={`${category.categorySlug}/blogs`} className="p-4 border-opacity-50 border-gray-500">
+                                                <Link
+                                                    to={`${category.categorySlug}/blogs`}
+                                                    className={`p-4 border-opacity-50 border-gray-500 ${pathName.includes(`${category.categorySlug}/blogs`) ? "text-blue-violet" : null}`}
+                                                >
                                                     {capitalizeWords(category.categoryName)}
                                                 </Link>
                                             </DropdownMenuItem>
@@ -71,7 +74,7 @@ const Header = ({ categories }) => {
                                 </DropdownMenu>
                             </li>
                             <li>
-                                <NavLink to="/blogs" className={`hover:text-blue-violet transition ${pathName === "/blogs" ? "text-blue-violet" : null}`}>
+                                <NavLink to="/blogs" className={`hover:text-blue-violet transition ${pathName === "/blogs" || pathName.includes("/blog-details/") ? "text-blue-violet" : null}`}>
                                     Blogs
                                 </NavLink>
                             </li>
