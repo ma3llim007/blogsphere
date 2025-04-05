@@ -1,0 +1,7 @@
+User-agent: *
+Disallow: /admin/
+Disallow: /writer/
+Disallow: /moderator/
+Disallow: /dashboard/
+
+Sitemap: https://yourdomain.com/sitemap.xml
