@@ -10,6 +10,7 @@ import { FaCalendar } from "react-icons/fa";
 import Loading from "@/components/common/Loading";
 import reactParser from "html-react-parser";
 import DOMPurify from "dompurify";
+import ScrollProgressBar from "@/components/client/ScrollProgressBar";
 
 const BlogDetails = () => {
     const { blogSlug } = useParams();
@@ -31,6 +32,7 @@ const BlogDetails = () => {
     }
     return (
         <>
+            <ScrollProgressBar />
             <PageBanner title={slugToText(blogSlug)}>
                 <Breadcrumb>
                     <BreadcrumbList className="text-lg font-bold">
