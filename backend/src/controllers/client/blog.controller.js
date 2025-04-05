@@ -108,6 +108,7 @@ const blogDetails = asyncHandler(async (req, res) => {
     }
 });
 
+// Latest And Random Blogs
 const latestRandomBlogs = asyncHandler(async (req, res) => {
     try {
         // Latest Blogs
@@ -141,7 +142,7 @@ const latestRandomBlogs = asyncHandler(async (req, res) => {
             },
         ]);
 
-        return res.status(200).json(new ApiResponse(200, { latestBlogs,randomBlogs }, "Latest Blogs Fetch Successfully"));
+        return res.status(200).json(new ApiResponse(200, { latestBlogs, randomBlogs }, "Latest Blogs Fetch Successfully"));
     } catch (_error) {
         console.error(_error);
 
@@ -149,4 +150,27 @@ const latestRandomBlogs = asyncHandler(async (req, res) => {
     }
 });
 
-export { blogs, categoryByBlogs, blogDetails, latestRandomBlogs };
+// Searching For Blogs
+const searchBlogs = asyncHandler(async (req, res) => {
+    try {
+        const { term } = req.query;
+
+        const blogs = await Blog.find({
+            blogStatus: "Approved",
+            blogTitle: { $regex: term, $options: "i" },
+        })
+            .limit(6)
+            .select("blogTitle blogSlug")
+            .sort({ blogTitle: 1 });
+
+        if (!blogs.length) {
+            return res.status(404).json(new ApiResponse(404, null, "No Matching Blogs Found"));
+        }
+
+        return res.status(200).json(new ApiResponse(200, blogs, "Blogs Fetched Successfully"));
+    } catch (_error) {
+        return res.status(500).json(new ApiError(500, "Something Went Wrong! While Searching For Blogs"));
+    }
+});
+
+export { blogs, categoryByBlogs, blogDetails, latestRandomBlogs, searchBlogs };

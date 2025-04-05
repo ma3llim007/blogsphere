@@ -1,11 +1,11 @@
 import { Link, NavLink, useLocation } from "react-router-dom";
-import { FaSearch } from "react-icons/fa";
 import { GoSidebarExpand } from "react-icons/go";
 import { IoIosArrowDown } from "react-icons/io";
 import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuTrigger } from "@/components/ui/dropdown-menu";
 import { capitalizeWords } from "@/utils/utils";
 import { useState } from "react";
 import HeaderSidebar from "./HeaderSidebar";
+import SearchInput from "./SearchInput";
 
 const Header = ({ categories }) => {
     const [isOpenModel, setIsOpenModel] = useState(false);
@@ -27,10 +27,7 @@ const Header = ({ categories }) => {
                 {/* Navigation & Search */}
                 <div className="hidden flex-grow lg:flex items-center justify-between">
                     {/* Search Input */}
-                    <div className="relative flex items-center lg:w-40 xl:w-52 2xl:w-64">
-                        <FaSearch className="absolute left-3 text-primary" />
-                        <input type="text" placeholder="Search..." className="w-full pl-10 pr-4 py-2 border-b border-gray-300 focus:border-primary outline-none transition duration-300" />
-                    </div>
+                    <SearchInput />
 
                     {/* Navigation */}
                     <nav className="hidden md:block gap-6 font-medium text-lg grow justify-center">
