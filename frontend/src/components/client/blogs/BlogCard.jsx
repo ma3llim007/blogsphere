@@ -20,7 +20,7 @@ const BlogCard = ({ blog }) => {
                     <h3 className="text-lg font-bold text-gray-900 hover:text-blue-violet transition duration-300 line-clamp-2">{capitalizeWords(blog?.blogTitle)}</h3>
                     <p className="line-clamp-2 text-gray-700">{blog?.blogShortDescription}</p>
                     <p className="flex items-center gap-2 text-gray-500">
-                        <FaCalendar /> {formatDateTime(blog?.createdAt)}
+                        <FaCalendar /> {formatDateTime(blog?.updatedAt)}
                     </p>
                 </div>
             </Link>
