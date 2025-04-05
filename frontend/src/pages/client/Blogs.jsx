@@ -67,7 +67,7 @@ const Blogs = () => {
                     {blogs?.length > 0 ? (
                         blogs.map(blog => <BlogCard blog={blog} key={blog?._id} />)
                     ) : (
-                        <div className="w-full border py-10 text-center col-span-full">
+                        <div className="w-full py-10 text-center col-span-full">
                             <h2 className="text-3xl underline font-bold text-blue-violet underline-offset-9">No Blogs Found</h2>
                         </div>
                     )}

@@ -77,7 +77,7 @@ const CategoryByBlogs = () => {
                     {blogs?.length > 0 ? (
                         blogs.map(blog => <BlogCard blog={blog} key={blog?._id} />)
                     ) : (
-                        <div className="w-full border py-10 text-center col-span-full space-y-5">
+                        <div className="w-full py-10 text-center col-span-full space-y-5">
                             <h2 className="text-3xl underline font-bold text-blue-violet underline-offset-7">No Blogs Found For This Category.</h2>
                             <Link to={"/blogs"}>
                                 <Button className="Primary btn2xl cursor-pointer">Back To Blogs</Button>
