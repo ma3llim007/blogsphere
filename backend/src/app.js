@@ -4,6 +4,7 @@ import cors from "cors";
 import { adminRoutes, clientRoutes, moderatorRoutes, writerRoutes } from "./routes/index.routes.js";
 import cookieParser from "cookie-parser";
 import helmet from "helmet";
+import compression from "compression";
 const app = express();
 
 // Middleware
@@ -16,6 +17,18 @@ app.use(
     helmet({
         contentSecurityPolicy: false,
         crossOriginEmbedderPolicy: false,
+    })
+);
+app.use(
+    compression({
+        threshold: 1024,
+        level: 6,
+        filter: (req, res) => {
+            if (req.headers["x-no-compression"]) {
+                return false;
+            }
+            return compression.filter(req, res);
+        },
     })
 );
 
