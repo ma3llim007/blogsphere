@@ -18,7 +18,7 @@ const headerCategory = asyncHandler(async (req, res) => {
         const categories = await Category.find().select("categoryName categorySlug");
 
         // Saving the data in cache
-        await redisClient.setEx(key, 600, JSON.stringify({ categories }));
+        await redisClient.setEx(key, 600, JSON.stringify(categories));
 
         return res.status(200).json(new ApiResponse(200, categories, "Categories Fetch Successfully"));
     } catch (_error) {
@@ -40,7 +40,7 @@ const categories = asyncHandler(async (req, res) => {
         const categories = await Category.find().select("categoryName categorySlug categoryImage");
 
         // Saving the data in cache
-        await redisClient.setEx(key, 600, JSON.stringify({ categories }));
+        await redisClient.setEx(key, 600, JSON.stringify(categories));
 
         return res.status(200).json(new ApiResponse(200, categories, "Categories Fetch Successfully"));
     } catch (_error) {
