@@ -1,5 +1,5 @@
 import { Router } from "express";
-import { saveEnquiry } from "../../controllers/client/enquiry.controller.js";
+import { saveEnquiry } from "../../controllers/client/client.controller.js";
 
 const routes = Router();
 
