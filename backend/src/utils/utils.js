@@ -20,4 +20,15 @@ const verifyToken = (token, secret) => {
     return new Promise((resolve, reject) => jwt.verify(token, secret, (err, decoded) => (err ? reject(err) : resolve(decoded))));
 };
 
-export { HttpOptions, isTokenExpired, verifyToken };
+const generateCacheKey = (req) => {
+    const baseUrl = req.path.replace(/^\/+|\/+$/g, "").replace(/\//g, ":");
+    const params = req.query;
+    const sortedParams = Object.keys(params)
+        .sort()
+        .map((key) => `${key}=${params[key]}`)
+        .join("&");
+
+    return sortedParams ? `${baseUrl}:${sortedParams}` : baseUrl;
+};
+
+export { HttpOptions, isTokenExpired, verifyToken, generateCacheKey };
