@@ -55,7 +55,7 @@ const AllBlogs = () => {
             header: "Actions",
             cell: ({ row }) => (
                 <div className="flex gap-1 items-center flex-wrap">
-                    <Button className="Info cursor-pointer" onClick={() => navigate(`/writer/blogs/view-blog/${row.original._id}`)}>
+                    <Button className="Info cursor-pointer" onClick={() => navigate(`/admin/blogs/view-blog/${row.original._id}`)}>
                         View
                     </Button>
                 </div>
