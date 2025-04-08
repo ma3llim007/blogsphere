@@ -44,8 +44,8 @@ const AllBlogs = () => {
             header: "Blog Status",
             cell: ({ row }) => <Badge title={row.original?.blogStatus} className={`${statusBlogClass[row?.original?.blogStatus] || ""} !rounded !leading-normal`} />,
         },
-        { header: "Written By", cell: ({ row }) => `${row?.original?.blogModeratorId?.firstName || "-"} ${row?.original?.blogModeratorId?.lastName || "-"}` },
-        { header: "Verify By", cell: ({ row }) => `${row?.original?.blogAuthorId?.firstName || "-"} ${row?.original?.blogAuthorId?.lastName || "-"}` },
+        { header: "Written By", cell: ({ row }) => `${row?.original?.blogAuthorId?.firstName || "-"} ${row?.original?.blogAuthorId?.lastName || "-"}` },
+        { header: "Verify By", cell: ({ row }) => `${row?.original?.blogModeratorId?.firstName || "-"} ${row?.original?.blogModeratorId?.lastName || "-"}` },
         {
             accessorKey: "updatedAt",
             header: "Date Time",
