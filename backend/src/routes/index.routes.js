@@ -17,10 +17,11 @@ import writer_dashboardRouter from "./writer/dashboard.routes.js";
 import client_categoryRouter from "./client/category.routes.js";
 import client_blogRouter from "./client/blog.routes.js";
 import client_enquiryRouter from "./client/enquiry.routes.js";
+import { authLimiter, publicLimiter } from "../middlewares/rate-limit.middleware.js";
 
 // Admin Routes
 const adminRoutes = Router();
-adminRoutes.use("/auth", admin_authRouter);
+adminRoutes.use("/auth", authLimiter, admin_authRouter);
 adminRoutes.use("/category", admin_categoryRouter);
 adminRoutes.use("/blog", admin_blogRouter);
 adminRoutes.use("/moderator", admin_moderatorRouter);
@@ -28,20 +29,20 @@ adminRoutes.use("/writer", admin_writerRouter);
 
 // Moderator Routes
 const moderatorRoutes = Router();
-moderatorRoutes.use("/auth", moderator_AuthRouter);
+moderatorRoutes.use("/auth", authLimiter, moderator_AuthRouter);
 moderatorRoutes.use("/blog", moderator_blogRouter);
 moderatorRoutes.use("/dashboard", moderator_dashboardRouter);
 
 // Writer Routes
 const writerRoutes = Router();
-writerRoutes.use("/auth", writer_AuthRouter);
+writerRoutes.use("/auth", authLimiter, writer_AuthRouter);
 writerRoutes.use("/blog", writer_BlogRouter);
 writerRoutes.use("/dashboard", writer_dashboardRouter);
 
 // Client Routes
 const clientRoutes = Router();
-clientRoutes.use("/category", client_categoryRouter);
-clientRoutes.use("/blog", client_blogRouter);
-clientRoutes.use("/enquiry", client_enquiryRouter);
+clientRoutes.use("/category", publicLimiter, client_categoryRouter);
+clientRoutes.use("/blog", publicLimiter, client_blogRouter);
+clientRoutes.use("/enquiry", publicLimiter, client_enquiryRouter);
 
 export { adminRoutes, writerRoutes, moderatorRoutes, clientRoutes };
