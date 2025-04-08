@@ -1,6 +1,6 @@
-import { FaHome, FaUsers, FaPlus, FaCubes, FaBlogger, FaList, FaUserEdit } from "react-icons/fa";
+import { FaHome, FaPlus, FaCubes, FaBlogger, FaList, FaUserEdit, FaExclamationTriangle } from "react-icons/fa";
 import { FaRegMessage } from "react-icons/fa6";
-import { MdAddModerator } from "react-icons/md";
+import { MdAddModerator, MdOutlineLibraryBooks } from "react-icons/md";
 import { AiFillDashboard } from "react-icons/ai";
 import { Sidebar, SidebarContent, SidebarGroup, SidebarGroupContent, SidebarMenu, SidebarMenuButton, SidebarMenuItem, SidebarMenuSub, useSidebar } from "@/components/ui/sidebar";
 import { Collapsible, CollapsibleContent, CollapsibleTrigger } from "@/components/ui/collapsible";
@@ -9,6 +9,7 @@ import { BadgeCheck, ChevronRight, ChevronsUpDown } from "lucide-react";
 import { DropdownMenu, DropdownMenuContent, DropdownMenuGroup, DropdownMenuItem, DropdownMenuLabel, DropdownMenuSeparator, DropdownMenuTrigger } from "../ui/dropdown-menu";
 import { Avatar, AvatarFallback, AvatarImage } from "../ui/avatar";
 import LogoutBtn from "@/components/admin/AdminLogoutBtn";
+import { BiRevision } from "react-icons/bi";
 
 const navBar = [
     { name: "Main Site", Icon: FaHome, urlLink: "/" },
@@ -17,17 +18,6 @@ const navBar = [
         Icon: AiFillDashboard,
         urlLink: "/admin/dashboard",
         segment: "dashboard",
-    },
-    {
-        name: "Manage User",
-        Icon: FaUsers,
-        innerLists: [
-            {
-                name: "Users List",
-                urlLink: "/admin/users/user-list",
-            },
-        ],
-        segment: "users",
     },
     {
         name: "Manage Enquiry",
@@ -93,13 +83,23 @@ const navBar = [
         Icon: FaBlogger,
         innerLists: [
             {
-                name: "Add Blog",
-                urlLink: "/admin/blogs/add-blog",
-                Icon: FaPlus,
+                name: "Approved Blogs",
+                urlLink: "/admin/blogs/approved-blogs",
             },
             {
-                name: "Blog List",
-                urlLink: "/admin/blogs/blog-list",
+                name: "Revision Blogs",
+                urlLink: "/admin/blogs/revision-blogs",
+                Icon: BiRevision,
+            },
+            {
+                name: "Rejected Blogs",
+                urlLink: "/admin/blogs/rejected-blogs",
+                Icon: FaExclamationTriangle,
+            },
+            {
+                name: "All Blogs",
+                urlLink: "/admin/blogs/all-blogs",
+                Icon: MdOutlineLibraryBooks,
             },
         ],
         segment: "users",

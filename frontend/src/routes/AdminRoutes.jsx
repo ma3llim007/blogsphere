@@ -18,6 +18,7 @@ const ViewWriter = lazy(() => import("@/pages/admin/writer/ViewWriter"));
 const AddCategory = lazy(() => import("@/pages/admin/category/AddCategory"));
 const CategoryList = lazy(() => import("@/pages/admin/category/CategoryList"));
 const EditCategory = lazy(() => import("@/pages/admin/category/EditCategory"));
+const AllBlogs = lazy(() => import("@/pages/admin/blogs/AllBlogs"));
 
 // Defining Routes
 const router = createBrowserRouter([
@@ -169,6 +170,35 @@ const router = createBrowserRouter([
                         element: (
                             <Suspense fallback={<Loading />}>
                                 <CategoryList />
+                            </Suspense>
+                        ),
+                    },
+                    {
+                        path: "edit-category/:categoryId",
+                        element: (
+                            <Suspense fallback={<Loading />}>
+                                <EditCategory />
+                            </Suspense>
+                        ),
+                    },
+                ],
+            },
+            {
+                path: "blogs",
+                children: [
+                    {
+                        index: true,
+                        element: (
+                            <Suspense fallback={<Loading />}>
+                                <AllBlogs />
+                            </Suspense>
+                        ),
+                    },
+                    {
+                        path: "all-blogs",
+                        element: (
+                            <Suspense fallback={<Loading />}>
+                                <AllBlogs />
                             </Suspense>
                         ),
                     },
