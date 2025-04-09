@@ -8,7 +8,7 @@ import { ApiError, ApiResponse, asyncHandler } from "../../utils/Api.utils.js";
 const dashboardAnalytic = asyncHandler(async (req, res) => {
     try {
         // Define all blog statuses
-        const blogStatuses = ["Draft", "Ready To Publish", "Needs Revisions", "Approved", "Rejected"];
+        const blogStatuses = ["Needs Revisions", "Approved", "Rejected"];
 
         // Parallel aggregation for performance
         const [blogsByStatus, blogsByCategory, totalEnquiries, totalModerators, totalWriters, totalCategories] = await Promise.all([
@@ -75,8 +75,6 @@ const dashboardAnalytic = asyncHandler(async (req, res) => {
             totalWriters,
             totalCategories,
             totalBlogs,
-            totalDraftBlogs: statusCountMap["Draft"] || 0,
-            totalReadyToPublishBlogs: statusCountMap["Ready To Publish"] || 0,
             totalNeedsRevisionBlogs: statusCountMap["Needs Revisions"] || 0,
             totalApprovedBlogs: statusCountMap["Approved"] || 0,
             totalRejectedBlogs: statusCountMap["Rejected"] || 0,

@@ -73,7 +73,7 @@ const ApprovedBlogs = () => {
                 <meta name="description" content="View and manage all blog posts on BlogSphere." />
                 <meta name="robots" content="noindex, nofollow" />
             </Helmet>
-            <PageHeader title={"Manage Blogs"} controller={"Blogs"} controllerUrl={"/admin/blogs/revision-blogs/"} page={"Revision Blog's List"} />
+            <PageHeader title={"Manage Blogs"} controller={"Blogs"} controllerUrl={"/admin/blogs/revision-blogs/"} page={"Approved List's"} />
             <Table columns={blogColumns} data={blogData} paginationOptions={{ pageSize: 10 }} sortable loading={isLoading} />
         </>
     );
