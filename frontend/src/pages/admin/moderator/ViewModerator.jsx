@@ -107,7 +107,7 @@ const ViewModerator = () => {
                             </tbody>
                         </table>
                     </div>
-                    <Button className="Primary cursor-pointer" onClick={() => navigate("/admin/moderator/moderator-list/")}>
+                    <Button className="Secondary cursor-pointer" onClick={() => navigate("/admin/moderator/moderator-list/")}>
                         <FaBackward /> Back To Moderator Listing
                     </Button>
                 </div>

@@ -24,7 +24,7 @@ const WriterList = () => {
     });
 
     const { mutate, isPending } = useMutation({
-        mutationFn: id => crudService.delete(`/writer/delete-writer/${id}`),
+        mutationFn: id => crudService.delete(`/admin/writer/delete-writer/${id}`),
         onSuccess: data => {
             queryClient.invalidateQueries("writerList");
             toastService.success(data?.message);
