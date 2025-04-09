@@ -15,11 +15,10 @@ import { Suspense, useEffect } from "react";
 import { Helmet } from "react-helmet-async";
 import { useForm } from "react-hook-form";
 import { FaBackward } from "react-icons/fa";
-import { Link, useLocation, useParams } from "react-router-dom";
+import { Link, useParams } from "react-router-dom";
 
 const ViewBlog = () => {
     const { blogId } = useParams();
-    const location = useLocation();
 
     const {
         register,
@@ -61,7 +60,7 @@ const ViewBlog = () => {
                 <meta name="robots" content="noindex, nofollow" />
                 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
             </Helmet>
-            <PageHeader homeUrl="/moderator/dashboard" title={"Manage Blogs"} controller={"Blog Listing"} controllerUrl={location.pathname} page={"View Blog"} />
+            <PageHeader homeUrl="/moderator/dashboard" title={"Manage Blogs"} controller={"Blog Listing"} controllerUrl={-1} page={"View Blog"} />
             <section className="w-full">
                 <div className="my-4 w-full container mx-auto border-t-4 border-blue-700 rounded-lg p-2 bg-gray-100 dark:bg-slate-800">
                     <form className="space-y-5">
