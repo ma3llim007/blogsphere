@@ -69,11 +69,11 @@ const ApprovedBlogs = () => {
     return (
         <>
             <Helmet>
-                <title>Manage Blog Posts | BlogSphere</title>
-                <meta name="description" content="View and manage all blog posts on BlogSphere." />
+                <title>Approved Blogs | Admin Panel | BlogSphere</title>
+                <meta name="description" content="View and manage all approved blog posts on BlogSphere. Ensure published content aligns with editorial guidelines." />
                 <meta name="robots" content="noindex, nofollow" />
             </Helmet>
-            <PageHeader title={"Manage Blogs"} controller={"Blogs"} controllerUrl={"/admin/blogs/revision-blogs/"} page={"Approved List's"} />
+            <PageHeader title={"Manage Blogs"} controller={"Blogs"} controllerUrl={"/admin/blogs/approved-blogs/"} page={"Approved List's"} />
             <Table columns={blogColumns} data={blogData} paginationOptions={{ pageSize: 10 }} sortable loading={isLoading} />
         </>
     );

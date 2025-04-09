@@ -75,8 +75,8 @@ const ModeratorList = () => {
     return (
         <>
             <Helmet>
-                <title>Moderator Listing | BlogSphere</title>
-                <meta name="description" content="View and manage all moderators in the BlogSphere admin panel. Assign roles, update permissions, and monitor activity efficiently." />
+                <title>Moderator List | Admin Panel | BlogSphere</title>
+                <meta name="description" content="View and manage all moderators in the BlogSphere admin panel. Edit roles, remove access, or review moderator activity." />
                 <meta name="robots" content="noindex, nofollow" />
             </Helmet>
             <PageHeader title={"Manage Moderators"} controller={"View All Moderator"} controllerUrl={"/admin/moderator/moderator-list/"} page={"Moderator Listing"} />

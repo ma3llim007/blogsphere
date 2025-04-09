@@ -6,13 +6,15 @@ const AdminNotFound = () => {
     return (
         <>
             <Helmet>
-                <title>404 - Page Not Found | BlogSphere</title>
+                <title>404 - Page Not Found | BlogSphere Admin</title>
+                <meta name="description" content="Oops! The page you are looking for doesn't exist in the BlogSphere Admin Panel." />
                 <meta name="robots" content="noindex, nofollow" />
-                <meta name="description" content="The page you are looking for does not exist in the admin panel." />
-                <meta property="og:title" content="404 - Page Not Found" />
-                <meta property="og:description" content="This page does not exist in the admin panel. Please return to the dashboard." />
+                <meta name="viewport" content="width=device-width, initial-scale=1" />
+                <meta charSet="utf-8" />
+                <meta property="og:title" content="404 - Not Found | BlogSphere Admin" />
+                <meta property="og:description" content="This page does not exist in the BlogSphere admin interface." />
                 <meta property="og:type" content="website" />
-                <meta property="og:url" content={window.location.href} />
+                <meta property="og:site_name" content="BlogSphere" />
             </Helmet>
 
             <section className="w-full h-full bg-white dark:bg-slate-950 flex flex-col justify-center items-center leading-10 py-20 px-5 text-center">

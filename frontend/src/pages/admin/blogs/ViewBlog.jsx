@@ -31,11 +31,11 @@ const ViewBlog = () => {
     return (
         <>
             <Helmet>
-                <title>View Blog Post | BlogSphere</title>
-                <meta name="description" content="Viewing an existing blog post in BlogSphere admin panel." />
+                <title>View Blog | Admin Panel | BlogSphere</title>
+                <meta name="description" content="Preview blog content, check formatting, and validate before approving or suggesting changes. Admin-only view in BlogSphere." />
                 <meta name="robots" content="noindex, nofollow" />
             </Helmet>
-            <PageHeader title={"Manage Blogs"} controller={"Blog Listing"} controllerUrl={"/admin/blogs/all-blogs/"} page={"View Blog"} />
+            <PageHeader title={"Manage Blogs"} controller={"Blog Listing"} controllerUrl={-1} page={"View Blog"} />
             <section className="w-full">
                 <div className="my-4 w-full container mx-auto border-t-4 border-blue-700 rounded-lg p-2 bg-gray-100 dark:bg-slate-800">
                     <form className="space-y-5">

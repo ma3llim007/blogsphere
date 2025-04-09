@@ -99,8 +99,8 @@ const EditCategory = () => {
     return (
         <>
             <Helmet>
-                <title>Edit Category | BlogSphere</title>
-                <meta name="description" content="Modify an existing product category in BlogSphere admin panel. Update category name, description, and status." />
+                <title>Edit Category | Admin Panel | BlogSphere</title>
+                <meta name="description" content="Update or rename an existing blog category in the BlogSphere admin dashboard. Maintain consistent content organization." />
                 <meta name="robots" content="noindex, nofollow" />
             </Helmet>
             <PageHeader title={"Manage Category's"} controller={"Category"} controllerUrl={"/admin/category/category-list"} page={"Edit Category"} />

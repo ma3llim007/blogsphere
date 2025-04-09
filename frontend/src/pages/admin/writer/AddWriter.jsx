@@ -44,8 +44,8 @@ const AddWriter = () => {
     return (
         <>
             <Helmet>
-                <title>Add New Writer | BlogSphere</title>
-                <meta name="description" content="Add and manage writers on the BlogSphere admin panel. Assign roles, set permissions, and streamline content creation effortlessly." />
+                <title>Add Writer | Admin Panel | BlogSphere</title>
+                <meta name="description" content="Add a new writer to the BlogSphere platform. Assign permissions and grant access to create and manage blog content." />
                 <meta name="robots" content="noindex, nofollow" />
             </Helmet>
             <PageHeader title={"Manage Writers"} controller={"Writers"} controllerUrl={"/admin/writers/"} page={"Add Writer's"} />

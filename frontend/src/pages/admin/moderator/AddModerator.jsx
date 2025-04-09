@@ -44,8 +44,8 @@ const AddModerator = () => {
     return (
         <>
             <Helmet>
-                <title>Add New Moderator | BlogSphere</title>
-                <meta name="description" content="Add and manage moderators on the BlogSphere admin panel. Assign roles and control permissions efficiently." />
+                <title>Add Moderator | Admin Panel | BlogSphere</title>
+                <meta name="description" content="Add a new moderator to the BlogSphere platform. Assign roles and permissions to manage blog submissions effectively." />
                 <meta name="robots" content="noindex, nofollow" />
             </Helmet>
             <PageHeader title={"Manage Moderators"} controller={"Moderators"} controllerUrl={"/admin/moderator/"} page={"Add Moderator's"} />

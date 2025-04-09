@@ -68,8 +68,8 @@ const EnquiryListing = () => {
     return (
         <>
             <Helmet>
-                <title>Contact Enquiries | BlogSphere</title>
-                <meta name="description" content="View and respond to customer contact enquiries in BlogSphere admin panel." />
+                <title>Enquiry List | Admin Panel | BlogSphere</title>
+                <meta name="description" content="View and manage all user enquiries submitted through BlogSphere. Track, prioritize, and respond effectively." />
                 <meta name="robots" content="noindex, nofollow" />
             </Helmet>
             <PageHeader title={"Manage Enquiry's"} controller={"All Enquiry"} controllerUrl={"/admin/enquiry/enquiry-list/"} />

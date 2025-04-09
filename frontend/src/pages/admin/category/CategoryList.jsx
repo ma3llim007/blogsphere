@@ -83,8 +83,8 @@ const CategoryList = () => {
     return (
         <>
             <Helmet>
-                <title>Manage Categories | BlogSphere</title>
-                <meta name="description" content="View and manage product categories in BlogSphere admin panel. Add, edit, and delete categories easily." />
+                <title>Category List | Admin Panel | BlogSphere</title>
+                <meta name="description" content="Browse all blog categories in BlogSphere. Manage, edit, or delete categories to maintain structured content." />
                 <meta name="robots" content="noindex, nofollow" />
             </Helmet>
             <PageHeader title={"Manage Category's"} controller={"Category"} controllerUrl={"/admin/category/category-list/"} page={"Category's List"} />

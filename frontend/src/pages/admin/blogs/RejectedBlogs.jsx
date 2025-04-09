@@ -69,8 +69,8 @@ const RejectedBlogs = () => {
     return (
         <>
             <Helmet>
-                <title>Manage Blog Posts | BlogSphere</title>
-                <meta name="description" content="View and manage all blog posts on BlogSphere." />
+                <title>Rejected Blogs | Admin Panel | BlogSphere</title>
+                <meta name="description" content="Review rejected blog posts and provide feedback or reconsideration options within the BlogSphere admin dashboard." />
                 <meta name="robots" content="noindex, nofollow" />
             </Helmet>
             <PageHeader title={"Manage Blogs"} controller={"Blogs"} controllerUrl={"/admin/blogs/rejected-blogs/"} page={"Rejected Blog's List"} />

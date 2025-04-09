@@ -75,8 +75,8 @@ const WriterList = () => {
     return (
         <>
             <Helmet>
-                <title>Writer Listing | BlogSphere Admin</title>
-                <meta name="description" content="View and manage all writers in the BlogSphere admin panel. Assign roles, update permissions, and track writing activity efficiently." />
+                <title>Writer List | Admin Panel | BlogSphere</title>
+                <meta name="description" content="Manage all registered writers on BlogSphere. View activity, update roles, or remove writers as needed." />
                 <meta name="robots" content="noindex, nofollow" />
             </Helmet>
             <PageHeader title={"Manage Writers"} controller={"View All Writers"} controllerUrl={"/admin/writers/writer-list/"} page={"Writer Listing"} />

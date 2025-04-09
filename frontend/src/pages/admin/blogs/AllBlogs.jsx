@@ -69,10 +69,11 @@ const AllBlogs = () => {
     return (
         <>
             <Helmet>
-                <title>Manage Blog Posts | BlogSphere</title>
-                <meta name="description" content="View and manage all blog posts on BlogSphere." />
+                <title>All Blogs | Admin Panel | BlogSphere</title>
+                <meta name="description" content="Browse and manage all blog entries in the BlogSphere admin panel. Filter, sort, and take actions on submitted content." />
                 <meta name="robots" content="noindex, nofollow" />
             </Helmet>
+
             <PageHeader title={"Manage Blogs"} controller={"Blogs"} controllerUrl={"/admin/blogs/all-blogs/"} page={"All Blog's List"} />
             <Table columns={blogColumns} data={blogData} paginationOptions={{ pageSize: 10 }} sortable loading={isLoading} />
         </>

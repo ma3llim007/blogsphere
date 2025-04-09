@@ -68,8 +68,8 @@ const AddCategory = () => {
     return (
         <>
             <Helmet>
-                <title>Add Category | BlogSphere</title>
-                <meta name="description" content="Create a new product category in BlogSphere admin panel to organize your inventory." />
+                <title>Add Category | Admin Panel | BlogSphere</title>
+                <meta name="description" content="Create a new blog category in BlogSphere. Organize content effectively by assigning categories to blog posts." />
                 <meta name="robots" content="noindex, nofollow" />
             </Helmet>
             <PageHeader title={"Manage Category's"} controller={"Category"} controllerUrl={"/admin/category/add-category/"} page={"Add Category's"} />

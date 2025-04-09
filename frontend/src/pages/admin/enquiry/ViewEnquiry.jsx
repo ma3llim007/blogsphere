@@ -12,7 +12,7 @@ import { useNavigate, useParams } from "react-router-dom";
 const ViewEnquiry = () => {
     const { enquiryId } = useParams();
     const navigate = useNavigate();
-    
+
     // fetching the contact Data based on Contact Id
     const { data: contactData, isLoading } = useQuery({
         queryKey: ["enquiry", enquiryId],
@@ -32,8 +32,8 @@ const ViewEnquiry = () => {
     return (
         <>
             <Helmet>
-                <title>View Enquiry | sameerCart</title>
-                <meta name="description" content="Check details of customer contact enquiries in sameerCart admin panel." />
+                <title>View Enquiry | Admin Panel | BlogSphere</title>
+                <meta name="description" content="Inspect details of a specific user enquiry in the BlogSphere admin panel. Respond or archive as needed." />
                 <meta name="robots" content="noindex, nofollow" />
             </Helmet>
             <PageHeader title={"Manage Enquiry's"} controller={"All Enquiry"} controllerUrl={"/admin/enquiry/enquiry-list/"} page={"View Enquiry"} />

@@ -38,11 +38,14 @@ const Dashboard = () => {
         <>
             <Helmet>
                 <title>Admin Dashboard | BlogSphere</title>
-                <meta
-                    name="description"
-                    content="Access the BlogSphere Admin Dashboard to manage blog posts, monitor performance, collaborate with writers, and streamline your publishing workflow."
-                />
+                <meta name="description" content="Access the BlogSphere Admin Dashboard to manage blog posts, categories." />
                 <meta name="robots" content="noindex, nofollow" />
+                <meta name="viewport" content="width=device-width, initial-scale=1" />
+                <meta charSet="utf-8" />
+                <meta property="og:title" content="Admin Dashboard | BlogSphere" />
+                <meta property="og:description" content="Manage and monitor all blog operations from the BlogSphere Admin Dashboard." />
+                <meta property="og:type" content="website" />
+                <meta property="og:site_name" content="BlogSphere" />
             </Helmet>
             <PageHeader title={"Dashboard"} controller={"Dashboard"} controllerUrl={"/admin/dashboard/"} />
             <section className="container mx-auto px-4 mb-10">

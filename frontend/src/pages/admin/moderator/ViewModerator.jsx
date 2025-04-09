@@ -46,8 +46,8 @@ const ViewModerator = () => {
     return (
         <>
             <Helmet>
-                <title>View Moderator Details | BlogSphere</title>
-                <meta name="description" content="Review moderator details, roles, and permissions in the BlogSphere admin panel." />
+                <title>View Moderator | Admin Panel | BlogSphere</title>
+                <meta name="description" content="View detailed information about a specific moderator on BlogSphere. Check assigned roles, activity, and profile status." />
                 <meta name="robots" content="noindex, nofollow" />
             </Helmet>
             <PageHeader title={"Manage Moderators"} controller={"View All Moderator"} controllerUrl={"/admin/moderator/moderator-list/"} page={"View Moderator"} />

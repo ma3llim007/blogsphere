@@ -69,8 +69,8 @@ const RevisionBlogs = () => {
     return (
         <>
             <Helmet>
-                <title>Manage Blog Posts | BlogSphere</title>
-                <meta name="description" content="View and manage all blog posts on BlogSphere." />
+                <title>Blogs Needing Revisions | Admin Panel | BlogSphere</title>
+                <meta name="description" content="Explore blogs flagged for revision. Collaborate with writers to improve and resubmit articles in BlogSphere." />
                 <meta name="robots" content="noindex, nofollow" />
             </Helmet>
             <PageHeader title={"Manage Blogs"} controller={"Blogs"} controllerUrl={"/admin/blogs/revision-blogs/"} page={"Revision Blog's List"} />
