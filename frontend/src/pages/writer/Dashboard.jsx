@@ -7,6 +7,7 @@ import { useQuery } from "@tanstack/react-query";
 import { Helmet } from "react-helmet-async";
 import { FaBlogger, FaCheckCircle, FaClipboardList, FaEdit, FaFileAlt, FaTimesCircle } from "react-icons/fa";
 import BlogStatusChart from "@/components/writer/dashboard/BlogStatusChart";
+import { Link } from "react-router-dom";
 
 const Dashboard = () => {
     // fetching data of writer
@@ -21,12 +22,12 @@ const Dashboard = () => {
     const { cards, blogStatusChart, categoryChart } = data?.data || {};
 
     const cardData = [
-        { count: cards?.totalBlogs, Icon: FaBlogger, label: "Total Blogs", color: "text-white" },
-        { count: cards?.totalDraftBlogs, Icon: FaFileAlt, label: "Draft Blogs", color: "text-gray-100" },
-        { count: cards?.totalReadyToPublishBlogs, Icon: FaClipboardList, label: "Ready To Publish Blogs", color: "text-blue-500" },
-        { count: cards?.totalNeedsRevisionBlogs, Icon: FaEdit, label: "Needs Revisions Blogs", color: "text-orange-600" },
-        { count: cards?.totalApprovedBlogs, Icon: FaCheckCircle, label: "Approved Blogs", color: "text-green-500" },
-        { count: cards?.totalRejectedBlogs, Icon: FaTimesCircle, label: "Rejected Blogs", color: "text-red-500" },
+        { count: cards?.totalBlogs, Icon: FaBlogger, label: "Total Blogs", color: "text-white", link: "/writer/blogs/blog-list" },
+        { count: cards?.totalDraftBlogs, Icon: FaFileAlt, label: "Draft Blogs", color: "text-gray-100", link: "/writer/blogs/draft-blogs" },
+        { count: cards?.totalReadyToPublishBlogs, Icon: FaClipboardList, label: "Ready To Publish Blogs", color: "text-blue-500", link: "/writer/blogs/pending-blogs" },
+        { count: cards?.totalNeedsRevisionBlogs, Icon: FaEdit, label: "Needs Revisions Blogs", color: "text-orange-600", link: "/writer/blogs/revision-blogs" },
+        { count: cards?.totalApprovedBlogs, Icon: FaCheckCircle, label: "Approved Blogs", color: "text-green-500", link: "/writer/blogs/approved-blogs" },
+        { count: cards?.totalRejectedBlogs, Icon: FaTimesCircle, label: "Rejected Blogs", color: "text-red-500", link: "/writer/blogs/rejected-blogs" },
     ];
 
     if (isPending) {
@@ -43,18 +44,17 @@ const Dashboard = () => {
             </Helmet>
             <PageHeader homeUrl="/writer/dashboard/" title={"Dashboard"} controller={"Dashboard"} controllerUrl={"/writer/dashboard/"} />
             <section className="container mx-auto px-4 mb-10">
-                <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-2 lg:grid-cols-3 gap-6 select-none">
-                    {cardData.map(({ count, Icon, color, label }, index) => (
-                        <div
-                            key={index}
-                            className="w-full border border-gray-700 dark:border-gray-500/30 p-4 rounded-lg shadow-md transition-transform transform hover:scale-105 bg-gray-100 dark:bg-gray-800 hover:shadow-lg hover:shadow-blue-500/40 dark:hover:shadow-blue-400/20 cursor-pointer space-y-4"
-                        >
-                            <div className="flex items-center gap-4 text-3xl font-semibold text-gray-900 dark:text-gray-100">
-                                {Icon && <Icon size={25} className={color} />}
-                                <h4>{count || 0}</h4>
+                <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-2 lg:grid-cols-4 gap-6 select-none">
+                    {cardData.map(({ count, Icon, color, label, link }, index) => (
+                        <Link to={link || "#"} key={index} className="w-full">
+                            <div className="w-full border border-gray-700 dark:border-gray-500/30 p-4 rounded-lg shadow-md transition-transform transform hover:scale-105 bg-gray-100 dark:bg-gray-800 hover:shadow-lg hover:shadow-blue-500/40 dark:hover:shadow-blue-400/20 cursor-pointer space-y-4">
+                                <div className="flex items-center gap-4 text-3xl font-semibold text-gray-900 dark:text-gray-100">
+                                    {Icon && <Icon size={25} className={color} />}
+                                    <h4>{count || 0}</h4>
+                                </div>
+                                <p className="text-lg font-bold text-gray-700 dark:text-gray-300">{label}</p>
                             </div>
-                            <p className="text-lg font-bold text-gray-700 dark:text-gray-300">{label}</p>
-                        </div>
+                        </Link>
                     ))}
                 </div>
                 <hr className="my-5" />
