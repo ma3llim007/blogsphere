@@ -3,7 +3,23 @@ import { Blog } from "../../models/blog.model.js";
 import { ApiError, ApiResponse, asyncHandler } from "../../utils/Api.utils.js";
 
 // Approved Blogs
-const approvedBlogs = asyncHandler(async (req, res) => {});
+const approvedBlogs = asyncHandler(async (req, res) => {
+    try {
+        const blogs = await Blog.find({ blogStatus: "Approved" })
+            .populate("blogCategory", "categoryName")
+            .populate("blogAuthorId", "firstName lastName")
+            .populate("blogModeratorId", "firstName lastName")
+            .select("-blogShortDescription -blogDescription -createdAt");
+
+        if (!blogs.length) {
+            return res.status(200).json(new ApiResponse(200, {}, "No Approved Blog Found"));
+        }
+
+        return res.status(200).json(new ApiResponse(200, blogs, "Approved Blogs Fetch Successfully"));
+    } catch (_error) {
+        return res.status(500).json(new ApiError(500, "Something Went Wrong! While Fetching Approved Blogs"));
+    }
+});
 
 // Revision Blogs
 const revisionBlogs = asyncHandler(async (req, res) => {
@@ -51,7 +67,7 @@ const allBlogs = asyncHandler(async (req, res) => {
             .populate("blogAuthorId", "firstName lastName")
             .populate("blogModeratorId", "firstName lastName")
             .select("-blogShortDescription -blogDescription -createdAt");
-            
+
         if (!blogs.length) {
             return res.status(200).json(new ApiResponse(200, {}, "No Blog Found"));
         }
