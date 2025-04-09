@@ -71,9 +71,11 @@ const PendingBlogs = () => {
     return (
         <>
             <Helmet>
-                <title>Pending Blogs | BlogSphere</title>
-                <meta name="description" content="Review and manage pending blogs on BlogSphere. Approve, edit, or request revisions." />
+                <title>Pending Blogs | Writer Panel | BlogSphere</title>
+                <meta name="description" content="Check the status of your submitted blog posts that are awaiting review by moderators in BlogSphere." />
+                <meta name="keywords" content="Pending Blog, Under Review, Submitted Articles, Writer Workflow, BlogSphere Panel" />
                 <meta name="robots" content="noindex, nofollow" />
+                <meta name="viewport" content="width=device-width, initial-scale=1.0" />
             </Helmet>
             <PageHeader homeUrl="/writer/dashboard" title={"Manage Blogs"} controller={"Blogs"} controllerUrl={"/writer/blogs/pending-blogs/"} page={"Pending Blog's List"} />
             <Table columns={blogColumns} data={blogData} paginationOptions={{ pageSize: 10 }} sortable loading={isLoading} />

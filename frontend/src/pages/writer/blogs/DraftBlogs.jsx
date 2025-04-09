@@ -95,9 +95,11 @@ const DraftBlogs = () => {
     return (
         <>
             <Helmet>
-                <title>Draft Blogs | BlogSphere</title>
-                <meta name="description" content="Manage your draft blogs on BlogSphere. Edit, review, and publish when ready." />
+                <title>Draft Blogs | Writer Panel | BlogSphere</title>
+                <meta name="description" content="Access and manage your draft blog posts in the BlogSphere writer panel. Continue writing, editing, or submitting your content for review." />
+                <meta name="keywords" content="Draft Blogs, Unpublished Articles, Blog Writing, Blog Edits, BlogSphere Writer Panel" />
                 <meta name="robots" content="noindex, nofollow" />
+                <meta name="viewport" content="width=device-width, initial-scale=1.0" />
             </Helmet>
             <PageHeader homeUrl="/writer/dashboard" title={"Manage Blogs"} controller={"Blogs"} controllerUrl={location.pathname} page={"Draft Blogs"} />
             <Table columns={blogColumns} data={blogData} paginationOptions={{ pageSize: 10 }} sortable loading={isLoading} />

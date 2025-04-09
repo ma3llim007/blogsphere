@@ -41,13 +41,11 @@ const LoginWriter = () => {
     return (
         <>
             <Helmet>
-                <title>Writer Login | BlogSphere - Secure Access for Writers</title>
-                <meta
-                    name="description"
-                    content="Log in to your BlogSphere writer account to create, edit, and manage your blog posts. Access your dashboard securely and start publishing high-quality content today."
-                />
+                <title>Writer Login | BlogSphere</title>
+                <meta name="description" content="Login to your BlogSphere Writer account to create, edit, and manage blog posts efficiently." />
+                <meta name="keywords" content="Writer Login, BlogSphere Writer, Blog Login, Content Creator Login, Author Access" />
                 <meta name="robots" content="noindex, nofollow" />
-                <meta name="keywords" content="Writer Login, BlogSphere Login, Author Dashboard, Blogging Platform, Secure Writer Access, Content Management, Blog Admin Panel" />
+                <meta name="viewport" content="width=device-width, initial-scale=1.0" />
             </Helmet>
             <section className="w-screen h-screen bg-slate-950">
                 <div className="container mx-auto flex justify-center items-center h-full">

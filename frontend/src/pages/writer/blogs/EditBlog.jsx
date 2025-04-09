@@ -112,9 +112,11 @@ const EditBlog = () => {
     return (
         <>
             <Helmet>
-                <title>Edit Blog Post | BlogSphere</title>
-                <meta name="description" content="Modify and update an existing blog post in BlogSphere admin panel. Manage SEO and content optimization." />
+                <title>Edit Blog | Writer Panel | BlogSphere</title>
+                <meta name="description" content="Edit and refine your existing blog post before submitting for approval or re-submitting revisions." />
+                <meta name="keywords" content="Edit Blog, Blog Revisions, Update Blog Post, Modify Article, BlogSphere Writer Panel" />
                 <meta name="robots" content="noindex, nofollow" />
+                <meta name="viewport" content="width=device-width, initial-scale=1.0" />
             </Helmet>
             <PageHeader homeUrl="/writer/dashboard" title={"Manage Blogs"} controller={"Blog Listing"} controllerUrl={"/writer/blogs/blog-list"} page={"Edit Blog"} />
             <section className="w-full">

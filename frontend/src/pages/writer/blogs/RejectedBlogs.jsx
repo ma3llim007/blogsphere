@@ -101,9 +101,11 @@ const RejectedBlogs = () => {
     return (
         <>
             <Helmet>
-                <title>Rejected Blogs | BlogSphere</title>
-                <meta name="description" content="View and manage rejected blogs on BlogSphere. Review reasons, make edits, and resubmit." />
+                <title>Rejected Blogs | Writer Panel | BlogSphere</title>
+                <meta name="description" content="Review the blogs that were rejected, view feedback, and revise to improve your content on BlogSphere." />
+                <meta name="keywords" content="Rejected Blog, Blog Feedback, Improve Content, Resubmit Articles, BlogSphere Panel" />
                 <meta name="robots" content="noindex, nofollow" />
+                <meta name="viewport" content="width=device-width, initial-scale=1.0" />
             </Helmet>
             <PageHeader homeUrl="/writer/dashboard" title={"Manage Blogs"} controller={"Blogs"} controllerUrl={location.pathname} page={"Rejected Blogs"} />
             <Table columns={blogColumns} data={blogData} paginationOptions={{ pageSize: 10 }} sortable loading={isLoading} />

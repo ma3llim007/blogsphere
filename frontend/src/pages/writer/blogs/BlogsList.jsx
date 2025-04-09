@@ -91,11 +91,13 @@ const BlogsList = () => {
     return (
         <>
             <Helmet>
-                <title>Manage Blog Posts | BlogSphere</title>
-                <meta name="description" content="View and manage all blog posts on BlogSphere. Edit, delete, and update content." />
+                <title>All Blogs | Writer Panel | BlogSphere</title>
+                <meta name="description" content="View and manage all your blog posts in BlogSphere, including drafts, approved, and pending articles." />
+                <meta name="keywords" content="All Blogs, Blog List, Article Overview, Manage Posts, BlogSphere Writer Panel" />
                 <meta name="robots" content="noindex, nofollow" />
+                <meta name="viewport" content="width=device-width, initial-scale=1.0" />
             </Helmet>
-            <PageHeader homeUrl="writer/dashboard" title={"Manage Blogs"} controller={"Blogs"} controllerUrl={"/writer/blogs/blog-list/"} page={"All Blog's List"} />
+            <PageHeader homeUrl="/writer/dashboard" title={"Manage Blogs"} controller={"Blogs"} controllerUrl={"/writer/blogs/blog-list/"} page={"All Blog's List"} />
             <Table columns={blogColumns} data={blogData} paginationOptions={{ pageSize: 10 }} sortable loading={isLoading} />
         </>
     );

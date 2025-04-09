@@ -54,11 +54,13 @@ const ViewBlog = () => {
     return (
         <>
             <Helmet>
-                <title>View Blog Post | BlogSphere</title>
-                <meta name="description" content="Viewing an existing blog post in BlogSphere admin panel. Manage SEO and content optimization." />
+                <title>View Blog | Writer Panel | BlogSphere</title>
+                <meta name="description" content="Read the full details of your blog post including its current status, moderation notes, and final content." />
+                <meta name="keywords" content="View Blog, Blog Preview, Article Detail, Blog Status, BlogSphere Writer View" />
                 <meta name="robots" content="noindex, nofollow" />
+                <meta name="viewport" content="width=device-width, initial-scale=1.0" />
             </Helmet>
-            <PageHeader homeUrl="/writer/dashboard" title={"Manage Blogs"} controller={"Blog Listing"} controllerUrl={"/writer/blogs/add-blog/"} page={"View Blog"} />
+            <PageHeader homeUrl="/writer/dashboard" title={"Manage Blogs"} controller={"Blog Listing"} controllerUrl={-1} page={"View Blog"} />
             <section className="w-full">
                 <div className="my-4 w-full container mx-auto border-t-4 border-blue-700 rounded-lg p-2 bg-gray-100 dark:bg-slate-800">
                     <form className="space-y-5">

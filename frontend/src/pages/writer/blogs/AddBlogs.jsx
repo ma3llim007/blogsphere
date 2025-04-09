@@ -76,9 +76,11 @@ const AddBlogs = () => {
     return (
         <>
             <Helmet>
-                <title>Add New Blog | BlogSphere</title>
-                <meta name="description" content="Create and publish a new blog post on BlogSphere admin panel. Manage content and SEO settings." />
+                <title>Add Blog | Writer Panel | BlogSphere</title>
+                <meta name="description" content="Create a new blog post in the BlogSphere writer panel. Add your content, assign categories, and submit for review." />
+                <meta name="keywords" content="Add Blog, Create Blog Post, New Article, Submit Blog, BlogSphere Writer" />
                 <meta name="robots" content="noindex, nofollow" />
+                <meta name="viewport" content="width=device-width, initial-scale=1.0" />
             </Helmet>
             <PageHeader homeUrl="/writer/dashboard" title={"Manage Blogs"} controller={"Blogs"} controllerUrl={"/writer/blogs/add-blog/"} page={"Add Blog's"} />
             <section className="w-full">

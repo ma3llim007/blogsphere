@@ -65,9 +65,11 @@ const UpdateWriterDetails = () => {
     return (
         <>
             <Helmet>
-                <title>Update Writer Details | BlogSphere</title>
-                <meta name="description" content="Edit and update your writer profile details, manage your account settings, and ensure your information is up to date on BlogSphere." />
+                <title>Update Profile Details | Writer Panel | BlogSphere</title>
+                <meta name="description" content="Edit your personal and professional information in the BlogSphere writer panel to keep your profile up to date." />
+                <meta name="keywords" content="Update Writer Info, Edit Profile, Writer Account Settings, BlogSphere Author Profile, Personal Details" />
                 <meta name="robots" content="noindex, nofollow" />
+                <meta name="viewport" content="width=device-width, initial-scale=1.0" />
             </Helmet>
             <PageHeader
                 homeUrl="/writer/dashboard"

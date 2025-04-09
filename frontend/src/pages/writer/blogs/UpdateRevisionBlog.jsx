@@ -112,11 +112,13 @@ const UpdateRevisionBlog = () => {
     return (
         <>
             <Helmet>
-                <title>Update Revision Blog | BlogSphere</title>
-                <meta name="description" content="Review and update blog posts requiring revisions in BlogSphere. Improve content and resubmit for approval." />
+                <title>Update Blog Revision | Writer Panel | BlogSphere</title>
+                <meta name="description" content="Apply the required changes to your blog post and update the content for resubmission in BlogSphere." />
+                <meta name="keywords" content="Update Blog, Revise Article, Blog Feedback, Submit Revisions, BlogSphere Writer Panel" />
                 <meta name="robots" content="noindex, nofollow" />
+                <meta name="viewport" content="width=device-width, initial-scale=1.0" />
             </Helmet>
-            <PageHeader homeUrl="/writer/dashboard" title={"Manage Blogs"} controller={"Blog Listing"} controllerUrl={"/writer/blogs/blog-list"} page={"Edit Blog"} />
+            <PageHeader homeUrl="/writer/dashboard" title={"Manage Blogs"} controller={"Blog Listing"} controllerUrl={-1} page={"Edit Blog"} />
             <section className="w-full">
                 <div className="my-4 w-full container mx-auto border-t-4 border-blue-700 rounded-lg p-2 bg-gray-100 dark:bg-slate-800">
                     <form className="space-y-5" onSubmit={handleSubmit(data => mutate(data))} encType="multipart/form-data">

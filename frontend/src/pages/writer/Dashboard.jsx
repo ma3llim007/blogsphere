@@ -36,8 +36,10 @@ const Dashboard = () => {
         <>
             <Helmet>
                 <title>Writer Dashboard | BlogSphere</title>
-                <meta name="description" content="Manage your blog posts, track progress, and submit articles for review in the BlogSphere writer dashboard." />
+                <meta name="description" content="Access your writer dashboard to track blog status, view submissions, and collaborate with moderators on BlogSphere." />
+                <meta name="keywords" content="Writer Dashboard, BlogSphere Dashboard, Blog Stats, My Blogs, Content Management" />
                 <meta name="robots" content="noindex, nofollow" />
+                <meta name="viewport" content="width=device-width, initial-scale=1.0" />
             </Helmet>
             <PageHeader homeUrl="/writer/dashboard/" title={"Dashboard"} controller={"Dashboard"} controllerUrl={"/writer/dashboard/"} />
             <section className="container mx-auto px-4 mb-10">
