@@ -43,9 +43,11 @@ const ChangePassword = () => {
     return (
         <>
             <Helmet>
-                <title>Change Password | BlogSphere</title>
-                <meta name="description" content="Secure your BlogSphere account by updating your password. Change your password regularly to keep your account safe." />
+                <title>Change Password | Moderator Panel | BlogSphere</title>
+                <meta name="description" content="Securely update your BlogSphere moderator account password to protect your profile and moderation access." />
+                <meta name="keywords" content="Change Password, Update Login, Moderator Security, BlogSphere Moderator, Account Protection" />
                 <meta name="robots" content="noindex, nofollow" />
+                <meta name="viewport" content="width=device-width, initial-scale=1.0" />
             </Helmet>
             <PageHeader
                 homeUrl="/moderator/dashboard"

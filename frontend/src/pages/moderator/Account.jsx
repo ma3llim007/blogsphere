@@ -26,9 +26,11 @@ const Account = () => {
     return (
         <>
             <Helmet>
-                <title>My Account | BlogSphere</title>
-                <meta name="description" content="Manage your account settings, update profile details, and review your activity in BlogSphere." />
+                <title>Moderator Account | BlogSphere</title>
+                <meta name="description" content="Manage your moderator profile on BlogSphere. View account details and access moderation settings securely." />
+                <meta name="keywords" content="Moderator Account, Profile Settings, Moderator Panel, BlogSphere Account, View Account, Blog Admin Profile" />
                 <meta name="robots" content="noindex, nofollow" />
+                <meta name="viewport" content="width=device-width, initial-scale=1.0" />
             </Helmet>
             <PageHeader homeUrl="/moderator/dashboard" title={"Manage Account"} controller={"Dashboard"} controllerUrl={"/moderator/dashboard"} page={"View Account"} />
             <section className="w-full">

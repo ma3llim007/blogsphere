@@ -25,7 +25,7 @@ const VerifyBlog = () => {
         setValue,
         setError,
         watch,
-    } = useForm({ mode: "onChange", resolver: yupResolver(moderatorBlogVerifyScheme)});
+    } = useForm({ mode: "onChange", resolver: yupResolver(moderatorBlogVerifyScheme) });
 
     const { data, isLoading } = useQuery({
         queryKey: ["blog", blogId],
@@ -67,9 +67,11 @@ const VerifyBlog = () => {
     return (
         <>
             <Helmet>
-                <title>Review Blog | BlogSphere</title>
-                <meta name="description" content="Viewing an existing blog post in BlogSphere admin panel. Manage SEO and content optimization." />
+                <title>Verify Blogs | Moderator Panel | BlogSphere</title>
+                <meta name="description" content="Verify submitted blogs for authenticity and quality before approval or revision requests on BlogSphere." />
+                <meta name="keywords" content="Verify Blogs, Blog Authentication, Content Check, Blog Review, Moderator Approval, BlogSphere QC" />
                 <meta name="robots" content="noindex, nofollow" />
+                <meta name="viewport" content="width=device-width, initial-scale=1.0" />
             </Helmet>
             <PageHeader homeUrl="/moderator/dashboard" title={"Manage Blogs"} controller={"Blog Listing"} controllerUrl={"/moderator/blogs/latest-blog/"} page={"Verify Blog"} />
             <section className="w-full">
@@ -137,16 +139,8 @@ const VerifyBlog = () => {
                         ) : null}
                         <div className="w-full border-t flex gap-2 items-center pt-2 mb-1">
                             <Button type="submit" className="Primary cursor-pointer">
-                                Verify Blog
+                                Update Blog
                             </Button>
-                            {/* |
-                             <Link to={"/moderator/blogs/latest-blog/"}>
-                                <Button className="Info cursor-pointer">View Blog</Button>
-                            </Link>
-                            |
-                            <Link to={"/moderator/blogs/latest-blog/"}>
-                                <Button className="Secondary cursor-pointer">Back To Latest Blog Listing</Button>
-                            </Link> */}
                         </div>
                     </form>
                 </div>

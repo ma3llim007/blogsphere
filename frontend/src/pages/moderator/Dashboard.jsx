@@ -33,10 +33,12 @@ const Dashboard = () => {
         <>
             <Helmet>
                 <title>Moderator Dashboard | BlogSphere</title>
-                <meta name="description" content="Review, approve, or reject blog posts submitted by writers. Manage content moderation efficiently on BlogSphere." />
+                <meta name="description" content="Access the Moderator Dashboard on BlogSphere to review blog submissions, approve content, and collaborate with writers." />
+                <meta name="keywords" content="Moderator Dashboard, BlogSphere Moderator Panel, Blog Review, Content Approval, Blog Management, Writer Collaboration" />
                 <meta name="robots" content="noindex, nofollow" />
+                <meta name="viewport" content="width=device-width, initial-scale=1.0" />
             </Helmet>
-            <PageHeader homeUrl="/writer/dashboard/" title={"Dashboard"} controller={"Dashboard"} controllerUrl={"/writer/dashboard/"} />
+            <PageHeader homeUrl="/moderator/dashboard/" title={"Dashboard"} controller={"Dashboard"} controllerUrl={"/moderator/dashboard/"} />
             <section className="container mx-auto px-4 mb-10">
                 <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-2 lg:grid-cols-3 gap-6 select-none">
                     {cardData.map(({ count, Icon, color, label }, index) => (

@@ -77,9 +77,11 @@ const RejectedBlogs = () => {
     return (
         <>
             <Helmet>
-                <title>Rejected Blogs | BlogSphere</title>
-                <meta name="description" content="View and manage rejected blog posts on BlogSphere. Review reasons, make edits, and resubmit content." />
+                <title>Rejected Blogs | Moderator Panel | BlogSphere</title>
+                <meta name="description" content="View all rejected blog submissions. Track moderation decisions and provide clear feedback to writers in BlogSphere." />
+                <meta name="keywords" content="Rejected Blogs, Moderator Actions, Blog Rejection, Feedback, Blog Review, BlogSphere Moderator" />
                 <meta name="robots" content="noindex, nofollow" />
+                <meta name="viewport" content="width=device-width, initial-scale=1.0" />
             </Helmet>
             <PageHeader homeUrl="/moderator/dashboard" title={"Manage Blogs"} controller={"Blogs"} controllerUrl={"/moderator/blogs/rejected-blogs/"} page={"Rejected Blog's List"} />
             <Table columns={blogColumns} data={blogData} paginationOptions={{ pageSize: 10 }} sortable loading={isLoading} />

@@ -55,9 +55,11 @@ const ViewBlog = () => {
     return (
         <>
             <Helmet>
-                <title>View Blog Post | BlogSphere</title>
-                <meta name="description" content="Viewing an existing blog post in BlogSphere admin panel. Manage SEO and content optimization." />
+                <title>View Blog | Moderator Panel | BlogSphere</title>
+                <meta name="description" content="Read and evaluate an individual blog post submitted by a writer. Take action as a moderator in BlogSphere." />
+                <meta name="keywords" content="View Blog, Blog Review, Blog Content, Read Blog, Blog Moderation, BlogSphere Article View" />
                 <meta name="robots" content="noindex, nofollow" />
+                <meta name="viewport" content="width=device-width, initial-scale=1.0" />
             </Helmet>
             <PageHeader homeUrl="/moderator/dashboard" title={"Manage Blogs"} controller={"Blog Listing"} controllerUrl={location.pathname} page={"View Blog"} />
             <section className="w-full">

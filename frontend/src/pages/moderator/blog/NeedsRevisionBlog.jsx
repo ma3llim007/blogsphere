@@ -34,7 +34,7 @@ const NeedsRevisionBlog = () => {
             accessorKey: "blogRevisionMessage",
             header: "Revision Message",
             cell: ({ row }) => (
-            <div className="max-w-[300px]">
+                <div className="max-w-[300px]">
                     <p className="text-wrap line-clamp-4">{row.getValue("blogRevisionMessage")}</p>
                 </div>
             ),
@@ -78,9 +78,11 @@ const NeedsRevisionBlog = () => {
     return (
         <>
             <Helmet>
-                <title>Blogs Needing Revision | BlogSphere</title>
-                <meta name="description" content="Review and revise blog posts that need improvements on BlogSphere. Edit, update, and refine content." />
+                <title>Needs Revision Blogs | Moderator Panel | BlogSphere</title>
+                <meta name="description" content="Manage blog posts that require revisions. Collaborate with writers to improve quality and meet editorial guidelines." />
+                <meta name="keywords" content="Needs Revisions, Blog Edits, Blog Review, Moderator Feedback, Writer Collaboration, BlogSphere Revisions" />
                 <meta name="robots" content="noindex, nofollow" />
+                <meta name="viewport" content="width=device-width, initial-scale=1.0" />
             </Helmet>
             <PageHeader homeUrl="/moderator/dashboard" title={"Manage Blogs"} controller={"Blogs"} controllerUrl={"/moderator/blogs/needs-revisions-blogs/"} page={"Needs Revisions Listing"} />
             <Table columns={blogColumns} data={blogData} paginationOptions={{ pageSize: 10 }} sortable loading={isLoading} />

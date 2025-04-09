@@ -67,9 +67,11 @@ const ApprovedBlogs = () => {
     return (
         <>
             <Helmet>
-                <title>Approved Blogs | BlogSphere</title>
-                <meta name="description" content="Browse all approved blogs on BlogSphere. Read, share, and stay informed with quality content." />
-                <meta name="robots" content="index, follow" />
+                <title>Approved Blogs | Moderator Panel | BlogSphere</title>
+                <meta name="description" content="Browse all blogs approved by you or the moderation team in BlogSphere. Ensure quality and publishing standards are met." />
+                <meta name="keywords" content="Approved Blogs, Moderator Blogs, Blog Approval, Blog Review, BlogSphere Moderator, Published Blogs" />
+                <meta name="robots" content="noindex, nofollow" />
+                <meta name="viewport" content="width=device-width, initial-scale=1.0" />
             </Helmet>
             <PageHeader homeUrl="/moderator/dashboard" title={"Manage Blogs"} controller={"Blogs"} controllerUrl={"/moderator/blogs/approved-blogs/"} page={"Approved Blog's List"} />
             <Table columns={blogColumns} data={blogData} paginationOptions={{ pageSize: 10 }} sortable loading={isLoading} />

@@ -22,7 +22,6 @@ const UpdateDetails = () => {
         setValue,
     } = useForm({
         mode: "onChange",
-        // resolver: yupResolver(updateWriterSchema),
     });
 
     // fetching data of moderator
@@ -63,9 +62,11 @@ const UpdateDetails = () => {
     return (
         <>
             <Helmet>
-                <title>Update Moderator Details | BlogSphere</title>
-                <meta name="description" content="Edit and update your Moderator profile details, manage your account settings, and ensure your information is up to date on BlogSphere." />
+                <title>Update Account Details | Moderator Panel | BlogSphere</title>
+                <meta name="description" content="Edit your personal and account information as a moderator on BlogSphere. Keep your contact and profile info up to date." />
+                <meta name="keywords" content="Update Profile, Edit Details, Moderator Account Info, BlogSphere Moderator Settings, Contact Info" />
                 <meta name="robots" content="noindex, nofollow" />
+                <meta name="viewport" content="width=device-width, initial-scale=1.0" />
             </Helmet>
             <PageHeader
                 homeUrl="/moderator/dashboard"

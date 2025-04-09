@@ -6,15 +6,12 @@ const ModeratorNotFound = () => {
     return (
         <>
             <Helmet>
-                <title>404 - Page Not Found | BlogSphere</title>
+                <title>404 - Page Not Found | Moderator Panel | BlogSphere</title>
+                <meta name="description" content="Oops! This page doesn’t exist in the Moderator Panel of BlogSphere. Return to the dashboard or check the URL." />
+                <meta name="keywords" content="404 Moderator, Page Not Found, Invalid Route, BlogSphere Error, Broken Link, Moderator Panel Error" />
                 <meta name="robots" content="noindex, nofollow" />
-                <meta name="description" content="The page you are looking for does not exist in the admin panel." />
-                <meta property="og:title" content="404 - Page Not Found" />
-                <meta property="og:description" content="This page does not exist in the admin panel. Please return to the dashboard." />
-                <meta property="og:type" content="website" />
-                <meta property="og:url" content={window.location.href} />
+                <meta name="viewport" content="width=device-width, initial-scale=1.0" />
             </Helmet>
-
             <section className="w-full h-full bg-white dark:bg-slate-950 flex flex-col justify-center items-center leading-10 py-20 px-5 text-center">
                 <h1 className="font-extrabold text-9xl mb-1">404</h1>
                 <h2 className="font-bold text-xl mb-3 lg:text-4xl xl:text-4xl 2xl:text-4xl">The Page You&apos;re Looking For Can&apos;t Found!</h2>
