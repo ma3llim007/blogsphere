@@ -15,7 +15,7 @@ const EnquiryListing = () => {
 
     // fetching the contact enquiry
     const { data, isPending } = useQuery({
-        queryKey: ["contactList"],
+        queryKey: ["enquiryList"],
         queryFn: () => crudService.get("/admin/enquiry/enquiry-list"),
         onError: err => {
             toastService.error(err?.message || "Failed to fetch Data.");
@@ -24,9 +24,9 @@ const EnquiryListing = () => {
 
     // delete Enquiry
     const { mutate: deleteEnquiry, isPending: deleteEnquiryIsPending } = useMutation({
-        mutationFn: id => crudService.delete(`contact/delete-contact/${id}`, true),
+        mutationFn: id => crudService.delete(`/admin/enquiry/delete-enquiry/${id}`),
         onSuccess: data => {
-            queryClient.invalidateQueries("contactList");
+            queryClient.invalidateQueries("enquiryList");
             toastService.success(data?.message);
         },
         onError: error => {
@@ -55,7 +55,7 @@ const EnquiryListing = () => {
                         dialogTitle="Are You Sure You Want to Delete This Enquiry?"
                         dialogDesc="This action will permanently delete the Enquiry. Proceed?"
                         dialogActionTitle="Delete Enquiry"
-                        dialogActionfn={() => deleteEnquiry(row.original?._id)}
+                        dialogActionfunc={() => deleteEnquiry(row.original?._id)}
                     />
                 </div>
             ),
@@ -72,7 +72,7 @@ const EnquiryListing = () => {
                 <meta name="description" content="View and respond to customer contact enquiries in BlogSphere admin panel." />
                 <meta name="robots" content="noindex, nofollow" />
             </Helmet>
-            <PageHeader title={"Manage Enquiry's"} controller={"All Enquiry"} controllerUrl={"/admin/enquiry/contact-list/"} />
+            <PageHeader title={"Manage Enquiry's"} controller={"All Enquiry"} controllerUrl={"/admin/enquiry/enquiry-list/"} />
             <Table columns={contactColumns} data={contactData} emptyMessage="Contact Is Empty" loading={isPending} paginationOptions={{ pageSize: 10 }} sortable />
         </>
     );

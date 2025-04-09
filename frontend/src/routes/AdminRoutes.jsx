@@ -4,7 +4,6 @@ import Loading from "@/components/common/Loading";
 // Layouts
 const AuthLayout = lazy(() => import("@/layouts/AuthLayout"));
 const AdminLayout = lazy(() => import("@/layouts/AdminLayout"));
-
 // Pages
 const Login = lazy(() => import("@/pages/admin/auth/Login"));
 const Dashboard = lazy(() => import("@/pages/admin/Dashboard"));
@@ -24,6 +23,7 @@ const RejectedBlogs = lazy(() => import("@/pages/admin/blogs/RejectedBlogs"));
 const RevisionBlogs = lazy(() => import("@/pages/admin/blogs/RevisionBlogs"));
 const ApprovedBlogs = lazy(() => import("@/pages/admin/blogs/ApprovedBlogs"));
 const EnquiryListing = lazy(() => import("@/pages/admin/enquiry/EnquiryListing"));
+const ViewEnquiry = lazy(() => import("@/pages/admin/enquiry/ViewEnquiry"));
 
 // Defining Routes
 const router = createBrowserRouter([
@@ -89,10 +89,18 @@ const router = createBrowserRouter([
                         ),
                     },
                     {
-                        path: "contact-list",
+                        path: "enquiry-list",
                         element: (
                             <Suspense fallback={<Loading />}>
                                 <EnquiryListing />
+                            </Suspense>
+                        ),
+                    },
+                    {
+                        path: "view-enquiry/:enquiryId",
+                        element: (
+                            <Suspense fallback={<Loading />}>
+                                <ViewEnquiry />
                             </Suspense>
                         ),
                     },

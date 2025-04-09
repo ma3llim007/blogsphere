@@ -25,7 +25,7 @@ const navBar = [
         innerLists: [
             {
                 name: "Enquiry",
-                urlLink: "/admin/enquiry/contact-list",
+                urlLink: "/admin/enquiry/enquiry-list",
             },
         ],
         segment: "users",
