@@ -23,6 +23,7 @@ const ViewBlog = lazy(() => import("@/pages/admin/blogs/ViewBlog"));
 const RejectedBlogs = lazy(() => import("@/pages/admin/blogs/RejectedBlogs"));
 const RevisionBlogs = lazy(() => import("@/pages/admin/blogs/RevisionBlogs"));
 const ApprovedBlogs = lazy(() => import("@/pages/admin/blogs/ApprovedBlogs"));
+const EnquiryListing = lazy(() => import("@/pages/admin/enquiry/EnquiryListing"));
 
 // Defining Routes
 const router = createBrowserRouter([
@@ -75,6 +76,27 @@ const router = createBrowserRouter([
                         <Dashboard />
                     </Suspense>
                 ),
+            },
+            {
+                path: "enquiry",
+                children: [
+                    {
+                        index: true,
+                        element: (
+                            <Suspense fallback={<Loading />}>
+                                <EnquiryListing />
+                            </Suspense>
+                        ),
+                    },
+                    {
+                        path: "contact-list",
+                        element: (
+                            <Suspense fallback={<Loading />}>
+                                <EnquiryListing />
+                            </Suspense>
+                        ),
+                    },
+                ],
             },
             {
                 path: "moderator",

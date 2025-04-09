@@ -5,6 +5,7 @@ import admin_categoryRouter from "./admin/category.routes.js";
 import admin_blogRouter from "./admin/blog.routes.js";
 import admin_moderatorRouter from "./admin/moderator.routes.js";
 import admin_writerRouter from "./admin/writeAuth.routes.js";
+import admin_enquiryRouter from "./admin/enquiry.routes.js";
 // Moderator Import
 import moderator_AuthRouter from "./moderator/auth.routes.js";
 import moderator_blogRouter from "./moderator/blog.routes.js";
@@ -26,6 +27,7 @@ adminRoutes.use("/category", admin_categoryRouter);
 adminRoutes.use("/blog", admin_blogRouter);
 adminRoutes.use("/moderator", admin_moderatorRouter);
 adminRoutes.use("/writer", admin_writerRouter);
+adminRoutes.use("/enquiry", admin_enquiryRouter);
 
 // Moderator Routes
 const moderatorRoutes = Router();
