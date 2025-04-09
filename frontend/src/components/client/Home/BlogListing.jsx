@@ -18,7 +18,7 @@ const BlogListing = ({ title = "latest blogs", bgColor = "bg-white", blogs = [] 
                                 key={blog?._id}
                                 className="bg-gray-50 flex flex-col rounded-2xl shadow-lg overflow-hidden cursor-pointer border-b-2 border-transparent hover:border-blue-violet transition-all duration-300"
                             >
-                                <img src={blog?.blogFeatureImage} alt={capitalizeWords(blog?.blogTitle)} className="w-full h-56 md:h-40 lg:h-64 xl:h-60 object-cover" />
+                                <img width={475} height={270} src={blog?.blogFeatureImage} alt={capitalizeWords(blog?.blogTitle)} className="w-full h-56 md:h-40 lg:h-64 xl:h-60 object-cover" />
                                 <div className="flex flex-col justify-center p-4 space-y-2 md:space-y-3 grow">
                                     <p className="bg-light text-blue-violet px-3 py-1 text-xs md:text-sm lg:text-base font-semibold rounded-2xl max-w-fit">
                                         {capitalizeWords(blog?.blogCategory?.categoryName)}

@@ -14,15 +14,7 @@ const HomeBanner = ({ blogs }) => {
                 <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 items-center">
                     {/* Featured Large Blog Card */}
                     <Link to={`/blog-details/${featuredBlog?.blogSlug}`} className="border-b-4 border-blue-600 rounded-xl overflow-hidden shadow-md group transition-transform hover:scale-[1.01]">
-                        <img
-                            width={800}
-                            height={320}
-                            src={featuredBlog?.blogFeatureImage}
-                            alt={featuredBlog?.blogTitle}
-                            className="w-full h-80 object-cover"
-                            fetchPriority="high"
-                            decoding="async"
-                        />
+                        <img width={800} height={320} src={featuredBlog?.blogFeatureImage} alt={featuredBlog?.blogTitle} className="w-full h-80 object-cover" fetchPriority="high" decoding="async" />
                         <div className="bg-white px-5 py-4 space-y-3">
                             <span className="bg-light text-blue-violet text-sm px-3 py-1 rounded-2xl font-bold inline-block">{capitalizeWords(featuredBlog?.category)}</span>
                             <h2 className="text-xl md:text-2xl font-extrabold leading-tight line-clamp-2">{capitalizeWords(featuredBlog?.blogTitle)}</h2>
@@ -40,7 +32,10 @@ const HomeBanner = ({ blogs }) => {
                                 </div>
                                 <div className="grow space-y-2">
                                     <span className="bg-light text-blue-violet text-sm px-3 py-1 rounded-2xl font-semibold inline-block">{capitalizeWords(blog?.category)}</span>
-                                    <h3 className="text-sm md:text-lg font-semibold line-clamp-2 group-hover:text-blue-violet transition-colors">{capitalizeWords(blog?.blogTitle)}</h3>
+                                    <h3 className="text-sm md:text-lg font-semibold line-clamp-2 group-hover:text-blue-violet transition-transform duration-300 ease-in-out group-hover:translate-y-[-2px]">
+                                        {capitalizeWords(blog?.blogTitle)}
+                                    </h3>
+
                                     <p className="flex items-center gap-2 text-sm text-gray-500">
                                         <SlCalender /> {formatDateTime(blog?.updatedAt)}
                                     </p>
