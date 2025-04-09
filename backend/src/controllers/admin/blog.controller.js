@@ -1,3 +1,4 @@
+import { isValidObjectId } from "mongoose";
 import { Blog } from "../../models/blog.model.js";
 import { ApiError, ApiResponse, asyncHandler } from "../../utils/Api.utils.js";
 
@@ -21,11 +22,36 @@ const allBlogs = asyncHandler(async (req, res) => {
         if (!blogs.length) {
             return res.status(200).json(new ApiResponse(200, {}, "No Blog Found"));
         }
-        
+
         return res.status(200).json(new ApiResponse(200, blogs, "Blogs Fetch Successfully"));
     } catch (_error) {
         return res.status(500).json(new ApiError(500, "Something Went Wrong! while Fetching All Blogs"));
     }
 });
 
-export { approvedBlogs, revisionBlogs, rejectedBlogs, allBlogs };
+// View Blog
+const viewBlogs = asyncHandler(async (req, res) => {
+    const { blogId } = req.params;
+
+    if (!blogId) {
+        return res.status(429).json(new ApiError(429, "Blog Is Required"));
+    }
+
+    if (!isValidObjectId(blogId)) {
+        return res.status(400).json(new ApiError(400, "Blog Id Is Not Valid"));
+    }
+
+    try {
+        const blogs = await Blog.findById(blogId).populate("blogCategory", "categoryName").populate("blogAuthorId", "firstName lastName").populate("blogModeratorId", "firstName lastName");
+
+        if (!blogs) {
+            return res.status(200).json(new ApiResponse(200, {}, "No Blog Found"));
+        }
+
+        return res.status(200).json(new ApiResponse(200, blogs, "Blog Details Fetch Successfully"));
+    } catch (_error) {
+        return res.status(500).json(new ApiError(500, "Something Went Wrong! while Fetching Blogs Details"));
+    }
+});
+
+export { approvedBlogs, revisionBlogs, rejectedBlogs, allBlogs, viewBlogs };
