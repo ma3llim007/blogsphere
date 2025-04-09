@@ -13,13 +13,13 @@ const blogs = asyncHandler(async (req, res) => {
         const skip = (page - 1) * limit;
 
         // Generate a Unique cache key based on page & limit
-        const key = generateCacheKey(req);
+        // const key = generateCacheKey(req);
 
         // Check if data exists in Redis cache
-        const cacheData = await redisClient.get(key);
-        if (cacheData) {
-            return res.status(200).json(new ApiResponse(200, JSON.parse(cacheData), "Blogs Fetch Successfully"));
-        }
+        // const cacheData = await redisClient.get(key);
+        // if (cacheData) {
+        //     return res.status(200).json(new ApiResponse(200, JSON.parse(cacheData), "Blogs Fetch Successfully"));
+        // }
 
         // Get total blog count & calculate total pages
         const totalBlogs = await Blog.countDocuments({ blogStatus: "Approved" });
@@ -43,7 +43,7 @@ const blogs = asyncHandler(async (req, res) => {
         }
 
         // Saving the data in cache
-        await redisClient.setEx(key, 600, JSON.stringify({ blogs, page, totalPages }));
+        // await redisClient.setEx(key, 600, JSON.stringify({ blogs, page, totalPages }));
 
         return res.status(200).json(new ApiResponse(200, { blogs, page, totalPages }, "Blogs Fetch Successfully"));
     } catch (_error) {
@@ -66,13 +66,13 @@ const categoryByBlogs = asyncHandler(async (req, res) => {
         const skip = (page - 1) * limit;
 
         // Generate a Unique cache key based on page & limit
-        const key = generateCacheKey(req);
+        // const key = generateCacheKey(req);
 
         // Check if data exists in Redis cache
-        const cacheData = await redisClient.get(key);
-        if (cacheData) {
-            return res.status(200).json(new ApiResponse(200, JSON.parse(cacheData), "Blogs Fetch Successfully"));
-        }
+        // const cacheData = await redisClient.get(key);
+        // if (cacheData) {
+        //     return res.status(200).json(new ApiResponse(200, JSON.parse(cacheData), "Blogs Fetch Successfully"));
+        // }
 
         // Get total blog count & calculate total pages
         const totalBlogs = await Blog.countDocuments({ blogStatus: "Approved", blogCategory: category?._id });
@@ -96,7 +96,7 @@ const categoryByBlogs = asyncHandler(async (req, res) => {
         }
 
         // Saving the data in cache
-        await redisClient.setEx(key, 600, JSON.stringify({ blogs, page, totalPages }));
+        // await redisClient.setEx(key, 600, JSON.stringify({ blogs, page, totalPages }));
 
         return res.status(200).json(new ApiResponse(200, { blogs, page, totalPages }, "Blogs Fetch Successfully"));
     } catch (_error) {
@@ -112,13 +112,13 @@ const blogDetails = asyncHandler(async (req, res) => {
     }
 
     // Generate a Unique cache key based on page & limit
-    const key = generateCacheKey(req);
+    // const key = generateCacheKey(req);
 
     // Check if data exists in Redis cache
-    const cacheData = await redisClient.get(key);
-    if (cacheData) {
-        return res.status(200).json(new ApiResponse(200, JSON.parse(cacheData), "Blog Details Fetch Successfully"));
-    }
+    // const cacheData = await redisClient.get(key);
+    // if (cacheData) {
+    //     return res.status(200).json(new ApiResponse(200, JSON.parse(cacheData), "Blog Details Fetch Successfully"));
+    // }
 
     try {
         const blog = await Blog.findOne({ blogSlug }, "-blogSlug -blogShortDescription -blogStatus -createdAt -blogModeratorId -__v")
@@ -138,7 +138,7 @@ const blogDetails = asyncHandler(async (req, res) => {
         ]);
 
         // Saving the data in cache
-        await redisClient.setEx(key, 600, JSON.stringify({ blogs, relatedBlogs }));
+        // await redisClient.setEx(key, 600, JSON.stringify({ blogs, relatedBlogs }));
 
         return res.status(200).json(new ApiResponse(200, { blog, relatedBlogs }, "Blog Details Fetch Successfully"));
     } catch (_error) {
@@ -150,13 +150,13 @@ const blogDetails = asyncHandler(async (req, res) => {
 const latestRandomBlogs = asyncHandler(async (req, res) => {
     try {
         // Generate a Unique cache key based on page & limit
-        const key = generateCacheKey(req);
+        // const key = generateCacheKey(req);
 
         // Check if data exists in Redis cache
-        const cacheData = await redisClient.get(key);
-        if (cacheData) {
-            return res.status(200).json(new ApiResponse(200, JSON.parse(cacheData), "Latest Blogs Fetch Successfully"));
-        }
+        // const cacheData = await redisClient.get(key);
+        // if (cacheData) {
+        //     return res.status(200).json(new ApiResponse(200, JSON.parse(cacheData), "Latest Blogs Fetch Successfully"));
+        // }
 
         // Latest Blogs
         const latestBlogs = await Blog.find({ blogStatus: "Approved" })
@@ -190,7 +190,7 @@ const latestRandomBlogs = asyncHandler(async (req, res) => {
         ]);
         
         // Saving the data in cache
-        await redisClient.setEx(key, 600, JSON.stringify({ latestBlogs, randomBlogs }));
+        // await redisClient.setEx(key, 600, JSON.stringify({ latestBlogs, randomBlogs }));
 
         return res.status(200).json(new ApiResponse(200, { latestBlogs, randomBlogs }, "Latest Blogs Fetch Successfully"));
     } catch (_error) {

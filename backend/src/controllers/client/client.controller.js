@@ -7,18 +7,18 @@ import redisClient from "../../config/redis.js";
 const headerCategory = asyncHandler(async (req, res) => {
     try {
         // Generate a Unique cache key based on page & limit
-        const key = generateCacheKey(req);
+        // const key = generateCacheKey(req);
 
         // Check if data exists in Redis cache
-        const cacheData = await redisClient.get(key);
-        if (cacheData) {
-            return res.status(200).json(new ApiResponse(200, JSON.parse(cacheData), "Categories Fetch Successfully"));
-        }
+        // const cacheData = await redisClient.get(key);
+        // if (cacheData) {
+        //     return res.status(200).json(new ApiResponse(200, JSON.parse(cacheData), "Categories Fetch Successfully"));
+        // }
 
         const categories = await Category.find().select("categoryName categorySlug");
 
         // Saving the data in cache
-        await redisClient.setEx(key, 600, JSON.stringify(categories));
+        // await redisClient.setEx(key, 600, JSON.stringify(categories));
 
         return res.status(200).json(new ApiResponse(200, categories, "Categories Fetch Successfully"));
     } catch (_error) {
@@ -29,18 +29,18 @@ const headerCategory = asyncHandler(async (req, res) => {
 const categories = asyncHandler(async (req, res) => {
     try {
         // Generate a Unique cache key based on page & limit
-        const key = generateCacheKey(req);
+        // const key = generateCacheKey(req);
 
         // Check if data exists in Redis cache
-        const cacheData = await redisClient.get(key);
-        if (cacheData) {
-            return res.status(200).json(new ApiResponse(200, JSON.parse(cacheData), "Categories Fetch Successfully"));
-        }
+        // const cacheData = await redisClient.get(key);
+        // if (cacheData) {
+        //     return res.status(200).json(new ApiResponse(200, JSON.parse(cacheData), "Categories Fetch Successfully"));
+        // }
 
         const categories = await Category.find().select("categoryName categorySlug categoryImage");
 
         // Saving the data in cache
-        await redisClient.setEx(key, 600, JSON.stringify(categories));
+        // await redisClient.setEx(key, 600, JSON.stringify(categories));
 
         return res.status(200).json(new ApiResponse(200, categories, "Categories Fetch Successfully"));
     } catch (_error) {
