@@ -9,7 +9,22 @@ const approvedBlogs = asyncHandler(async (req, res) => {});
 const revisionBlogs = asyncHandler(async (req, res) => {});
 
 // Rejected Blogs
-const rejectedBlogs = asyncHandler(async (req, res) => {});
+const rejectedBlogs = asyncHandler(async (req, res) => {
+    try {
+        const blogs = await Blog.find({ blogStatus: "Rejected" })
+            .populate("blogCategory", "categoryName")
+            .populate("blogAuthorId", "firstName lastName")
+            .populate("blogModeratorId", "firstName lastName")
+            .select("-blogShortDescription -blogDescription -createdAt");
+        if (!blogs.length) {
+            return res.status(200).json(new ApiResponse(200, {}, "No Rejected Blog Found"));
+        }
+
+        return res.status(200).json(new ApiResponse(200, blogs, "Rejected Blogs Fetch Successfully"));
+    } catch (_error) {
+        return res.status(500).json(new ApiError(500, "Something Went Wrong! While Fetching Rejected Blogs"));
+    }
+});
 
 // All Blogs
 const allBlogs = asyncHandler(async (req, res) => {
@@ -25,7 +40,7 @@ const allBlogs = asyncHandler(async (req, res) => {
 
         return res.status(200).json(new ApiResponse(200, blogs, "Blogs Fetch Successfully"));
     } catch (_error) {
-        return res.status(500).json(new ApiError(500, "Something Went Wrong! while Fetching All Blogs"));
+        return res.status(500).json(new ApiError(500, "Something Went Wrong! While Fetching All Blogs"));
     }
 });
 
