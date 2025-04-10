@@ -13,11 +13,11 @@ const socialLinks = [
 
 const Footer = () => {
     return (
-        <>
+        <footer className="bg-dark text-white min-h-[176px] shrink-0">
             <Container>
                 <div className="my-5 flex flex-col justify-center items-center gap-5 md:flex-row md:justify-between">
                     <Link to="/" className="w-[200px] h-[60px]">
-                        <img width={200} height={60} src={logo} alt="BlogSphere Logo" className="w-[200px] h-[60px]" decoding="async" loading="lazy" />
+                        <img src={logo} alt="BlogSphere Logo" width={200} height={60} className="w-[200px] h-[60px]" decoding="async" loading="lazy" />
                     </Link>
                     <div className="flex gap-5 items-center">
                         <h3 className="text-xl lg:text-2xl items-center font-bold">Follow Us</h3>
@@ -52,7 +52,7 @@ const Footer = () => {
             >
                 <FaArrowUp className="text-lg" />
             </button>
-        </>
+        </footer>
     );
 };
 

@@ -52,9 +52,7 @@ const PublicLayout = () => {
             <main className="grow">
                 <Outlet />
             </main>
-            <footer className="bg-dark text-white h-44 shrink-0">
-                <Footer />
-            </footer>
+            <Footer />
         </div>
     );
 };
