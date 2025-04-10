@@ -1,6 +1,6 @@
-import CategorySection from "@/components/client/Home/CategorySection";
-import Loader from "@/components/client/Loader";
-import Loading from "@/components/common/Loading";
+import BlogListingSkeleton from "@/components/skeleton/BlogListingSkeleton";
+import CategorySectionSkeleton from "@/components/skeleton/CategorySectionSkeleton";
+import HomeBannerSkeleton from "@/components/skeleton/HomeBannerSkeleton";
 import crudService from "@/services/crudService";
 import toastService from "@/services/toastService";
 import { useQuery } from "@tanstack/react-query";
@@ -8,6 +8,7 @@ import { lazy, Suspense } from "react";
 import { Helmet } from "react-helmet-async";
 const HomeBanner = lazy(() => import("@/components/client/Home/HomeBanner"));
 const BlogListing = lazy(() => import("@/components/client/Home/BlogListing"));
+const CategorySection = lazy(() => import("@/components/client/Home/CategorySection"));
 
 const Home = () => {
     const currentUrl = `${import.meta.env.VITE_BASE_URL}`;
@@ -22,7 +23,7 @@ const Home = () => {
     });
 
     if (isLoading) {
-        return <Loading />;
+        return <HomeBannerSkeleton />;
     }
 
     const { latestBlogs, randomBlogs } = data?.data || {};
@@ -46,12 +47,16 @@ const Home = () => {
                 <meta name="twitter:description" content="Read about personal growth, self improvement, and tech on Sameer Blogs." />
                 <meta name="twitter:image" content={`${currentUrl}/logo.svg`} />
             </Helmet>
-            <section className="w-full">
-                <Suspense fallback={<Loader />}>
+            <section className="w-full space-y-6">
+                <Suspense fallback={<HomeBannerSkeleton />}>
                     <HomeBanner blogs={randomBlogs} />
                 </Suspense>
-                <CategorySection />
-                <BlogListing bgColor="bg-light" blogs={latestBlogs} />
+                <Suspense fallback={<CategorySectionSkeleton />}>
+                    <CategorySection />
+                </Suspense>
+                <Suspense fallback={<BlogListingSkeleton />}>
+                    <BlogListing bgColor="bg-light" blogs={latestBlogs} />
+                </Suspense>
             </section>
         </>
     );

@@ -1,10 +1,10 @@
 import crudService from "@/services/crudService";
 import toastService from "@/services/toastService";
 import { useQuery } from "@tanstack/react-query";
-import Loader from "../Loader";
 import Container from "@/components/common/Container";
 import { capitalizeWords } from "@/utils/utils";
 import { Link } from "react-router-dom";
+import CategorySectionSkeleton from "@/components/skeleton/CategorySectionSkeleton";
 
 const CategorySection = () => {
     const { data, isLoading } = useQuery({
@@ -16,7 +16,7 @@ const CategorySection = () => {
         },
     });
     if (isLoading) {
-        return <Loader />;
+        return <CategorySectionSkeleton />;
     }
     return (
         <div className="my-7 sm:my-9 lg:my-14">
