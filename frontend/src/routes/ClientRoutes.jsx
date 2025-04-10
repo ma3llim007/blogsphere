@@ -2,7 +2,7 @@ import { lazy, Suspense } from "react";
 import { RouterProvider } from "react-router";
 import { createBrowserRouter } from "react-router-dom";
 import PublicLayout from "@/layouts/PublicLayout";
-import Loading from "@/components/common/Loading";
+import Loader from "@/components/client/Loader";
 // Page
 const Home = lazy(() => import("@/pages/client/Home"));
 const PrivacyPolicy = lazy(() => import("@/pages/client/PrivacyPolicy"));
@@ -23,7 +23,7 @@ const ClientRoutes = () => {
                 {
                     index: true,
                     element: (
-                        <Suspense fallback={<Loading />}>
+                        <Suspense fallback={<Loader />}>
                             <Home />
                         </Suspense>
                     ),
@@ -31,7 +31,7 @@ const ClientRoutes = () => {
                 {
                     path: "about-us",
                     element: (
-                        <Suspense fallback={<Loading />}>
+                        <Suspense fallback={<Loader />}>
                             <AboutUs />
                         </Suspense>
                     ),
@@ -39,7 +39,7 @@ const ClientRoutes = () => {
                 {
                     path: "blogs",
                     element: (
-                        <Suspense fallback={<Loading />}>
+                        <Suspense fallback={<Loader />}>
                             <Blogs />
                         </Suspense>
                     ),
@@ -47,7 +47,7 @@ const ClientRoutes = () => {
                 {
                     path: ":category/blogs",
                     element: (
-                        <Suspense fallback={<Loading />}>
+                        <Suspense fallback={<Loader />}>
                             <CategoryByBlogs />
                         </Suspense>
                     ),
@@ -55,7 +55,7 @@ const ClientRoutes = () => {
                 {
                     path: "blog-details/:blogSlug",
                     element: (
-                        <Suspense fallback={<Loading />}>
+                        <Suspense fallback={<Loader />}>
                             <BlogDetails />
                         </Suspense>
                     ),
@@ -63,7 +63,7 @@ const ClientRoutes = () => {
                 {
                     path: "privacy-policy",
                     element: (
-                        <Suspense fallback={<Loading />}>
+                        <Suspense fallback={<Loader />}>
                             <PrivacyPolicy />
                         </Suspense>
                     ),
@@ -71,7 +71,7 @@ const ClientRoutes = () => {
                 {
                     path: "terms-conditions",
                     element: (
-                        <Suspense fallback={<Loading />}>
+                        <Suspense fallback={<Loader />}>
                             <TermsConditions />
                         </Suspense>
                     ),
@@ -79,7 +79,7 @@ const ClientRoutes = () => {
                 {
                     path: "contact-us",
                     element: (
-                        <Suspense fallback={<Loading />}>
+                        <Suspense fallback={<Loader />}>
                             <ContactUs />
                         </Suspense>
                     ),
