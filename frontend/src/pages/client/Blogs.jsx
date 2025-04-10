@@ -7,8 +7,8 @@ import crudService from "@/services/crudService";
 import { useInView } from "react-intersection-observer";
 import { useInfiniteQuery } from "@tanstack/react-query";
 import { useCallback, useEffect } from "react";
-import Loading from "@/components/common/Loading";
-import Loader from "@/components/client/Loader";
+import BlogListingSkeleton from "@/components/skeleton/BlogListingSkeleton";
+import LoadingBlogsSkeleton from "@/components/skeleton/LoadingBlogsSkeleton";
 
 const fetchBlogs = async ({ pageParam = 1 }) => {
     try {
@@ -40,7 +40,7 @@ const Blogs = () => {
     useEffect(loadMore, [inView]);
 
     if (isLoading) {
-        return <Loading />;
+        return <BlogListingSkeleton />;
     }
 
     const blogs = data?.pages?.flatMap(page => page.blogs) || [];
@@ -74,7 +74,7 @@ const Blogs = () => {
                 </div>
             </Container>
             <div ref={ref} className="text-center my-5" aria-live="polite">
-                {isFetchingNextPage ? <Loader text="Loading More Blogs..." /> : null}
+                {isFetchingNextPage ? <LoadingBlogsSkeleton /> : null}
             </div>
         </>
     );

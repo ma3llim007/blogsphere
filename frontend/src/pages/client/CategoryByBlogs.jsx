@@ -6,11 +6,11 @@ import crudService from "@/services/crudService";
 import { useInView } from "react-intersection-observer";
 import { useInfiniteQuery } from "@tanstack/react-query";
 import { useCallback, useEffect } from "react";
-import Loading from "@/components/common/Loading";
 import Container from "@/components/common/Container";
 import BlogCard from "@/components/client/blogs/BlogCard";
-import Loader from "@/components/client/Loader";
 import { Button } from "@/components/ui/button";
+import BlogListingSkeleton from "@/components/skeleton/BlogListingSkeleton";
+import LoadingBlogsSkeleton from "@/components/skeleton/LoadingBlogsSkeleton";
 
 const fetchBlogs = async ({ pageParam = 1, categorySlug }) => {
     try {
@@ -32,7 +32,7 @@ const CategoryByBlogs = () => {
         getNextPageParam: lastPage => (lastPage?.totalPages > lastPage.page ? lastPage.page + 1 : undefined),
         enabled: !!category,
     });
-
+    
     const loadMore = useCallback(() => {
         if (inView && hasNextPage) {
             fetchNextPage().catch(err => console.error("Error fetching next page:", err));
@@ -47,7 +47,7 @@ const CategoryByBlogs = () => {
 
     const blogs = data?.pages?.flatMap(page => page.blogs) || [];
     if (isLoading) {
-        return <Loading />;
+        return <BlogListingSkeleton />;
     }
     return (
         <>
@@ -86,7 +86,7 @@ const CategoryByBlogs = () => {
                     )}
                 </div>
                 <div ref={ref} className="text-center my-5" aria-live="polite">
-                    {isFetchingNextPage ? <Loader text="Loading More Blogs..." /> : null}
+                    {isFetchingNextPage ? <LoadingBlogsSkeleton /> : null}
                 </div>
             </Container>
         </>
