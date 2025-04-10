@@ -1,7 +1,9 @@
+import Container from "../common/Container";
+
 const BlogListingSkeleton = () => {
     return (
         <div className="py-14 bg-light animate-pulse">
-            <div className="container mx-auto px-4">
+            <Container>
                 <div className="space-y-7">
                     <div className="h-10 bg-gray-300 rounded"></div>
                     <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6">
@@ -61,7 +63,7 @@ const BlogListingSkeleton = () => {
                         </div>
                     </div>
                 </div>
-            </div>
+            </Container>
         </div>
     );
 };

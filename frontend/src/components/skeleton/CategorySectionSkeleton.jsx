@@ -1,7 +1,9 @@
+import Container from "../common/Container";
+
 const CategorySectionSkeleton = () => {
     return (
         <div className="my-7 sm:my-9 lg:my-14 animate-pulse">
-            <div className="container mx-auto">
+            <Container>
                 <div className="text-3xl sm:text-4xl font-bold text-center mb-10">
                     <span className="h-10 bg-gray-200 block"></span>
                 </div>
@@ -27,7 +29,7 @@ const CategorySectionSkeleton = () => {
                         </div>
                     </div>
                 </div>
-            </div>
+            </Container>
         </div>
     );
 };
