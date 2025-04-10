@@ -3,6 +3,7 @@ import { RouterProvider } from "react-router";
 import { createBrowserRouter } from "react-router-dom";
 import PublicLayout from "@/layouts/PublicLayout";
 import Loader from "@/components/client/Loader";
+import ErrorBoundary from "@/components/ErrorBoundary";
 // Page
 const Home = lazy(() => import("@/pages/client/Home"));
 const PrivacyPolicy = lazy(() => import("@/pages/client/PrivacyPolicy"));
@@ -18,7 +19,11 @@ const ClientRoutes = () => {
     const router = createBrowserRouter([
         {
             path: "/",
-            element: <PublicLayout />,
+            element: (
+                <ErrorBoundary>
+                    <PublicLayout />
+                </ErrorBoundary>
+            ),
             children: [
                 {
                     index: true,
