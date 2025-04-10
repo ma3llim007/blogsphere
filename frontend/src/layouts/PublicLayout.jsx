@@ -1,4 +1,5 @@
 import Footer from "@/components/client/Footer";
+import Loading from "@/components/common/Loading";
 import crudService from "@/services/crudService";
 import toastService from "@/services/toastService";
 import { useQuery, useQueryClient } from "@tanstack/react-query";
@@ -25,7 +26,7 @@ const PublicLayout = () => {
         });
     }, [queryClient]);
 
-    const { data } = useQuery({
+    const { data, isLoading } = useQuery({
         queryKey: ["headerCategory"],
         queryFn: () => crudService.get("category/get-categories"),
         onError: error => {
@@ -40,6 +41,9 @@ const PublicLayout = () => {
         window.scrollTo(0, 0);
     }, [location.pathname]);
 
+    if (isLoading) {
+        return <Loading />;
+    }
     return (
         <div className="w-full flex flex-col min-h-screen font-DmSans overflow-hidden">
             <Header categories={data?.data} />
