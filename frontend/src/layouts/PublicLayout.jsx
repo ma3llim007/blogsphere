@@ -1,9 +1,8 @@
 import Footer from "@/components/client/Footer";
-import Loading from "@/components/common/Loading";
 import crudService from "@/services/crudService";
 import toastService from "@/services/toastService";
 import { useQuery, useQueryClient } from "@tanstack/react-query";
-import { lazy, Suspense, useEffect } from "react";
+import { lazy, useEffect } from "react";
 import { Outlet, useLocation } from "react-router-dom";
 
 const Header = lazy(() => import("@/components/client/Header/Header"));
@@ -26,7 +25,7 @@ const PublicLayout = () => {
         });
     }, [queryClient]);
 
-    const { data, isLoading } = useQuery({
+    const { data } = useQuery({
         queryKey: ["headerCategory"],
         queryFn: () => crudService.get("category/get-categories"),
         onError: error => {
@@ -41,14 +40,9 @@ const PublicLayout = () => {
         window.scrollTo(0, 0);
     }, [location.pathname]);
 
-    if (isLoading) {
-        return <Loading />;
-    }
     return (
         <div className="w-full flex flex-col min-h-screen font-DmSans overflow-hidden">
-            <Suspense fallback={<Loading />}>
-                <Header categories={data?.data} />
-            </Suspense>
+            <Header categories={data?.data} />
             <main className="grow">
                 <Outlet />
             </main>
