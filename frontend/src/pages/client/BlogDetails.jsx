@@ -11,8 +11,10 @@ import Loading from "@/components/common/Loading";
 import reactParser from "html-react-parser";
 import DOMPurify from "dompurify";
 import ScrollProgressBar from "@/components/client/ScrollProgressBar";
+import { Helmet } from "react-helmet-async";
 
 const BlogDetails = () => {
+    const currentUrl = import.meta.env.VITE_BASE_URL;
     const { blogSlug } = useParams();
     // Fetching the Blog Detail
     const { data, isLoading, isFetching } = useQuery({
@@ -30,8 +32,32 @@ const BlogDetails = () => {
     if (isLoading || isFetching) {
         return <Loading />;
     }
+
     return (
         <>
+            <Helmet>
+                <title>{`${blog?.blogTitle} | BlogSphere - Discover Insights on ${blog?.blogCategory?.categoryName}`}</title>
+                <meta name="description" content={blog?.blogShortDescription || "Read the full article to discover more insights, tips, and trends about " + blog?.blogTitle} />
+                <meta name="keywords" content={`${blog?.blogTitle}, ${blog?.blogCategory?.categoryName}, ${blog?.blogAuthorId?.firstName} ${blog?.blogAuthorId?.lastName}, BlogSphere`} />
+                <meta name="author" content="BlogSphere Team" />
+                <meta name="robots" content="index, follow" />
+                <link rel="canonical" href={`${currentUrl}blog-details/${blogSlug}`} />
+                {/* Open Graph / Facebook */}
+                <meta property="og:title" content={`${blog?.blogTitle} | BlogSphere - Discover Insights on ${blog?.blogCategory?.categoryName}`} />
+                <meta property="og:description" content={blog?.blogShortDescription || "Read the full article to discover more insights, tips, and trends about " + blog?.blogTitle} />
+                <meta property="og:type" content="article" />
+                <meta property="og:url" content={`${currentUrl}blog-details/${blogSlug}`} />
+                <meta property="og:image" content={blog?.featuredImage || `${currentUrl}logo.svg`} />
+                <meta property="og:site_name" content="BlogSphere" />
+                {/* Twitter Card */}
+                <meta name="twitter:card" content="summary_large_image" />
+                <meta name="twitter:title" content={`${blog?.blogTitle} | BlogSphere - Discover Insights on ${blog?.blogCategory?.categoryName}`} />
+                <meta name="twitter:description" content={blog?.blogShortDescription || "Read the full article to discover more insights, tips, and trends about " + blog?.blogTitle} />
+                <meta name="twitter:image" content={blog?.featuredImage || `${currentUrl}logo.svg`} />
+                {/* Optional Enhancements */}
+                <meta name="viewport" content="width=device-width, initial-scale=1" />
+                <meta httpEquiv="X-UA-Compatible" content="IE=edge" />
+            </Helmet>
             <ScrollProgressBar />
             <PageBanner title={slugToText(blogSlug)}>
                 <Breadcrumb>

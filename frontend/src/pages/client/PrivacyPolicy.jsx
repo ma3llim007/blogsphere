@@ -1,11 +1,35 @@
 import PageBanner from "@/components/client/PageBanner";
 import Container from "@/components/common/Container";
 import { Breadcrumb, BreadcrumbItem, BreadcrumbList, BreadcrumbPage, BreadcrumbSeparator } from "@/components/ui/breadcrumb";
+import { Helmet } from "react-helmet-async";
 import { Link } from "react-router-dom";
 
 const PrivacyPolicy = () => {
+    const currentUrl = import.meta.env.VITE_BASE_URL;
     return (
         <>
+         <Helmet>
+                <title>Privacy Policy | BlogSphere - Your Privacy Matters</title>
+                <meta name="description" content="Read our Privacy Policy to understand how we collect, use, and protect your data at BlogSphere." />
+                <meta name="keywords" content="Privacy Policy, BlogSphere, Data Protection, User Privacy, Terms and Conditions" />
+                <meta name="robots" content="index, follow" />
+                <link rel="canonical" href={currentUrl} />
+                {/* Open Graph / Facebook */}
+                <meta property="og:title" content="Privacy Policy | BlogSphere - Your Privacy Matters" />
+                <meta property="og:description" content="Read our Privacy Policy to understand how we collect, use, and protect your data at BlogSphere." />
+                <meta property="og:type" content="website" />
+                <meta property="og:url" content={currentUrl} />
+                <meta property="og:image" content={`${currentUrl}/logo.svg`} />
+                <meta property="og:site_name" content="BlogSphere" />
+                {/* Twitter Card */}
+                <meta name="twitter:card" content="summary_large_image" />
+                <meta name="twitter:title" content="Privacy Policy | BlogSphere - Your Privacy Matters" />
+                <meta name="twitter:description" content="Read our Privacy Policy to understand how we collect, use, and protect your data at BlogSphere." />
+                <meta name="twitter:image" content={`${currentUrl}/logo.svg`} />
+                {/* Optional Enhancements */}
+                <meta name="viewport" content="width=device-width, initial-scale=1" />
+                <meta httpEquiv="X-UA-Compatible" content="IE=edge" />
+            </Helmet>
             <PageBanner title="Privacy Policy">
                 <Breadcrumb>
                     <BreadcrumbList className="text-lg font-bold">

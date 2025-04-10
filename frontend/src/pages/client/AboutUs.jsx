@@ -3,10 +3,35 @@ import PageBanner from "@/components/client/PageBanner";
 import Container from "@/components/common/Container";
 import { Breadcrumb, BreadcrumbItem, BreadcrumbList, BreadcrumbPage, BreadcrumbSeparator } from "@/components/ui/breadcrumb";
 import aboutUsImage from "@/assets/client/about.webp";
+import { Helmet } from "react-helmet-async";
 
 const AboutUs = () => {
+    const currentUrl = import.meta.env.VITE_BASE_URL;
     return (
         <>
+            <Helmet>
+                <title>About Us | BlogSphere - Learn More About Our Blogging Platform</title>
+                <meta name="description" content="Discover the story behind BlogSphere, a leading platform for bloggers to share insights and build communities around their passions." />
+                <meta name="keywords" content="BlogSphere, about us, blogging platform, blogging community, blogging website, about BlogSphere" />
+                <meta name="author" content="BlogSphere Team" />
+                <meta name="robots" content="index, follow" />
+                <link rel="canonical" href={`${currentUrl}about-us`} />
+                {/* Open Graph / Facebook */}
+                <meta property="og:title" content="About Us | BlogSphere - Learn More About Our Blogging Platform" />
+                <meta property="og:description" content="Learn more about BlogSphere, the platform where bloggers can share their stories, connect with their readers, and make an impact." />
+                <meta property="og:type" content="website" />
+                <meta property="og:url" content={`${currentUrl}about-us`} />
+                <meta property="og:image" content={`${currentUrl}logo.svg`}  />
+                <meta property="og:site_name" content="BlogSphere" />
+                {/* Twitter Card */}
+                <meta name="twitter:card" content="summary_large_image" />
+                <meta name="twitter:title" content="About Us | BlogSphere - Learn More About Our Blogging Platform" />
+                <meta name="twitter:description" content="Find out the story behind BlogSphere, the go-to platform for aspiring bloggers and influencer to create impactful content." />
+                <meta name="twitter:image" content={`${currentUrl}logo.svg`}  />
+                {/* Optional Enhancements */}
+                <meta name="viewport" content="width=device-width, initial-scale=1" />
+                <meta httpEquiv="X-UA-Compatible" content="IE=edge" />
+            </Helmet>
             <PageBanner title="About Us">
                 <Breadcrumb>
                     <BreadcrumbList className="text-lg font-bold">

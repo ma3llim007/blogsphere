@@ -14,8 +14,10 @@ import { useMutation } from "@tanstack/react-query";
 import crudService from "@/services/crudService";
 import toastService from "@/services/toastService";
 import Loading from "@/components/common/Loading";
+import { Helmet } from "react-helmet-async";
 
 const ContactUs = () => {
+    const currentUrl = import.meta.env.VITE_BASE_URL;
     const {
         register,
         formState: { errors },
@@ -41,6 +43,29 @@ const ContactUs = () => {
     }
     return (
         <>
+            <Helmet>
+                <title>Contact Us | BlogSphere - Get in Touch with Us</title>
+                <meta name="description" content="Reach out to BlogSphere for any inquiries, support, or feedback. We're here to help you!" />
+                <meta name="keywords" content="Contact BlogSphere, Contact Us, BlogSphere support, Get in touch, Contact BlogSphere team" />
+                <meta name="author" content="BlogSphere Team" />
+                <meta name="robots" content="index, follow" />
+                <link rel="canonical" href={`${currentUrl}contact-us`} />
+                {/* Open Graph / Facebook */}
+                <meta property="og:title" content="Contact Us | BlogSphere - Get in Touch with Us" />
+                <meta property="og:description" content="Reach out to BlogSphere for any inquiries, support, or feedback. We're here to help you!" />
+                <meta property="og:type" content="website" />
+                <meta property="og:url" content={`${currentUrl}contact-us`} />
+                <meta property="og:image" content={`${currentUrl}logo.svg`} />
+                <meta property="og:site_name" content="BlogSphere" />
+                {/* Twitter Card */}
+                <meta name="twitter:card" content="summary_large_image" />
+                <meta name="twitter:title" content="Contact Us | BlogSphere - Get in Touch with Us" />
+                <meta name="twitter:description" content="Reach out to BlogSphere for any inquiries, support, or feedback. We're here to help you!" />
+                <meta name="twitter:image" content={`${currentUrl}logo.svg`} />
+                {/* Optional Enhancements */}
+                <meta name="viewport" content="width=device-width, initial-scale=1" />
+                <meta httpEquiv="X-UA-Compatible" content="IE=edge" />
+            </Helmet>
             <PageBanner title="Contact Us">
                 <Breadcrumb>
                     <BreadcrumbList className="text-lg font-bold">

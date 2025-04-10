@@ -11,7 +11,7 @@ const BlogListing = lazy(() => import("@/components/client/Home/BlogListing"));
 const CategorySection = lazy(() => import("@/components/client/Home/CategorySection"));
 
 const Home = () => {
-    const currentUrl = `${import.meta.env.VITE_BASE_URL}`;
+    const currentUrl = import.meta.env.VITE_BASE_URL;
 
     const { data, isLoading } = useQuery({
         queryKey: ["homeBlogs"],
@@ -30,22 +30,27 @@ const Home = () => {
     return (
         <>
             <Helmet>
-                <title>Sameer Blogs | Personal Growth, Tech, and Inspiration</title>
-                <meta name="description" content="Welcome to Sameer Blogs — explore insightful content on self improvement, technology, and productivity to level up your life." />
-                <meta name="keywords" content="self improvement, tech blogs, productivity, personal development, Sameer Blogs" />
-                <meta name="author" content="Mohd Sameer" />
+                <title>BlogSphere - Discover Trending Blogs, Insights, and Stories</title>
+                <meta name="description" content="Discover thought-provoking blogs, trending stories, and expert insights across technology, health, travel, and more — only on BlogSphere." />
+                <meta name="keywords" content="BlogSphere, blogging platform, trending blogs, latest blogs, tech blogs, health blogs, travel blogs, lifestyle, blogging site" />
+                <meta name="author" content="BlogSphere Team" />
+                <meta name="robots" content="index, follow" />
                 <link rel="canonical" href={currentUrl} />
-                {/* Open Graph (Facebook, LinkedIn) */}
-                <meta property="og:title" content="Sameer Blogs | Personal Growth, Tech, and Inspiration" />
-                <meta property="og:description" content="Explore blogs on self improvement, tech, and productivity." />
-                <meta property="og:image" content={`${currentUrl}/logo.svg`} />
-                <meta property="og:url" content={currentUrl} />
+                {/* Open Graph / Facebook */}
+                <meta property="og:title" content="BlogSphere - Discover Trending Blogs, Insights, and Stories" />
+                <meta property="og:description" content="Explore the world of blogs – expert opinions, guides, and more on BlogSphere, the home of authentic content." />
                 <meta property="og:type" content="website" />
+                <meta property="og:url" content={currentUrl} />
+                <meta property="og:image" content={`${currentUrl}logo.svg`} />
+                <meta property="og:site_name" content="BlogSphere" />
                 {/* Twitter Card */}
                 <meta name="twitter:card" content="summary_large_image" />
-                <meta name="twitter:title" content="Sameer Blogs | Personal Growth, Tech, and Inspiration" />
-                <meta name="twitter:description" content="Read about personal growth, self improvement, and tech on Sameer Blogs." />
-                <meta name="twitter:image" content={`${currentUrl}/logo.svg`} />
+                <meta name="twitter:title" content="BlogSphere - Discover Trending Blogs, Insights, and Stories" />
+                <meta name="twitter:description" content="Stay informed with the latest blog posts across tech, health, and more – curated by BlogSphere." />
+                <meta name="twitter:image" content={`${currentUrl}logo.svg`} />
+                {/* Optional Enhancements */}
+                <meta name="viewport" content="width=device-width, initial-scale=1" />
+                <meta httpEquiv="X-UA-Compatible" content="IE=edge" />
             </Helmet>
             <section className="w-full space-y-6">
                 <Suspense fallback={<HomeBannerSkeleton />}>

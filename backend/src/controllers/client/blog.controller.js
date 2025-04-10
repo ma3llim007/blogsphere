@@ -121,7 +121,7 @@ const blogDetails = asyncHandler(async (req, res) => {
     // }
 
     try {
-        const blog = await Blog.findOne({ blogSlug }, "-blogSlug -blogShortDescription -blogStatus -createdAt -blogModeratorId -__v")
+        const blog = await Blog.findOne({ blogSlug }, "-blogSlug -blogStatus -createdAt -blogModeratorId -__v")
             .populate({ path: "blogCategory", select: "categoryName" })
             .populate({ path: "blogAuthorId", select: "firstName lastName" })
             .lean();
@@ -138,7 +138,7 @@ const blogDetails = asyncHandler(async (req, res) => {
         ]);
 
         // Saving the data in cache
-        // await redisClient.setEx(key, 600, JSON.stringify({ blogs, relatedBlogs }));
+        // await redisClient.setEx(key, 300, JSON.stringify({ blogs, relatedBlogs }));
 
         return res.status(200).json(new ApiResponse(200, { blog, relatedBlogs }, "Blog Details Fetch Successfully"));
     } catch (_error) {
