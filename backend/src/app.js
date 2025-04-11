@@ -30,7 +30,7 @@ app.use(
     })
 );
 // 🔐 Trust the proxy so that rate-limiter gets the real IP
-app.use("trust proxy", true);
+app.set("trust proxy", true);
 
 // Routes
 app.use("/api/v1/admin", adminRoutes);
