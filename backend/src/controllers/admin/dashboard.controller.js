@@ -1,6 +1,6 @@
 import { Blog } from "../../models/blog.model.js";
 import { Category } from "../../models/category.model.js";
-import { Enquiry } from "../../models/Enquiry.model.js";
+import { Enquiry } from "../../models/enquiry.model.js";
 import { Moderator } from "../../models/moderator.model.js";
 import { Writer } from "../../models/writer.model.js";
 import { ApiError, ApiResponse, asyncHandler } from "../../utils/Api.utils.js";

@@ -1,5 +1,5 @@
 import { ApiError, ApiResponse, asyncHandler } from "../../utils/Api.utils.js";
-import { Enquiry } from "../../models/Enquiry.model.js";
+import { Enquiry } from "../../models/enquiry.model.js";
 import { isValidObjectId } from "mongoose";
 
 // Enquiry Listing

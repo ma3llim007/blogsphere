@@ -1,6 +1,6 @@
 import { ApiError, ApiResponse, asyncHandler } from "../../utils/Api.utils.js";
 import { Category } from "../../models/category.model.js";
-import { Enquiry } from "../../models/Enquiry.model.js";
+import { Enquiry } from "../../models/enquiry.model.js";
 import { generateCacheKey } from "../../utils/utils.js";
 import redisClient from "../../config/redis.js";
 
