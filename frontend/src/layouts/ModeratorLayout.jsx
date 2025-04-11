@@ -1,5 +1,7 @@
+import Footer from "../components/admin/Footer";
+import Header from "../components/admin/Header";
 import Loading from "@/components/common/Loading";
-import ModeratorSideBar from "@/components/sidebar/ModeratorSideBar";
+import ModeratorSideBar from "../components/moderator/LogOutModerator";
 import { SidebarInset, SidebarProvider } from "@/components/ui/sidebar";
 import useModeratorAuth from "@/hooks/useModeratorAuth";
 import { useEffect } from "react";
@@ -21,9 +23,11 @@ const ModeratorLayout = () => {
         <SidebarProvider>
             <ModeratorSideBar user={moderator} />
             <SidebarInset>
+                <Header />
                 <section className="flex flex-1 flex-col gap-4 p-4 pt-0">
                     <Outlet />
                 </section>
+                <Footer />
             </SidebarInset>
         </SidebarProvider>
     );
