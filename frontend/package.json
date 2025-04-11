@@ -49,6 +49,7 @@
         "tailwind-merge": "^3.0.2",
         "tailwindcss": "^4.0.14",
         "tw-animate-css": "^1.2.4",
+        "vite-plugin-compression": "^0.5.1",
         "yup": "^1.6.1"
     },
     "devDependencies": {
