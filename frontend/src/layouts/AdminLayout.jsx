@@ -1,7 +1,7 @@
-import AdminFooter from "@/components/admin/AdminFooter";
-import AdminHeader from "@/components/admin/AdminHeader";
+import AdminFooter from "@/components/Admin/AdminFooter";
+import AdminHeader from "@/components/Admin/AdminHeader";
 import Loading from "@/components/common/Loading";
-import AdminSideBar from "@/components/sidebar/AdminSideBar";
+import AdminSideBar from "@/components/Sidebar/AdminSideBar";
 import { SidebarInset, SidebarProvider } from "@/components/ui/sidebar";
 import useAdminAuth from "@/hooks/useAdminAuth";
 import toastService from "@/services/toastService";
