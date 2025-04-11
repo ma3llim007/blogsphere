@@ -1,14 +1,17 @@
-import { defineConfig } from "vite";
-import react from "@vitejs/plugin-react";
-import tailwindcss from "@tailwindcss/vite";
-import path from "path";
-import viteCompression from "vite-plugin-compression";
-import { fileURLToPath } from "url";
-const __dirname = path.dirname(fileURLToPath(import.meta.url));
+const { defineConfig } = require("vite");
+const react = require("@vitejs/plugin-react");
+const tailwindcss = require("@tailwindcss/vite");
+const path = require("path");
+const viteCompression = require("vite-plugin-compression");
 
-// https://vite.dev/config/
-export default defineConfig({
-    plugins: [react(), tailwindcss(), viteCompression({ algorithm: "brotliCompress" }), viteCompression({ algorithm: "gzip" })],
+// https://vitejs.dev/config/
+module.exports = defineConfig({
+    plugins: [
+        react(),
+        tailwindcss(),
+        viteCompression({ algorithm: "brotliCompress" }),
+        viteCompression({ algorithm: "gzip" }),
+    ],
     resolve: {
         alias: {
             "@": path.resolve(__dirname, "./src"),
