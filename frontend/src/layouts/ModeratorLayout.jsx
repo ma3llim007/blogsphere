@@ -1,7 +1,7 @@
-import Footer from "../components/admin/Footer";
-import Header from "../components/admin/Header";
 import Loading from "@/components/common/Loading";
-import ModeratorSideBar from "../components/moderator/LogOutModerator";
+import Footer from "@/components/moderator/Footer";
+import Header from "@/components/moderator/Header";
+import ModeratorSideBar from "@/components/sidebar/ModeratorSideBar";
 import { SidebarInset, SidebarProvider } from "@/components/ui/sidebar";
 import useModeratorAuth from "@/hooks/useModeratorAuth";
 import { useEffect } from "react";
