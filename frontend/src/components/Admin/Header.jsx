@@ -17,7 +17,6 @@ const Header = () => {
                     </BreadcrumbList>
                 </Breadcrumb>
             </div>
-            {/* <ModeToggle /> */}
         </header>
     );
 };
