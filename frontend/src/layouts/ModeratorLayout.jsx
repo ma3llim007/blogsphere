@@ -1,9 +1,9 @@
-import Footer from "@/components/admin/Footer";
 import Header from "@/components/admin/Header";
 import Loading from "@/components/common/Loading";
 import ModeratorSideBar from "@/components/sidebar/ModeratorSideBar";
 import { SidebarInset, SidebarProvider } from "@/components/ui/sidebar";
 import useModeratorAuth from "@/hooks/useModeratorAuth";
+import { currentYear } from "@/utils/utils";
 import { useEffect } from "react";
 import { Outlet } from "react-router-dom";
 
@@ -27,7 +27,9 @@ const ModeratorLayout = () => {
                 <section className="flex flex-1 flex-col gap-4 p-4 pt-0">
                     <Outlet />
                 </section>
-                <Footer />
+                <footer className="border-t px-4 py-4 text-center select-none">
+                    <div className="text-base font-bold">© {currentYear()} BlogSphere. All Rights Reserved.</div>
+                </footer>
             </SidebarInset>
         </SidebarProvider>
     );
