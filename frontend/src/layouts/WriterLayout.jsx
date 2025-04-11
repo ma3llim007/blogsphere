@@ -2,11 +2,11 @@ import { useEffect } from "react";
 import { Outlet } from "react-router-dom";
 import toastService from "@/services/toastService";
 import { SidebarInset, SidebarProvider } from "@/components/ui/sidebar";
-import Header from "@/components/admin/Header";
-import Footer from "@/components/admin/Footer";
 import WriterSideBar from "@/components/sidebar/WriterSideBar";
 import useWriterAuth from "@/hooks/useWriterAuth";
 import Loading from "@/components/common/Loading";
+import Header from "@/components/writer/Header";
+import Footer from "@/components/writer/Footer";
 
 const WriterLayout = () => {
     const { isError, isLoading, writer } = useWriterAuth();
