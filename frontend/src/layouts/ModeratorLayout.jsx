@@ -1,4 +1,4 @@
-import Footer from "../components/admin/Footer";
+import Footer from "@/components/admin/Footer";
 import Header from "@/components/admin/Header";
 import Loading from "@/components/common/Loading";
 import ModeratorSideBar from "@/components/sidebar/ModeratorSideBar";
