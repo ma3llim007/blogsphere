@@ -5,8 +5,6 @@ import path from "path";
 import viteCompression from "vite-plugin-compression";
 import { fileURLToPath } from "url";
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
-console.log(__dirname);
-
 
 // https://vite.dev/config/
 export default defineConfig({
