@@ -13,6 +13,7 @@ const AboutUs = lazy(() => import("@/pages/client/AboutUs"));
 const Blogs = lazy(() => import("@/pages/client/Blogs"));
 const CategoryByBlogs = lazy(() => import("@/pages/client/CategoryByBlogs"));
 const BlogDetails = lazy(() => import("@/pages/client/BlogDetails"));
+const NotFound = lazy(() => import("@/pages/client/NotFound"));
 
 const ClientRoutes = () => {
     // Defining Routes
@@ -86,6 +87,14 @@ const ClientRoutes = () => {
                     element: (
                         <Suspense fallback={<Loader />}>
                             <ContactUs />
+                        </Suspense>
+                    ),
+                },
+                {
+                    path: "*",
+                    element: (
+                        <Suspense fallback={<Loader />}>
+                            <NotFound />
                         </Suspense>
                     ),
                 },
